@@ -1,0 +1,4058 @@
+[
+  {
+    "id": "last-friday-night-tgif",
+    "title": "Last Friday Night (T.G.I.F.)",
+    "artist": "Katy Perry",
+    "releaseYear": "2010",
+    "synonymTitle": "Final Weekday Evening (T.G.I.W.)",
+    "difficulty": "medium",
+    "hints": [
+      "Ultimate Week's End",
+      "Pop party anthem",
+      "Artist: Katy Perry"
+    ]
+  },
+  {
+    "id": "no-hands-feat-roscoe-dash-wale",
+    "title": "No Hands (feat. Roscoe Dash & Wale)",
+    "artist": "Waka Flocka Flame, Roscoe Dash, Wale",
+    "releaseYear": "2010",
+    "synonymTitle": "Zero Palms",
+    "difficulty": "viral",
+    "hints": [
+      "Empty Grip",
+      "Hip-hop/trap",
+      "Artist: Waka Flocka Flame featuring Roscoe Dash & Wale"
+    ]
+  },
+  {
+    "id": "locked-out-of-heaven",
+    "title": "Locked out of Heaven",
+    "artist": "Bruno Mars",
+    "releaseYear": "2012",
+    "synonymTitle": "Barred from Paradise",
+    "difficulty": "easy",
+    "hints": [
+      "Shut From Bliss",
+      "Pop/R&B",
+      "Artist: Bruno Mars"
+    ]
+  },
+  {
+    "id": "headlines",
+    "title": "Headlines",
+    "artist": "Drake",
+    "releaseYear": "2011",
+    "synonymTitle": "Captions",
+    "difficulty": "easy",
+    "hints": [
+      "Titles",
+      "Hip-hop/rap",
+      "Artist: Drake"
+    ]
+  },
+  {
+    "id": "give-me-everything-feat-nayer",
+    "title": "Give Me Everything (feat. Nayer)",
+    "artist": "Pitbull, AFROJACK, Ne-Yo, Nayer",
+    "releaseYear": 2011,
+    "synonymTitle": "Provide Me All (feat. Nayer)",
+    "difficulty": "easy",
+    "hints": [
+      "Grant Me Everything",
+      "EDM-infused pop/hip-hop",
+      "Artists: Pitbull, AFROJACK, Ne-Yo, Nayer"
+    ]
+  },
+  {
+    "id": "she-will",
+    "title": "She Will",
+    "artist": "Lil Wayne, Drake",
+    "releaseYear": "2011",
+    "synonymTitle": "Female Shall",
+    "difficulty": "easy",
+    "hints": [
+      "That Woman Shall",
+      "Hip-hop/rap",
+      "Artists: Lil Wayne and Drake"
+    ]
+  },
+  {
+    "id": "money-trees",
+    "title": "Money Trees",
+    "artist": "Kendrick Lamar, Jay Rock",
+    "releaseYear": "2012",
+    "synonymTitle": "Currency Forests",
+    "difficulty": "medium",
+    "hints": [
+      "Wealth Gardens",
+      "Hip-hop",
+      "Artist: Kendrick Lamar featuring Jay Rock"
+    ]
+  },
+  {
+    "id": "work-out",
+    "title": "Work Out",
+    "artist": "J. Cole",
+    "releaseYear": "2011",
+    "synonymTitle": "Labor It",
+    "difficulty": "medium",
+    "hints": [
+      "Train Hard",
+      "Hip-hop",
+      "Artist: J. Cole"
+    ]
+  },
+  {
+    "id": "sm",
+    "title": "S&M",
+    "artist": "Rihanna",
+    "releaseYear": "2010",
+    "synonymTitle": "Bondage & Torment",
+    "difficulty": "medium",
+    "hints": [
+      "Submission & Pain",
+      "Pop/dance",
+      "Artist: Rihanna"
+    ]
+  },
+  {
+    "id": "only-girl-in-the-world",
+    "title": "Only Girl (In The World)",
+    "artist": "Rihanna",
+    "releaseYear": 2010,
+    "synonymTitle": "Sole Female (Across The Globe)",
+    "difficulty": "easy",
+    "hints": [
+      "Lone Woman Globally",
+      "Pop/dance",
+      "Artist: Rihanna"
+    ]
+  },
+  {
+    "id": "take-me-to-church",
+    "title": "Take Me to Church",
+    "artist": "Hozier",
+    "releaseYear": "2014",
+    "synonymTitle": "Escort Me to Cathedral",
+    "difficulty": "medium",
+    "hints": [
+      "Bring Me To Temple",
+      "Indie rock",
+      "Artist: Hozier"
+    ]
+  },
+  {
+    "id": "love-me",
+    "title": "Love Me",
+    "artist": "Lil Wayne, Drake, Future",
+    "releaseYear": "2013",
+    "synonymTitle": "Adore Me",
+    "difficulty": "easy",
+    "hints": [
+      "Cherish Me",
+      "Hip-Hop/Rap",
+      "Artists: Lil Wayne, Drake, Future"
+    ]
+  },
+  {
+    "id": "no-role-modelz",
+    "title": "No Role Modelz",
+    "artist": "J. Cole",
+    "releaseYear": "2014",
+    "synonymTitle": "Zero Exemplars",
+    "difficulty": "medium",
+    "hints": [
+      "Without Icons",
+      "Hip-hop",
+      "Artist: J. Cole"
+    ]
+  },
+  {
+    "id": "power-trip-feat-miguel",
+    "title": "Power Trip (feat. Miguel)",
+    "artist": "J. Cole, Miguel",
+    "releaseYear": 2013,
+    "synonymTitle": "Strength Journey (feat. Miguel)",
+    "difficulty": "medium",
+    "hints": [
+      "Control Quest",
+      "R&B/Hip-Hop",
+      "Artist: J. Cole featuring Miguel"
+    ]
+  },
+  {
+    "id": "time-of-our-lives",
+    "title": "Time of Our Lives",
+    "artist": "Pitbull, Ne-Yo",
+    "releaseYear": 2014,
+    "synonymTitle": "Era of Our Existence",
+    "difficulty": "easy",
+    "hints": [
+      "Epoch Of Our Days",
+      "Hip-hop/pop crossover",
+      "Artists: Pitbull and Ne-Yo"
+    ]
+  },
+  {
+    "id": "everybody-talks",
+    "title": "Everybody Talks",
+    "artist": "Neon Trees",
+    "releaseYear": 2012,
+    "synonymTitle": "Everyone Speaks",
+    "difficulty": "easy",
+    "hints": [
+      "All Converse",
+      "Indie rock/synthpop",
+      "Artist: Neon Trees"
+    ]
+  },
+  {
+    "id": "3005",
+    "title": "3005",
+    "artist": "Childish Gambino",
+    "releaseYear": "2013",
+    "synonymTitle": "2994",
+    "difficulty": "hard",
+    "hints": [
+      "Numerical Sequence",
+      "Hip-hop/R&B",
+      "Artist: Donald Glover's rap alter ego"
+    ]
+  },
+  {
+    "id": "still-into-you",
+    "title": "Still into You",
+    "artist": "Paramore",
+    "releaseYear": "2013",
+    "synonymTitle": "Continuing Within You",
+    "difficulty": "medium",
+    "hints": [
+      "Remain Devoted",
+      "Pop-rock",
+      "Artist: Paramore"
+    ]
+  },
+  {
+    "id": "trap-queen",
+    "title": "Trap Queen",
+    "artist": "Fetty Wap",
+    "releaseYear": 2015,
+    "synonymTitle": "Snare Monarch",
+    "difficulty": "medium",
+    "hints": [
+      "Cage Princess",
+      "Hip-hop/rap",
+      "Artist: Fetty Wap"
+    ]
+  },
+  {
+    "id": "thats-what-i-like",
+    "title": "That's What I Like",
+    "artist": "Bruno Mars",
+    "releaseYear": "2016",
+    "synonymTitle": "This Is My Preference",
+    "difficulty": "easy",
+    "hints": [
+      "What Appeals To Me",
+      "Pop/funk",
+      "Artist: Bruno Mars"
+    ]
+  },
+  {
+    "id": "wait-a-minute",
+    "title": "Wait a Minute!",
+    "artist": "WILLOW",
+    "releaseYear": "2015",
+    "synonymTitle": "Pause a Second!",
+    "difficulty": "easy",
+    "hints": [
+      "Hold On Briefly",
+      "Pop/alternative",
+      "Artist: WILLOW (Jada Pinkett Smith's daughter)"
+    ]
+  },
+  {
+    "id": "one-dance",
+    "title": "One Dance",
+    "artist": "Drake, Wizkid, Kyla",
+    "releaseYear": "2016",
+    "synonymTitle": "Single Movement",
+    "difficulty": "easy",
+    "hints": [
+      "Sole Waltz",
+      "Hip-hop/R&B",
+      "Artist: Drake"
+    ]
+  },
+  {
+    "id": "white-iverson",
+    "title": "White Iverson",
+    "artist": "Post Malone",
+    "releaseYear": "2016",
+    "synonymTitle": "Pale Allen",
+    "difficulty": "medium",
+    "hints": [
+      "Pale Hoopster",
+      "Hip-hop/rap",
+      "Artist: Post Malone"
+    ]
+  },
+  {
+    "id": "679-feat-remy-boyz",
+    "title": "679 (feat. Remy Boyz)",
+    "artist": "Fetty Wap, Remy Boyz",
+    "releaseYear": "2015",
+    "synonymTitle": "679 (featuring Remy Crew)",
+    "difficulty": "easy",
+    "hints": [
+      "679 Ensemble Collaboration",
+      "Hip-hop/rap",
+      "Artist: Fetty Wap"
+    ]
+  },
+  {
+    "id": "wet-dreamz",
+    "title": "Wet Dreamz",
+    "artist": "J. Cole",
+    "releaseYear": "2014",
+    "synonymTitle": "Moist Fantasies",
+    "difficulty": "medium",
+    "hints": [
+      "Damp Reveries",
+      "Hip-hop",
+      "Artist: J. Cole"
+    ]
+  },
+  {
+    "id": "lush-life",
+    "title": "Lush Life",
+    "artist": "Zara Larsson",
+    "releaseYear": "2017",
+    "synonymTitle": "Verdant Existence",
+    "difficulty": "hard",
+    "hints": [
+      "Abundant Days",
+      "Pop",
+      "Artist: Zara Larsson"
+    ]
+  },
+  {
+    "id": "sign-of-the-times",
+    "title": "Sign of the Times",
+    "artist": "Harry Styles",
+    "releaseYear": "2017",
+    "synonymTitle": "Indicator of the Era",
+    "difficulty": "medium",
+    "hints": [
+      "Mark Of The Period",
+      "Pop ballad",
+      "Artist: One Direction's former member"
+    ]
+  },
+  {
+    "id": "love-feat-zacari",
+    "title": "LOVE. FEAT. ZACARI.",
+    "artist": "Kendrick Lamar, Zacari",
+    "releaseYear": "2017",
+    "synonymTitle": "AFFECTION. FEAT. ZACARI.",
+    "difficulty": "medium",
+    "hints": [
+      "DEVOTION Collaboration",
+      "Hip-hop/R&B",
+      "Artist: Kendrick Lamar featuring Zacari"
+    ]
+  },
+  {
+    "id": "passionfruit",
+    "title": "Passionfruit",
+    "artist": "Drake",
+    "releaseYear": "2017",
+    "synonymTitle": "Ardor Tropical Berry",
+    "difficulty": "hard",
+    "hints": [
+      "Exotic Fervor Berry",
+      "Hip-hop/R&B",
+      "Artist: Drake"
+    ]
+  },
+  {
+    "id": "bad-at-love",
+    "title": "Bad At Love",
+    "artist": "Halsey",
+    "releaseYear": "2017",
+    "synonymTitle": "Terrible With Romance",
+    "difficulty": "medium",
+    "hints": [
+      "Inadequate Romantic",
+      "Pop-rock",
+      "Artist: Halsey"
+    ]
+  },
+  {
+    "id": "apocalypse",
+    "title": "Apocalypse",
+    "artist": "Cigarettes After Sex",
+    "releaseYear": "2017",
+    "synonymTitle": "Cataclysm",
+    "difficulty": "hard",
+    "hints": [
+      "Total Destruction",
+      "Indie/alternative",
+      "Artist: Cigarettes After Sex"
+    ]
+  },
+  {
+    "id": "unforgettable",
+    "title": "Unforgettable",
+    "artist": "French Montana, Swae Lee",
+    "releaseYear": "2017",
+    "synonymTitle": "Indelible",
+    "difficulty": "hard",
+    "hints": [
+      "Permanent Memory",
+      "Hip-hop/rap",
+      "Artists: French Montana and Swae Lee"
+    ]
+  },
+  {
+    "id": "gods-plan",
+    "title": "God's Plan",
+    "artist": "Drake",
+    "releaseYear": "2018",
+    "synonymTitle": "Deity's Scheme",
+    "difficulty": "easy",
+    "hints": [
+      "Supreme Intent",
+      "Hip-hop/rap",
+      "Artist: Drake"
+    ]
+  },
+  {
+    "id": "lucid-dreams",
+    "title": "Lucid Dreams",
+    "artist": "Juice WRLD",
+    "releaseYear": 2018,
+    "synonymTitle": "Clear Visions",
+    "difficulty": "easy",
+    "hints": [
+      "Vivid Slumber",
+      "Hip-hop/emo rap",
+      "Artist: Juice WRLD"
+    ]
+  },
+  {
+    "id": "wish-feat-trippie-redd---trippie-mix",
+    "title": "Wish (feat. Trippie Redd) - Trippie Mix",
+    "artist": "Diplo, Trippie Redd",
+    "releaseYear": "2018",
+    "synonymTitle": "Desire (feat. Trippie Redd) - Trippie Remix",
+    "difficulty": "easy",
+    "hints": [
+      "Longing Mix",
+      "Trap/rap",
+      "Artist: Diplo & Trippie Redd"
+    ]
+  },
+  {
+    "id": "i-like-it",
+    "title": "I Like It",
+    "artist": "Cardi B, Bad Bunny, J Balvin",
+    "releaseYear": "2018",
+    "synonymTitle": "I Appreciate It",
+    "difficulty": "easy",
+    "hints": [
+      "I Enjoy It",
+      "Latin trap-pop crossover",
+      "Artists: Cardi B, Bad Bunny, J Balvin"
+    ]
+  },
+  {
+    "id": "cry",
+    "title": "Cry",
+    "artist": "Cigarettes After Sex",
+    "releaseYear": "2019",
+    "synonymTitle": "Weep",
+    "difficulty": "easy",
+    "hints": [
+      "Shed Tears",
+      "Indie/alternative R&B",
+      "Artist: Cigarettes After Sex"
+    ]
+  },
+  {
+    "id": "we-fell-in-love-in-october",
+    "title": "we fell in love in october",
+    "artist": "girl in red",
+    "releaseYear": 2018,
+    "synonymTitle": "we tumbled in affection in autumn's tenth month",
+    "difficulty": "medium",
+    "hints": [
+      "We Plunged Into Romance In October",
+      "Indie pop",
+      "Artist: girl in red"
+    ]
+  },
+  {
+    "id": "party-4-u",
+    "title": "party 4 u",
+    "artist": "Charli xcx",
+    "releaseYear": "2020",
+    "synonymTitle": "celebration 4 you",
+    "difficulty": "easy",
+    "hints": [
+      "Gathering 4 You",
+      "Hyperpop/pop",
+      "Artist: Charli xcx"
+    ]
+  },
+  {
+    "id": "sundress",
+    "title": "Sundress",
+    "artist": "A$AP Rocky",
+    "releaseYear": "2018",
+    "synonymTitle": "Daylight Gown",
+    "difficulty": "medium",
+    "hints": [
+      "Summer Outfit",
+      "Hip-hop/rap",
+      "Artist: A$AP Rocky"
+    ]
+  },
+  {
+    "id": "ok-love-you-bye",
+    "title": "Ok Love You Bye",
+    "artist": "Olivia Dean",
+    "releaseYear": "2019",
+    "synonymTitle": "Alright Adore You Goodbye",
+    "difficulty": "easy",
+    "hints": [
+      "Fine Treasure You Later",
+      "R&B/Soul",
+      "Artist: Olivia Dean"
+    ]
+  },
+  {
+    "id": "adore-you",
+    "title": "Adore You",
+    "artist": "Harry Styles",
+    "releaseYear": 2019,
+    "synonymTitle": "Cherish You",
+    "difficulty": "easy",
+    "hints": [
+      "Treasure You",
+      "Pop",
+      "Artist: Harry Styles"
+    ]
+  },
+  {
+    "id": "wait-for-u-feat-drake-tems",
+    "title": "WAIT FOR U (feat. Drake & Tems)",
+    "artist": "Future, Drake, Tems",
+    "releaseYear": "2022",
+    "synonymTitle": "PAUSE FOR YOU (feat. Drake & Tems)",
+    "difficulty": "medium",
+    "hints": [
+      "HOLD FOR YOU",
+      "Hip-Hop/R&B",
+      "Artists: Future, Drake, and Tems"
+    ]
+  },
+  {
+    "id": "deja-vu",
+    "title": "deja vu",
+    "artist": "Olivia Rodrigo",
+    "releaseYear": 2021,
+    "synonymTitle": "recurring recollection",
+    "difficulty": "medium",
+    "hints": [
+      "Familiar Moment",
+      "Pop/alternative",
+      "Artist: Olivia Rodrigo"
+    ]
+  },
+  {
+    "id": "kiss-me-more-feat-sza",
+    "title": "Kiss Me More (feat. SZA)",
+    "artist": "Doja Cat, SZA",
+    "releaseYear": "2021",
+    "synonymTitle": "Smooch Me Additional",
+    "difficulty": "medium",
+    "hints": [
+      "Embrace Me Further",
+      "Pop/R&B",
+      "Artist: Doja Cat featuring SZA"
+    ]
+  },
+  {
+    "id": "too-many-nights-feat-don-toliver-with-future",
+    "title": "Too Many Nights (feat. Don Toliver & with Future)",
+    "artist": "Metro Boomin, Future, Don Toliver",
+    "releaseYear": "2022",
+    "synonymTitle": "Excessive Evenings (feat. Don Toliver & with Future)",
+    "difficulty": "easy",
+    "hints": [
+      "Abundant Hours",
+      "Hip-hop/trap",
+      "Artists: Metro Boomin, Future, Don Toliver"
+    ]
+  },
+  {
+    "id": "the-perfect-pair",
+    "title": "the perfect pair",
+    "artist": "beabadoobee",
+    "releaseYear": 2022,
+    "synonymTitle": "the flawless duo",
+    "difficulty": "medium",
+    "hints": [
+      "The Ideal Couple",
+      "Indie pop/rock",
+      "Artist: beabadoobee"
+    ]
+  },
+  {
+    "id": "trance-with-travis-scott-young-thug",
+    "title": "Trance (with Travis Scott & Young Thug)",
+    "artist": "Metro Boomin, Travis Scott, Young Thug",
+    "releaseYear": "2022",
+    "synonymTitle": "Hypnosis (with Travis Scott & Young Thug)",
+    "difficulty": "medium",
+    "hints": [
+      "Mesmerism",
+      "Hip-hop/trap",
+      "Artists: Metro Boomin, Travis Scott, Young Thug"
+    ]
+  },
+  {
+    "id": "falling-behind",
+    "title": "Falling Behind",
+    "artist": "Laufey",
+    "releaseYear": "2022",
+    "synonymTitle": "Descending Trailing",
+    "difficulty": "medium",
+    "hints": [
+      "Lagging Backward",
+      "Indie pop/alternative",
+      "Artist: Laufey, Icelandic singer-songwriter"
+    ]
+  },
+  {
+    "id": "nonsense",
+    "title": "Nonsense",
+    "artist": "Sabrina Carpenter",
+    "releaseYear": "2022",
+    "synonymTitle": "Gibberish",
+    "difficulty": "easy",
+    "hints": [
+      "Rubbish",
+      "Pop",
+      "Artist: Sabrina Carpenter"
+    ]
+  },
+  {
+    "id": "from-the-start",
+    "title": "From The Start",
+    "artist": "Laufey",
+    "releaseYear": "2023",
+    "synonymTitle": "Since The Beginning",
+    "difficulty": "easy",
+    "hints": [
+      "Initial Point",
+      "Indie pop",
+      "Artist: Laufey"
+    ]
+  },
+  {
+    "id": "thats-so-true",
+    "title": "That's So True",
+    "artist": "Gracie Abrams",
+    "releaseYear": "2024",
+    "synonymTitle": "That's Rather Accurate",
+    "difficulty": "easy",
+    "hints": [
+      "That's Quite Factual",
+      "Indie pop",
+      "Artist: Gracie Abrams"
+    ]
+  },
+  {
+    "id": "good-luck-babe",
+    "title": "Good Luck, Babe!",
+    "artist": "Chappell Roan",
+    "releaseYear": "2024",
+    "synonymTitle": "Fortune, Baby!",
+    "difficulty": "easy",
+    "hints": [
+      "Best Wishes, Dear",
+      "Pop",
+      "Artist: Chappell Roan"
+    ]
+  },
+  {
+    "id": "no-pole",
+    "title": "No Pole",
+    "artist": "Don Toliver",
+    "releaseYear": "2023",
+    "synonymTitle": "Zero Stick",
+    "difficulty": "hard",
+    "hints": [
+      "Without Rod",
+      "Hip-hop/rap",
+      "Artist: Don Toliver"
+    ]
+  },
+  {
+    "id": "dive",
+    "title": "Dive",
+    "artist": "Olivia Dean",
+    "releaseYear": 2023,
+    "synonymTitle": "Plunge",
+    "difficulty": "easy",
+    "hints": [
+      "Submerge",
+      "Contemporary R&B/soul",
+      "Artist: Olivia Dean"
+    ]
+  },
+  {
+    "id": "luther-with-sza",
+    "title": "luther (with sza)",
+    "artist": "Kendrick Lamar, SZA",
+    "releaseYear": "2024",
+    "synonymTitle": "preacher (featuring sza)",
+    "difficulty": "medium",
+    "hints": [
+      "Evangelist",
+      "Hip-hop/R&B collaboration",
+      "Artists: Kendrick Lamar and SZA"
+    ]
+  },
+  {
+    "id": "taste",
+    "title": "Taste",
+    "artist": "Sabrina Carpenter",
+    "releaseYear": "2024",
+    "synonymTitle": "Flavor",
+    "difficulty": "easy",
+    "hints": [
+      "Savor",
+      "Pop",
+      "Artist: Sabrina Carpenter"
+    ]
+  },
+  {
+    "id": "beautiful-things",
+    "title": "Beautiful Things",
+    "artist": "Benson Boone",
+    "releaseYear": 2024,
+    "synonymTitle": "Gorgeous Stuff",
+    "difficulty": "easy",
+    "hints": [
+      "Lovely Objects",
+      "Pop ballad",
+      "Artist: Benson Boone"
+    ]
+  },
+  {
+    "id": "the-hardest-part",
+    "title": "The Hardest Part",
+    "artist": "Olivia Dean",
+    "releaseYear": "2023",
+    "synonymTitle": "The Most Challenging Segment",
+    "difficulty": "medium",
+    "hints": [
+      "The Toughest Bit",
+      "R&B/Soul",
+      "Artist: Olivia Dean"
+    ]
+  },
+  {
+    "id": "i-had-some-help-feat-morgan-wallen",
+    "title": "I Had Some Help (Feat. Morgan Wallen)",
+    "artist": "Post Malone, Morgan Wallen",
+    "releaseYear": "2024",
+    "synonymTitle": "I Possessed Certain Assistance (Feat. Morgan Wallen)",
+    "difficulty": "medium",
+    "hints": [
+      "Got Certain Support",
+      "Country-pop collaboration",
+      "Artists: Post Malone & Morgan Wallen"
+    ]
+  },
+  {
+    "id": "kemst-samt-inn---dusk-remix",
+    "title": "Kemst samt inn - Dusk Remix",
+    "artist": "BlazRoca, Dusk",
+    "releaseYear": 2011,
+    "synonymTitle": "Arrive Together Within - Dusk Remix",
+    "difficulty": "hard",
+    "hints": [
+      "Enter Joint Within - Dusk Remix",
+      "Electronic/remix",
+      "Artists: BlazRoca and Dusk"
+    ]
+  },
+  {
+    "id": "shdy-nate-intro",
+    "title": "Shdy Nate Intro",
+    "artist": "Shady Nate",
+    "releaseYear": "2010",
+    "synonymTitle": "Murky Nate Opening",
+    "difficulty": "medium",
+    "hints": [
+      "Dark Nate Beginning",
+      "Hip-hop/rap",
+      "Artist: Shady Nate"
+    ]
+  },
+  {
+    "id": "who-dem",
+    "title": "Who Dem",
+    "artist": "Lukach",
+    "releaseYear": "2012",
+    "synonymTitle": "Which Those",
+    "difficulty": "medium",
+    "hints": [
+      "Whom Those",
+      "Hip-hop/rap",
+      "Artist: Lukach"
+    ]
+  },
+  {
+    "id": "coffeee",
+    "title": "Coffeee!!!",
+    "artist": "Oriole",
+    "releaseYear": "2011",
+    "synonymTitle": "Java!!!",
+    "difficulty": "medium",
+    "hints": [
+      "Brew!!!",
+      "Indie pop",
+      "Artist: Oriole"
+    ]
+  },
+  {
+    "id": "first-kiss---commentary",
+    "title": "First Kiss - Commentary",
+    "artist": "Isac Elliot",
+    "releaseYear": "2013",
+    "synonymTitle": "Initial Smooch - Remarks",
+    "difficulty": "easy",
+    "hints": [
+      "Opening Lip Lock - Notes",
+      "Pop",
+      "Artist: Isac Elliot"
+    ]
+  },
+  {
+    "id": "kickstart",
+    "title": "Kickstart",
+    "artist": "Redrama",
+    "releaseYear": "2012",
+    "synonymTitle": "Jumpstart My Core",
+    "difficulty": "medium",
+    "hints": [
+      "Launch Begin",
+      "Electronic/dance pop",
+      "Artist: Redrama"
+    ]
+  },
+  {
+    "id": "rock-my-hologram---si-beggs-pleasure-principle-mix",
+    "title": "Rock My Hologram - Si Begg's Pleasure Principle Mix",
+    "artist": "Juice Aleem",
+    "releaseYear": "2010",
+    "synonymTitle": "Sway My Phantom - Si Begg's Delight Doctrine Remix",
+    "difficulty": "hard",
+    "hints": [
+      "Move My Phantom - Si Begg's Joy Rule Mix",
+      "Electronic/remix",
+      "Artist: Juice Aleem"
+    ]
+  },
+  {
+    "id": "bahd-gyal-bubble",
+    "title": "Bahd Gyal Bubble",
+    "artist": "Michie Mee",
+    "releaseYear": "2012",
+    "synonymTitle": "Naughty Female Foam",
+    "difficulty": "hard",
+    "hints": [
+      "Wicked Woman Froth",
+      "Hip-hop/dancehall",
+      "Artist: Michie Mee"
+    ]
+  },
+  {
+    "id": "carry-on",
+    "title": "Carry On",
+    "artist": "Tkay Maidza, Killer Mike",
+    "releaseYear": "2016",
+    "synonymTitle": "Transport Forward",
+    "difficulty": "medium",
+    "hints": [
+      "Bear Along",
+      "Hip-hop/rap",
+      "Artists: Tkay Maidza & Killer Mike"
+    ]
+  },
+  {
+    "id": "im-in-the-kitchen",
+    "title": "I'm in the Kitchen",
+    "artist": "Rich The Factor",
+    "releaseYear": "2016",
+    "synonymTitle": "I'm in the Cooking Chamber",
+    "difficulty": "medium",
+    "hints": [
+      "I'm in the Cooking Space",
+      "Hip-hop/rap",
+      "Artist: Rich The Factor"
+    ]
+  },
+  {
+    "id": "fire-in-the-hole",
+    "title": "Fire in the Hole",
+    "artist": "K Kutta",
+    "releaseYear": "2016",
+    "synonymTitle": "Blaze in the Opening",
+    "difficulty": "medium",
+    "hints": [
+      "Inferno in the Gap",
+      "Hip-hop/rap",
+      "Artist: K Kutta"
+    ]
+  },
+  {
+    "id": "pack-your-bags",
+    "title": "Pack Your Bags",
+    "artist": "Red Shaydez",
+    "releaseYear": "2016",
+    "synonymTitle": "Stow Your Luggage",
+    "difficulty": "easy",
+    "hints": [
+      "Bundle Your Belongings",
+      "Hip-hop/rap",
+      "Artist: Red Shaydez"
+    ]
+  },
+  {
+    "id": "after-party-remix",
+    "title": "After Party (Remix)",
+    "artist": "Melange Lavonne",
+    "releaseYear": 2013,
+    "synonymTitle": "Following Celebration (Remix)",
+    "difficulty": "easy",
+    "hints": [
+      "Subsequent Festivity",
+      "Hip-hop/R&B",
+      "Artist: Melange Lavonne"
+    ]
+  },
+  {
+    "id": "pimpin-as-a-mack",
+    "title": "Pimpin' as a Mack",
+    "artist": "M.C. Mack",
+    "releaseYear": "2014",
+    "synonymTitle": "Hustlin' like a Smooth Operator",
+    "difficulty": "medium",
+    "hints": [
+      "Pimping like a Charmer",
+      "Hip-hop",
+      "Artist: M.C. Mack"
+    ]
+  },
+  {
+    "id": "high",
+    "title": "HIGH",
+    "artist": "Sarafa, Big Daddy Sho, Andre",
+    "releaseYear": "2015",
+    "synonymTitle": "ELEVATED",
+    "difficulty": "easy",
+    "hints": [
+      "SOARING",
+      "Hip-hop/rap",
+      "Artists: Sarafa, Big Daddy Sho, Andre"
+    ]
+  },
+  {
+    "id": "star-of-show",
+    "title": "Star Of Show",
+    "artist": "Raheem the Dream",
+    "releaseYear": "2019",
+    "synonymTitle": "Celebrity Of Performance",
+    "difficulty": "medium",
+    "hints": [
+      "Luminary Of Spectacle",
+      "Hip-hop/rap",
+      "Artist: Raheem the Dream"
+    ]
+  },
+  {
+    "id": "why-you-always-hate---remastered",
+    "title": "Why you always hate - Remastered",
+    "artist": "Gonzo G, Ahtyamov",
+    "releaseYear": "2019",
+    "synonymTitle": "Wherefore thou perpetually despise - Restored",
+    "difficulty": "hard",
+    "hints": [
+      "Why thou constantly despise - Reissued",
+      "Rap/hip-hop",
+      "Artists: Gonzo G and Ahtyamov"
+    ]
+  },
+  {
+    "id": "no-graft-no-gain",
+    "title": "No Graft, No Gain",
+    "artist": "Reklews, Bang On!",
+    "releaseYear": "2019",
+    "synonymTitle": "Zero Labor, Zero Profit",
+    "difficulty": "medium",
+    "hints": [
+      "Without Effort Without Reward",
+      "Indie/alternative",
+      "Artist: Reklews, Bang On!"
+    ]
+  },
+  {
+    "id": "the-growing-addiction---remix",
+    "title": "The Growing Addiction - Remix",
+    "artist": "Bo",
+    "releaseYear": "2017",
+    "synonymTitle": "The Expanding Compulsion - Remix",
+    "difficulty": "medium",
+    "hints": [
+      "The Intensifying Dependency - Remix",
+      "Comedy rap/hip-hop",
+      "Artist: Bo Burnham"
+    ]
+  },
+  {
+    "id": "big-things",
+    "title": "Big Things",
+    "artist": "Lil Skritt",
+    "releaseYear": "2019",
+    "synonymTitle": "Massive Matters",
+    "difficulty": "medium",
+    "hints": [
+      "Grand Stuff",
+      "Hip-hop/rap",
+      "Artist: Lil Skritt"
+    ]
+  },
+  {
+    "id": "passenger",
+    "title": "Passenger",
+    "artist": "Just Us Guys, Max Reece, One Only, Reezy",
+    "releaseYear": "2018",
+    "synonymTitle": "Traveler",
+    "difficulty": "easy",
+    "hints": [
+      "Commuter",
+      "Hip-hop/rap",
+      "Artist: Just Us Guys, Max Reece, One Only, Reezy"
+    ]
+  },
+  {
+    "id": "frozen-gang-intro",
+    "title": "Frozen Gang Intro",
+    "artist": "Frozen Gang",
+    "releaseYear": "2018",
+    "synonymTitle": "Icy Crew Prelude",
+    "difficulty": "medium",
+    "hints": [
+      "Chilled Squad Opening",
+      "Hip-hop/rap",
+      "Artist: Frozen Gang"
+    ]
+  },
+  {
+    "id": "i-am-we",
+    "title": "I Am We",
+    "artist": "Eskatology, Devize",
+    "releaseYear": "2017",
+    "synonymTitle": "Me Exist Us",
+    "difficulty": "hard",
+    "hints": [
+      "I Become Ourselves",
+      "Experimental hip-hop",
+      "Artist: Eskatology, Devize"
+    ]
+  },
+  {
+    "id": "taghsim",
+    "title": "Taghsim",
+    "artist": "Farsea, Navid",
+    "releaseYear": "2020",
+    "synonymTitle": "Partition",
+    "difficulty": "hard",
+    "hints": [
+      "Segmentation",
+      "World music / Persian instrumental",
+      "Artist: Farsea, Navid - Iranian composer"
+    ]
+  },
+  {
+    "id": "uncle-sam",
+    "title": "Uncle Sam",
+    "artist": "Sons of Thunder",
+    "releaseYear": 2022,
+    "synonymTitle": "Grandfather Liberty",
+    "difficulty": "medium",
+    "hints": [
+      "American Uncle",
+      "Rock/Americana",
+      "Artist: Sons of Thunder"
+    ]
+  },
+  {
+    "id": "king-me",
+    "title": "King Me",
+    "artist": "Chey Dolla",
+    "releaseYear": "2020",
+    "synonymTitle": "Crown Me",
+    "difficulty": "easy",
+    "hints": [
+      "Enthrone Me",
+      "Hip-hop/rap",
+      "Artist: Chey Dolla"
+    ]
+  },
+  {
+    "id": "hung-up---midnight-express-mb-da-funk-mix",
+    "title": "Hung Up - Midnight Express & Mb da Funk Mix",
+    "artist": "Checkmate, Midnight Express, MB Da Funk",
+    "releaseYear": "2022",
+    "synonymTitle": "Suspended - Nocturnal Express & Mb da Funk Remix",
+    "difficulty": "medium",
+    "hints": [
+      "Dangling - Nocturnal Route & Mb da Funk Rework",
+      "Dance-pop remix culture",
+      "Artists: Checkmate, Midnight Express, MB Da Funk"
+    ]
+  },
+  {
+    "id": "tigwilise-chikondi",
+    "title": "Tigwilise Chikondi",
+    "artist": "DJ Mzenga Man, TJ Still",
+    "releaseYear": "2022",
+    "synonymTitle": "Organize Affection",
+    "difficulty": "hard",
+    "hints": [
+      "Arrange Devotion",
+      "Afrobeats/Amapiano",
+      "Artists: DJ Mzenga Man and TJ Still"
+    ]
+  },
+  {
+    "id": "haircut",
+    "title": "HAIRCUT",
+    "artist": "AG Club",
+    "releaseYear": "2021",
+    "synonymTitle": "TRIM",
+    "difficulty": "easy",
+    "hints": [
+      "CUT",
+      "Electronic/dance pop",
+      "Artist: AG Club"
+    ]
+  },
+  {
+    "id": "come-on-let-go---midnight-express-easy-mix",
+    "title": "Come on Let Go - Midnight Express Easy Mix",
+    "artist": "Checkmate, Midnight Express",
+    "releaseYear": "2022",
+    "synonymTitle": "Arrive On Release - Midnight Express Simple Arrangement",
+    "difficulty": "medium",
+    "hints": [
+      "Go On Release - Nocturnal Route Simple Mix",
+      "Electronic/dance",
+      "Artist: Checkmate, Midnight Express"
+    ]
+  },
+  {
+    "id": "michael-haze---dej-ten-kush",
+    "title": "Michael Haze - Dej Ten Kush",
+    "artist": "Vneumicky",
+    "releaseYear": 2020,
+    "synonymTitle": "Mitchell Fog - Grant That Soothing",
+    "difficulty": "hard",
+    "hints": [
+      "Stefan Mist - Give That Tranquil",
+      "Electronic/hip-hop",
+      "Artist: Vneumicky"
+    ]
+  },
+  {
+    "id": "faded-images",
+    "title": "Faded Images",
+    "artist": "Cilla Black",
+    "releaseYear": 2012,
+    "synonymTitle": "Dimmed Pictures",
+    "difficulty": "medium",
+    "hints": [
+      "Bleached Visions",
+      "Soul/pop",
+      "Artist: Cilla Black"
+    ]
+  },
+  {
+    "id": "buccaneers",
+    "title": "Buccaneers",
+    "artist": "Whiskey Ritual",
+    "releaseYear": 2013,
+    "synonymTitle": "Maritime Thieves",
+    "difficulty": "medium",
+    "hints": [
+      "Ocean Raiders",
+      "Alternative rock",
+      "Artist: Whiskey Ritual"
+    ]
+  },
+  {
+    "id": "kansas-city",
+    "title": "Kansas City",
+    "artist": "Wilbert Harrison",
+    "releaseYear": "2011",
+    "synonymTitle": "Missouri Municipality",
+    "difficulty": "medium",
+    "hints": [
+      "Central Town",
+      "R&B/Rock and Roll",
+      "Artist: Wilbert Harrison"
+    ]
+  },
+  {
+    "id": "maze-of-madness",
+    "title": "Maze of Madness",
+    "artist": "Heretic",
+    "releaseYear": "2013",
+    "synonymTitle": "Labyrinth of Chaos",
+    "difficulty": "medium",
+    "hints": [
+      "Puzzle of Insanity",
+      "Metal/rock",
+      "Artist: Heretic"
+    ]
+  },
+  {
+    "id": "masons-apron-reel-variations",
+    "title": "Mason's Apron Reel (Variations)",
+    "artist": "Johan de Wal",
+    "releaseYear": "2011",
+    "synonymTitle": "Builder's Garment Spin (Adaptations)",
+    "difficulty": "hard",
+    "hints": [
+      "Craftsman's Clothing Jig (Modifications)",
+      "Instrumental/classical crossover",
+      "Artist: Johan de Wal"
+    ]
+  },
+  {
+    "id": "crowned-in-filth",
+    "title": "Crowned in Filth",
+    "artist": "Heretic",
+    "releaseYear": "2013",
+    "synonymTitle": "Adorned in Grime",
+    "difficulty": "hard",
+    "hints": [
+      "Decorated in Muck",
+      "Metal",
+      "Artist: Heretic"
+    ]
+  },
+  {
+    "id": "aint-that-just-like-me-mono-version",
+    "title": "Ain't That Just Like Me (Mono Version)",
+    "artist": "The Searchers",
+    "releaseYear": "2012",
+    "synonymTitle": "Isn't That Precisely Characteristic of Me (Mono Version)",
+    "difficulty": "medium",
+    "hints": [
+      "Doesn't That Fit My Nature (Mono Version)",
+      "British Invasion rock",
+      "Artist: The Searchers"
+    ]
+  },
+  {
+    "id": "alright-mono",
+    "title": "Alright (Mono)",
+    "artist": "The Searchers",
+    "releaseYear": "2012",
+    "synonymTitle": "Acceptable (Monophonic)",
+    "difficulty": "medium",
+    "hints": [
+      "Fine (Monophonic)",
+      "Indie rock",
+      "Artist: The Searchers"
+    ]
+  },
+  {
+    "id": "good-lovin---single-version",
+    "title": "Good Lovin' - Single Version",
+    "artist": "The Young Rascals",
+    "releaseYear": "2017",
+    "synonymTitle": "Excellent Affection - Solo Edition",
+    "difficulty": "easy",
+    "hints": [
+      "Pleasant Romance - Solo Edition",
+      "Soul and rock",
+      "Artist: The Young Rascals"
+    ]
+  },
+  {
+    "id": "last-nights-fun-single-reel",
+    "title": "Last Night's Fun (Single Reel)",
+    "artist": "Johan de Wal",
+    "releaseYear": "2019",
+    "synonymTitle": "Previous Evening's Enjoyment (Solo Rotation)",
+    "difficulty": "hard",
+    "hints": [
+      "Former Evening's Delight (Solo Rotation)",
+      "Folk/traditional music",
+      "Artist: Johan de Wal"
+    ]
+  },
+  {
+    "id": "monaghan-jig-merrily-kiss-the-quakers-wife-slide",
+    "title": "Monaghan Jig / Merrily Kiss the Quaker's Wife (Slide)",
+    "artist": "Johan de Wal",
+    "releaseYear": 2019,
+    "synonymTitle": "Leitrim Reel / Cheerfully Smooch the Puritan's Spouse (Glide)",
+    "difficulty": "hard",
+    "hints": [
+      "Tyrone Reel / Happily Embrace the Puritan's Bride (Glide)",
+      "Irish traditional folk instrumental",
+      "Artist: Johan de Wal, Dutch musician known for Celtic arrangements"
+    ]
+  },
+  {
+    "id": "kerry-reel-joe-cooleys-reel",
+    "title": "Kerry Reel / Joe Cooley's Reel",
+    "artist": "Johan de Wal",
+    "releaseYear": "2019",
+    "synonymTitle": "County Spin / Joseph Chilly's Spin",
+    "difficulty": "hard",
+    "hints": [
+      "Limerick Spin / James Frosty's Spin",
+      "Traditional Irish folk/Celtic instrumental",
+      "Artist: Johan de Wal - Dutch musician specializing in Irish reels"
+    ]
+  },
+  {
+    "id": "wise-maid-reel-musical-priest-single-reel",
+    "title": "Wise Maid (Reel) / Musical Priest (Single Reel)",
+    "artist": "Johan de Wal",
+    "releaseYear": 2019,
+    "synonymTitle": "Intelligent Maiden (Spool) / Melodic Cleric (Solo Spool)",
+    "difficulty": "hard",
+    "hints": [
+      "Clever Woman (Spool) / Harmonic Monk (Solo Spool)",
+      "Instrumental folk/traditional music",
+      "Artist: Johan de Wal, Dutch traditional musician"
+    ]
+  },
+  {
+    "id": "kate-martins-waltz",
+    "title": "Kate Martin's Waltz",
+    "artist": "Johan de Wal",
+    "releaseYear": "2017",
+    "synonymTitle": "Catherine Powell's Three-Step",
+    "difficulty": "hard",
+    "hints": [
+      "Margaret Sullivan's Three-Step",
+      "Classical/instrumental",
+      "Artist: Johan de Wal"
+    ]
+  },
+  {
+    "id": "never-ever-mike-cruz-radio-mix",
+    "title": "Never Ever (Mike Cruz Radio Mix)",
+    "artist": "Lisa Stansfield, Mike Cruz",
+    "releaseYear": "2018",
+    "synonymTitle": "Not Once (Mike Cruz Radio Mix)",
+    "difficulty": "easy",
+    "hints": [
+      "Not Once (Mike Cruz Radio Mix)",
+      "R&B/pop remix from 2018",
+      "Artist: Lisa Stansfield"
+    ]
+  },
+  {
+    "id": "alfie",
+    "title": "Alfie",
+    "artist": "Cilla Black",
+    "releaseYear": "2017",
+    "synonymTitle": "Edmund",
+    "difficulty": "hard",
+    "hints": [
+      "Vincent",
+      "British pop",
+      "Artist: Cilla Black"
+    ]
+  },
+  {
+    "id": "stars",
+    "title": "Stars",
+    "artist": "Simply Red",
+    "releaseYear": "2022",
+    "synonymTitle": "Celestial Bodies",
+    "difficulty": "medium",
+    "hints": [
+      "Heavenly Orbs",
+      "Soul/pop",
+      "Artist: Simply Red"
+    ]
+  },
+  {
+    "id": "river-jordan",
+    "title": "River Jordan",
+    "artist": "D.I.D",
+    "releaseYear": "2022",
+    "synonymTitle": "Stream Michael",
+    "difficulty": "hard",
+    "hints": [
+      "Waterway Michael",
+      "Hip-hop/rap",
+      "Artist: D.I.D"
+    ]
+  },
+  {
+    "id": "tomei-ni-aogu",
+    "title": "Tomei ni Aogu",
+    "artist": "ETO",
+    "releaseYear": "2023",
+    "synonymTitle": "Crystalline ni Gaze Upward",
+    "difficulty": "hard",
+    "hints": [
+      "Transparent ni Look Up",
+      "Japanese pop/rock",
+      "Artist: ETO"
+    ]
+  },
+  {
+    "id": "right-place-wrong-time",
+    "title": "Right Place Wrong Time",
+    "artist": "Dr. John",
+    "releaseYear": "2024",
+    "synonymTitle": "Correct Location Incorrect Moment",
+    "difficulty": "medium",
+    "hints": [
+      "Perfect Spot Bad Timing",
+      "Funk/soul classic",
+      "Artist: Dr. John, the Night Tripper"
+    ]
+  },
+  {
+    "id": "thrill-me---steppin-razor-mix",
+    "title": "Thrill Me - Steppin' Razor Mix",
+    "artist": "Simply Red",
+    "releaseYear": "2021",
+    "synonymTitle": "Electrify Me - Striding Blade Remix",
+    "difficulty": "medium",
+    "hints": [
+      "Excite Me - Dancing Knife Remix",
+      "Soul/pop remix",
+      "Artist: Simply Red"
+    ]
+  },
+  {
+    "id": "groovin",
+    "title": "Groovin'",
+    "artist": "The Young Rascals",
+    "releaseYear": "1968",
+    "synonymTitle": "Vibing'",
+    "difficulty": "easy",
+    "hints": [
+      "Swaying",
+      "Soul/rock",
+      "Artist: The Young Rascals"
+    ]
+  },
+  {
+    "id": "your-song---acoustic-version",
+    "title": "Your Song - Acoustic Version",
+    "artist": "Cilla Black",
+    "releaseYear": "2024",
+    "synonymTitle": "Thine Melody - Unplugged Rendition",
+    "difficulty": "medium",
+    "hints": [
+      "Thy Tune - Unamplified Cut",
+      "Soft rock/pop",
+      "Artist: Cilla Black"
+    ]
+  },
+  {
+    "id": "without-him",
+    "title": "Without Him",
+    "artist": "Cilla Black",
+    "releaseYear": "2021",
+    "synonymTitle": "Minus He",
+    "difficulty": "easy",
+    "hints": [
+      "Absent He",
+      "Soul/pop ballad",
+      "Artist: Cilla Black"
+    ]
+  },
+  {
+    "id": "bring-me-to-life",
+    "title": "Bring Me To Life",
+    "artist": "Evanescence",
+    "releaseYear": "2003",
+    "synonymTitle": "Transport Me To Existence",
+    "difficulty": "medium",
+    "hints": [
+      "Carry Me Into Living",
+      "Alternative rock",
+      "Artist: Evanescence"
+    ]
+  },
+  {
+    "id": "mr-brightside",
+    "title": "Mr. Brightside",
+    "artist": "The Killers",
+    "releaseYear": "2004",
+    "synonymTitle": "Sir Luminous-Perspective",
+    "difficulty": "viral",
+    "hints": [
+      "Mister Sunny-View",
+      "Indie rock / new wave",
+      "Artist: The Killers"
+    ]
+  },
+  {
+    "id": "in-the-end",
+    "title": "In the End",
+    "artist": "Linkin Park",
+    "releaseYear": "2000",
+    "synonymTitle": "At the Finish",
+    "difficulty": "easy",
+    "hints": [
+      "By the Conclusion",
+      "Nu-metal/alternative rock",
+      "Artist: Linkin Park"
+    ]
+  },
+  {
+    "id": "feel-good-inc",
+    "title": "Feel Good Inc.",
+    "artist": "Gorillaz, De La Soul",
+    "releaseYear": "2005",
+    "synonymTitle": "Sense Pleasant Corp.",
+    "difficulty": "viral",
+    "hints": [
+      "Enjoy Happy Ltd.",
+      "Alternative hip-hop",
+      "Artist: Gorillaz featuring De La Soul"
+    ]
+  },
+  {
+    "id": "numb",
+    "title": "Numb",
+    "artist": "Linkin Park",
+    "releaseYear": "2003",
+    "synonymTitle": "Insensitive",
+    "difficulty": "medium",
+    "hints": [
+      "Unfeeling",
+      "Alternative rock/nu-metal",
+      "Artist: Linkin Park"
+    ]
+  },
+  {
+    "id": "somewhere-i-belong",
+    "title": "Somewhere I Belong",
+    "artist": "Linkin Park",
+    "releaseYear": 2003,
+    "synonymTitle": "Anyplace I Fit In",
+    "difficulty": "medium",
+    "hints": [
+      "Somewhere I Fit",
+      "Nu-metal/alternative rock",
+      "Artist: Linkin Park"
+    ]
+  },
+  {
+    "id": "island-in-the-sun",
+    "title": "Island In The Sun",
+    "artist": "Weezer",
+    "releaseYear": "2001",
+    "synonymTitle": "Archipelago Beneath The Stars",
+    "difficulty": "viral",
+    "hints": [
+      "Solitary Atoll Overhead",
+      "Alternative rock",
+      "Artist: Weezer"
+    ]
+  },
+  {
+    "id": "cant-stop",
+    "title": "Can't Stop",
+    "artist": "Red Hot Chili Peppers",
+    "releaseYear": "2002",
+    "synonymTitle": "Unable Halt",
+    "difficulty": "viral",
+    "hints": [
+      "Powerless Cease",
+      "Funk rock",
+      "Artist: Red Hot Chili Peppers"
+    ]
+  },
+  {
+    "id": "drops-of-jupiter-tell-me",
+    "title": "Drops of Jupiter (Tell Me)",
+    "artist": "Train",
+    "releaseYear": "2001",
+    "synonymTitle": "Precipitation of the Gas Giant (Inform Me)",
+    "difficulty": "medium",
+    "hints": [
+      "Rivulets From The Planet Speak",
+      "Rock/pop",
+      "Artist: Train"
+    ]
+  },
+  {
+    "id": "somebody-told-me",
+    "title": "Somebody Told Me",
+    "artist": "The Killers",
+    "releaseYear": "2004",
+    "synonymTitle": "A Person Informed Me",
+    "difficulty": "medium",
+    "hints": [
+      "Someone Disclosed To Me",
+      "Rock/new wave",
+      "Artist: The Killers"
+    ]
+  },
+  {
+    "id": "viva-la-vida",
+    "title": "Viva La Vida",
+    "artist": "Coldplay",
+    "releaseYear": "2008",
+    "synonymTitle": "Long Live The Existence",
+    "difficulty": "medium",
+    "hints": [
+      "Celebrate The Living",
+      "Alternative rock/pop",
+      "Artist: Coldplay"
+    ]
+  },
+  {
+    "id": "what-ive-done",
+    "title": "What I've Done",
+    "artist": "Linkin Park",
+    "releaseYear": "2007",
+    "synonymTitle": "Which I've Completed",
+    "difficulty": "medium",
+    "hints": [
+      "Actions I Have Made",
+      "Nu-metal/alternative rock",
+      "Artist: Linkin Park"
+    ]
+  },
+  {
+    "id": "how-to-save-a-life",
+    "title": "How to Save a Life",
+    "artist": "The Fray",
+    "releaseYear": "2005",
+    "synonymTitle": "Methods to Rescue an Existence",
+    "difficulty": "medium",
+    "hints": [
+      "Ways To Preserve Living",
+      "Alternative rock",
+      "Artist: The Fray"
+    ]
+  },
+  {
+    "id": "monster",
+    "title": "Monster",
+    "artist": "Skillet",
+    "releaseYear": "2009",
+    "synonymTitle": "Creature",
+    "difficulty": "easy",
+    "hints": [
+      "Fiend",
+      "Industrial metal",
+      "Artist: Skillet"
+    ]
+  },
+  {
+    "id": "animal-i-have-become",
+    "title": "Animal I Have Become",
+    "artist": "Three Days Grace",
+    "releaseYear": 2006,
+    "synonymTitle": "Beast I Have Transformed Into",
+    "difficulty": "medium",
+    "hints": [
+      "Brute I Have Turned Into",
+      "Rock/metal",
+      "Artist: Three Days Grace"
+    ]
+  },
+  {
+    "id": "all-i-need",
+    "title": "All I Need",
+    "artist": "Radiohead",
+    "releaseYear": "2007",
+    "synonymTitle": "Everything I Require",
+    "difficulty": "medium",
+    "hints": [
+      "Everything I Desire",
+      "Alternative rock",
+      "Artist: Radiohead"
+    ]
+  },
+  {
+    "id": "mary-janes-last-dance",
+    "title": "Mary Jane's Last Dance",
+    "artist": "Tom Petty and the Heartbreakers",
+    "releaseYear": "2008",
+    "synonymTitle": "Polly Anne's Final Waltz",
+    "difficulty": "medium",
+    "hints": [
+      "Sarah Jean's Ultimate Waltz",
+      "Rock/alternative",
+      "Artist: Tom Petty and the Heartbreakers"
+    ]
+  },
+  {
+    "id": "cherry-waves",
+    "title": "Cherry Waves",
+    "artist": "Deftones",
+    "releaseYear": "2006",
+    "synonymTitle": "Crimson Undulations",
+    "difficulty": "hard",
+    "hints": [
+      "Scarlet Ripples",
+      "Alternative metal/nu-metal",
+      "Artist: Deftones"
+    ]
+  },
+  {
+    "id": "sextape",
+    "title": "Sextape",
+    "artist": "Deftones",
+    "releaseYear": "2010",
+    "synonymTitle": "Intimate Recording",
+    "difficulty": "medium",
+    "hints": [
+      "Private Video",
+      "Alternative metal",
+      "Artist: Deftones"
+    ]
+  },
+  {
+    "id": "go-away",
+    "title": "Go Away",
+    "artist": "Weezer, Best Coast",
+    "releaseYear": "2014",
+    "synonymTitle": "Depart Elsewhere",
+    "difficulty": "easy",
+    "hints": [
+      "Leave Here",
+      "Indie rock/pop",
+      "Artists: Weezer and Best Coast"
+    ]
+  },
+  {
+    "id": "do-i-wanna-know",
+    "title": "Do I Wanna Know?",
+    "artist": "Arctic Monkeys",
+    "releaseYear": "2013",
+    "synonymTitle": "Shall I Desire to Comprehend?",
+    "difficulty": "medium",
+    "hints": [
+      "Must I Wish To Learn",
+      "Indie rock",
+      "Artist: Arctic Monkeys"
+    ]
+  },
+  {
+    "id": "ride",
+    "title": "Ride",
+    "artist": "Twenty One Pilots",
+    "releaseYear": "2015",
+    "synonymTitle": "Journey",
+    "difficulty": "medium",
+    "hints": [
+      "Voyage",
+      "Alternative rock/pop",
+      "Artist: Twenty One Pilots"
+    ]
+  },
+  {
+    "id": "the-less-i-know-the-better",
+    "title": "The Less I Know The Better",
+    "artist": "Tame Impala",
+    "releaseYear": 2015,
+    "synonymTitle": "The Fewer I Understand The Superior",
+    "difficulty": "medium",
+    "hints": [
+      "The Minimal I Grasp The Finer",
+      "Psychedelic rock/pop",
+      "Artist: Tame Impala"
+    ]
+  },
+  {
+    "id": "new-person-same-old-mistakes",
+    "title": "New Person, Same Old Mistakes",
+    "artist": "Tame Impala",
+    "releaseYear": "2015",
+    "synonymTitle": "Fresh Individual, Identical Ancient Errors",
+    "difficulty": "hard",
+    "hints": [
+      "Novel Soul, Repeat Timeless Blunders",
+      "Psychedelic rock/pop",
+      "Artist: Tame Impala (Kevin Parker)"
+    ]
+  },
+  {
+    "id": "let-it-happen",
+    "title": "Let It Happen",
+    "artist": "Tame Impala",
+    "releaseYear": "2015",
+    "synonymTitle": "Permit It Occur",
+    "difficulty": "medium",
+    "hints": [
+      "Allow It Unfold",
+      "Psychedelic rock/pop",
+      "Artist: Tame Impala (Kevin Parker)"
+    ]
+  },
+  {
+    "id": "pumped-up-kicks",
+    "title": "Pumped Up Kicks",
+    "artist": "Foster The People",
+    "releaseYear": 2011,
+    "synonymTitle": "Inflated Elevated Sneakers",
+    "difficulty": "medium",
+    "hints": [
+      "Inflated Boosted Shoes",
+      "Indie pop",
+      "Artist: Foster The People"
+    ]
+  },
+  {
+    "id": "whyd-you-only-call-me-when-youre-high",
+    "title": "Why'd You Only Call Me When You're High?",
+    "artist": "Arctic Monkeys",
+    "releaseYear": "2013",
+    "synonymTitle": "Wherefore'd You Solely Reach Out When You're Intoxicated?",
+    "difficulty": "hard",
+    "hints": [
+      "Why'd You Merely Contact Me When You're Stoned",
+      "Indie rock",
+      "Artist: Arctic Monkeys"
+    ]
+  },
+  {
+    "id": "centuries",
+    "title": "Centuries",
+    "artist": "Fall Out Boy",
+    "releaseYear": 2015,
+    "synonymTitle": "Eons",
+    "difficulty": "medium",
+    "hints": [
+      "Ages",
+      "Pop-punk/alternative rock",
+      "Artist: Fall Out Boy"
+    ]
+  },
+  {
+    "id": "borderline",
+    "title": "Borderline",
+    "artist": "Tame Impala",
+    "releaseYear": "2020",
+    "synonymTitle": "Edgeline",
+    "difficulty": "medium",
+    "hints": [
+      "Threshold",
+      "Psychedelic rock/pop",
+      "Artist: Tame Impala (Kevin Parker)"
+    ]
+  },
+  {
+    "id": "hard-times",
+    "title": "Hard Times",
+    "artist": "Paramore",
+    "releaseYear": "2017",
+    "synonymTitle": "Difficult Periods",
+    "difficulty": "easy",
+    "hints": [
+      "Tough Moments",
+      "Alternative pop-rock",
+      "Artist: Paramore"
+    ]
+  },
+  {
+    "id": "crazy-train",
+    "title": "Crazy Train",
+    "artist": "Ozzy Osbourne",
+    "releaseYear": "2020",
+    "synonymTitle": "Insane Locomotive",
+    "difficulty": "easy",
+    "hints": [
+      "Mad Rails",
+      "Heavy metal",
+      "Artist: Ozzy Osbourne"
+    ]
+  },
+  {
+    "id": "eventually",
+    "title": "Eventually",
+    "artist": "Tame Impala",
+    "releaseYear": 2015,
+    "synonymTitle": "In Due Course",
+    "difficulty": "hard",
+    "hints": [
+      "Sooner or Later",
+      "Psychedelic rock/pop",
+      "Artist: Tame Impala (Kevin Parker)"
+    ]
+  },
+  {
+    "id": "the-adults-are-talking",
+    "title": "The Adults Are Talking",
+    "artist": "The Strokes",
+    "releaseYear": 2020,
+    "synonymTitle": "The Matured Individuals Are Conversing",
+    "difficulty": "medium",
+    "hints": [
+      "The Grown Folks Are Speaking",
+      "Indie rock",
+      "Artist: The Strokes"
+    ]
+  },
+  {
+    "id": "sweater-weather",
+    "title": "Sweater Weather",
+    "artist": "The Neighbourhood",
+    "releaseYear": "2013",
+    "synonymTitle": "Cardigan Climate",
+    "difficulty": "medium",
+    "hints": [
+      "Pullover Season",
+      "Indie pop",
+      "Artist: The Neighbourhood"
+    ]
+  },
+  {
+    "id": "space-song",
+    "title": "Space Song",
+    "artist": "Beach House",
+    "releaseYear": "2015",
+    "synonymTitle": "Cosmos Melody",
+    "difficulty": "medium",
+    "hints": [
+      "Universe Tune",
+      "Dream pop/indie",
+      "Artist: Beach House"
+    ]
+  },
+  {
+    "id": "lovers-rock",
+    "title": "Lovers Rock",
+    "artist": "TV Girl",
+    "releaseYear": "2014",
+    "synonymTitle": "Admirers Stone",
+    "difficulty": "medium",
+    "hints": [
+      "Sweethearts Roll",
+      "Indie pop",
+      "Artist: TV Girl"
+    ]
+  },
+  {
+    "id": "my-kind-of-woman",
+    "title": "My Kind of Woman",
+    "artist": "Mac DeMarco",
+    "releaseYear": "2012",
+    "synonymTitle": "My Type of Lady",
+    "difficulty": "easy",
+    "hints": [
+      "My Preferred Sort of Girl",
+      "Indie rock/psychedelic pop",
+      "Artist: Mac DeMarco"
+    ]
+  },
+  {
+    "id": "cigarette-daydreams",
+    "title": "Cigarette Daydreams",
+    "artist": "Cage The Elephant",
+    "releaseYear": 2013,
+    "synonymTitle": "Smoke Reveries",
+    "difficulty": "medium",
+    "hints": [
+      "Tobacco Fantasies",
+      "Indie rock",
+      "Artist: Cage The Elephant"
+    ]
+  },
+  {
+    "id": "tongue-tied",
+    "title": "Tongue Tied",
+    "artist": "GROUPLOVE",
+    "releaseYear": "2011",
+    "synonymTitle": "Speech Bound",
+    "difficulty": "medium",
+    "hints": [
+      "Mute Restricted",
+      "Indie pop rock",
+      "Artist: GROUPLOVE"
+    ]
+  },
+  {
+    "id": "what-you-know",
+    "title": "What You Know",
+    "artist": "Two Door Cinema Club",
+    "releaseYear": "2010",
+    "synonymTitle": "That Which You Comprehend",
+    "difficulty": "hard",
+    "hints": [
+      "Everything You Understand",
+      "Indie rock",
+      "Artist: Two Door Cinema Club"
+    ]
+  },
+  {
+    "id": "cigarettes-out-the-window",
+    "title": "Cigarettes out the Window",
+    "artist": "TV Girl",
+    "releaseYear": "2016",
+    "synonymTitle": "Smokes through the Pane",
+    "difficulty": "hard",
+    "hints": [
+      "Butts from the Glass",
+      "Indie rock",
+      "Artist: TV Girl"
+    ]
+  },
+  {
+    "id": "not-allowed",
+    "title": "Not Allowed",
+    "artist": "TV Girl",
+    "releaseYear": "2016",
+    "synonymTitle": "Forbidden",
+    "difficulty": "easy",
+    "hints": [
+      "Prohibited",
+      "Indie pop",
+      "Artist: TV Girl"
+    ]
+  },
+  {
+    "id": "blue-hair",
+    "title": "Blue Hair",
+    "artist": "TV Girl",
+    "releaseYear": "2018",
+    "synonymTitle": "Cyan Locks",
+    "difficulty": "medium",
+    "hints": [
+      "Azure Strands",
+      "Indie pop/lo-fi",
+      "Artist: TV Girl"
+    ]
+  },
+  {
+    "id": "for-the-first-time",
+    "title": "For the First Time",
+    "artist": "Mac DeMarco",
+    "releaseYear": "2017",
+    "synonymTitle": "During the Initial Instance",
+    "difficulty": "medium",
+    "hints": [
+      "At the Opening Moment",
+      "Indie rock/pop",
+      "Artist: Mac DeMarco"
+    ]
+  },
+  {
+    "id": "yellow",
+    "title": "Yellow",
+    "artist": "Coldplay",
+    "releaseYear": "2000",
+    "synonymTitle": "Blonde",
+    "difficulty": "easy",
+    "hints": [
+      "Golden",
+      "Alternative rock",
+      "Artist: Coldplay"
+    ]
+  },
+  {
+    "id": "without-me",
+    "title": "Without Me",
+    "artist": "Eminem",
+    "releaseYear": "2002",
+    "synonymTitle": "Absent From Me",
+    "difficulty": "easy",
+    "hints": [
+      "Minus Me",
+      "Hip-hop",
+      "Artist: Eminem"
+    ]
+  },
+  {
+    "id": "yeah-feat-lil-jon-ludacris",
+    "title": "Yeah! (feat. Lil Jon & Ludacris)",
+    "artist": "USHER, Lil Jon, Ludacris",
+    "releaseYear": "2004",
+    "synonymTitle": "Affirmative! (feat. Lil Jon & Ludacris)",
+    "difficulty": "viral",
+    "hints": [
+      "Absolutely!",
+      "Crunk/hip-hop club anthem",
+      "Artists: USHER, Lil Jon & Ludacris"
+    ]
+  },
+  {
+    "id": "dirty-little-secret",
+    "title": "Dirty Little Secret",
+    "artist": "The All-American Rejects",
+    "releaseYear": "2005",
+    "synonymTitle": "Unclean Tiny Confidential",
+    "difficulty": "medium",
+    "hints": [
+      "Grimy Small Mystery",
+      "Pop-punk/rock",
+      "Artist: The All-American Rejects"
+    ]
+  },
+  {
+    "id": "all-falls-down",
+    "title": "All Falls Down",
+    "artist": "Kanye West, Syleena Johnson",
+    "releaseYear": "2004",
+    "synonymTitle": "Everything Crumbles",
+    "difficulty": "medium",
+    "hints": [
+      "Complete Collapse",
+      "Hip-hop/R&B",
+      "Artist: Kanye West featuring Syleena Johnson"
+    ]
+  },
+  {
+    "id": "this-love",
+    "title": "This Love",
+    "artist": "Maroon 5",
+    "releaseYear": "2002",
+    "synonymTitle": "That Affection",
+    "difficulty": "easy",
+    "hints": [
+      "Such Passion",
+      "Pop rock",
+      "Artist: Maroon 5"
+    ]
+  },
+  {
+    "id": "rock-your-body",
+    "title": "Rock Your Body",
+    "artist": "Justin Timberlake",
+    "releaseYear": "2002",
+    "synonymTitle": "Sway Your Form",
+    "difficulty": "viral",
+    "hints": [
+      "Shake Your Frame",
+      "Pop/R&B",
+      "Artist: Justin Timberlake"
+    ]
+  },
+  {
+    "id": "the-middle",
+    "title": "The Middle",
+    "artist": "Jimmy Eat World",
+    "releaseYear": "2001",
+    "synonymTitle": "The Center",
+    "difficulty": "easy",
+    "hints": [
+      "The Heart",
+      "Emo-pop rock",
+      "Artist: Jimmy Eat World"
+    ]
+  },
+  {
+    "id": "flashing-lights",
+    "title": "Flashing Lights",
+    "artist": "Kanye West, Dwele",
+    "releaseYear": "2007",
+    "synonymTitle": "Gleaming Beams",
+    "difficulty": "medium",
+    "hints": [
+      "Brilliant Rays",
+      "Hip-hop/R&B",
+      "Artist: Kanye West"
+    ]
+  },
+  {
+    "id": "heartless",
+    "title": "Heartless",
+    "artist": "Kanye West",
+    "releaseYear": "2008",
+    "synonymTitle": "Emotionless",
+    "difficulty": "easy",
+    "hints": [
+      "Unfeeling",
+      "Hip-hop/rap",
+      "Artist: Kanye West"
+    ]
+  },
+  {
+    "id": "promiscuous",
+    "title": "Promiscuous",
+    "artist": "Nelly Furtado, Timbaland",
+    "releaseYear": "2006",
+    "synonymTitle": "Licentious",
+    "difficulty": "hard",
+    "hints": [
+      "Unfaithful",
+      "Hip-hop/pop crossover",
+      "Artists: Canadian pop star and Timbaland"
+    ]
+  },
+  {
+    "id": "dont-stop-the-music",
+    "title": "Don't Stop The Music",
+    "artist": "Rihanna",
+    "releaseYear": "2007",
+    "synonymTitle": "Cease Not The Melody",
+    "difficulty": "medium",
+    "hints": [
+      "Keep Playing The Song",
+      "Pop/dance",
+      "Artist: Rihanna"
+    ]
+  },
+  {
+    "id": "the-way-i-are",
+    "title": "The Way I Are",
+    "artist": "Timbaland, Keri Hilson, D.O.E.",
+    "releaseYear": "2007",
+    "synonymTitle": "The Method I Exist",
+    "difficulty": "medium",
+    "hints": [
+      "How I Behave",
+      "Hip-hop/R&B",
+      "Artist: Timbaland featuring Keri Hilson"
+    ]
+  },
+  {
+    "id": "clarity",
+    "title": "Clarity",
+    "artist": "Zedd, Foxes",
+    "releaseYear": "2012",
+    "synonymTitle": "Lucidity",
+    "difficulty": "medium",
+    "hints": [
+      "Transparency",
+      "Electronic pop",
+      "Artist: Zedd featuring Foxes"
+    ]
+  },
+  {
+    "id": "feel-so-close---radio-edit",
+    "title": "Feel So Close - Radio Edit",
+    "artist": "Calvin Harris",
+    "releaseYear": "2012",
+    "synonymTitle": "Sense So Near - Radio Edit",
+    "difficulty": "easy",
+    "hints": [
+      "Perceive So Near - Radio Edit",
+      "Electronic dance pop",
+      "Artist: Calvin Harris"
+    ]
+  },
+  {
+    "id": "moves-like-jagger---studio-recording-from-the-voice-performance",
+    "title": "Moves Like Jagger - Studio Recording From \"The Voice\" Performance",
+    "artist": "Maroon 5, Christina Aguilera",
+    "releaseYear": "2010",
+    "synonymTitle": "Motions Resembling Jagger - Official Cut From \"The Vocal\" Execution",
+    "difficulty": "medium",
+    "hints": [
+      "Dances Like Jagger - Studio Cut From The Vocal Performance",
+      "Pop-rock collaboration",
+      "Artists: Maroon 5 and Christina Aguilera"
+    ]
+  },
+  {
+    "id": "outside-feat-ellie-goulding",
+    "title": "Outside (feat. Ellie Goulding)",
+    "artist": "Calvin Harris, Ellie Goulding",
+    "releaseYear": "2014",
+    "synonymTitle": "Exterior (feat. Ellie Goulding)",
+    "difficulty": "easy",
+    "hints": [
+      "Beyond",
+      "Electronic pop/dance",
+      "Artist: Calvin Harris & Ellie Goulding"
+    ]
+  },
+  {
+    "id": "uptown-funk-feat-bruno-mars",
+    "title": "Uptown Funk (feat. Bruno Mars)",
+    "artist": "Mark Ronson, Bruno Mars",
+    "releaseYear": "2015",
+    "synonymTitle": "Downtown Groove",
+    "difficulty": "easy",
+    "hints": [
+      "Midtown Soul",
+      "Funk-pop",
+      "Artist: Mark Ronson featuring Bruno Mars"
+    ]
+  },
+  {
+    "id": "timber",
+    "title": "Timber",
+    "artist": "Pitbull, Kesha",
+    "releaseYear": "2012",
+    "synonymTitle": "Wood",
+    "difficulty": "easy",
+    "hints": [
+      "Log",
+      "Hip-hop/pop",
+      "Artist: Pitbull featuring Kesha"
+    ]
+  },
+  {
+    "id": "dj-got-us-fallin-in-love-feat-pitbull",
+    "title": "DJ Got Us Fallin' In Love (feat. Pitbull)",
+    "artist": "USHER, Pitbull",
+    "releaseYear": "2010",
+    "synonymTitle": "Turntablist Made Us Descending Into Affection",
+    "difficulty": "medium",
+    "hints": [
+      "Spinner Made Us Dropping Into Romance",
+      "Hip-hop/pop dance hit",
+      "Artists: USHER and Pitbull"
+    ]
+  },
+  {
+    "id": "latch",
+    "title": "Latch",
+    "artist": "Disclosure, Sam Smith",
+    "releaseYear": "2013",
+    "synonymTitle": "Clasp",
+    "difficulty": "easy",
+    "hints": [
+      "Grip",
+      "Electronic pop",
+      "Artists: Disclosure featuring Sam Smith"
+    ]
+  },
+  {
+    "id": "cheerleader---felix-jaehn-remix-radio-edit",
+    "title": "Cheerleader - Felix Jaehn Remix Radio Edit",
+    "artist": "OMI",
+    "releaseYear": "2015",
+    "synonymTitle": "Supporter - Felix Jaehn Remix Radio Edit",
+    "difficulty": "easy",
+    "hints": [
+      "Pom Pom Girl - Felix Jaehn Remix Radio Edit",
+      "Caribbean pop/dance",
+      "Artist: OMI"
+    ]
+  },
+  {
+    "id": "sweet-but-psycho",
+    "title": "Sweet but Psycho",
+    "artist": "Ava Max",
+    "releaseYear": 2020,
+    "synonymTitle": "Sugary yet Deranged",
+    "difficulty": "medium",
+    "hints": [
+      "Pleasant Yet Deranged",
+      "Pop",
+      "Artist: Ava Max"
+    ]
+  },
+  {
+    "id": "cant-stop-the-feeling-from-dreamworks-animations-trolls",
+    "title": "CAN'T STOP THE FEELING! (from DreamWorks Animation's \"TROLLS\")",
+    "artist": "Justin Timberlake",
+    "releaseYear": "2016",
+    "synonymTitle": "UNABLE TO HALT THE EMOTION!",
+    "difficulty": "easy",
+    "hints": [
+      "Cannot Suppress This Joy",
+      "Pop/dance",
+      "Artist: Justin Timberlake"
+    ]
+  },
+  {
+    "id": "24k-magic",
+    "title": "24K Magic",
+    "artist": "Bruno Mars",
+    "releaseYear": "2016",
+    "synonymTitle": "Pure Gold Enchantment",
+    "difficulty": "medium",
+    "hints": [
+      "Radiant Golden Wonder",
+      "Pop/funk",
+      "Artist: Bruno Mars"
+    ]
+  },
+  {
+    "id": "cake-by-the-ocean",
+    "title": "Cake By The Ocean",
+    "artist": "DNCE",
+    "releaseYear": "2016",
+    "synonymTitle": "Dessert Beside The Sea",
+    "difficulty": "easy",
+    "hints": [
+      "Pastry Along The Shore",
+      "Pop/dance",
+      "Artist: DNCE"
+    ]
+  },
+  {
+    "id": "no-lie",
+    "title": "No Lie",
+    "artist": "Sean Paul, Dua Lipa",
+    "releaseYear": 2018,
+    "synonymTitle": "Zero Falsehood",
+    "difficulty": "medium",
+    "hints": [
+      "Pure Honesty",
+      "Dancehall-pop collaboration",
+      "Artists: Sean Paul and Dua Lipa"
+    ]
+  },
+  {
+    "id": "kings-queens",
+    "title": "Kings & Queens",
+    "artist": "Ava Max",
+    "releaseYear": "2020",
+    "synonymTitle": "Monarchs & Royalty",
+    "difficulty": "easy",
+    "hints": [
+      "Rulers & Nobility",
+      "Pop anthem",
+      "Artist: Ava Max"
+    ]
+  },
+  {
+    "id": "levitating-feat-dababy",
+    "title": "Levitating (feat. DaBaby)",
+    "artist": "Dua Lipa, DaBaby",
+    "releaseYear": "2020",
+    "synonymTitle": "Floating (feat. DaBaby)",
+    "difficulty": "easy",
+    "hints": [
+      "Soaring High",
+      "Pop/dance",
+      "Artist: Dua Lipa featuring DaBaby"
+    ]
+  },
+  {
+    "id": "dont-start-now",
+    "title": "Don't Start Now",
+    "artist": "Dua Lipa",
+    "releaseYear": 2020,
+    "synonymTitle": "Cease Commencing Currently",
+    "difficulty": "medium",
+    "hints": [
+      "Refrain From Beginning",
+      "Pop/disco",
+      "Artist: Dua Lipa"
+    ]
+  },
+  {
+    "id": "those-years-are-over",
+    "title": "Those Years Are Over",
+    "artist": "The Sha La Das",
+    "releaseYear": 2018,
+    "synonymTitle": "Those Epochs Have Finished",
+    "difficulty": "medium",
+    "hints": [
+      "Those Days Have Concluded",
+      "Indie pop",
+      "Artist: The Sha La Das"
+    ]
+  },
+  {
+    "id": "impatient",
+    "title": "Impatient",
+    "artist": "Jeremih, Ty Dolla $ign",
+    "releaseYear": "2015",
+    "synonymTitle": "Restless",
+    "difficulty": "medium",
+    "hints": [
+      "Anxious",
+      "R&B/Hip-Hop",
+      "Artists: Jeremih and Ty Dolla $ign"
+    ]
+  },
+  {
+    "id": "sorry-not-sorry",
+    "title": "Sorry Not Sorry",
+    "artist": "Bryson Tiller",
+    "releaseYear": "2015",
+    "synonymTitle": "Regretful Not Regretful",
+    "difficulty": "easy",
+    "hints": [
+      "Apologetic Yet Unapologetic",
+      "R&B/Hip-Hop",
+      "Artist: Bryson Tiller"
+    ]
+  },
+  {
+    "id": "river",
+    "title": "River",
+    "artist": "Leon Bridges",
+    "releaseYear": "2015",
+    "synonymTitle": "Stream",
+    "difficulty": "easy",
+    "hints": [
+      "Flowing Water",
+      "R&B/Soul",
+      "Artist: Leon Bridges"
+    ]
+  },
+  {
+    "id": "what-more-can-i-say",
+    "title": "What More Can I Say",
+    "artist": "The Notations",
+    "releaseYear": "2015",
+    "synonymTitle": "Which Additional May I Articulate",
+    "difficulty": "hard",
+    "hints": [
+      "What Else Might I Express",
+      "R&B/Soul",
+      "Artist: The Notations"
+    ]
+  },
+  {
+    "id": "sweet-life",
+    "title": "Sweet Life",
+    "artist": "Frank Ocean",
+    "releaseYear": "2012",
+    "synonymTitle": "Sugary Existence",
+    "difficulty": "medium",
+    "hints": [
+      "Delightful Living",
+      "R&B/Hip-Hop",
+      "Artist: Frank Ocean"
+    ]
+  },
+  {
+    "id": "hold-on",
+    "title": "Hold On",
+    "artist": "The Internet",
+    "releaseYear": "2018",
+    "synonymTitle": "Grasp Tight",
+    "difficulty": "medium",
+    "hints": [
+      "Maintain Your Grip",
+      "R&B/Neo-Soul",
+      "Artist: The Internet (featuring Syd)"
+    ]
+  },
+  {
+    "id": "coming-home",
+    "title": "Coming Home",
+    "artist": "Leon Bridges",
+    "releaseYear": "2015",
+    "synonymTitle": "Arriving Residence",
+    "difficulty": "medium",
+    "hints": [
+      "Returning House",
+      "R&B/Soul",
+      "Artist: Leon Bridges"
+    ]
+  },
+  {
+    "id": "beyond",
+    "title": "Beyond",
+    "artist": "Leon Bridges",
+    "releaseYear": "2018",
+    "synonymTitle": "Further",
+    "difficulty": "easy",
+    "hints": [
+      "Surpassing Limits",
+      "R&B soul",
+      "Artist: Leon Bridges"
+    ]
+  },
+  {
+    "id": "better-than",
+    "title": "Better Than",
+    "artist": "Lake Street Dive",
+    "releaseYear": "2014",
+    "synonymTitle": "Superior To",
+    "difficulty": "easy",
+    "hints": [
+      "Exceeding",
+      "Funk/soul",
+      "Artist: Lake Street Dive"
+    ]
+  },
+  {
+    "id": "broken-window-serenade",
+    "title": "Broken Window Serenade",
+    "artist": "Whiskey Myers",
+    "releaseYear": "2011",
+    "synonymTitle": "Fractured Pane Melody",
+    "difficulty": "medium",
+    "hints": [
+      "Shattered Glass Ballad",
+      "Country rock",
+      "Artist: Whiskey Myers"
+    ]
+  },
+  {
+    "id": "head-over-boots",
+    "title": "Head Over Boots",
+    "artist": "Jon Pardi",
+    "releaseYear": "2016",
+    "synonymTitle": "Mind Over Footwear",
+    "difficulty": "medium",
+    "hints": [
+      "Thoughts Above Shoes",
+      "Country",
+      "Artist: Jon Pardi"
+    ]
+  },
+  {
+    "id": "wagon-wheel",
+    "title": "Wagon Wheel",
+    "artist": "Darius Rucker",
+    "releaseYear": "2013",
+    "synonymTitle": "Cart Rotation",
+    "difficulty": "easy",
+    "hints": [
+      "Carriage Rotation",
+      "Country-pop crossover",
+      "Artist: Darius Rucker"
+    ]
+  },
+  {
+    "id": "tennessee-whiskey",
+    "title": "Tennessee Whiskey",
+    "artist": "Chris Stapleton",
+    "releaseYear": "2015",
+    "synonymTitle": "Georgia Bourbon",
+    "difficulty": "medium",
+    "hints": [
+      "Kentucky Spirits",
+      "Country",
+      "Artist: Chris Stapleton"
+    ]
+  },
+  {
+    "id": "springsteen",
+    "title": "Springsteen",
+    "artist": "Eric Church",
+    "releaseYear": "2011",
+    "synonymTitle": "Bounceteen",
+    "difficulty": "hard",
+    "hints": [
+      "Elastic Teen",
+      "Country rock",
+      "Artist: Eric Church"
+    ]
+  },
+  {
+    "id": "whiskey-glasses",
+    "title": "Whiskey Glasses",
+    "artist": "Morgan Wallen",
+    "releaseYear": "2018",
+    "synonymTitle": "Bourbon Spectacles",
+    "difficulty": "medium",
+    "hints": [
+      "Liquor Lenses",
+      "Country",
+      "Artist: Morgan Wallen"
+    ]
+  },
+  {
+    "id": "chasin-you",
+    "title": "Chasin' You",
+    "artist": "Morgan Wallen",
+    "releaseYear": "2018",
+    "synonymTitle": "Pursuing Me",
+    "difficulty": "medium",
+    "hints": [
+      "Following Yourself",
+      "Country",
+      "Artist: Morgan Wallen"
+    ]
+  },
+  {
+    "id": "drinkin-problem",
+    "title": "Drinkin' Problem",
+    "artist": "Midland",
+    "releaseYear": "2017",
+    "synonymTitle": "Beverage Predicament",
+    "difficulty": "medium",
+    "hints": [
+      "Alcohol Issue",
+      "Country",
+      "Artist: Midland"
+    ]
+  },
+  {
+    "id": "when-it-rains-it-pours",
+    "title": "When It Rains It Pours",
+    "artist": "Luke Combs",
+    "releaseYear": "2017",
+    "synonymTitle": "When It Falls It Floods",
+    "difficulty": "easy",
+    "hints": [
+      "Torrents Descend",
+      "Country",
+      "Artist: Luke Combs"
+    ]
+  },
+  {
+    "id": "feathered-indians",
+    "title": "Feathered Indians",
+    "artist": "Tyler Childers",
+    "releaseYear": "2017",
+    "synonymTitle": "Winged Native Americans",
+    "difficulty": "medium",
+    "hints": [
+      "Plumaged Tribes",
+      "Country/folk",
+      "Artist: Tyler Childers"
+    ]
+  },
+  {
+    "id": "diamonds",
+    "title": "Diamonds",
+    "artist": "GabrielCaminha, Berc7e, Ojizzy",
+    "releaseYear": "2019",
+    "synonymTitle": "Gems",
+    "difficulty": "easy",
+    "hints": [
+      "Crystals",
+      "Hip-hop/trap",
+      "Artists: GabrielCaminha, Berc7e, Ojizzy"
+    ]
+  },
+  {
+    "id": "lonely-lil-rhody",
+    "title": "Lonely Lil Rhody'",
+    "artist": "Ladyy Acee",
+    "releaseYear": "2019",
+    "synonymTitle": "Isolated Compact Rhode Island",
+    "difficulty": "hard",
+    "hints": [
+      "Solitary Small State",
+      "Hip-hop/rap",
+      "Artist: Ladyy Acee"
+    ]
+  },
+  {
+    "id": "nightside",
+    "title": "Nightside",
+    "artist": "Official D&d",
+    "releaseYear": "2018",
+    "synonymTitle": "Darkflank",
+    "difficulty": "hard",
+    "hints": [
+      "Shadow Edge",
+      "Hip-hop/rap",
+      "Artist: Official D&d"
+    ]
+  },
+  {
+    "id": "soldier-boy",
+    "title": "Soldier Boy",
+    "artist": "Iceboy Ben",
+    "releaseYear": "2019",
+    "synonymTitle": "Warrior Youth",
+    "difficulty": "easy",
+    "hints": [
+      "Combat Recruit",
+      "Hip-hop/rap",
+      "Artist: Iceboy Ben"
+    ]
+  },
+  {
+    "id": "beamer-tesla",
+    "title": "Beamer & Tesla",
+    "artist": "Nova Jwest",
+    "releaseYear": 2020,
+    "synonymTitle": "Luxury Sedan & Electric Vehicle",
+    "difficulty": "medium",
+    "hints": [
+      "Premium Car Electric Automobile",
+      "Hip-hop/rap",
+      "Artist: Nova Jwest"
+    ]
+  },
+  {
+    "id": "among-us-rap",
+    "title": "Among Us Rap",
+    "artist": "Zigred",
+    "releaseYear": "2020",
+    "synonymTitle": "Within Ourselves Rhythm",
+    "difficulty": "viral",
+    "hints": [
+      "Midst Ourselves Beat",
+      "Viral gaming meme rap",
+      "Artist: Zigred"
+    ]
+  },
+  {
+    "id": "aprendi",
+    "title": "Aprendi",
+    "artist": "Thimbada",
+    "releaseYear": "2020",
+    "synonymTitle": "Educado",
+    "difficulty": "easy",
+    "hints": [
+      "Learned",
+      "Brazilian funk/trap",
+      "Artist: Thimbada"
+    ]
+  },
+  {
+    "id": "goat-talk",
+    "title": "Goat Talk",
+    "artist": "Ladyy Acee",
+    "releaseYear": "2022",
+    "synonymTitle": "Caprine Discourse",
+    "difficulty": "hard",
+    "hints": [
+      "Ruminant Speech",
+      "Hip-hop/rap",
+      "Artist: Ladyy Acee"
+    ]
+  },
+  {
+    "id": "06",
+    "title": "06",
+    "artist": "Tommy Jacob",
+    "releaseYear": "2021",
+    "synonymTitle": "Naught Half-Dozen",
+    "difficulty": "hard",
+    "hints": [
+      "Zero Six",
+      "Indie/pop",
+      "Artist: Tommy Jacob"
+    ]
+  },
+  {
+    "id": "labello---instrumental",
+    "title": "Labello - Instrumental",
+    "artist": "FAKT",
+    "releaseYear": 2021,
+    "synonymTitle": "Lip Balm - Non-Vocal",
+    "difficulty": "hard",
+    "hints": [
+      "Lip Wax Instrumental",
+      "Electronic/instrumental",
+      "Artist: FAKT"
+    ]
+  },
+  {
+    "id": "mass-public-transport",
+    "title": "Mass Public Transport",
+    "artist": "M-Squad",
+    "releaseYear": "2024",
+    "synonymTitle": "Bulk Collective Commute",
+    "difficulty": "medium",
+    "hints": [
+      "Collective Transit System",
+      "Hip-hop/rap",
+      "Artist: M-Squad"
+    ]
+  },
+  {
+    "id": "kompos",
+    "title": "Kompos",
+    "artist": "Phaser",
+    "releaseYear": 2021,
+    "synonymTitle": "Amalgam",
+    "difficulty": "hard",
+    "hints": [
+      "Composite",
+      "Electronic/experimental",
+      "Artist: Phaser"
+    ]
+  },
+  {
+    "id": "phukk-what-u-thought",
+    "title": "Phukk What U Thought",
+    "artist": "LayZ PalaZuelos, Ese Boosta, Yung Pacino",
+    "releaseYear": "2021",
+    "synonymTitle": "Disregard What U Believed",
+    "difficulty": "medium",
+    "hints": [
+      "Reject What U Assumed",
+      "West Coast hip-hop",
+      "Artists: LayZ PalaZuelos, Ese Boosta, Yung Pacino"
+    ]
+  },
+  {
+    "id": "obsession",
+    "title": "Obsession",
+    "artist": "Kostaki",
+    "releaseYear": "2024",
+    "synonymTitle": "Fixation",
+    "difficulty": "easy",
+    "hints": [
+      "Preoccupation",
+      "Pop/electronic",
+      "Artist: Kostaki"
+    ]
+  },
+  {
+    "id": "iris",
+    "title": "Iris",
+    "artist": "The Goo Goo Dolls",
+    "releaseYear": "1998",
+    "synonymTitle": "Oculus",
+    "difficulty": "hard",
+    "hints": [
+      "Vision Window",
+      "Alternative rock",
+      "Artist: The Goo Goo Dolls"
+    ]
+  },
+  {
+    "id": "my-own-worst-enemy",
+    "title": "My Own Worst Enemy",
+    "artist": "Lit",
+    "releaseYear": "1999",
+    "synonymTitle": "Me Personally Greatest Adversary",
+    "difficulty": "viral",
+    "hints": [
+      "I Am My Own Foe",
+      "Pop-punk rock",
+      "Artist: Lit"
+    ]
+  },
+  {
+    "id": "teenage-dirtbag",
+    "title": "Teenage Dirtbag",
+    "artist": "Wheatus",
+    "releaseYear": "1999",
+    "synonymTitle": "Adolescent Filth Scoundrel",
+    "difficulty": "viral",
+    "hints": [
+      "Young Filthy Loser",
+      "Alternative rock anthem",
+      "Artist: Wheatus"
+    ]
+  },
+  {
+    "id": "lovefool",
+    "title": "Lovefool",
+    "artist": "The Cardigans",
+    "releaseYear": "1996",
+    "synonymTitle": "Affection Jester",
+    "difficulty": "viral",
+    "hints": [
+      "Romance Buffoon",
+      "Swedish pop/rock",
+      "Artist: The Cardigans"
+    ]
+  },
+  {
+    "id": "the-real-slim-shady",
+    "title": "The Real Slim Shady",
+    "artist": "Eminem",
+    "releaseYear": "2000",
+    "synonymTitle": "The Authentic Lean Shadowy",
+    "difficulty": "viral",
+    "hints": [
+      "Genuine Thin Shadow",
+      "Hip-hop",
+      "Artist: Eminem"
+    ]
+  },
+  {
+    "id": "all-the-small-things",
+    "title": "All The Small Things",
+    "artist": "blink-182",
+    "releaseYear": "1999",
+    "synonymTitle": "Every The Tiny Objects",
+    "difficulty": "viral",
+    "hints": [
+      "All Minuscule Stuff",
+      "Pop-punk",
+      "Artist: blink-182"
+    ]
+  },
+  {
+    "id": "whats-my-age-again",
+    "title": "What's My Age Again?",
+    "artist": "blink-182",
+    "releaseYear": "1999",
+    "synonymTitle": "How Many Years Have I Existed Once More?",
+    "difficulty": "viral",
+    "hints": [
+      "How Old Am I Now",
+      "Pop punk",
+      "Artist: blink-182"
+    ]
+  },
+  {
+    "id": "ride-wit-me",
+    "title": "Ride Wit Me",
+    "artist": "Nelly, City Spud",
+    "releaseYear": "2000",
+    "synonymTitle": "Journey Alongside Me",
+    "difficulty": "viral",
+    "hints": [
+      "Travel With Me",
+      "Hip-hop/rap",
+      "Artist: Nelly feat. City Spud"
+    ]
+  },
+  {
+    "id": "you-get-what-you-give",
+    "title": "You Get What You Give",
+    "artist": "New Radicals",
+    "releaseYear": "1998",
+    "synonymTitle": "You Obtain What You Provide",
+    "difficulty": "viral",
+    "hints": [
+      "You Receive What You Deliver",
+      "Alternative/pop rock",
+      "Artist: New Radicals"
+    ]
+  },
+  {
+    "id": "let-down",
+    "title": "Let Down",
+    "artist": "Radiohead",
+    "releaseYear": "1997",
+    "synonymTitle": "Disappoint Beneath",
+    "difficulty": "medium",
+    "hints": [
+      "Fail Below",
+      "Alternative rock",
+      "Artist: Radiohead"
+    ]
+  },
+  {
+    "id": "scar-tissue",
+    "title": "Scar Tissue",
+    "artist": "Red Hot Chili Peppers",
+    "releaseYear": "1999",
+    "synonymTitle": "Mark Material",
+    "difficulty": "hard",
+    "hints": [
+      "Wound Skin",
+      "Alternative rock",
+      "Artist: Red Hot Chili Peppers"
+    ]
+  },
+  {
+    "id": "everlong",
+    "title": "Everlong",
+    "artist": "Foo Fighters",
+    "releaseYear": "1997",
+    "synonymTitle": "Perpetually Extended",
+    "difficulty": "viral",
+    "hints": [
+      "Forever Extended",
+      "Alternative rock",
+      "Artist: Foo Fighters"
+    ]
+  },
+  {
+    "id": "change-in-the-house-of-flies",
+    "title": "Change (In the House of Flies)",
+    "artist": "Deftones",
+    "releaseYear": "2000",
+    "synonymTitle": "Alteration (In the Dwelling of Insects)",
+    "difficulty": "hard",
+    "hints": [
+      "Shift In The Building Of Bugs",
+      "Alternative metal",
+      "Artist: Deftones"
+    ]
+  },
+  {
+    "id": "californication",
+    "title": "Californication",
+    "artist": "Red Hot Chili Peppers",
+    "releaseYear": "1999",
+    "synonymTitle": "Golden-State-ification",
+    "difficulty": "medium",
+    "hints": [
+      "California Phenomenon",
+      "Alternative rock",
+      "Artist: Red Hot Chili Peppers"
+    ]
+  },
+  {
+    "id": "my-own-summer-shove-it",
+    "title": "My Own Summer (Shove It)",
+    "artist": "Deftones",
+    "releaseYear": "1997",
+    "synonymTitle": "Personal Season (Thrust Away)",
+    "difficulty": "hard",
+    "hints": [
+      "My Season Push It",
+      "Nu-metal/alternative rock",
+      "Artist: Deftones"
+    ]
+  },
+  {
+    "id": "shake-it-off",
+    "title": "Shake It Off",
+    "artist": "Taylor Swift",
+    "releaseYear": "2014",
+    "synonymTitle": "Dismiss It Away",
+    "difficulty": "easy",
+    "hints": [
+      "Shrug It Aside",
+      "Pop",
+      "Artist: Taylor Swift"
+    ]
+  },
+  {
+    "id": "happy",
+    "title": "Happy",
+    "artist": "Pharrell Williams",
+    "releaseYear": "2013",
+    "synonymTitle": "Joyful",
+    "difficulty": "easy",
+    "hints": [
+      "Elated",
+      "Pop/R&B",
+      "Artist: Pharrell Williams"
+    ]
+  },
+  {
+    "id": "roar",
+    "title": "Roar",
+    "artist": "Katy Perry",
+    "releaseYear": "2013",
+    "synonymTitle": "Bellow",
+    "difficulty": "easy",
+    "hints": [
+      "Growl",
+      "Pop",
+      "Artist: Katy Perry"
+    ]
+  },
+  {
+    "id": "bad-guy",
+    "title": "bad guy",
+    "artist": "Billie Eilish",
+    "releaseYear": "2019",
+    "synonymTitle": "wicked character",
+    "difficulty": "easy",
+    "hints": [
+      "sinister individual",
+      "Alt pop",
+      "Artist: Billie Eilish"
+    ]
+  },
+  {
+    "id": "drivers-license",
+    "title": "drivers license",
+    "artist": "Olivia Rodrigo",
+    "releaseYear": "2021",
+    "synonymTitle": "operators permit",
+    "difficulty": "easy",
+    "hints": [
+      "motorist credential",
+      "Pop",
+      "Artist: Olivia Rodrigo"
+    ]
+  },
+  {
+    "id": "royals",
+    "title": "Royals",
+    "artist": "Lorde",
+    "releaseYear": "2013",
+    "synonymTitle": "Monarchs",
+    "difficulty": "medium",
+    "hints": [
+      "Sovereigns",
+      "Indie pop",
+      "Artist: Lorde"
+    ]
+  },
+  {
+    "id": "cheap-thrills",
+    "title": "Cheap Thrills",
+    "artist": "Sia",
+    "releaseYear": "2016",
+    "synonymTitle": "Inexpensive Excitement",
+    "difficulty": "medium",
+    "hints": [
+      "Budget Excitement",
+      "Pop",
+      "Artist: Sia"
+    ]
+  },
+  {
+    "id": "believer",
+    "title": "Believer",
+    "artist": "Imagine Dragons",
+    "releaseYear": "2017",
+    "synonymTitle": "Devoted Follower",
+    "difficulty": "medium",
+    "hints": [
+      "Faithful Devotee",
+      "Alt rock",
+      "Artist: Imagine Dragons"
+    ]
+  },
+  {
+    "id": "stressed-out",
+    "title": "Stressed Out",
+    "artist": "Twenty One Pilots",
+    "releaseYear": "2015",
+    "synonymTitle": "Overwhelmed Beyond Capacity",
+    "difficulty": "medium",
+    "hints": [
+      "Tensed to the Limit",
+      "Indie pop/rap",
+      "Artist: Twenty One Pilots"
+    ]
+  },
+  {
+    "id": "cant-stop-the-feeling",
+    "title": "Can't Stop the Feeling",
+    "artist": "Justin Timberlake",
+    "releaseYear": "2016",
+    "synonymTitle": "Unable to Halt the Sensation",
+    "difficulty": "medium",
+    "hints": [
+      "Cannot Suppress the Emotion",
+      "Pop",
+      "Artist: Justin Timberlake"
+    ]
+  },
+  {
+    "id": "old-town-road",
+    "title": "Old Town Road",
+    "artist": "Lil Nas X",
+    "releaseYear": "2019",
+    "synonymTitle": "Ancient Village Path",
+    "difficulty": "medium",
+    "hints": [
+      "Historic Settlement Trail",
+      "Country rap",
+      "Artist: Lil Nas X"
+    ]
+  },
+  {
+    "id": "industry-baby",
+    "title": "INDUSTRY BABY",
+    "artist": "Lil Nas X",
+    "releaseYear": "2021",
+    "synonymTitle": "COMMERCE INFANT",
+    "difficulty": "medium",
+    "hints": [
+      "BUSINESS NEWBORN",
+      "Hip-hop",
+      "Artist: Lil Nas X"
+    ]
+  },
+  {
+    "id": "seven-nation-army",
+    "title": "Seven Nation Army",
+    "artist": "The White Stripes",
+    "releaseYear": "2003",
+    "synonymTitle": "Septet of Citizens Forces",
+    "difficulty": "hard",
+    "hints": [
+      "Heptad of Countryfolk Forces",
+      "Garage rock",
+      "Artist: The White Stripes"
+    ]
+  },
+  {
+    "id": "radioactive",
+    "title": "Radioactive",
+    "artist": "Imagine Dragons",
+    "releaseYear": "2012",
+    "synonymTitle": "Nuclear Contaminated",
+    "difficulty": "hard",
+    "hints": [
+      "Fallout Saturated",
+      "Alt rock",
+      "Artist: Imagine Dragons"
+    ]
+  },
+  {
+    "id": "dog-days-are-over",
+    "title": "Dog Days Are Over",
+    "artist": "Florence + The Machine",
+    "releaseYear": "2009",
+    "synonymTitle": "Canine Era Has Concluded",
+    "difficulty": "hard",
+    "hints": [
+      "Hound Season Has Passed",
+      "Indie rock",
+      "Artist: Florence + The Machine"
+    ]
+  },
+  {
+    "id": "gold-digger",
+    "title": "Gold Digger",
+    "artist": "Kanye West",
+    "releaseYear": "2005",
+    "synonymTitle": "Precious Metal Excavator",
+    "difficulty": "hard",
+    "hints": [
+      "Wealth Seeker",
+      "Hip-hop",
+      "Artist: Kanye West"
+    ]
+  },
+  {
+    "id": "since-u-been-gone",
+    "title": "Since U Been Gone",
+    "artist": "Kelly Clarkson",
+    "releaseYear": "2004",
+    "synonymTitle": "Following Your Departure",
+    "difficulty": "hard",
+    "hints": [
+      "Since Your Absence Began",
+      "Pop rock",
+      "Artist: Kelly Clarkson"
+    ]
+  },
+  {
+    "id": "yeah",
+    "title": "Yeah!",
+    "artist": "Usher",
+    "releaseYear": "2004",
+    "synonymTitle": "Affirmative!",
+    "difficulty": "viral",
+    "hints": [
+      "Certainly!",
+      "R&B/crunk",
+      "Artist: Usher"
+    ]
+  },
+  {
+    "id": "wrecking-ball",
+    "title": "Wrecking Ball",
+    "artist": "Miley Cyrus",
+    "releaseYear": "2013",
+    "synonymTitle": "Demolition Sphere",
+    "difficulty": "viral",
+    "hints": [
+      "Destruction Orb",
+      "Pop",
+      "Artist: Miley Cyrus"
+    ]
+  },
+  {
+    "id": "gangnam-style",
+    "title": "Gangnam Style",
+    "artist": "PSY",
+    "releaseYear": "2012",
+    "synonymTitle": "Affluent District Manner",
+    "difficulty": "viral",
+    "hints": [
+      "Upscale District Mannerism",
+      "K-pop",
+      "Artist: PSY"
+    ]
+  },
+  {
+    "id": "stay",
+    "title": "Stay",
+    "artist": "The Kid LAROI & Justin Bieber",
+    "releaseYear": "2021",
+    "synonymTitle": "Remain",
+    "difficulty": "easy",
+    "hints": [
+      "Linger",
+      "Pop",
+      "Artist: The Kid LAROI & Justin Bieber"
+    ]
+  },
+  {
+    "id": "as-it-was",
+    "title": "As It Was",
+    "artist": "Harry Styles",
+    "releaseYear": "2022",
+    "synonymTitle": "The Way Things Were",
+    "difficulty": "easy",
+    "hints": [
+      "How Things Once Stood",
+      "Pop",
+      "Artist: Harry Styles"
+    ]
+  },
+  {
+    "id": "watermelon-sugar",
+    "title": "Watermelon Sugar",
+    "artist": "Harry Styles",
+    "releaseYear": "2019",
+    "synonymTitle": "Tropical Fruit Sweetness",
+    "difficulty": "easy",
+    "hints": [
+      "Melon Saccharine Delight",
+      "Pop",
+      "Artist: Harry Styles"
+    ]
+  },
+  {
+    "id": "positions",
+    "title": "positions",
+    "artist": "Ariana Grande",
+    "releaseYear": "2020",
+    "synonymTitle": "stances",
+    "difficulty": "easy",
+    "hints": [
+      "postures",
+      "R&B pop",
+      "Artist: Ariana Grande"
+    ]
+  },
+  {
+    "id": "anti-hero",
+    "title": "Anti-Hero",
+    "artist": "Taylor Swift",
+    "releaseYear": "2022",
+    "synonymTitle": "Contrary Protagonist",
+    "difficulty": "easy",
+    "hints": [
+      "Opposite of a Champion",
+      "Pop",
+      "Artist: Taylor Swift"
+    ]
+  },
+  {
+    "id": "flowers",
+    "title": "Flowers",
+    "artist": "Miley Cyrus",
+    "releaseYear": "2023",
+    "synonymTitle": "Blossoms",
+    "difficulty": "easy",
+    "hints": [
+      "Petals",
+      "Pop",
+      "Artist: Miley Cyrus"
+    ]
+  },
+  {
+    "id": "blindingLights2",
+    "title": "Save Your Tears",
+    "artist": "The Weeknd",
+    "releaseYear": "2020",
+    "synonymTitle": "Preserve Your Weeping",
+    "difficulty": "medium",
+    "hints": [
+      "Hold Back Your Weeping",
+      "R&B/synth pop",
+      "Artist: The Weeknd"
+    ]
+  },
+  {
+    "id": "levitating2",
+    "title": "Physical",
+    "artist": "Dua Lipa",
+    "releaseYear": "2020",
+    "synonymTitle": "Corporeal",
+    "difficulty": "medium",
+    "hints": [
+      "Bodily",
+      "Pop",
+      "Artist: Dua Lipa"
+    ]
+  },
+  {
+    "id": "montero",
+    "title": "MONTERO (Call Me By Your Name)",
+    "artist": "Lil Nas X",
+    "releaseYear": "2021",
+    "synonymTitle": "SUMMON ME BY YOUR TITLE",
+    "difficulty": "medium",
+    "hints": [
+      "ADDRESS ME BY YOUR LABEL",
+      "Pop/hip-hop",
+      "Artist: Lil Nas X"
+    ]
+  },
+  {
+    "id": "good-4-u",
+    "title": "good 4 u",
+    "artist": "Olivia Rodrigo",
+    "releaseYear": "2021",
+    "synonymTitle": "beneficial for you",
+    "difficulty": "medium",
+    "hints": [
+      "favorable for you",
+      "Pop punk",
+      "Artist: Olivia Rodrigo"
+    ]
+  },
+  {
+    "id": "heat-waves",
+    "title": "Heat Waves",
+    "artist": "Glass Animals",
+    "releaseYear": "2020",
+    "synonymTitle": "Thermal Ripples",
+    "difficulty": "medium",
+    "hints": [
+      "Warmth Surges",
+      "Indie pop",
+      "Artist: Glass Animals"
+    ]
+  },
+  {
+    "id": "easy-on-me",
+    "title": "Easy On Me",
+    "artist": "Adele",
+    "releaseYear": "2021",
+    "synonymTitle": "Gentle Toward Me",
+    "difficulty": "medium",
+    "hints": [
+      "Tender With Me",
+      "Pop/soul",
+      "Artist: Adele"
+    ]
+  },
+  {
+    "id": "bad-habits",
+    "title": "Bad Habits",
+    "artist": "Ed Sheeran",
+    "releaseYear": "2021",
+    "synonymTitle": "Wicked Tendencies",
+    "difficulty": "hard",
+    "hints": [
+      "Poor Tendencies",
+      "Pop",
+      "Artist: Ed Sheeran"
+    ]
+  },
+  {
+    "id": "running-up-that-hill",
+    "title": "Running Up That Hill",
+    "artist": "Kate Bush",
+    "releaseYear": "1985",
+    "synonymTitle": "Ascending That Slope",
+    "difficulty": "hard",
+    "hints": [
+      "Climbing That Incline",
+      "Art pop",
+      "Artist: Kate Bush"
+    ]
+  },
+  {
+    "id": "escapism",
+    "title": "Escapism",
+    "artist": "RAYE",
+    "releaseYear": "2022",
+    "synonymTitle": "Avoidance Fantasy",
+    "difficulty": "hard",
+    "hints": [
+      "Reality Evasion",
+      "R&B",
+      "Artist: RAYE"
+    ]
+  },
+  {
+    "id": "lose-yourself",
+    "title": "Lose Yourself",
+    "artist": "Eminem",
+    "releaseYear": "2002",
+    "synonymTitle": "Surrender to the Moment",
+    "difficulty": "hard",
+    "hints": [
+      "Abandon Your Identity",
+      "Hip-hop",
+      "Artist: Eminem"
+    ]
+  },
+  {
+    "id": "mr-brightside-2",
+    "title": "Somebody Told Me",
+    "artist": "The Killers",
+    "releaseYear": "2004",
+    "synonymTitle": "A Person Informed Me",
+    "difficulty": "hard",
+    "hints": [
+      "An Individual Mentioned to Me",
+      "Indie rock",
+      "Artist: The Killers"
+    ]
+  },
+  {
+    "id": "ymca",
+    "title": "Y.M.C.A.",
+    "artist": "Village People",
+    "releaseYear": "1978",
+    "synonymTitle": "Y.C.C.A.",
+    "difficulty": "viral",
+    "hints": [
+      "Community Recreation Chant",
+      "Disco",
+      "Artist: Village People"
+    ]
+  },
+  {
+    "id": "macarena",
+    "title": "Macarena",
+    "artist": "Los Del Rio",
+    "releaseYear": "1995",
+    "synonymTitle": "Rhythmic Arm Dance",
+    "difficulty": "viral",
+    "hints": [
+      "Traditional Latin Shuffle",
+      "Latin pop",
+      "Artist: Los Del Rio"
+    ]
+  },
+  {
+    "id": "baby-one-more-time",
+    "title": "...Baby One More Time",
+    "artist": "Britney Spears",
+    "releaseYear": "1998",
+    "synonymTitle": "...Infant Once Again",
+    "difficulty": "viral",
+    "hints": [
+      "Infant Yet Again",
+      "Pop",
+      "Artist: Britney Spears"
+    ]
+  },
+  {
+    "id": "blurred-lines",
+    "title": "Blurred Lines",
+    "artist": "Robin Thicke",
+    "releaseYear": "2013",
+    "synonymTitle": "Hazy Boundaries",
+    "difficulty": "easy",
+    "hints": [
+      "Fuzzy Limits",
+      "R&B pop",
+      "Artist: Robin Thicke"
+    ]
+  },
+  {
+    "id": "call-me-maybe",
+    "title": "Call Me Maybe",
+    "artist": "Carly Rae Jepsen",
+    "releaseYear": "2012",
+    "synonymTitle": "Ring Me Perhaps",
+    "difficulty": "easy",
+    "hints": [
+      "Phone Me Possibly",
+      "Pop",
+      "Artist: Carly Rae Jepsen"
+    ]
+  },
+  {
+    "id": "thrift-shop",
+    "title": "Thrift Shop",
+    "artist": "Macklemore",
+    "releaseYear": "2012",
+    "synonymTitle": "Secondhand Store",
+    "difficulty": "easy",
+    "hints": [
+      "Resale Boutique",
+      "Hip-hop",
+      "Artist: Macklemore"
+    ]
+  },
+  {
+    "id": "someone-like-you",
+    "title": "Someone Like You",
+    "artist": "Adele",
+    "releaseYear": "2011",
+    "synonymTitle": "A Person Resembling You",
+    "difficulty": "easy",
+    "hints": [
+      "Somebody Similar to You",
+      "Soul/pop",
+      "Artist: Adele"
+    ]
+  },
+  {
+    "id": "we-found-love",
+    "title": "We Found Love",
+    "artist": "Rihanna",
+    "releaseYear": "2011",
+    "synonymTitle": "We Discovered Affection",
+    "difficulty": "easy",
+    "hints": [
+      "We Uncovered Romance",
+      "Dance/pop",
+      "Artist: Rihanna"
+    ]
+  },
+  {
+    "id": "ocean-drive",
+    "title": "Ocean Drive",
+    "artist": "Duke Dumont",
+    "releaseYear": "2014",
+    "synonymTitle": "Seaside Boulevard",
+    "difficulty": "medium",
+    "hints": [
+      "Marine Thoroughfare",
+      "Electronic",
+      "Artist: Duke Dumont"
+    ]
+  },
+  {
+    "id": "telephone",
+    "title": "Telephone",
+    "artist": "Lady Gaga",
+    "releaseYear": "2009",
+    "synonymTitle": "Handheld Communicator",
+    "difficulty": "medium",
+    "hints": [
+      "Voice Transmission Device",
+      "Pop",
+      "Artist: Lady Gaga"
+    ]
+  },
+  {
+    "id": "titanium",
+    "title": "Titanium",
+    "artist": "David Guetta",
+    "releaseYear": "2011",
+    "synonymTitle": "Indestructible Metal",
+    "difficulty": "medium",
+    "hints": [
+      "Unbreakable Alloy",
+      "Electronic/pop",
+      "Artist: David Guetta"
+    ]
+  },
+  {
+    "id": "someone-you-loved",
+    "title": "Someone You Loved",
+    "artist": "Lewis Capaldi",
+    "releaseYear": "2018",
+    "synonymTitle": "A Person You Cherished",
+    "difficulty": "medium",
+    "hints": [
+      "A Person You Adored",
+      "Pop/soul",
+      "Artist: Lewis Capaldi"
+    ]
+  },
+  {
+    "id": "thunder",
+    "title": "Thunder",
+    "artist": "Imagine Dragons",
+    "releaseYear": "2017",
+    "synonymTitle": "Lightning Rumble",
+    "difficulty": "medium",
+    "hints": [
+      "Atmospheric Boom",
+      "Pop rock",
+      "Artist: Imagine Dragons"
+    ]
+  },
+  {
+    "id": "lovely",
+    "title": "lovely",
+    "artist": "Billie Eilish & Khalid",
+    "releaseYear": "2018",
+    "synonymTitle": "delightful",
+    "difficulty": "medium",
+    "hints": [
+      "enchanting",
+      "Indie pop",
+      "Artist: Billie Eilish & Khalid"
+    ]
+  },
+  {
+    "id": "purple-rain",
+    "title": "Purple Rain",
+    "artist": "Prince",
+    "releaseYear": "1984",
+    "synonymTitle": "Violet Downpour",
+    "difficulty": "hard",
+    "hints": [
+      "Lavender Precipitation",
+      "R&B/rock",
+      "Artist: Prince"
+    ]
+  },
+  {
+    "id": "bohemian-rhapsody",
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "releaseYear": "1975",
+    "synonymTitle": "Wandering Soul Reverie",
+    "difficulty": "hard",
+    "hints": [
+      "Nomadic Soul Fantasy",
+      "Rock",
+      "Artist: Queen"
+    ]
+  },
+  {
+    "id": "hotel-california",
+    "title": "Hotel California",
+    "artist": "Eagles",
+    "releaseYear": "1977",
+    "synonymTitle": "Lodging on the Golden Coast",
+    "difficulty": "hard",
+    "hints": [
+      "Inn on the West Coast",
+      "Rock",
+      "Artist: Eagles"
+    ]
+  },
+  {
+    "id": "smells-like-teen-spirit-2",
+    "title": "Come As You Are",
+    "artist": "Nirvana",
+    "releaseYear": "1991",
+    "synonymTitle": "Arrive In Your Current State",
+    "difficulty": "hard",
+    "hints": [
+      "Present Yourself Naturally",
+      "Grunge",
+      "Artist: Nirvana"
+    ]
+  },
+  {
+    "id": "killing-me-softly",
+    "title": "Killing Me Softly",
+    "artist": "Fugees",
+    "releaseYear": "1996",
+    "synonymTitle": "Eliminating Me Gently",
+    "difficulty": "hard",
+    "hints": [
+      "Destroying Me Tenderly",
+      "R&B/hip-hop",
+      "Artist: Fugees"
+    ]
+  },
+  {
+    "id": "cotton-eye-joe",
+    "title": "Cotton Eye Joe",
+    "artist": "Rednex",
+    "releaseYear": "1994",
+    "synonymTitle": "Fabric Gaze Joseph",
+    "difficulty": "viral",
+    "hints": [
+      "Woven Stare Joey",
+      "Eurodance",
+      "Artist: Rednex"
+    ]
+  },
+  {
+    "id": "mambo-no-5",
+    "title": "Mambo No. 5",
+    "artist": "Lou Bega",
+    "releaseYear": "1999",
+    "synonymTitle": "Latin Rhythm Number Five",
+    "difficulty": "viral",
+    "hints": [
+      "Dance Rhythm Number Five",
+      "Latin pop",
+      "Artist: Lou Bega"
+    ]
+  },
+  {
+    "id": "who-let-the-dogs-out",
+    "title": "Who Let the Dogs Out",
+    "artist": "Baha Men",
+    "releaseYear": "2000",
+    "synonymTitle": "Who Released the Hounds",
+    "difficulty": "viral",
+    "hints": [
+      "Who Freed the Canines",
+      "Novelty pop",
+      "Artist: Baha Men"
+    ]
+  },
+  {
+    "id": "umbrella",
+    "title": "Umbrella",
+    "artist": "Rihanna",
+    "releaseYear": "2007",
+    "synonymTitle": "Rain Shield",
+    "difficulty": "easy",
+    "hints": [
+      "Canopy Protector",
+      "R&B pop",
+      "Artist: Rihanna"
+    ]
+  },
+  {
+    "id": "poker-face",
+    "title": "Poker Face",
+    "artist": "Lady Gaga",
+    "releaseYear": "2008",
+    "synonymTitle": "Expressionless Gambler",
+    "difficulty": "easy",
+    "hints": [
+      "Blank Card Table Stare",
+      "Pop",
+      "Artist: Lady Gaga"
+    ]
+  },
+  {
+    "id": "tik-tok",
+    "title": "TiK ToK",
+    "artist": "Kesha",
+    "releaseYear": "2009",
+    "synonymTitle": "Clock Sounds",
+    "difficulty": "easy",
+    "hints": [
+      "Timepiece Noises",
+      "Pop",
+      "Artist: Kesha"
+    ]
+  },
+  {
+    "id": "dynamite",
+    "title": "Dynamite",
+    "artist": "BTS",
+    "releaseYear": "2020",
+    "synonymTitle": "Explosive Energy",
+    "difficulty": "easy",
+    "hints": [
+      "Detonation Charge",
+      "K-pop",
+      "Artist: BTS"
+    ]
+  },
+  {
+    "id": "waterfall",
+    "title": "Waterfall",
+    "artist": "TLC",
+    "releaseYear": "1994",
+    "synonymTitle": "Cascading Descent",
+    "difficulty": "easy",
+    "hints": [
+      "Flowing Plunge",
+      "R&B",
+      "Artist: TLC"
+    ]
+  },
+  {
+    "id": "dont-look-back-in-anger",
+    "title": "Don't Look Back in Anger",
+    "artist": "Oasis",
+    "releaseYear": "1996",
+    "synonymTitle": "Don't Glance Behind in Rage",
+    "difficulty": "medium",
+    "hints": [
+      "Don't Peer Backward in Fury",
+      "Brit-pop",
+      "Artist: Oasis"
+    ]
+  },
+  {
+    "id": "moves-like-jagger",
+    "title": "Moves Like Jagger",
+    "artist": "Maroon 5",
+    "releaseYear": "2011",
+    "synonymTitle": "Motions Like a Rock God",
+    "difficulty": "medium",
+    "hints": [
+      "Gyrations of a Legend",
+      "Pop rock",
+      "Artist: Maroon 5"
+    ]
+  },
+  {
+    "id": "side-to-side",
+    "title": "Side To Side",
+    "artist": "Ariana Grande",
+    "releaseYear": "2016",
+    "synonymTitle": "Flank to Flank",
+    "difficulty": "medium",
+    "hints": [
+      "Edge to Edge",
+      "Pop",
+      "Artist: Ariana Grande"
+    ]
+  },
+  {
+    "id": "uptown-girl",
+    "title": "Uptown Girl",
+    "artist": "Billy Joel",
+    "releaseYear": "1983",
+    "synonymTitle": "Highbrow Lady",
+    "difficulty": "medium",
+    "hints": [
+      "Elite District Female",
+      "Pop",
+      "Artist: Billy Joel"
+    ]
+  },
+  {
+    "id": "eye-of-the-tiger",
+    "title": "Eye of the Tiger",
+    "artist": "Survivor",
+    "releaseYear": "1982",
+    "synonymTitle": "Gaze of the Predator",
+    "difficulty": "hard",
+    "hints": [
+      "Vision of the Beast",
+      "Rock",
+      "Artist: Survivor"
+    ]
+  },
+  {
+    "id": "dont-stop-believin",
+    "title": "Don't Stop Believin'",
+    "artist": "Journey",
+    "releaseYear": "1981",
+    "synonymTitle": "Don't Cease Having Faith",
+    "difficulty": "hard",
+    "hints": [
+      "Never Halt Your Conviction",
+      "Rock",
+      "Artist: Journey"
+    ]
+  },
+  {
+    "id": "sweet-home-alabama",
+    "title": "Sweet Home Alabama",
+    "artist": "Lynyrd Skynyrd",
+    "releaseYear": "1974",
+    "synonymTitle": "Beloved Southern Dwelling",
+    "difficulty": "hard",
+    "hints": [
+      "Cherished Homeland Residence",
+      "Southern rock",
+      "Artist: Lynyrd Skynyrd"
+    ]
+  },
+  {
+    "id": "livin-on-a-prayer",
+    "title": "Livin' on a Prayer",
+    "artist": "Bon Jovi",
+    "releaseYear": "1986",
+    "synonymTitle": "Surviving on a Plea",
+    "difficulty": "hard",
+    "hints": [
+      "Persisting on an Appeal",
+      "Rock",
+      "Artist: Bon Jovi"
+    ]
+  },
+  {
+    "id": "ice-ice-baby",
+    "title": "Ice Ice Baby",
+    "artist": "Vanilla Ice",
+    "releaseYear": "1990",
+    "synonymTitle": "Frost Frost Infant",
+    "difficulty": "viral",
+    "hints": [
+      "Frozen Frozen Newborn",
+      "Hip-hop",
+      "Artist: Vanilla Ice"
+    ]
+  },
+  {
+    "id": "la-bamba",
+    "title": "La Bamba",
+    "artist": "Los Lobos",
+    "releaseYear": "1987",
+    "synonymTitle": "The Rumble",
+    "difficulty": "viral",
+    "hints": [
+      "The Tremor",
+      "Latin rock",
+      "Artist: Los Lobos"
+    ]
+  }
+]

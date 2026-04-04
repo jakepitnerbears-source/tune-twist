@@ -1,0 +1,224 @@
+"use client";
+
+import { useEffect } from "react";
+import { X } from "lucide-react";
+import StarRating from "@/components/StarRating";
+
+const DIFFICULTY_STYLES: Record<string, string> = {
+  Easy: "bg-[color:var(--color-green)] text-[color:var(--color-navy)]",
+  Medium: "bg-yellow-400 text-[color:var(--color-navy)]",
+  Hard: "bg-[color:var(--color-coral)] text-white",
+  Viral: "bg-[color:var(--color-purple)] text-white",
+};
+
+function Badge({ label }: { label: string }) {
+  return (
+    <span className={`text-xs font-bold px-3 py-1 rounded-full ${DIFFICULTY_STYLES[label]}`}>
+      {label}
+    </span>
+  );
+}
+
+export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
+  // Close on Escape
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // Lock body scroll
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = ""; };
+  }, []);
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center"
+      aria-modal="true"
+      role="dialog"
+    >
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* Panel */}
+      <div className="relative z-10 w-full sm:max-w-[560px] max-h-[90dvh] flex flex-col bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-t-3xl sm:rounded-2xl overflow-hidden">
+
+        {/* Sticky header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[color:var(--color-border)] shrink-0">
+          <h2 className="text-lg font-bold">How to Play</h2>
+          <button
+            onClick={onClose}
+            className="text-[color:var(--color-muted)] hover:text-white transition-colors"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="overflow-y-auto px-6 py-6 flex flex-col gap-8">
+
+          {/* The Idea */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">The Idea</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">You see this</p>
+              <p className="text-2xl font-bold">Dazzling Illumination</p>
+              <div className="border-t border-[color:var(--color-border)] pt-3 flex items-center gap-2">
+                <span className="text-[color:var(--color-green)] font-bold text-sm">✓ Blinding Lights</span>
+                <span className="text-xs text-[color:var(--color-muted)]">— The Weeknd</span>
+              </div>
+            </div>
+            <p className="text-sm text-[color:var(--color-muted)]">
+              Every word (or a few key ones) has been swapped for a synonym. Your job is to reverse-engineer the real title.
+            </p>
+          </div>
+
+          {/* Each Day */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Each Day</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
+              <div className="flex flex-col gap-2.5">
+                {[
+                  { label: "Easy", desc: "Minimal changes. Very recognizable." },
+                  { label: "Medium", desc: "2–3 word swaps. Requires some thought." },
+                  { label: "Medium", desc: "A second medium to keep you honest." },
+                  { label: "Hard", desc: "More abstract. Still fair and solvable." },
+                  { label: "Viral", desc: "A throwback or a TikTok-era banger." },
+                ].map((row, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-xs text-[color:var(--color-muted)] w-4">{i + 1}</span>
+                    <Badge label={row.label} />
+                    <span className="text-sm text-[color:var(--color-muted)]">{row.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Guessing */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Guessing</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
+              <ul className="flex flex-col gap-2 text-sm text-[color:var(--color-muted)]">
+                <li>✓ &nbsp;Unlimited guesses — no penalty for wrong answers</li>
+                <li>✓ &nbsp;Capitalization and punctuation are ignored</li>
+                <li>✓ &nbsp;Small words like "the", "of", "a" can be skipped</li>
+                <li>✓ &nbsp;Minor typos are forgiven</li>
+                <li className="text-white font-medium pt-1">Hit Enter or Submit to check your guess</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Hints */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Hints</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
+              <p className="text-sm text-[color:var(--color-muted)]">
+                Each song has 3 escalating hints. Using them costs points but keeps you in the game.
+              </p>
+              <div className="flex flex-col gap-2">
+                {[
+                  { n: "1", text: `Another synonym title — e.g. "Glaring Beams"` },
+                  { n: "2", text: `Genre — e.g. "Pop/R&B"` },
+                  { n: "3", text: `Artist name — e.g. "Artist: The Weeknd"` },
+                ].map((h) => (
+                  <div
+                    key={h.n}
+                    className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-[color:var(--color-card)] border border-[color:var(--color-purple)] text-[color:var(--color-purple)]"
+                  >
+                    <span className="opacity-60 text-xs">Hint {h.n}</span>
+                    <span>{h.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bonus Round */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Bonus Round</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
+              <p className="text-sm text-[color:var(--color-muted)]">
+                Decode the title, then unlock bonus questions for extra points.
+              </p>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between text-sm">
+                  <span>Who's the artist?</span>
+                  <span className="font-bold text-[color:var(--color-green)]">+150 pts</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span>What year was it released?</span>
+                  <span className="font-bold text-[color:var(--color-green)]">+100 pts</span>
+                </div>
+              </div>
+              <p className="text-xs text-[color:var(--color-muted)]">Year accepted within ±1.</p>
+            </div>
+          </div>
+
+          {/* Scoring */}
+          <div className="flex flex-col gap-3">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Scoring</h3>
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
+              <div className="flex flex-col gap-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Base score per song</span>
+                  <span className="font-bold">1,000 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Hint 1 used</span><span>–200 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Hint 2 used</span><span>–300 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Hint 3 used</span><span>–400 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Song revealed (not solved)</span><span>0 pts</span>
+                </div>
+                <div className="border-t border-[color:var(--color-border)] pt-2 flex justify-between font-bold">
+                  <span>Max per song (with bonus)</span>
+                  <span className="text-[color:var(--color-green)]">1,250 pts</span>
+                </div>
+                <div className="flex justify-between font-bold">
+                  <span>Max daily total</span>
+                  <span className="text-[color:var(--color-green)]">6,250 pts</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Star ratings */}
+            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">Star Ratings</p>
+              <div className="flex flex-col gap-2">
+                {([
+                  [5, "4,500–6,250 pts"],
+                  [4, "3,500–4,499 pts"],
+                  [3, "2,500–3,499 pts"],
+                  [2, "1,000–2,499 pts"],
+                  [1, "1–999 pts"],
+                ] as [number, string][]).map(([count, range]) => (
+                  <div key={count} className="flex items-center justify-between">
+                    <StarRating stars={count} size={14} />
+                    <span className="text-sm text-[color:var(--color-muted)]">{range}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom padding */}
+          <div className="h-2" />
+        </div>
+      </div>
+    </div>
+  );
+}
