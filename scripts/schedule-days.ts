@@ -17,6 +17,7 @@ type Difficulty = "easy" | "medium" | "hard" | "viral";
 interface Song {
   id: string;
   title: string;
+  artist: string;
   difficulty: Difficulty;
 }
 
@@ -25,7 +26,7 @@ type Schedule = Record<string, [string, string, string, string, string]>;
 const SONGS_PATH = path.join(__dirname, "../../data/songs.json");
 const SCHEDULE_PATH = path.join(__dirname, "../../data/schedule.json");
 const REUSE_WINDOW = 60; // days before a song can repeat
-const VIRAL_REUSE_WINDOW = 17; // viral pool is small, allow faster reuse
+const VIRAL_REUSE_WINDOW = 60; // match main window — viral pool now large enough
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -51,8 +52,12 @@ function addDays(dateStr: string, n: number): string {
   return d.toISOString().split("T")[0];
 }
 
-function pickOne(pool: Song[], usedRecently: Set<string>): Song | null {
-  const available = pool.filter((s) => !usedRecently.has(s.id));
+function pickOne(pool: Song[], usedRecently: Set<string>, usedArtists: Set<string>): Song | null {
+  const available = pool.filter((s) => {
+    if (usedRecently.has(s.id)) return false;
+    if (usedArtists.has(s.artist?.toLowerCase().trim())) return false;
+    return true;
+  });
   if (available.length === 0) return null;
   // Shuffle for variety
   const idx = Math.floor(Math.random() * available.length);
@@ -119,21 +124,27 @@ function main() {
       }
     }
 
-    const easy = pickOne(byDiff.easy, usedRecently);
+    const usedArtists = new Set<string>();
+
+    const easy = pickOne(byDiff.easy, usedRecently, usedArtists);
     if (!easy) { console.warn(`⚠️  No easy song available for ${dateStr}`); continue; }
     usedRecently.add(easy.id);
+    usedArtists.add(easy.artist?.toLowerCase().trim());
 
-    const medium1 = pickOne(byDiff.medium, usedRecently);
+    const medium1 = pickOne(byDiff.medium, usedRecently, usedArtists);
     if (!medium1) { console.warn(`⚠️  No medium song available for ${dateStr}`); continue; }
     usedRecently.add(medium1.id);
+    usedArtists.add(medium1.artist?.toLowerCase().trim());
 
-    const medium2 = pickOne(byDiff.medium, usedRecently);
+    const medium2 = pickOne(byDiff.medium, usedRecently, usedArtists);
     if (!medium2) { console.warn(`⚠️  No second medium song available for ${dateStr}`); continue; }
     usedRecently.add(medium2.id);
+    usedArtists.add(medium2.artist?.toLowerCase().trim());
 
-    const hard = pickOne(byDiff.hard, usedRecently);
+    const hard = pickOne(byDiff.hard, usedRecently, usedArtists);
     if (!hard) { console.warn(`⚠️  No hard song available for ${dateStr}`); continue; }
     usedRecently.add(hard.id);
+    usedArtists.add(hard.artist?.toLowerCase().trim());
 
     // Viral uses a shorter reuse window since the pool is smaller
     const viralUsedRecently = new Set<string>();
@@ -141,7 +152,7 @@ function main() {
       const pastDate = addDays(dateStr, -back);
       if (schedule[pastDate]) viralUsedRecently.add(schedule[pastDate][4]);
     }
-    const viral = pickOne(byDiff.viral, viralUsedRecently);
+    const viral = pickOne(byDiff.viral, viralUsedRecently, usedArtists);
     if (!viral) { console.warn(`⚠️  No viral song available for ${dateStr}`); continue; }
 
     schedule[dateStr] = [easy.id, medium1.id, medium2.id, hard.id, viral.id];

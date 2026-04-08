@@ -119,7 +119,7 @@ async function searchTracks(token, query, limit = 10) {
 }
 // ── Claude generation ─────────────────────────────────────────────────────────
 async function generateSongEntry(client, title, artist, releaseYear, existingTitles) {
-    const prompt = `You are creating content for TuneDecode, a daily music word game where players decode synonym-transformed song titles.
+    const prompt = `You are creating content for TuneTwist, a daily music word game where players decode synonym-transformed song titles.
 
 Song: "${title}" by ${artist} (${releaseYear})
 
@@ -137,10 +137,11 @@ Generate a JSON object for this song. Rules:
   - "medium" for well-known songs with moderate swaps
   - "hard" for songs where synonyms are more abstract
   - "viral" for songs that went hugely viral on TikTok or are beloved 90s/00s throwbacks
-- hints: exactly 3 strings in this exact order:
+- hints: exactly 4 strings in this exact order:
   1. Genre and era (e.g. "2010s pop")
   2. Partial title with blanks showing first letter of each key word (e.g. "S_____ of You")
   3. Artist clue (e.g. "Artist: Ed Sheeran")
+  4. A completely different synonym version of the title — same concept, entirely different word choices from synonymTitle (e.g. if synonymTitle is "Form of You", hint 4 could be "Contour of Yourself"). NEVER reuse words from synonymTitle.
 - id: lowercase hyphenated version of the title (e.g. "shape-of-you")
 
 Respond with ONLY a valid JSON object, no explanation:
@@ -191,7 +192,7 @@ async function main() {
     const countIdx = args.indexOf("--count");
     const countVal = countIdx !== -1 ? args[countIdx + 1] : undefined;
     const targetCount = parseInt(countVal ?? "50", 10);
-    console.log(`\n🎵 TuneDecode Song Generator`);
+    console.log(`\n🎵 TuneTwist Song Generator`);
     console.log(`Target: ${targetCount} new songs\n`);
     // Load existing library
     let existing = [];

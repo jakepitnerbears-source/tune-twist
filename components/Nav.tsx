@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import HowToPlayModal from "@/components/HowToPlayModal";
 
 export default function Nav() {
@@ -10,8 +11,8 @@ export default function Nav() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 border-b border-[color:var(--color-border)] bg-[color:var(--color-navy)]">
-        <Link href="/" className="text-lg font-bold tracking-tight hover:opacity-80 transition-opacity">
-          TuneTwist
+        <Link href="/" className="hover:opacity-80 transition-opacity">
+          <Image src="/logo.png" alt="TitleTwist" width={80} height={40} className="object-contain" />
         </Link>
         <div className="flex items-center gap-6">
           <Link
@@ -21,10 +22,22 @@ export default function Nav() {
             Archive
           </Link>
           <Link
+            href="/preview"
+            className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors"
+          >
+            Preview
+          </Link>
+          <Link
             href="/genres"
             className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors"
           >
             Genres
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors"
+          >
+            Contact
           </Link>
           <button
             onClick={() => setShowModal(true)}

@@ -1,1 +1,93 @@
-[]
+[
+  {
+    "id": "smells-like-teen-spirit",
+    "title": "Smells Like Teen Spirit",
+    "artist": "Nirvana",
+    "releaseYear": "1991",
+    "synonymTitle": "Resembles Adolescent Vitality",
+    "difficulty": "hard",
+    "hints": [
+      "Reeks of Youthful Energy",
+      "Rock/grunge",
+      "Artist: Nirvana"
+    ]
+  },
+  {
+    "id": "bittersweet-symphony",
+    "title": "Bittersweet Symphony",
+    "artist": "The Verve",
+    "releaseYear": "1997",
+    "synonymTitle": "Bittersweet Concerto",
+    "difficulty": "hard",
+    "hints": [
+      "Painful Melody",
+      "Britpop/rock",
+      "Artist: The Verve"
+    ]
+  },
+  {
+    "id": "everybody-hurts",
+    "title": "Everybody Hurts",
+    "artist": "R.E.M.",
+    "releaseYear": "1992",
+    "synonymTitle": "Everyone Aches",
+    "difficulty": "hard",
+    "hints": [
+      "All Feel Pain",
+      "Alternative rock",
+      "Artist: R.E.M."
+    ]
+  },
+  {
+    "id": "just-like-heaven",
+    "title": "Just Like Heaven",
+    "artist": "The Cure",
+    "releaseYear": "1987",
+    "synonymTitle": "Exactly Like Paradise",
+    "difficulty": "hard",
+    "hints": [
+      "Identical to Bliss",
+      "Post-punk/new wave",
+      "Artist: The Cure"
+    ]
+  },
+  {
+    "id": "time-after-time",
+    "title": "Time After Time",
+    "artist": "Cyndi Lauper",
+    "releaseYear": "1983",
+    "synonymTitle": "Moment After Moment",
+    "difficulty": "hard",
+    "hints": [
+      "Repeatedly, Endlessly",
+      "Pop/new wave",
+      "Artist: Cyndi Lauper"
+    ]
+  },
+  {
+    "id": "man-in-the-mirror",
+    "title": "Man in the Mirror",
+    "artist": "Michael Jackson",
+    "releaseYear": "1988",
+    "synonymTitle": "Person in the Reflection",
+    "difficulty": "hard",
+    "hints": [
+      "Guy in the Looking Glass",
+      "Pop/R&B",
+      "Artist: Michael Jackson"
+    ]
+  },
+  {
+    "id": "heart-shaped-box",
+    "title": "Heart-Shaped Box",
+    "artist": "Nirvana",
+    "releaseYear": "1993",
+    "synonymTitle": "Cardiac Container",
+    "difficulty": "hard",
+    "hints": [
+      "Organ-Shaped Crate",
+      "Rock/grunge",
+      "Artist: Nirvana"
+    ]
+  }
+]

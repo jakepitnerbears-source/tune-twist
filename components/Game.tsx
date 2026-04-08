@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
+import Image from "next/image";
+import { Music, Music2, Music3, Music4, Headphones, Mic, Radio, Disc3 } from "lucide-react";
 import { DailyPuzzle } from "@/lib/getDailyPuzzle";
 import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { Difficulty } from "@/data/puzzles";
@@ -12,6 +14,7 @@ const HINT_COSTS = [200, 300, 400];
 const BASE_SCORE = 1000;
 const ARTIST_BONUS = 150;
 const YEAR_BONUS = 100;
+const YEAR_BONUS_CLOSE = 50;
 const MAX_SONG_SCORE = BASE_SCORE + ARTIST_BONUS + YEAR_BONUS; // 1250
 
 const DIFFICULTY_COLORS: Record<Difficulty, string> = {
@@ -40,8 +43,67 @@ const ALMOST_MESSAGES = ["You're very close 👀", "So close. One more try.", "G
 const HINT_MESSAGES = ["Here's a nudge.", "Getting warmer.", "Almost there…"];
 const SKIP_MESSAGES = ["No points for this one.", "Revealed."];
 
+const BURST_STREAKS = [
+  { angle: 12,  length: 260, size: 5, color: '#ff3db4' },
+  { angle: 38,  length: 195, size: 7, color: '#ff6b3d' },
+  { angle: 65,  length: 230, size: 4, color: '#ffb13d' },
+  { angle: 95,  length: 175, size: 6, color: '#a8ff3e' },
+  { angle: 122, length: 215, size: 5, color: '#3dfff5' },
+  { angle: 150, length: 270, size: 4, color: '#3d9fff' },
+  { angle: 192, length: 195, size: 6, color: '#7b61ff' },
+  { angle: 220, length: 240, size: 5, color: '#c461ff' },
+  { angle: 248, length: 175, size: 7, color: '#ff61b4' },
+  { angle: 278, length: 220, size: 4, color: '#ff3db4' },
+  { angle: 308, length: 255, size: 6, color: '#ffb13d' },
+  { angle: 342, length: 185, size: 5, color: '#3dfff5' },
+];
+
+const BURST_DOTS = [
+  { x: '16%', y: '20%', size: 11, color: '#7b61ff' },
+  { x: '81%', y: '15%', size: 8,  color: '#3dfff5' },
+  { x: '13%', y: '68%', size: 13, color: '#ff3db4' },
+  { x: '84%', y: '64%', size: 9,  color: '#a8ff3e' },
+  { x: '87%', y: '38%', size: 6,  color: '#ffb13d' },
+  { x: '11%', y: '43%', size: 7,  color: '#ff6b3d' },
+];
+
+const BURST_ICONS = [
+  { x: '7%',  y: '10%', size: 30, color: '#ffffff',  rotate: -15, Icon: Music,      delay: 0,    dur: 3.4 },
+  { x: '87%', y: '7%',  size: 24, color: '#3dfff5',  rotate:  20, Icon: Music2,     delay: 0.5,  dur: 3.9 },
+  { x: '4%',  y: '34%', size: 38, color: '#ffb13d',  rotate:  -8, Icon: Headphones, delay: 1.2,  dur: 4.2 },
+  { x: '91%', y: '28%', size: 26, color: '#ffffff',  rotate:  14, Icon: Mic,        delay: 0.3,  dur: 3.6 },
+  { x: '2%',  y: '57%', size: 22, color: '#a8ff3e',  rotate: -22, Icon: Music3,     delay: 0.8,  dur: 4.5 },
+  { x: '89%', y: '54%', size: 34, color: '#ffffff',  rotate:   8, Icon: Music4,     delay: 1.5,  dur: 3.2 },
+  { x: '9%',  y: '77%', size: 28, color: '#c461ff',  rotate:  18, Icon: Radio,      delay: 0.2,  dur: 4.8 },
+  { x: '84%', y: '80%', size: 22, color: '#ff3db4',  rotate: -10, Icon: Disc3,      delay: 1.0,  dur: 3.7 },
+  { x: '26%', y: '5%',  size: 20, color: '#ffffff',  rotate:  28, Icon: Mic,        delay: 0.6,  dur: 4.1 },
+  { x: '68%', y: '4%',  size: 32, color: '#ffb13d',  rotate: -18, Icon: Music2,     delay: 1.3,  dur: 3.5 },
+  { x: '19%', y: '89%', size: 26, color: '#ffffff',  rotate:  10, Icon: Headphones, delay: 0.4,  dur: 4.6 },
+  { x: '74%', y: '87%', size: 30, color: '#7b61ff',  rotate:  -6, Icon: Music,      delay: 0.9,  dur: 3.3 },
+  { x: '46%', y: '3%',  size: 24, color: '#ff61b4',  rotate:  20, Icon: Radio,      delay: 1.7,  dur: 4.0 },
+  { x: '1%',  y: '50%', size: 18, color: '#ffffff',  rotate: -25, Icon: Music4,     delay: 0.7,  dur: 4.4 },
+  { x: '94%', y: '47%', size: 36, color: '#a8ff3e',  rotate:  10, Icon: Music3,     delay: 1.1,  dur: 3.8 },
+  { x: '37%', y: '93%', size: 22, color: '#ffffff',  rotate: -12, Icon: Music,      delay: 0.15, dur: 4.3 },
+  { x: '60%', y: '95%', size: 28, color: '#3d9fff',  rotate:  24, Icon: Disc3,      delay: 1.4,  dur: 3.6 },
+  { x: '14%', y: '52%', size: 20, color: '#ffb13d',  rotate: -30, Icon: Mic,        delay: 0.85, dur: 4.7 },
+  { x: '77%', y: '41%', size: 24, color: '#ffffff',  rotate:  16, Icon: Music2,     delay: 1.6,  dur: 3.4 },
+  { x: '51%', y: '97%', size: 18, color: '#7b61ff',  rotate:  -8, Icon: Radio,      delay: 0.35, dur: 4.9 },
+  { x: '32%', y: '2%',  size: 26, color: '#ffffff',  rotate:  -5, Icon: Headphones, delay: 1.9,  dur: 3.1 },
+  { x: '55%', y: '6%',  size: 20, color: '#ff6b3d',  rotate:  32, Icon: Music4,     delay: 0.55, dur: 4.2 },
+];
+
 function randomFrom(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function stripFeaturing(title: string): string {
+  return title
+    .replace(/\s*\(feat\..*?\)/gi, "")
+    .replace(/\s*\(ft\..*?\)/gi, "")
+    .replace(/\s*\(featuring.*?\)/gi, "")
+    .replace(/\s*feat\..*$/gi, "")
+    .replace(/\s*FEAT\..*$/g, "")
+    .trim();
 }
 
 const NUMBER_ONES: Record<string, number> = {
@@ -88,10 +150,13 @@ function validateArtist(guess: string, correct: string): boolean {
   return false;
 }
 
-function validateYear(guess: string, correct: string): boolean {
+function validateYear(guess: string, correct: string): "exact" | "close" | false {
   const g = parseInt(guess.trim(), 10);
   const c = parseInt(correct, 10);
-  return !isNaN(g) && Math.abs(g - c) <= 1;
+  if (isNaN(g)) return false;
+  if (g === c) return "exact";
+  if (Math.abs(g - c) === 1) return "close";
+  return false;
 }
 
 function titleScore(hintsUsed: number, solved: boolean): number {
@@ -104,7 +169,7 @@ function totalSongScore(s: SongState): number {
   return (
     titleScore(s.hintsUsed, s.solved) +
     (s.artistCorrect ? ARTIST_BONUS : 0) +
-    (s.yearCorrect ? YEAR_BONUS : 0)
+    (s.yearCorrect === "exact" ? YEAR_BONUS : s.yearCorrect === "close" ? YEAR_BONUS_CLOSE : 0)
   );
 }
 
@@ -168,7 +233,7 @@ interface SongState {
   artistCorrect: boolean | null;
   artistFeedback: string;
   yearGuess: string;
-  yearCorrect: boolean | null;
+  yearCorrect: "exact" | "close" | false | null;
   yearFeedback: string;
 }
 
@@ -255,7 +320,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
   // Full-screen confetti when title + artist + year all correct
   useEffect(() => {
     const s = states[songIndex];
-    if (s.solved && s.artistCorrect === true && s.yearCorrect === true) {
+    if (s.solved && s.artistCorrect === true && s.yearCorrect === "exact") {
       setFullConfetti(true);
       const t = setTimeout(() => setFullConfetti(false), 3000);
       return () => clearTimeout(t);
@@ -339,8 +404,10 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
     const correct = validateYear(state.yearGuess, releaseYear);
     updateState(songIndex, {
       yearCorrect: correct,
-      yearFeedback: correct
+      yearFeedback: correct === "exact"
         ? randomFrom(["+100. Dialed in.", "Year on point."])
+        : correct === "close"
+        ? randomFrom(["+50. One year off.", "Close — within a year."])
         : randomFrom(["Wrong year. Guess again.", "Off by more than one."]),
     });
   }
@@ -349,7 +416,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
     updateState(songIndex, {
       bonusDone: true,
       artistCorrect: state.artistCorrect ?? false,
-      yearCorrect: state.yearCorrect ?? false,
+      yearCorrect: state.yearCorrect ?? false as false,
     });
   }
 
@@ -409,7 +476,9 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
         <div className="w-full max-w-[560px] flex flex-col gap-6">
 
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight">TuneTwist</h1>
+            <div className="flex justify-center mb-2">
+              <Image src="/logo.png" alt="TitleTwist" width={160} height={80} className="object-contain" />
+            </div>
             {streak > 0 && (
               <p className="text-sm text-[color:var(--color-muted)] mt-1">
                 🔥 {streak}-day streak
@@ -493,12 +562,14 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
                         </span>
                         <span
                           className={
-                            s.yearCorrect
+                            s.yearCorrect === "exact"
                               ? "text-[color:var(--color-green)]"
+                              : s.yearCorrect === "close"
+                              ? "text-yellow-400"
                               : "text-[color:var(--color-red)]"
                           }
                         >
-                          {s.yearCorrect ? "✓ Year" : "✗ Year"}
+                          {s.yearCorrect === "exact" ? "✓ Year" : s.yearCorrect === "close" ? "~ Year" : "✗ Year"}
                         </span>
                       </div>
                     )}
@@ -520,12 +591,56 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
 
   // ── Game screen ───────────────────────────────────────────────────────────
   return (
-    <main className="flex flex-col items-center justify-center min-h-[calc(100svh-8rem)] px-4 py-6">
-      <div className="w-full max-w-[560px] flex flex-col gap-8">
+    <main className="relative flex flex-col items-center justify-center min-h-[calc(100svh-8rem)] px-4 py-6 overflow-hidden">
+
+      {/* Burst background */}
+      <div className="absolute inset-0 pointer-events-none">
+
+        {/* Purple gradient blobs */}
+        <div style={{ position: 'absolute', top: '-10%', left: '-5%', width: '55%', height: '60%', background: 'radial-gradient(ellipse at center, #4c1d95cc 0%, #7b61ff44 40%, transparent 70%)', filter: 'blur(48px)', animation: 'blob-drift-a 12s ease-in-out infinite' }} />
+        <div style={{ position: 'absolute', bottom: '-5%', right: '-8%', width: '50%', height: '55%', background: 'radial-gradient(ellipse at center, #5b21b6bb 0%, #a855f733 40%, transparent 70%)', filter: 'blur(56px)', animation: 'blob-drift-b 15s ease-in-out 2s infinite' }} />
+        <div style={{ position: 'absolute', top: '30%', right: '15%', width: '38%', height: '45%', background: 'radial-gradient(ellipse at center, #3730a399 0%, #6d28d922 40%, transparent 70%)', filter: 'blur(40px)', animation: 'blob-drift-c 18s ease-in-out 5s infinite' }} />
+
+        {BURST_DOTS.map((d, i) => (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              left: d.x,
+              top: d.y,
+              width: d.size,
+              height: d.size,
+              background: d.color,
+              borderRadius: '50%',
+              animation: `dot-float ${3 + (i % 3) * 0.7}s ease-in-out ${i * 0.4}s infinite`,
+              opacity: 0.75,
+            }}
+          />
+        ))}
+        {BURST_ICONS.map(({ x, y, size, color, rotate, Icon, delay, dur }, i) => (
+          <div
+            key={`icon-${i}`}
+            style={{
+              position: 'absolute',
+              left: x,
+              top: y,
+              transform: `rotate(${rotate}deg)`,
+            }}
+          >
+            <div style={{ animation: `icon-drift ${dur}s ease-in-out ${delay}s infinite` }}>
+              <Icon size={size} color={color} strokeWidth={2.5} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-8">
 
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight">TuneTwist</h1>
+          <div className="flex justify-center mb-2">
+            <Image src="/logo.png" alt="TitleTwist" width={160} height={80} className="object-contain" />
+          </div>
           <p className="text-[color:var(--color-muted)] text-sm mt-1">
             Twist the song. One synonym at a time.
           </p>
@@ -586,7 +701,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
 
         {/* Song card */}
         <div
-          className={`relative bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-6 flex flex-col gap-4 ${
+          className={`relative bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-3xl p-6 flex flex-col gap-4 ${
             state.shake ? "animate-shake" : ""
           } ${state.glow ? "animate-glow" : ""}`}
         >
@@ -630,8 +745,17 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
             )}
           </div>
 
+          {/* Genre pill */}
+          {current.genre && (
+            <div className="flex justify-center">
+              <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[color:var(--color-border)] text-[color:var(--color-muted)] tracking-wide">
+                {current.genre}
+              </span>
+            </div>
+          )}
+
           {/* Synonym title */}
-          <p className="text-2xl font-bold leading-snug">{current.synonymTitle}</p>
+          <p className="text-4xl font-bold leading-tight text-center py-4">{stripFeaturing(current.synonymTitle)}</p>
 
           {/* Hints */}
           {state.hintsUsed > 0 && (
@@ -759,8 +883,10 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
                       /* Result state */
                       <div
                         className={`flex items-center justify-between px-3 py-2 rounded-xl border ${
-                          state.yearCorrect
+                          state.yearCorrect === "exact"
                             ? "border-[color:var(--color-green)] bg-[color:var(--color-green)]/10"
+                            : state.yearCorrect === "close"
+                            ? "border-yellow-400 bg-yellow-400/10"
                             : "border-[color:var(--color-red)] bg-[color:var(--color-red)]/10"
                         }`}
                       >
@@ -775,12 +901,14 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
                         </span>
                         <span
                           className={`text-sm font-bold ${
-                            state.yearCorrect
+                            state.yearCorrect === "exact"
                               ? "text-[color:var(--color-green)]"
+                              : state.yearCorrect === "close"
+                              ? "text-yellow-400"
                               : "text-[color:var(--color-red)]"
                           }`}
                         >
-                          {state.yearCorrect ? `+${YEAR_BONUS}` : "✗"}
+                          {state.yearCorrect === "exact" ? `+${YEAR_BONUS}` : state.yearCorrect === "close" ? `+${YEAR_BONUS_CLOSE}` : "✗"}
                         </span>
                       </div>
                     )}
@@ -801,7 +929,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
                       className={
                         state.artistCorrect
                           ? "text-[color:var(--color-green)]"
-                          : "text-[color:var(--color-muted)]"
+                          : "text-[color:var(--color-red)]"
                       }
                     >
                       {state.artistCorrect
@@ -810,13 +938,17 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
                     </span>
                     <span
                       className={
-                        state.yearCorrect
+                        state.yearCorrect === "exact"
                           ? "text-[color:var(--color-green)]"
-                          : "text-[color:var(--color-muted)]"
+                          : state.yearCorrect === "close"
+                          ? "text-yellow-400"
+                          : "text-[color:var(--color-red)]"
                       }
                     >
-                      {state.yearCorrect
+                      {state.yearCorrect === "exact"
                         ? `✓ Year +${YEAR_BONUS}`
+                        : state.yearCorrect === "close"
+                        ? `~ Year +${YEAR_BONUS_CLOSE}`
                         : `✗ Year (${
                             state.songInfo && state.songInfo !== "loading"
                               ? state.songInfo.releaseYear
@@ -915,7 +1047,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel }: { puzzle: Dai
           </div>
         </div>
 
-      </div>
+      </div> {/* end relative z-10 */}
 
       {/* Full-screen confetti burst */}
       {fullConfetti && (

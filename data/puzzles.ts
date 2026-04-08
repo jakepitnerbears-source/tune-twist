@@ -7,7 +7,8 @@ export interface Song {
   releaseYear: string;   // e.g. "2017"
   synonymTitle: string;  // e.g. "Form of You"
   difficulty: Difficulty;
-  hints: [string, string, string]; // [alt_synonym, genre, artist]
+  genre?: string;        // e.g. "Pop/R&B"
+  hints: [string, string, string]; // [alt_synonym, release_year, artist]
 }
 
 export const songs: Song[] = [

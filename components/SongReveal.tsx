@@ -32,10 +32,8 @@ export default function SongReveal({ info }: { info: SongInfo | null | "loading"
       <div className="flex flex-col gap-0.5 min-w-0">
         <p className="text-sm font-bold truncate">{info.trackName}</p>
         <p className="text-xs text-[color:var(--color-muted)] truncate">{info.artistName}</p>
-        <p className="text-xs text-[color:var(--color-muted)] truncate">
-          {info.collectionName} · {info.releaseYear}
-        </p>
-        <p className="text-xs text-[color:var(--color-muted)]">{info.genre}</p>
+        <p className="text-xs text-[color:var(--color-muted)] truncate">{info.collectionName}</p>
+        <p className="text-xs text-[color:var(--color-muted)]">{info.releaseYear} · {info.genre}</p>
       </div>
     </div>
   );

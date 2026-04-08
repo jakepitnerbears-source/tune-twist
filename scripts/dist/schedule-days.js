@@ -48,7 +48,7 @@ const path = __importStar(require("path"));
 const SONGS_PATH = path.join(__dirname, "../../data/songs.json");
 const SCHEDULE_PATH = path.join(__dirname, "../../data/schedule.json");
 const REUSE_WINDOW = 60; // days before a song can repeat
-const VIRAL_REUSE_WINDOW = 17; // viral pool is small, allow faster reuse
+const VIRAL_REUSE_WINDOW = 60; // match main window — viral pool now large enough
 function parseArgs() {
     const args = process.argv.slice(2);
     const get = (flag) => {
@@ -91,7 +91,7 @@ function main() {
         hard: songs.filter((s) => s.difficulty === "hard"),
         viral: songs.filter((s) => s.difficulty === "viral"),
     };
-    console.log(`\n📅 TuneDecode Schedule Builder`);
+    console.log(`\n📅 TuneTwist Schedule Builder`);
     console.log(`Songs available — Easy: ${byDiff.easy.length}, Medium: ${byDiff.medium.length}, Hard: ${byDiff.hard.length}, Viral: ${byDiff.viral.length}`);
     console.log(`Scheduling ${days} days starting ${start}\n`);
     // Check we have enough

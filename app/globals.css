@@ -44,6 +44,38 @@ body {
   100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
 }
 
+@keyframes streak-pulse {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 0.95; }
+}
+
+@keyframes dot-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes icon-drift {
+  0%,  100% { transform: translateY(0px)   scale(1);    opacity: 0.8; }
+  35%        { transform: translateY(-10px) scale(1.1);  opacity: 1;   }
+  70%        { transform: translateY(5px)   scale(0.93); opacity: 0.65; }
+}
+
+@keyframes blob-drift-a {
+  0%,  100% { transform: translate(0px, 0px)    scale(1); }
+  33%        { transform: translate(30px, -20px) scale(1.06); }
+  66%        { transform: translate(-20px, 15px) scale(0.95); }
+}
+@keyframes blob-drift-b {
+  0%,  100% { transform: translate(0px, 0px)    scale(1); }
+  33%        { transform: translate(-25px, 18px) scale(1.04); }
+  66%        { transform: translate(18px, -22px) scale(0.97); }
+}
+@keyframes blob-drift-c {
+  0%,  100% { transform: translate(0px, 0px)    scale(1); }
+  40%        { transform: translate(20px, 25px)  scale(1.05); }
+  75%        { transform: translate(-15px, -10px) scale(0.96); }
+}
+
 @keyframes confetti-0 { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(-55px,-65px) scale(0.2); opacity: 0; } }
 @keyframes confetti-1 { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(-20px,-90px) scale(0.2); opacity: 0; } }
 @keyframes confetti-2 { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(20px,-90px) scale(0.2); opacity: 0; } }

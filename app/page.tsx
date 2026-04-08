@@ -1,7 +1,7 @@
 import { getDailyPuzzle, getPuzzleNumber } from "@/lib/getDailyPuzzle";
 import Game from "@/components/Game";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // revalidate once per hour — puzzle changes daily
 
 export default function Home() {
   const puzzle = getDailyPuzzle();
