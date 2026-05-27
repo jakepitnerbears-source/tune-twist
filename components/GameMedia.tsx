@@ -13,21 +13,13 @@ const BASE_SCORE = 1000;
 const ARTIST_BONUS = 150;
 const YEAR_BONUS = 100;
 const YEAR_BONUS_CLOSE = 50;
-const MAX_SONG_SCORE = BASE_SCORE + ARTIST_BONUS + YEAR_BONUS; // 1250
+const MAX_SONG_SCORE = BASE_SCORE + ARTIST_BONUS + YEAR_BONUS;
 
-
-const CORRECT_MESSAGES = [
-  "Nice. That was quick.",
-  "You got that 👀",
-  "Clean solve.",
-  "That one trips people up.",
-  "Locked in.",
-];
+const CORRECT_MESSAGES = ["Nice. That was quick.", "You got that 👀", "Clean solve.", "That one trips people up.", "Locked in."];
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close. One more try.", "Getting warm…"];
 const HINT_MESSAGES = ["Here's a nudge.", "Getting warmer.", "Almost there…"];
 const SKIP_MESSAGES = ["No points for this one.", "Revealed."];
-
 
 const GENRE_HEX: Record<string, string> = {
   "Pop": "#f472b6", "R&B": "#fb923c", "Hip-Hop": "#facc15",
@@ -36,32 +28,18 @@ const GENRE_HEX: Record<string, string> = {
   "Funk/Disco": "#c084fc", "Latin": "#34d399", "Pop-Punk": "#e879f9",
 };
 
-const WAVEFORM_HEIGHTS = [35, 60, 75, 45, 85, 55, 40, 70, 50, 80, 65, 45, 75, 55, 40, 60, 80, 50, 70, 85, 45, 65, 75, 35, 60, 80, 50, 70, 85, 45, 65, 35, 75, 55, 85, 45, 70, 80, 50, 65];
-
-const BURST_STREAKS = [
-  { angle: 12,  length: 260, size: 5, color: '#ff3db4' },
-  { angle: 38,  length: 195, size: 7, color: '#ff6b3d' },
-  { angle: 65,  length: 230, size: 4, color: '#ffb13d' },
-  { angle: 95,  length: 175, size: 6, color: '#00b4ff' },
-  { angle: 122, length: 215, size: 5, color: '#3dfff5' },
-  { angle: 150, length: 270, size: 4, color: '#3d9fff' },
-  { angle: 192, length: 195, size: 6, color: '#7b61ff' },
-  { angle: 220, length: 240, size: 5, color: '#c461ff' },
-  { angle: 248, length: 175, size: 7, color: '#ff61b4' },
-  { angle: 278, length: 220, size: 4, color: '#ff3db4' },
-  { angle: 308, length: 255, size: 6, color: '#ffb13d' },
-  { angle: 342, length: 185, size: 5, color: '#3dfff5' },
+const CONFETTI_PARTICLES = [
+  { idx: 0, color: "#00b4ff", delay: 0 },
+  { idx: 1, color: "#7b61ff", delay: 30 },
+  { idx: 2, color: "#00b4ff", delay: 60 },
+  { idx: 3, color: "#ff6b3d", delay: 20 },
+  { idx: 4, color: "#7b61ff", delay: 50 },
+  { idx: 5, color: "#00b4ff", delay: 40 },
+  { idx: 6, color: "#ff6b3d", delay: 10 },
+  { idx: 7, color: "#7b61ff", delay: 70 },
+  { idx: 8, color: "#00b4ff", delay: 15 },
+  { idx: 9, color: "#ff6b3d", delay: 55 },
 ];
-
-const BURST_DOTS = [
-  { x: '16%', y: '20%', size: 11, color: '#7b61ff' },
-  { x: '81%', y: '15%', size: 8,  color: '#3dfff5' },
-  { x: '13%', y: '68%', size: 13, color: '#ff3db4' },
-  { x: '84%', y: '64%', size: 9,  color: '#00b4ff' },
-  { x: '87%', y: '38%', size: 6,  color: '#ffb13d' },
-  { x: '11%', y: '43%', size: 7,  color: '#ff6b3d' },
-];
-
 
 function randomFrom(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -88,24 +66,11 @@ const NUMBER_TENS: Record<string, number> = {
   sixty: 60, seventy: 70, eighty: 80, ninety: 90,
 };
 
-// Converts "Twenty One" → "21", "Five" → "5", "30" stays "30", etc.
 function collapseNumbers(str: string): string {
   let s = str.toLowerCase().replace(/-/g, " ");
-  // Compound: "twenty one" → "21"
-  s = s.replace(
-    /\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\s+(one|two|three|four|five|six|seven|eight|nine)\b/g,
-    (_, tens, ones) => String(NUMBER_TENS[tens] + NUMBER_ONES[ones])
-  );
-  // Remaining tens: "twenty" → "20"
-  s = s.replace(
-    /\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b/g,
-    (_, tens) => String(NUMBER_TENS[tens])
-  );
-  // Ones / teens: "one" → "1", "nineteen" → "19"
-  s = s.replace(
-    /\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)\b/g,
-    (_, ones) => String(NUMBER_ONES[ones])
-  );
+  s = s.replace(/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\s+(one|two|three|four|five|six|seven|eight|nine)\b/g, (_, tens, ones) => String(NUMBER_TENS[tens] + NUMBER_ONES[ones]));
+  s = s.replace(/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b/g, (_, tens) => String(NUMBER_TENS[tens]));
+  s = s.replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)\b/g, (_, ones) => String(NUMBER_ONES[ones]));
   return s;
 }
 
@@ -154,14 +119,9 @@ function starRating(score: number, maxScore: number): number {
   return 0;
 }
 
-function getToday(): string {
-  return new Date().toISOString().split("T")[0];
-}
-
+function getToday(): string { return new Date().toISOString().split("T")[0]; }
 function getYesterday(): string {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split("T")[0];
+  const d = new Date(); d.setDate(d.getDate() - 1); return d.toISOString().split("T")[0];
 }
 
 function formatCountdown(): string {
@@ -176,66 +136,28 @@ function formatCountdown(): string {
   return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
 
-const CONFETTI_PARTICLES = [
-  { idx: 0, color: "#00b4ff", delay: 0 },
-  { idx: 1, color: "#7b61ff", delay: 30 },
-  { idx: 2, color: "#00b4ff", delay: 60 },
-  { idx: 3, color: "#ff6b3d", delay: 20 },
-  { idx: 4, color: "#7b61ff", delay: 50 },
-  { idx: 5, color: "#00b4ff", delay: 40 },
-  { idx: 6, color: "#ff6b3d", delay: 10 },
-  { idx: 7, color: "#7b61ff", delay: 70 },
-  { idx: 8, color: "#00b4ff", delay: 15 },
-  { idx: 9, color: "#ff6b3d", delay: 55 },
-];
-
 interface SongState {
-  hintsUsed: number;
-  solved: boolean;
-  skipped: boolean;
-  guess: string;
-  feedback: string;
-  feedbackWarm: boolean;
-  shake: boolean;
-  glow: boolean;
-  songInfo: SongInfo | null | "loading";
-  bonusDone: boolean;
-  artistGuess: string;
-  artistCorrect: boolean | null;
-  artistFeedback: string;
-  yearGuess: string;
-  yearCorrect: "exact" | "close" | false | null;
-  yearFeedback: string;
+  hintsUsed: number; solved: boolean; skipped: boolean;
+  guess: string; feedback: string; feedbackWarm: boolean;
+  shake: boolean; glow: boolean; songInfo: SongInfo | null | "loading";
+  bonusDone: boolean; artistGuess: string; artistCorrect: boolean | null;
+  artistFeedback: string; yearGuess: string;
+  yearCorrect: "exact" | "close" | false | null; yearFeedback: string;
 }
 
 function initialSongState(): SongState {
   return {
-    hintsUsed: 0,
-    solved: false,
-    skipped: false,
-    guess: "",
-    feedback: "",
-    feedbackWarm: false,
-    shake: false,
-    glow: false,
-    songInfo: null,
-    bonusDone: false,
-    artistGuess: "",
-    artistCorrect: null,
-    artistFeedback: "",
-    yearGuess: "",
-    yearCorrect: null,
-    yearFeedback: "",
+    hintsUsed: 0, solved: false, skipped: false,
+    guess: "", feedback: "", feedbackWarm: false,
+    shake: false, glow: false, songInfo: null,
+    bonusDone: false, artistGuess: "", artistCorrect: null,
+    artistFeedback: "", yearGuess: "", yearCorrect: null, yearFeedback: "",
   };
 }
 
 function Check({ className = "" }: { className?: string }) {
   return (
-    <svg
-      width="12" height="12" viewBox="0 0 12 12" fill="none"
-      className={`inline-block shrink-0 ${className}`}
-      style={{ verticalAlign: "middle", marginTop: "-1px" }}
-    >
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={`inline-block shrink-0 ${className}`} style={{ verticalAlign: "middle", marginTop: "-1px" }}>
       <polyline points="1.5,6.5 4.5,9.5 10.5,2.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -243,21 +165,18 @@ function Check({ className = "" }: { className?: string }) {
 
 function Countdown() {
   const [time, setTime] = useState(formatCountdown());
-  useEffect(() => {
-    const id = setInterval(() => setTime(formatCountdown()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  useEffect(() => { const id = setInterval(() => setTime(formatCountdown()), 1000); return () => clearInterval(id); }, []);
   return (
     <div className="text-center flex flex-col gap-1">
-      <p className="text-xs text-[color:var(--color-muted)] uppercase tracking-widest">
-        Next puzzle in
-      </p>
+      <p className="text-xs text-[color:var(--color-muted)] uppercase tracking-widest">Next puzzle in</p>
       <p className="text-xl font-bold tabular-nums">{time}</p>
     </div>
   );
 }
 
-export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = [], previewUrls = [] }: { puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[]; previewUrls?: string[] }) {
+export default function GameMedia({ puzzle, puzzleNumber, genreLabel, allArtists = [], previewUrls = [] }: {
+  puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[]; previewUrls?: string[];
+}) {
   const [songIndex, setSongIndex] = useState(0);
   const [states, setStates] = useState<SongState[]>(puzzle.map(initialSongState));
   const [gameOver, setGameOver] = useState(false);
@@ -275,37 +194,29 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
 
   const current = puzzle[songIndex];
   const state = states[songIndex];
+  const genreColor = GENRE_HEX[current.genre ?? ""] ?? "#71717a";
+  const decade = current.releaseYear ? `${Math.floor(parseInt(current.releaseYear) / 10) * 10}s` : "";
 
-  // Load streak from localStorage
   useEffect(() => {
     try {
       const stored = localStorage.getItem("tunedecode_streak");
       if (stored) {
         const data = JSON.parse(stored) as { lastPlayed: string; streak: number };
         if (data.lastPlayed === getToday() || data.lastPlayed === getYesterday()) {
-          streakRef.current = data.streak;
-          setStreak(data.streak);
+          streakRef.current = data.streak; setStreak(data.streak);
         }
       }
     } catch {}
   }, []);
 
-  // Save streak when game ends
   useEffect(() => {
     if (!gameOver) return;
     const solved = states.filter((s) => s.solved).length;
     const newStreak = solved >= 3 ? streakRef.current + 1 : 0;
-    streakRef.current = newStreak;
-    setStreak(newStreak);
-    try {
-      localStorage.setItem(
-        "tunedecode_streak",
-        JSON.stringify({ lastPlayed: getToday(), streak: newStreak })
-      );
-    } catch {}
+    streakRef.current = newStreak; setStreak(newStreak);
+    try { localStorage.setItem("tunedecode_streak", JSON.stringify({ lastPlayed: getToday(), streak: newStreak })); } catch {}
   }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Full-screen confetti when title + artist + year all correct
   useEffect(() => {
     const s = states[songIndex];
     if (s.solved && s.artistCorrect === true && s.yearCorrect === "exact") {
@@ -319,27 +230,14 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     if (!fullConfetti) return [];
     const colors = ["#00b4ff", "#7b61ff", "#ff6b3d", "#ffffff", "#ffd700"];
     return Array.from({ length: 80 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      size: 6 + Math.random() * 7,
-      round: Math.random() > 0.5,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      duration: 1.8 + Math.random() * 1.8,
-      delay: Math.random() * 1.0,
+      id: i, left: Math.random() * 100, size: 6 + Math.random() * 7,
+      round: Math.random() > 0.5, color: colors[Math.floor(Math.random() * colors.length)],
+      duration: 1.8 + Math.random() * 1.8, delay: Math.random() * 1.0,
     }));
   }, [fullConfetti]);
 
-  // Focus management
-  useEffect(() => {
-    if (!state.solved && !state.skipped) inputRef.current?.focus();
-  }, [songIndex, state.solved, state.skipped]);
-
-  useEffect(() => {
-    if (state.solved && !state.bonusDone && state.artistCorrect === null) {
-      artistRef.current?.focus();
-    }
-  }, [state.solved, state.bonusDone, state.artistCorrect]);
-
+  useEffect(() => { if (!state.solved && !state.skipped) inputRef.current?.focus(); }, [songIndex, state.solved, state.skipped]);
+  useEffect(() => { if (state.solved && !state.bonusDone && state.artistCorrect === null) artistRef.current?.focus(); }, [state.solved, state.bonusDone, state.artistCorrect]);
 
   function updateState(index: number, patch: Partial<SongState>) {
     setStates((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
@@ -349,15 +247,10 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     if (!state.guess.trim() || state.solved) return;
     const correct = validateGuess(state.guess, current.title, current.altTitles);
     if (correct) {
-      // hint[1] = release year, hint[2] = artist — skip those bonuses if already revealed
       const autoSkipArtist = state.hintsUsed >= 3;
       const autoSkipYear = state.hintsUsed >= 2;
       updateState(songIndex, {
-        solved: true,
-        feedback: randomFrom(CORRECT_MESSAGES),
-        songInfo: "loading",
-        glow: true,
-        shake: false,
+        solved: true, feedback: randomFrom(CORRECT_MESSAGES), songInfo: "loading", glow: true, shake: false,
         ...(autoSkipArtist ? { artistCorrect: false } : {}),
         ...(autoSkipYear ? { yearCorrect: false as false } : {}),
       });
@@ -367,11 +260,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
       updateState(songIndex, { songInfo: info });
     } else {
       const almost = isAlmostCorrect(state.guess, current.title, current.altTitles);
-      updateState(songIndex, {
-        feedback: almost ? randomFrom(ALMOST_MESSAGES) : randomFrom(WRONG_MESSAGES),
-        feedbackWarm: almost,
-        shake: true,
-      });
+      updateState(songIndex, { feedback: almost ? randomFrom(ALMOST_MESSAGES) : randomFrom(WRONG_MESSAGES), feedbackWarm: almost, shake: true });
       setTimeout(() => updateState(songIndex, { shake: false }), 500);
     }
   }
@@ -381,37 +270,25 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     const correct = validateArtist(state.artistGuess, current.artist);
     updateState(songIndex, {
       artistCorrect: correct,
-      artistFeedback: correct
-        ? randomFrom(["+150. You know your stuff.", "Artist locked in."])
-        : randomFrom(["Not quite. Try again.", "Close?"]),
+      artistFeedback: correct ? randomFrom(["+150. You know your stuff.", "Artist locked in."]) : randomFrom(["Not quite. Try again.", "Close?"]),
     });
   }
 
   function handleYearSubmit() {
     if (!state.yearGuess.trim() || state.yearCorrect !== null) return;
-    const releaseYear =
-      state.songInfo && state.songInfo !== "loading"
-        ? state.songInfo.releaseYear
-        : current.releaseYear ?? "";
+    const releaseYear = state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? "";
     const correct = validateYear(state.yearGuess, releaseYear);
     updateState(songIndex, {
       yearCorrect: correct,
-      yearFeedback: correct === "exact"
-        ? randomFrom(["+100. Dialed in.", "Year on point."])
-        : correct === "close"
-        ? randomFrom(["+50. One year off.", "Close — within a year."])
-        : randomFrom(["Wrong year. Guess again.", "Off by more than one."]),
+      yearFeedback: correct === "exact" ? randomFrom(["+100. Dialed in.", "Year on point."]) : correct === "close" ? randomFrom(["+50. One year off.", "Close — within a year."]) : randomFrom(["Wrong year. Guess again.", "Off by more than one."]),
     });
   }
 
   function stopPreview() {
     if (audioTimerRef.current) clearTimeout(audioTimerRef.current);
-    audioRef.current?.pause();
-    audioRef.current = null;
-    setPlayingPreview(false);
+    audioRef.current?.pause(); audioRef.current = null; setPlayingPreview(false);
   }
 
-  // Stop audio when switching songs or on unmount
   useEffect(() => { stopPreview(); }, [songIndex]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => { stopPreview(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -422,27 +299,18 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     stopPreview();
     const audio = new Audio(url);
     audioRef.current = audio;
-    audio.play();
-    audio.onended = () => setPlayingPreview(false);
+    audio.play(); audio.onended = () => setPlayingPreview(false);
     audioTimerRef.current = setTimeout(stopPreview, 3000);
     setPlayingPreview(true);
   }
 
   function handleSkipBonus() {
-    updateState(songIndex, {
-      bonusDone: true,
-      artistCorrect: state.artistCorrect ?? false,
-      yearCorrect: state.yearCorrect ?? false as false,
-    });
+    updateState(songIndex, { bonusDone: true, artistCorrect: state.artistCorrect ?? false, yearCorrect: state.yearCorrect ?? false as false });
   }
 
   function handleHint() {
     if (state.hintsUsed >= current.hints.length || state.solved) return;
-    updateState(songIndex, {
-      hintsUsed: state.hintsUsed + 1,
-      feedback: randomFrom(HINT_MESSAGES),
-      feedbackWarm: false,
-    });
+    updateState(songIndex, { hintsUsed: state.hintsUsed + 1, feedback: randomFrom(HINT_MESSAGES), feedbackWarm: false });
   }
 
   function handleReveal() {
@@ -451,301 +319,235 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
   }
 
   function handleNext() {
-    if (songIndex < puzzle.length - 1) {
-      setSongIndex(songIndex + 1);
-    } else {
-      setGameOver(true);
-    }
+    if (songIndex < puzzle.length - 1) setSongIndex(songIndex + 1);
+    else setGameOver(true);
   }
 
   function buildShareText(score: number): string {
     const solvedCount = states.filter((s) => s.solved).length;
     const stars = starRating(score, maxScore);
     const starEmojis = "⭐".repeat(stars) + "☆".repeat(5 - stars);
-    const emojis = states
-      .map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"))
-      .join(" ");
+    const emojis = states.map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨")).join(" ");
     const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
     return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.com`;
   }
 
   function handleCopyResults(score: number) {
-    navigator.clipboard.writeText(buildShareText(score)).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    navigator.clipboard.writeText(buildShareText(score)).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2000); });
   }
 
-  const bonusComplete =
-    state.bonusDone ||
-    (state.artistCorrect !== null && state.yearCorrect !== null);
-
+  const bonusComplete = state.bonusDone || (state.artistCorrect !== null && state.yearCorrect !== null);
   const totalScore = states.reduce((sum, s) => sum + totalSongScore(s), 0);
   const maxScore = puzzle.length * MAX_SONG_SCORE;
+  const hintProgress = current.hints.length > 0 ? (state.hintsUsed / current.hints.length) * 100 : 0;
 
-  // ── Results screen ────────────────────────────────────────────────────────
+  // ── Results screen ─────────────────────────────────────────────────────────
   if (gameOver) {
     const stars = starRating(totalScore, maxScore);
     const solvedCount = states.filter((s) => s.solved).length;
     return (
       <main className="flex flex-col items-center justify-center min-h-[calc(100svh-8rem)] px-4 py-6">
-        <div className="w-full max-w-[560px] flex flex-col gap-6">
-
+        <div className="w-full max-w-[480px] flex flex-col gap-6">
           <div className="text-center">
             <div className="flex justify-center mb-2">
               <Image src="/logo.png" alt="TitleTwist" width={220} height={110} className="object-contain" />
             </div>
-            {streak > 0 && (
-              <p className="text-sm text-[color:var(--color-muted)] mt-1">
-                🔥 {streak}-day streak
-              </p>
-            )}
+            {streak > 0 && <p className="text-sm text-[color:var(--color-muted)] mt-1">🔥 {streak}-day streak</p>}
           </div>
-
-          {/* Share preview */}
           <div className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl px-6 py-5">
             <p className="text-[color:var(--color-muted)] text-xs uppercase tracking-widest text-center mb-3">Share Preview</p>
-            <pre className="text-sm text-center whitespace-pre font-mono leading-relaxed">
-              {buildShareText(totalScore)}
-            </pre>
+            <pre className="text-sm text-center whitespace-pre font-mono leading-relaxed">{buildShareText(totalScore)}</pre>
           </div>
-
-          {/* Copy Results CTA */}
-          <button
-            onClick={() => handleCopyResults(totalScore)}
-            className="w-full py-3.5 rounded-xl bg-[color:var(--color-green)] text-[color:var(--color-navy)] text-sm font-bold hover:opacity-90 transition-opacity"
-          >
+          <button onClick={() => handleCopyResults(totalScore)} className="w-full py-3.5 rounded-xl bg-[color:var(--color-green)] text-[color:var(--color-navy)] text-sm font-bold hover:opacity-90 transition-opacity">
             {copied ? <><Check className="text-[color:var(--color-navy)]" /> Copied!</> : "Copy Results"}
           </button>
-
           <div className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-8 flex flex-col gap-5">
-            <p className="text-[color:var(--color-muted)] text-xs uppercase tracking-widest text-center">
-              {genreLabel ? genreLabel : `Today's Results — #${puzzleNumber}`}
-            </p>
-            <div className="flex justify-center">
-              <StarRating stars={stars} size={28} />
-            </div>
+            <p className="text-[color:var(--color-muted)] text-xs uppercase tracking-widest text-center">{genreLabel ? genreLabel : `Today's Results — #${puzzleNumber}`}</p>
+            <div className="flex justify-center"><StarRating stars={stars} size={28} /></div>
             <p className="text-3xl font-bold text-center">{totalScore.toLocaleString()} pts</p>
-            <p className="text-[color:var(--color-muted)] text-sm text-center">
-              {solvedCount} of {puzzle.length} songs decoded
-            </p>
-
-            {/* Emoji grid */}
+            <p className="text-[color:var(--color-muted)] text-sm text-center">{solvedCount} of {puzzle.length} songs decoded</p>
             <div className="text-center text-2xl tracking-widest">
-              {states.map((s, i) => (
-                <span key={i}>
-                  {!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}
-                </span>
-              ))}
+              {states.map((s, i) => (<span key={i}>{!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}</span>))}
             </div>
-
-            {/* Song breakdown */}
             <div className="flex flex-col gap-3 mt-1">
               {puzzle.map((song, i) => {
                 const s = states[i];
                 return (
                   <div key={song.id} className="flex flex-col gap-1.5">
                     <div className="flex items-center justify-between text-sm">
-                      <span
-                        className={
-                          s.solved
-                            ? "text-white font-semibold"
-                            : "text-[color:var(--color-muted)] line-through"
-                        }
-                      >
-                        {song.title}
-                      </span>
-                      <span
-                        className={`font-semibold ${
-                          s.solved
-                            ? "text-[color:var(--color-green)]"
-                            : "text-[color:var(--color-muted)]"
-                        }`}
-                      >
-                        {totalSongScore(s)} pts
-                      </span>
+                      <span className={s.solved ? "text-white font-semibold" : "text-[color:var(--color-muted)] line-through"}>{song.title}</span>
+                      <span className={`font-semibold ${s.solved ? "text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}`}>{totalSongScore(s)} pts</span>
                     </div>
                     {s.solved && (
                       <div className="flex gap-2 text-xs">
-                        <span
-                          className={
-                            s.artistCorrect
-                              ? "text-[color:var(--color-green)]"
-                              : "text-[color:var(--color-red)]"
-                          }
-                        >
-                          {s.artistCorrect
-                            ? <><Check className="text-[color:var(--color-green)]" /> Artist</>
-                            : "✕ Artist"}
+                        <span className={s.artistCorrect ? "text-[color:var(--color-green)]" : "text-[color:var(--color-red)]"}>
+                          {s.artistCorrect ? <><Check className="text-[color:var(--color-green)]" /> Artist</> : "✕ Artist"}
                         </span>
-                        <span
-                          className={
-                            s.yearCorrect === "exact"
-                              ? "text-[color:var(--color-green)]"
-                              : s.yearCorrect === "close"
-                              ? "text-yellow-400"
-                              : "text-[color:var(--color-red)]"
-                          }
-                        >
-                          {s.yearCorrect === "exact"
-                            ? <><Check className="text-[color:var(--color-green)]" /> Year</>
-                            : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
+                        <span className={s.yearCorrect === "exact" ? "text-[color:var(--color-green)]" : s.yearCorrect === "close" ? "text-yellow-400" : "text-[color:var(--color-red)]"}>
+                          {s.yearCorrect === "exact" ? <><Check className="text-[color:var(--color-green)]" /> Year</> : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
                         </span>
                       </div>
                     )}
-                    {s.solved && s.songInfo && s.songInfo !== "loading" && (
-                      <SongReveal info={s.songInfo as SongInfo} />
-                    )}
+                    {s.solved && s.songInfo && s.songInfo !== "loading" && <SongReveal info={s.songInfo as SongInfo} />}
                   </div>
                 );
               })}
             </div>
           </div>
-
           <Countdown />
-
         </div>
       </main>
     );
   }
 
-  // ── Game screen ───────────────────────────────────────────────────────────
+  // ── Game screen ────────────────────────────────────────────────────────────
   return (
     <main className="relative flex flex-col items-center justify-center min-h-[calc(100svh-8rem)] px-4 py-6 overflow-hidden">
 
-      {/* Burst background */}
+      {/* Ambient background */}
       <div className="absolute inset-0 pointer-events-none">
         <div style={{ position: 'absolute', top: '-10%', left: '-5%', width: '55%', height: '60%', background: 'radial-gradient(ellipse at center, #4c1d95cc 0%, #7b61ff44 40%, transparent 70%)', filter: 'blur(48px)', animation: 'blob-drift-a 12s ease-in-out infinite' }} />
         <div style={{ position: 'absolute', bottom: '-5%', right: '-8%', width: '50%', height: '55%', background: 'radial-gradient(ellipse at center, #5b21b6bb 0%, #a855f733 40%, transparent 70%)', filter: 'blur(56px)', animation: 'blob-drift-b 15s ease-in-out 2s infinite' }} />
-        <div style={{ position: 'absolute', top: '30%', right: '15%', width: '38%', height: '45%', background: 'radial-gradient(ellipse at center, #3730a399 0%, #6d28d922 40%, transparent 70%)', filter: 'blur(40px)', animation: 'blob-drift-c 18s ease-in-out 5s infinite' }} />
-        {BURST_DOTS.map((d, i) => (
-          <div
-            key={i}
-            style={{
-              position: 'absolute',
-              left: d.x,
-              top: d.y,
-              width: d.size,
-              height: d.size,
-              background: d.color,
-              borderRadius: '50%',
-              animation: `dot-float ${3 + (i % 3) * 0.7}s ease-in-out ${i * 0.4}s infinite`,
-              opacity: 0.75,
-            }}
-          />
-        ))}
       </div>
 
-      <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-6">
+      <div className="relative z-10 w-full max-w-[640px] flex flex-col gap-4">
 
-        {/* Header */}
-        <div className="text-center">
-          <div className="flex justify-center mb-2">
-            <Image src="/logo.png" alt="TitleTwist" width={220} height={110} className="object-contain" />
-          </div>
-          <p className="text-[color:var(--color-muted)] text-sm mt-1">
-            Twist the song. One synonym at a time.
-          </p>
-        </div>
-
-        {/* Dot tracker */}
-        <div className="flex justify-center gap-2">
+        {/* Logo + dot tracker row */}
+        <div className="flex items-center justify-between px-1">
+          <Image src="/logo.png" alt="TitleTwist" width={130} height={65} className="object-contain" />
+          <div className="flex gap-2">
           {puzzle.map((_, i) => {
             const s = states[i];
             const isDone = s.solved || s.skipped;
             const isActive = i === songIndex;
             return (
-              <button
-                key={i}
-                onClick={() => isDone ? setSongIndex(i) : undefined}
-                disabled={!isDone && !isActive}
-                className={`transition-all rounded-full ${
-                  isActive
-                    ? "w-4 h-2.5 bg-white"
-                    : isDone && s.solved
-                    ? "w-2.5 h-2.5 bg-[color:var(--color-green)]"
-                    : isDone
-                    ? "w-2.5 h-2.5 bg-[color:var(--color-red)]"
-                    : "w-2.5 h-2.5 bg-[color:var(--color-border)]"
-                }`}
+              <button key={i} onClick={() => isDone ? setSongIndex(i) : undefined} disabled={!isDone && !isActive}
+                className={`transition-all rounded-full ${isActive ? "w-4 h-2.5 bg-white" : isDone && s.solved ? "w-2.5 h-2.5 bg-[color:var(--color-green)]" : isDone ? "w-2.5 h-2.5 bg-[color:var(--color-red)]" : "w-2.5 h-2.5 bg-[color:var(--color-border)]"}`}
               />
             );
           })}
+          </div>
         </div>
 
-        {/* Song card — player */}
+        {/* Player card */}
         <div className={`relative bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-3xl overflow-hidden ${state.shake ? "animate-shake" : ""} ${state.glow ? "animate-glow" : ""}`}>
 
           {/* Confetti burst */}
           {state.glow && (
-            <div className="absolute top-1/3 left-1/2 pointer-events-none" aria-hidden="true">
+            <div className="absolute top-1/3 left-1/2 pointer-events-none z-20" aria-hidden="true">
               {CONFETTI_PARTICLES.map((p) => (
                 <span key={p.idx} style={{ position: "absolute", width: 7, height: 7, borderRadius: "50%", background: p.color, animation: `confetti-${p.idx} 0.75s ease-out ${p.delay}ms forwards` }} />
               ))}
             </div>
           )}
 
-          {/* Album art + track info */}
-          <div className="flex gap-4 p-5 pb-4">
-            {/* Album art — click to play clip */}
-            <div
-              onClick={previewUrls[songIndex] && !state.solved && !state.skipped ? togglePreview : undefined}
-              className={`w-[80px] h-[80px] rounded-2xl shrink-0 flex items-center justify-center relative overflow-hidden ${previewUrls[songIndex] && !state.solved && !state.skipped ? "cursor-pointer" : ""}`}
-              style={{
-                background: `linear-gradient(135deg, ${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}33 0%, ${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}0d 100%)`,
-                border: `1px solid ${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}40`,
-              }}
-            >
+          {/* ── Album art — widescreen ── */}
+          <div
+            className="relative w-full aspect-[16/9] overflow-hidden cursor-pointer"
+            style={{ background: `linear-gradient(160deg, ${genreColor}33 0%, ${genreColor}0d 55%, #0a0c14 100%)` }}
+            onClick={previewUrls[songIndex] && !state.solved && !state.skipped ? togglePreview : undefined}
+          >
+            {/* Vinyl record */}
+            <div className="absolute inset-0 flex items-center justify-center">
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center"
+                className="h-[90%] aspect-square rounded-full relative"
                 style={{
-                  background: `conic-gradient(from 0deg, #0d0f1a 0%, ${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}55 30%, #0d0f1a 55%, ${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}30 80%, #0d0f1a 100%)`,
-                  border: "2px solid rgba(255,255,255,0.07)",
-                  animation: "vinyl-spin 4s linear infinite",
+                  background: `conic-gradient(from 0deg, #0d0f1a 0%, ${genreColor}55 25%, #0d0f1a 45%, ${genreColor}33 70%, #0d0f1a 90%, ${genreColor}22 100%)`,
+                  boxShadow: `0 0 60px ${genreColor}22, 0 0 120px ${genreColor}11`,
+                  border: "1px solid rgba(255,255,255,0.06)",
+                  animation: "vinyl-spin 5s linear infinite",
                   animationPlayState: playingPreview ? "running" : "paused",
                 }}
               >
-                <div className="w-3 h-3 rounded-full" style={{ background: "#0d0f1a", border: "1px solid rgba(255,255,255,0.15)" }} />
+                {/* Grooves */}
+                <div className="absolute inset-[15%] rounded-full border border-white/[0.04]" />
+                <div className="absolute inset-[30%] rounded-full border border-white/[0.04]" />
+                {/* Center hole */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-[18%] aspect-square rounded-full" style={{ background: "#0d0f1a", border: "1px solid rgba(255,255,255,0.12)" }} />
+                </div>
               </div>
-              {state.solved && (
-                <div className="absolute inset-0 flex items-center justify-center" style={{ background: `${GENRE_HEX[current.genre ?? ""] ?? "#71717a"}22` }}>
-                  <span className="text-xl font-bold text-[color:var(--color-green)]">✓</span>
-                </div>
-              )}
-              {state.skipped && (
-                <div className="absolute inset-0 flex items-center justify-center bg-[color:var(--color-red)]/20">
-                  <span className="text-xl font-bold text-[color:var(--color-red)]">✕</span>
-                </div>
-              )}
-              {previewUrls[songIndex] && !state.solved && !state.skipped && (
-                <div className="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center rounded-2xl">
-                  <span className="text-white text-lg">{playingPreview ? "⏸" : "▶"}</span>
-                </div>
-              )}
             </div>
 
-            {/* Track info */}
-            <div className="flex flex-col justify-center gap-1 min-w-0 flex-1">
-              <p className="text-[10px] font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">
-                {state.solved ? "Identified" : state.skipped ? "Skipped" : "Now Playing"} · Song {songIndex + 1} of {puzzle.length}
-              </p>
-              <p className="leading-tight text-3xl font-semibold" style={{ fontFamily: "var(--font-poppins)", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+            {/* Genre badge — top left */}
+            <div className="absolute top-4 left-4 z-10">
+              <span className="text-[11px] font-bold px-3 py-1 rounded-full" style={{ background: `${genreColor}33`, color: genreColor, border: `1px solid ${genreColor}44` }}>
+                {current.genre ?? "Unknown"}
+              </span>
+            </div>
+
+            {/* Song count — top right */}
+            <div className="absolute top-4 right-4 z-10">
+              <span className="text-[11px] font-semibold text-white/40 tabular-nums">
+                {songIndex + 1} / {puzzle.length}
+              </span>
+            </div>
+
+            {/* Title overlay — bottom */}
+            <div
+              className="absolute bottom-0 left-0 right-0 z-10 px-5 pt-8 pb-4"
+              style={{ background: "linear-gradient(to top, rgba(13,15,26,0.97) 0%, rgba(13,15,26,0.6) 55%, transparent 100%)" }}
+            >
+              <p
+                className="leading-[1.15] text-[2rem] text-white font-semibold"
+                style={{ fontFamily: "var(--font-poppins)", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
+              >
                 {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
               </p>
-              <p className="text-xs text-[color:var(--color-muted)] mt-0.5">
-                {state.solved || state.skipped
-                  ? current.artist
-                  : `${current.genre ?? ""}${current.releaseYear ? ` · ${Math.floor(parseInt(current.releaseYear) / 10) * 10}s` : ""}`}
+              <p className="text-sm text-white/45 mt-1">
+                {state.solved || state.skipped ? current.artist : decade}
               </p>
+            </div>
+
+            {/* Hover play overlay */}
+            {previewUrls[songIndex] && !state.solved && !state.skipped && (
+              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity" style={{ background: "rgba(0,0,0,0.25)" }}>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                  <span className="text-white text-2xl ml-0.5">{playingPreview ? "⏸" : "▶"}</span>
+                </div>
+              </div>
+            )}
+
+            {/* Solved overlay */}
+            {state.solved && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center" style={{ background: `${genreColor}0d` }}>
+                <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: `${genreColor}22`, border: `2px solid ${genreColor}55`, boxShadow: `0 0 32px ${genreColor}33` }}>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><polyline points="4,17 12,25 28,7" stroke="#00b4ff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </div>
+              </div>
+            )}
+
+            {/* Skipped overlay */}
+            {state.skipped && (
+              <div className="absolute inset-0 z-10 flex items-center justify-center bg-[color:var(--color-red)]/10">
+                <div className="w-20 h-20 rounded-full flex items-center justify-center bg-[color:var(--color-red)]/20 border-2 border-[color:var(--color-red)]/40">
+                  <span className="text-3xl font-bold text-[color:var(--color-red)]">✕</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── Progress / scrubber ── */}
+          <div className="px-5 pt-3 pb-1">
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] text-white/35 tabular-nums w-6 shrink-0">
+                {state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "0"}
+              </span>
+              <div className="flex-1 h-[3px] bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{ width: `${hintProgress}%`, background: `linear-gradient(90deg, ${genreColor} 0%, ${genreColor}88 100%)` }}
+                />
+              </div>
+              <span className="text-[10px] text-white/35 tabular-nums w-6 text-right shrink-0">
+                -{current.hints.length - state.hintsUsed}
+              </span>
             </div>
           </div>
 
-
-          <div className="h-px bg-[color:var(--color-border)] mx-5" />
-
-          {/* Hints */}
-          {state.hintsUsed > 0 && (
-            <div className="px-5 pt-4 flex flex-col gap-1.5">
+          {/* ── Hints revealed ── */}
+          {state.hintsUsed > 0 && !state.solved && !state.skipped && (
+            <div className="px-5 pt-2 flex flex-col gap-1.5">
               {current.hints.slice(0, state.hintsUsed).map((hint, hi) => (
                 <div key={hi} className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-[color:var(--color-navy)] border border-[color:var(--color-purple)] text-[color:var(--color-purple)]">
                   <span className="opacity-60 text-xs">Hint {hi + 1}</span>
@@ -755,8 +557,9 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
             </div>
           )}
 
-          {/* Main content */}
-          <div className="px-5 pt-4 pb-5 flex flex-col gap-3">
+          {/* ── Main content area ── */}
+          <div className="px-5 pt-2 pb-4 flex flex-col gap-3">
+
             {state.solved ? (
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
@@ -772,17 +575,13 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                     <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">
                       Bonus Round — up to +{state.hintsUsed >= 3 ? 0 : state.hintsUsed >= 2 ? ARTIST_BONUS : ARTIST_BONUS + YEAR_BONUS} pts
                     </p>
-
                     {state.hintsUsed < 3 && (
                       <div className="flex flex-col gap-1.5">
-                        <label className="text-xs text-[color:var(--color-muted)]">Who's the artist?</label>
+                        <label className="text-xs text-[color:var(--color-muted)]">Who&apos;s the artist?</label>
                         {state.artistCorrect === null ? (
                           <div className="flex gap-2">
                             <div className="relative flex-1" ref={artistDropdownRef}>
-                              <input
-                                ref={artistRef}
-                                type="text"
-                                value={state.artistGuess}
+                              <input ref={artistRef} type="text" value={state.artistGuess}
                                 onChange={(e) => { updateState(songIndex, { artistGuess: e.target.value, artistFeedback: "" }); setArtistDropdownOpen(true); }}
                                 onFocus={() => setArtistDropdownOpen(true)}
                                 onBlur={() => setTimeout(() => setArtistDropdownOpen(false), 150)}
@@ -812,7 +611,6 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                         )}
                       </div>
                     )}
-
                     {state.hintsUsed < 2 && (
                       <div className="flex flex-col gap-1.5">
                         <label className="text-xs text-[color:var(--color-muted)]">What year was it released?</label>
@@ -829,7 +627,6 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                         )}
                       </div>
                     )}
-
                     <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">Skip bonus →</button>
                   </div>
                 ) : (
@@ -853,6 +650,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
               </div>
             ) : (
               <>
+                {/* Input */}
                 <input
                   ref={inputRef}
                   type="text"
@@ -863,33 +661,59 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                   className="w-full bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl px-4 py-3 text-white placeholder:text-[color:var(--color-muted)] outline-none focus:border-[color:var(--color-green)] transition-colors"
                 />
                 {state.feedback && (
-                  <p className={`text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>{state.feedback}</p>
+                  <p className={`text-sm text-center ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>{state.feedback}</p>
                 )}
 
-                {/* Player controls */}
-                <div className="flex items-center gap-3 pt-1">
+                {/* Transport controls */}
+                <div className="flex items-center justify-center gap-12 pt-1 pb-1">
+                  {/* Hint */}
                   <button
                     onClick={handleHint}
                     disabled={state.hintsUsed >= current.hints.length}
-                    className="flex flex-col items-center gap-0.5 w-14 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] disabled:opacity-30 transition-colors"
+                    className="flex flex-col items-center gap-1 group disabled:opacity-30 transition-opacity"
                   >
-                    <span className="text-2xl leading-none">⏮</span>
-                    <span className="text-[9px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "Hint"}</span>
+                    <div className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[color:var(--color-purple)] group-hover:bg-[color:var(--color-purple)]/10 transition-colors disabled:pointer-events-none">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-white/50 group-hover:text-[color:var(--color-purple)] transition-colors" style={{ pointerEvents: "none" }}>
+                        <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z" />
+                      </svg>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-white/35 group-hover:text-[color:var(--color-purple)] transition-colors">
+                      {state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "Hint"}
+                    </span>
                   </button>
+
+                  {/* Submit — large circle */}
                   <button
                     onClick={handleSubmit}
-                    className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[color:var(--color-green)] text-[color:var(--color-navy)] font-bold text-sm hover:opacity-90 transition-opacity"
+                    className="flex flex-col items-center gap-1 group"
                   >
-                    <span className="text-base">▶</span> Submit
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition-opacity"
+                      style={{
+                        background: `linear-gradient(135deg, #00b4ff 0%, #7fff00 100%)`,
+                        boxShadow: `0 4px 24px ${genreColor}44`,
+                      }}
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" className="text-[#0d0f1a] ml-0.5">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-white/35 group-hover:text-white transition-colors">Submit</span>
                   </button>
+
+                  {/* Reveal */}
                   <button
                     onClick={handleReveal}
                     disabled={state.hintsUsed < current.hints.length}
-                    title={state.hintsUsed < current.hints.length ? `Use all ${current.hints.length} hints to unlock` : "Reveal answer (0 pts)"}
-                    className="flex flex-col items-center gap-0.5 w-14 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-coral)] disabled:opacity-30 transition-colors"
+                    title={state.hintsUsed < current.hints.length ? `Use all ${current.hints.length} hints first` : "Reveal answer (0 pts)"}
+                    className="flex flex-col items-center gap-1 group disabled:opacity-30 transition-opacity"
                   >
-                    <span className="text-2xl leading-none">⏭</span>
-                    <span className="text-[9px] uppercase tracking-widest">Reveal</span>
+                    <div className="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center group-hover:border-[color:var(--color-coral)] group-hover:bg-[color:var(--color-coral)]/10 transition-colors disabled:pointer-events-none">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-white/50 group-hover:text-[color:var(--color-coral)] transition-colors" style={{ pointerEvents: "none" }}>
+                        <path d="M6 18l8.5-6L6 6v12zm2-8.14L11.03 12 8 14.14V9.86zM16 6h2v12h-2z" />
+                      </svg>
+                    </div>
+                    <span className="text-[9px] uppercase tracking-widest text-white/35 group-hover:text-[color:var(--color-coral)] transition-colors">Reveal</span>
                   </button>
                 </div>
               </>
@@ -913,25 +737,13 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
           </div>
         </div>
 
-      </div> {/* end relative z-10 */}
+      </div>
 
-      {/* Full-screen confetti burst */}
+      {/* Full-screen confetti */}
       {fullConfetti && (
         <div className="fixed inset-0 pointer-events-none z-[200] overflow-hidden" aria-hidden="true">
           {confettiPieces.map((p) => (
-            <div
-              key={p.id}
-              style={{
-                position: "absolute",
-                left: `${p.left}%`,
-                top: "-12px",
-                width: p.size,
-                height: p.size,
-                borderRadius: p.round ? "50%" : "2px",
-                background: p.color,
-                animation: `confetti-fall ${p.duration}s ease-in ${p.delay}s forwards`,
-              }}
-            />
+            <div key={p.id} style={{ position: "absolute", left: `${p.left}%`, top: "-12px", width: p.size, height: p.size, borderRadius: p.round ? "50%" : "2px", background: p.color, animation: `confetti-fall ${p.duration}s ease-in ${p.delay}s forwards` }} />
           ))}
         </div>
       )}

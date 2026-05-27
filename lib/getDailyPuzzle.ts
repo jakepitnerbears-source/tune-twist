@@ -1,30 +1,39 @@
 import path from "path";
 import fs from "fs";
-import { songs as fallbackSongs, Song, Difficulty } from "@/data/puzzles";
+import { songs as fallbackSongs, Song } from "@/data/puzzles";
 
 export type DailyPuzzle = Song[];
 
-type Schedule = Record<string, [string, string, string, string, string]>;
+type Schedule = string[][];
 
-function getDayIndex(): number {
-  const epoch = new Date("2026-01-01").getTime();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return Math.floor((today.getTime() - epoch) / (1000 * 60 * 60 * 24));
+const CYCLE_LENGTH = 120;
+const EPOCH = new Date("2026-04-13T12:00:00").getTime();
+
+function getDaysFromEpoch(date?: string): number {
+  const d = date ? new Date(date + "T12:00:00") : new Date();
+  if (!date) d.setHours(12, 0, 0, 0);
+  return Math.floor((d.getTime() - EPOCH) / 86_400_000);
 }
 
-function rotatePick(pool: Song[], dayIndex: number): Song {
-  return pool[dayIndex % pool.length];
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const result = [...arr];
+  let s = (seed + 1) >>> 0;
+  for (let i = result.length - 1; i > 0; i--) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+
+const NON_POP_GENRES = new Set(["Rock", "Hip-Hop", "Hip Hop", "R&B", "Country", "Pop-Punk", "Alternative", "Indie", "Electronic", "Funk/Disco", "Metal", "Latin", "Funk"]);
+
+function primaryArtist(artist: string): string {
+  return artist.split(/,|&/)[0].trim().toLowerCase();
 }
 
 export function getPuzzleNumber(dateOverride?: string): number {
-  if (dateOverride) {
-    const epoch = new Date("2026-01-01").getTime();
-    const d = new Date(dateOverride);
-    d.setHours(0, 0, 0, 0);
-    return Math.floor((d.getTime() - epoch) / (1000 * 60 * 60 * 24)) + 1;
-  }
-  return getDayIndex() + 1;
+  return getDaysFromEpoch(dateOverride) + 1;
 }
 
 export function loadScheduleAndLibrary() {
@@ -48,44 +57,61 @@ function loadSchedule(): Schedule {
       return JSON.parse(fs.readFileSync(jsonPath, "utf-8")) as Schedule;
     }
   } catch {}
-  return {};
+  return [];
 }
 
 export function getDailyPuzzle(dateOverride?: string): DailyPuzzle {
-  const todayKey = dateOverride ?? new Date().toISOString().split("T")[0];
+  const days = getDaysFromEpoch(dateOverride);
+  const dayIndex = ((days % CYCLE_LENGTH) + CYCLE_LENGTH) % CYCLE_LENGTH;
+  const cycleNum = Math.floor(days / CYCLE_LENGTH);
+
   const library = loadSongLibrary();
   const schedule = loadSchedule();
   const songMap = Object.fromEntries(library.map((s) => [s.id, s]));
 
-  // Use schedule.json if today has an entry
-  if (schedule[todayKey]) {
-    const ids = schedule[todayKey];
-    const scheduled = ids.map((id) => songMap[id]).filter(Boolean) as Song[];
-    if (scheduled.length === 5) return scheduled;
+  if (schedule.length > 0) {
+    const flatIds = schedule.flat();
+    const orderedIds = cycleNum === 0 ? flatIds : seededShuffle(flatIds, cycleNum);
+    const daySlot = orderedIds.slice(dayIndex * 5, dayIndex * 5 + 5);
+    const songs = daySlot.map((id) => songMap[id]).filter(Boolean) as Song[];
+    if (songs.length === 5) return songs;
   }
 
-  // Fallback: rotate from library by difficulty
-  const dayIndex = getDayIndex();
-  const used: string[] = [];
+  // Fallback: genre-based rotation — 3 Pop + 2 from other genres
+  const dayIdx = Math.max(0, days);
+  const usedIds: string[] = [];
+  const usedArtists: string[] = [];
+  const usedGenres: string[] = [];
 
-  const easyPool = library.filter((s) => s.difficulty === "easy");
-  const easy = rotatePick(easyPool, dayIndex);
-  used.push(easy.id);
+  function pickFrom(pool: Song[], offset = 0): Song {
+    const filtered = pool.filter(
+      (s) => !usedIds.includes(s.id) && !usedArtists.includes(primaryArtist(s.artist))
+    );
+    const source = filtered.length > 0 ? filtered : pool.filter((s) => !usedIds.includes(s.id));
+    const fallback = source.length > 0 ? source : pool;
+    return fallback[(dayIdx + offset) % fallback.length];
+  }
 
-  const mediumPool = library.filter((s) => s.difficulty === "medium" && !used.includes(s.id));
-  const medium1 = rotatePick(mediumPool, dayIndex);
-  used.push(medium1.id);
+  const popPool = library.filter((s) => s.genre === "Pop");
+  const nonPopPool = library.filter((s) => NON_POP_GENRES.has(s.genre ?? ""));
+  const results: Song[] = [];
 
-  const medium2Pool = mediumPool.filter((s) => !used.includes(s.id));
-  const medium2 = rotatePick(medium2Pool, dayIndex + 1);
-  used.push(medium2.id);
+  for (let i = 0; i < 3; i++) {
+    const song = pickFrom(popPool, i);
+    results.push(song);
+    usedIds.push(song.id);
+    usedArtists.push(primaryArtist(song.artist));
+  }
 
-  const hardPool = library.filter((s) => s.difficulty === "hard" && !used.includes(s.id));
-  const hard = rotatePick(hardPool, dayIndex);
-  used.push(hard.id);
+  for (let i = 0; i < 2; i++) {
+    const preferNew = nonPopPool.filter((s) => !usedGenres.includes(s.genre ?? ""));
+    const pool = preferNew.length > 0 ? preferNew : nonPopPool;
+    const song = pickFrom(pool, i + 10);
+    results.push(song);
+    usedIds.push(song.id);
+    usedArtists.push(primaryArtist(song.artist));
+    usedGenres.push(song.genre ?? "");
+  }
 
-  const viralPool = library.filter((s) => s.difficulty === "viral" && !used.includes(s.id));
-  const viral = rotatePick(viralPool, dayIndex);
-
-  return [easy, medium1, medium2, hard, viral];
+  return results;
 }

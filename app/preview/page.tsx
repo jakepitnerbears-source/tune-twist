@@ -1,16 +1,8 @@
+import Link from "next/link";
 import { loadScheduleAndLibrary } from "@/lib/getDailyPuzzle";
 import { Song } from "@/data/puzzles";
 
 export const dynamic = "force-dynamic";
-
-const DIFFICULTY_COLORS: Record<string, string> = {
-  easy: "bg-[color:var(--color-green)] text-[color:var(--color-navy)]",
-  medium: "bg-yellow-400 text-[color:var(--color-navy)]",
-  hard: "bg-[color:var(--color-coral)] text-white",
-  viral: "bg-[color:var(--color-purple)] text-white",
-};
-
-const DIFFICULTY_ORDER = ["easy", "medium", "hard", "viral"];
 
 function stripFeaturing(title: string): string {
   return title
@@ -27,16 +19,34 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 }
 
+const GENRE_COLORS: Record<string, string> = {
+  "Pop":         "bg-pink-500/20 text-pink-300",
+  "R&B":         "bg-orange-500/20 text-orange-300",
+  "Hip-Hop":     "bg-yellow-500/20 text-yellow-300",
+  "Rock":        "bg-red-500/20 text-red-400",
+  "Alternative": "bg-rose-500/20 text-rose-300",
+  "Indie":       "bg-lime-500/20 text-lime-300",
+  "Electronic":  "bg-cyan-500/20 text-cyan-300",
+  "Country":     "bg-amber-500/20 text-amber-300",
+  "Metal":       "bg-zinc-500/20 text-zinc-300",
+  "Funk/Disco":  "bg-purple-500/20 text-purple-300",
+  "Latin":       "bg-emerald-500/20 text-emerald-300",
+  "Pop-Punk":    "bg-fuchsia-500/20 text-fuchsia-300",
+};
+
 function SongCard({ song, label }: { song: Song; label?: string }) {
+  const genreColor = GENRE_COLORS[song.genre ?? ""] ?? "bg-zinc-500/20 text-zinc-300";
   return (
     <div className="flex flex-col gap-2 border border-[color:var(--color-border)] rounded-xl p-4">
       <div className="flex items-center justify-between gap-2">
         <span className="text-xs text-[color:var(--color-muted)] font-semibold uppercase tracking-wider">
           {label ?? song.id}
         </span>
-        <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${DIFFICULTY_COLORS[song.difficulty]}`}>
-          {song.difficulty}
-        </span>
+        {song.genre && (
+          <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${genreColor}`}>
+            {song.genre}
+          </span>
+        )}
       </div>
 
       <p className="text-lg font-bold leading-snug">
@@ -71,67 +81,35 @@ export default function PreviewPage() {
   const today = new Date().toISOString().split("T")[0];
   const futureDates = Object.keys(schedule).filter((d) => d >= today).sort();
 
-  // Find unscheduled songs (in library but not in any upcoming slot)
   const scheduledIds = new Set(futureDates.flatMap((d) => schedule[d] as string[]));
   const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
-  const byDiff = DIFFICULTY_ORDER.map((diff) => ({
-    diff,
-    songs: unscheduled.filter((s: Song) => s.difficulty === diff),
-  })).filter(({ songs }) => songs.length > 0);
+  const genreGroups = Array.from(new Set(unscheduled.map((s: Song) => s.genre ?? "Other")))
+    .sort()
+    .map((genre) => ({
+      genre,
+      songs: unscheduled.filter((s: Song) => (s.genre ?? "Other") === genre),
+    }));
 
   return (
     <main className="flex flex-col items-center px-4 pt-10 pb-16">
       <div className="w-full max-w-[700px] flex flex-col gap-8">
 
-        {/* ── Header ── */}
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight">Song Preview</h1>
           <p className="text-[color:var(--color-muted)] text-sm mt-1">
-            testing only, not visible to users
+            {library.length} songs · {futureDates.length} days scheduled · {unscheduled.length} unscheduled
           </p>
         </div>
 
-        {/* ── Unscheduled library section ── */}
-        {unscheduled.length > 0 && (
-          <>
-            <div className="border border-[color:var(--color-border)] rounded-2xl p-6 flex flex-col gap-6">
-              <div className="text-center">
-                <h2 className="text-xl font-bold tracking-tight">Unscheduled Library</h2>
-                <p className="text-[color:var(--color-muted)] text-sm mt-1">
-                  {unscheduled.length} songs in library not yet in the schedule — review before scheduling
-                </p>
-              </div>
-
-              {byDiff.map(({ diff, songs }) => (
-                <div key={diff} className="flex flex-col gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${DIFFICULTY_COLORS[diff]}`}>
-                      {diff.toUpperCase()}
-                    </span>
-                    <span className="text-sm text-[color:var(--color-muted)]">{songs.length} songs</span>
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    {songs.map((song) => (
-                      <SongCard key={song.id} song={song} />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-[color:var(--color-border)] pt-4 text-center">
-              <h2 className="text-xl font-bold tracking-tight">Scheduled Days</h2>
-              <p className="text-[color:var(--color-muted)] text-sm mt-1">
-                {futureDates.length} upcoming days
-              </p>
-            </div>
-          </>
-        )}
+        {/* Upcoming scheduled days */}
+        <div className="flex items-center gap-3 pb-2 border-b-2 border-[color:var(--color-purple)]">
+          <h2 className="text-xl font-bold tracking-tight">Scheduled Days</h2>
+          <span className="text-sm text-[color:var(--color-muted)] ml-auto">{futureDates.length} upcoming</span>
+        </div>
 
         {futureDates.map((date) => {
           const ids = schedule[date] as string[];
           const songs = ids.map((id) => songMap[id]).filter(Boolean) as Song[];
-
           return (
             <div
               key={date}
@@ -141,13 +119,20 @@ export default function PreviewPage() {
                 <h2 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">
                   {formatDate(date)}
                 </h2>
-                {date === today && (
-                  <span className="text-xs font-bold px-3 py-1 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)]">
-                    Today
-                  </span>
-                )}
+                <div className="flex items-center gap-2">
+                  {date === today && (
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)]">
+                      Today
+                    </span>
+                  )}
+                  <Link
+                    href={`/play/${date}`}
+                    className="text-xs font-semibold px-3 py-1 rounded-full border border-[color:var(--color-purple)]/40 text-[color:var(--color-purple)] hover:bg-[color:var(--color-purple)]/10 transition-colors"
+                  >
+                    Play →
+                  </Link>
+                </div>
               </div>
-
               <div className="flex flex-col gap-3">
                 {songs.map((song, i) => (
                   <SongCard key={song.id} song={song} label={`Song ${i + 1}`} />
@@ -158,7 +143,33 @@ export default function PreviewPage() {
         })}
 
         {futureDates.length === 0 && (
-          <p className="text-center text-[color:var(--color-muted)]">No upcoming scheduled songs found.</p>
+          <p className="text-center text-[color:var(--color-muted)]">No upcoming scheduled days.</p>
+        )}
+
+        {/* Unscheduled songs */}
+        {unscheduled.length > 0 && (
+          <>
+            <div className="flex items-center gap-3 pb-2 border-b-2 border-[color:var(--color-border)]">
+              <h2 className="text-xl font-bold tracking-tight">Unscheduled Library</h2>
+              <span className="text-sm text-[color:var(--color-muted)] ml-auto">{unscheduled.length} songs</span>
+            </div>
+
+            {genreGroups.map(({ genre, songs }) => (
+              <div key={genre} className="flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${GENRE_COLORS[genre] ?? "bg-zinc-500/20 text-zinc-300"}`}>
+                    {genre}
+                  </span>
+                  <span className="text-sm text-[color:var(--color-muted)]">{songs.length} songs</span>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {songs.map((song) => (
+                    <SongCard key={song.id} song={song} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </>
         )}
 
       </div>

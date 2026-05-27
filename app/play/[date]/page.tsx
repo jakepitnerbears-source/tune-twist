@@ -1,5 +1,5 @@
-import { getDailyPuzzle, getPuzzleNumber } from "@/lib/getDailyPuzzle";
-import Game from "@/components/Game";
+import { getDailyPuzzle, getPuzzleNumber, loadScheduleAndLibrary } from "@/lib/getDailyPuzzle";
+import GameClassic from "@/components/GameClassic";
 import { notFound } from "next/navigation";
 
 export default async function PlayDate({
@@ -17,5 +17,8 @@ export default async function PlayDate({
 
   if (!puzzle || puzzle.length === 0) notFound();
 
-  return <Game puzzle={puzzle} puzzleNumber={puzzleNumber} />;
+  const { library } = loadScheduleAndLibrary();
+  const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
+
+  return <GameClassic puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} />;
 }

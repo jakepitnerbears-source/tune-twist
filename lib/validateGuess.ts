@@ -62,6 +62,26 @@ const SLANG: Record<string, string> = {
   bout: "about",
   cuz: "because",
   bc: "because",
+  till: "til",
+  until: "til",
+  gimme: "give me",
+  gonna: "going to",
+  wanna: "want to",
+  gotta: "got to",
+  kinda: "kind of",
+  outta: "out of",
+  sorta: "sort of",
+  shoulda: "should have",
+  coulda: "could have",
+  woulda: "would have",
+  cause: "because",
+  cos: "because",
+  em: "them",
+  im: "i am",
+  dont: "do not",
+  cant: "can not",
+  wont: "will not",
+  aint: "am not",
 };
 
 function normalizeSlang(str: string): string {
@@ -105,12 +125,12 @@ function levenshtein(a: string, b: string): number {
 function tokensSimilar(a: string, b: string): boolean {
   if (a === b) return true;
   // Allow 1 typo for words > 4 chars, 0 typos for short words
-  const threshold = a.length > 4 ? 1 : 0;
+  const threshold = a.length >= 4 ? 1 : 0;
   return levenshtein(a, b) <= threshold;
 }
 
-export function isAlmostCorrect(guess: string, correctTitle: string): boolean {
-  if (validateGuess(guess, correctTitle)) return false;
+export function isAlmostCorrect(guess: string, correctTitle: string, altTitles?: string[]): boolean {
+  if (validateGuess(guess, correctTitle, altTitles)) return false;
   const guessTokens = tokenize(guess).filter((w) => !IGNORE_WORDS.has(w));
   const titleTokens = tokenize(correctTitle).filter((w) => !IGNORE_WORDS.has(w));
   if (guessTokens.length === 0) return false;
@@ -126,7 +146,8 @@ export function isAlmostCorrect(guess: string, correctTitle: string): boolean {
   return matchedTitleWords.size / titleTokens.length >= 0.6;
 }
 
-export function validateGuess(guess: string, correctTitle: string): boolean {
+export function validateGuess(guess: string, correctTitle: string, altTitles?: string[]): boolean {
+  if (altTitles?.some((alt) => validateGuess(guess, alt))) return true;
   const guessTokens = tokenize(guess).filter((w) => !IGNORE_WORDS.has(w));
   const titleTokens = tokenize(correctTitle).filter((w) => !IGNORE_WORDS.has(w));
 

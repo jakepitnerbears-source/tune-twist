@@ -1,1262 +1,842 @@
-{
-  "2026-04-07": [
-    "price-tag",
-    "bad-blood",
-    "ocean-drive",
-    "decode",
-    "baby-got-back"
-  ],
-  "2026-04-08": [
-    "stay-with-me",
-    "boogie-wonderland",
-    "sweet-but-psycho",
-    "lush-life",
-    "the-real-slim-shady"
-  ],
-  "2026-04-09": [
-    "hard-times",
-    "cruel-summer",
-    "no-role-modelz",
-    "clocks",
-    "i-will-survive"
-  ],
-  "2026-04-10": [
-    "treat-you-better",
-    "kiss-me-more-feat-sza",
-    "dont-stop-the-music",
-    "electric-feel",
-    "no-hands-feat-roscoe-dash-wale"
-  ],
-  "2026-04-11": [
-    "when-it-rains-it-pours",
-    "bad-romance",
-    "drinkin-problem",
-    "lose-yourself",
-    "complicated"
-  ],
-  "2026-04-12": [
-    "yellow",
-    "bring-me-to-life",
-    "chasin-you",
-    "edge-of-seventeen",
-    "in-da-club"
-  ],
-  "2026-04-13": [
-    "flowers",
-    "space-song",
-    "let-it-happen",
-    "eye-of-the-tiger",
-    "ymca"
-  ],
-  "2026-04-14": [
-    "nonsense",
-    "deja-vu",
-    "cheap-thrills",
-    "apocalypse",
-    "whoomp-there-it-is"
-  ],
-  "2026-04-15": [
-    "drivers-license",
-    "photograph",
-    "californication",
-    "the-chain",
-    "lady-marmalade"
-  ],
-  "2026-04-16": [
-    "stay",
-    "traitor",
-    "no-lie",
-    "summer-of-69",
-    "mr-brightside"
-  ],
-  "2026-04-17": [
-    "just-dance",
-    "all-about-that-bass",
-    "7-years",
-    "escapism",
-    "lovefool"
-  ],
-  "2026-04-18": [
-    "dive",
-    "stressed-out",
-    "24k-magic",
-    "smells-like-teen-spirit",
-    "say-my-name"
-  ],
-  "2026-04-19": [
-    "cake-by-the-ocean",
-    "somebody-told-me",
-    "chandelier",
-    "what-you-know",
-    "ride-wit-me"
-  ],
-  "2026-04-20": [
-    "in-the-end",
-    "please-please-please",
-    "mirrors",
-    "cigarettes-out-the-window",
-    "boom-boom-pow"
-  ],
-  "2026-04-21": [
-    "perfect",
-    "dj-got-us-fallin-in-love-feat-pitbull",
-    "vampire",
-    "gold-digger",
-    "all-the-small-things"
-  ],
-  "2026-04-22": [
-    "blinding-lights",
-    "espresso",
-    "grenade",
-    "promiscuous",
-    "creep"
-  ],
-  "2026-04-23": [
-    "wait-a-minute",
-    "flashing-lights",
-    "peaches",
-    "midnight-city",
-    "mambo-no-5"
-  ],
-  "2026-04-24": [
-    "beyond",
-    "lovely",
-    "everybody-wants-to-rule-the-world",
-    "somebody-else",
-    "la-bamba"
-  ],
-  "2026-04-25": [
-    "rolling-in-the-deep",
-    "what-do-you-mean",
-    "cool-for-the-summer",
-    "whyd-you-only-call-me-when-youre-high",
-    "material-girl"
-  ],
-  "2026-04-26": [
-    "cheerleader---felix-jaehn-remix-radio-edit",
-    "glad-you-came",
-    "needed-me",
-    "radioactive",
-    "party-rock-anthem"
-  ],
-  "2026-04-27": [
-    "one-dance",
-    "viva-la-vida",
-    "numb",
-    "boulevard-of-broken-dreams",
-    "island-in-the-sun"
-  ],
-  "2026-04-28": [
-    "watermelon-sugar",
-    "royals",
-    "uptown-girl",
-    "american-idiot",
-    "my-own-worst-enemy"
-  ],
-  "2026-04-29": [
-    "call-me-maybe",
-    "work-out",
-    "hotline-bling",
-    "the-scientist",
-    "99-red-balloons"
-  ],
-  "2026-04-30": [
+[
+  [
     "thinking-out-loud",
-    "pompeii",
-    "believer",
-    "my-own-summer-shove-it",
-    "ice-ice-baby"
+    "like-a-prayer",
+    "somewhere-only-we-know",
+    "back-to-black",
+    "hey-brother"
   ],
-  "2026-05-01": [
-    "cant-stop-the-feeling-from-dreamworks-animations-trolls",
-    "sm",
-    "whiskey-glasses",
-    "closing-time",
-    "africa"
-  ],
-  "2026-05-02": [
-    "monster",
-    "cant-stop-the-feeling",
-    "side-to-side",
-    "bad-habits",
-    "dancing-queen"
-  ],
-  "2026-05-03": [
-    "better-than",
-    "sucker",
-    "falling-behind",
-    "fix-you",
-    "who-let-the-dogs-out"
-  ],
-  "2026-05-04": [
-    "my-kind-of-woman",
-    "bang-bang",
-    "sweet-dreams-are-made-of-this",
-    "american-pie",
-    "macarena"
-  ],
-  "2026-05-05": [
-    "happy",
-    "hold-on",
-    "sweater-weather",
-    "new-person-same-old-mistakes",
-    "survivor"
-  ],
-  "2026-05-06": [
-    "style",
-    "pumped-up-kicks",
-    "circles",
-    "get-lucky",
-    "shots"
-  ],
-  "2026-05-07": [
-    "go-away",
-    "the-hardest-part",
-    "telephone",
-    "killing-me-softly",
-    "sk8er-boi"
-  ],
-  "2026-05-08": [
-    "wagon-wheel",
-    "feathered-indians",
-    "calm-down",
-    "black-hole-sun",
-    "wrecking-ball"
-  ],
-  "2026-05-09": [
-    "someone-like-you",
-    "animal-i-have-become",
-    "last-friday-night-tgif",
-    "eventually",
-    "we-will-rock-you"
-  ],
-  "2026-05-10": [
-    "cry",
-    "take-me-to-church",
-    "the-adults-are-talking",
-    "purple-rain",
-    "teenage-dirtbag"
-  ],
-  "2026-05-11": [
-    "thrift-shop",
-    "lovers-rock",
-    "money-trees",
-    "wonderwall",
-    "semi-charmed-life"
-  ],
-  "2026-05-12": [
-    "thats-what-i-like",
-    "save-your-tears",
-    "in-my-blood",
-    "passionfruit",
-    "tubthumping"
-  ],
-  "2026-05-13": [
-    "just-the-way-you-are",
-    "butter",
-    "titanium",
-    "sweet-home-alabama",
-    "you-get-what-you-give"
-  ],
-  "2026-05-14": [
-    "attention",
-    "wake-me-up",
-    "do-i-wanna-know",
-    "redbone",
-    "no-scrubs"
-  ],
-  "2026-05-15": [
-    "intentions",
-    "for-the-first-time",
-    "industry-baby",
-    "since-u-been-gone",
-    "girls-just-want-to-have-fun"
-  ],
-  "2026-05-16": [
-    "lucid-dreams",
-    "sign-of-the-times",
-    "we-fell-in-love-in-october",
+  [
+    "scars-to-your-beautiful",
+    "all-time-low-jon-bellion",
     "come-as-you-are",
-    "turn-down-for-what"
+    "beyond-the-sea",
+    "ho-hey"
   ],
-  "2026-05-17": [
-    "poker-face",
-    "physical",
-    "here-comes-the-sun",
-    "heathens",
-    "crazy-in-love"
-  ],
-  "2026-05-18": [
-    "love-yourself",
-    "old-town-road",
-    "thank-u-next",
-    "dog-days-are-over",
-    "dont-you-forget-about-me"
-  ],
-  "2026-05-19": [
-    "we-found-love",
-    "thunder",
-    "all-i-need",
-    "go-your-own-way",
-    "another-one-bites-the-dust"
-  ],
-  "2026-05-20": [
-    "seorita",
-    "i-had-some-help-feat-morgan-wallen",
-    "dont-look-back-in-anger",
-    "everybody-hurts",
-    "tainted-love"
-  ],
-  "2026-05-21": [
-    "the-middle",
-    "still-into-you",
-    "clarity",
-    "hotel-california",
-    "the-real-slim-shady"
-  ],
-  "2026-05-22": [
-    "love-story",
-    "shut-up-and-dance",
-    "wet-dreamz",
-    "bittersweet-symphony",
-    "baby-one-more-time"
-  ],
-  "2026-05-23": [
-    "bad-guy",
-    "tennessee-whiskey",
-    "cigarette-daydreams",
-    "under-the-bridge",
-    "feel-good-inc"
-  ],
-  "2026-05-24": [
-    "anti-hero",
-    "birds-of-a-feather",
-    "easy-on-me",
-    "r-u-mine",
-    "walking-on-sunshine"
-  ],
-  "2026-05-25": [
-    "this-love",
-    "head-over-boots",
-    "drops-of-jupiter-tell-me",
-    "work-song",
-    "like-a-prayer"
-  ],
-  "2026-05-26": [
-    "havana",
-    "coming-home",
-    "the-perfect-pair",
-    "seven-nation-army",
-    "take-on-me"
-  ],
-  "2026-05-27": [
-    "thats-so-true",
-    "dirty-little-secret",
-    "someone-you-loved",
-    "livin-on-a-prayer",
-    "whats-my-age-again"
-  ],
-  "2026-05-28": [
-    "cant-feel-my-face",
-    "counting-stars",
-    "tongue-tied",
-    "running-up-that-hill",
-    "jump-around"
-  ],
-  "2026-05-29": [
-    "i-gotta-feeling",
-    "how-to-save-a-life",
-    "let-down",
-    "slide",
-    "gangnam-style"
-  ],
-  "2026-05-30": [
-    "some-nights",
-    "centuries",
-    "september",
-    "losing-my-religion",
-    "basket-case"
-  ],
-  "2026-05-31": [
-    "from-the-start",
-    "ride",
-    "bad-at-love",
-    "dreams",
-    "get-low"
-  ],
-  "2026-06-01": [
-    "river",
-    "how-you-remind-me",
-    "dont-start-now",
-    "scar-tissue",
-    "rock-your-body"
-  ],
-  "2026-06-02": [
-    "levitating-feat-dababy",
-    "unholy",
-    "what-ive-done",
-    "just-like-heaven",
-    "mamma-mia"
-  ],
-  "2026-06-03": [
-    "as-it-was",
-    "good-4-u",
-    "broken-window-serenade",
-    "dont-stop-believin",
-    "mr-brightside"
-  ],
-  "2026-06-04": [
-    "crazy-train",
-    "all-falls-down",
-    "somewhere-i-belong",
-    "bohemian-rhapsody",
-    "feel-good-inc"
-  ],
-  "2026-06-05": [
-    "adore-you",
-    "money-trees",
-    "heat-waves",
-    "man-in-the-mirror",
-    "everlong"
-  ],
-  "2026-06-06": [
-    "gods-plan",
-    "ocean-avenue",
-    "misery-business",
-    "time-after-time",
-    "dont-stop-me-now"
-  ],
-  "2026-06-07": [
-    "latch",
-    "power-trip-feat-miguel",
-    "the-less-i-know-the-better",
-    "vienna",
-    "thriller"
-  ],
-  "2026-06-08": [
-    "timber",
-    "fireflies",
-    "no-role-modelz",
-    "lush-life",
-    "under-pressure"
-  ],
-  "2026-06-09": [
-    "blurred-lines",
-    "kiss-me-more-feat-sza",
-    "bad-blood",
-    "clocks",
-    "no-hands-feat-roscoe-dash-wale"
-  ],
-  "2026-06-10": [
-    "locked-out-of-heaven",
-    "borderline",
-    "ocean-drive",
-    "electric-feel",
-    "hollaback-girl"
-  ],
-  "2026-06-11": [
-    "shape-of-you",
-    "dont-stop-the-music",
-    "sugar-were-goin-down",
-    "lose-yourself",
-    "cant-stop"
-  ],
-  "2026-06-12": [
-    "good-luck-babe",
-    "break-your-heart",
-    "bring-me-to-life",
-    "edge-of-seventeen",
-    "complicated"
-  ],
-  "2026-06-13": [
-    "dynamite",
-    "deja-vu",
-    "let-it-happen",
-    "eye-of-the-tiger",
-    "ymca"
-  ],
-  "2026-06-14": [
-    "shake-it-off",
-    "aint-no-mountain-high-enough",
-    "drinkin-problem",
-    "apocalypse",
-    "in-da-club"
-  ],
-  "2026-06-15": [
-    "nonsense",
-    "space-song",
-    "chasin-you",
-    "the-chain",
-    "i-will-survive"
-  ],
-  "2026-06-16": [
-    "only-girl-in-the-world",
-    "sweet-but-psycho",
-    "californication",
-    "thnks-fr-th-mmrs",
-    "whoomp-there-it-is"
-  ],
-  "2026-06-17": [
-    "heartless",
-    "no-lie",
-    "traitor",
-    "escapism",
-    "lady-marmalade"
-  ],
-  "2026-06-18": [
-    "chasing-cars",
-    "24k-magic",
-    "somebody-told-me",
-    "summer-of-69",
-    "lovefool"
-  ],
-  "2026-06-19": [
-    "closer",
-    "cheap-thrills",
-    "stressed-out",
-    "what-you-know",
-    "lovefool"
-  ],
-  "2026-06-20": [
-    "everybody-talks",
-    "mirrors",
-    "all-about-that-bass",
-    "cigarettes-out-the-window",
-    "all-the-small-things"
-  ],
-  "2026-06-21": [
-    "positions",
-    "7-years",
-    "footloose",
-    "gold-digger",
-    "baby-got-back"
-  ],
-  "2026-06-22": [
-    "beautiful-things",
-    "flashing-lights",
-    "dj-got-us-fallin-in-love-feat-pitbull",
-    "promiscuous",
-    "ride-wit-me"
-  ],
-  "2026-06-23": [
-    "outside-feat-ellie-goulding",
-    "boogie-wonderland",
-    "lovely",
-    "midnight-city",
-    "mambo-no-5"
-  ],
-  "2026-06-24": [
-    "stay-with-me",
-    "take-my-breath-away",
-    "peaches",
-    "somebody-else",
-    "say-my-name"
-  ],
-  "2026-06-25": [
-    "hard-times",
-    "photograph",
-    "you-give-love-a-bad-name",
-    "whyd-you-only-call-me-when-youre-high",
-    "creep"
-  ],
-  "2026-06-26": [
-    "roar",
-    "vampire",
-    "numb",
-    "radioactive",
-    "boom-boom-pow"
-  ],
-  "2026-06-27": [
-    "replay",
-    "needed-me",
-    "espresso",
-    "boulevard-of-broken-dreams",
-    "island-in-the-sun"
-  ],
-  "2026-06-28": [
-    "sorry",
-    "work-out",
-    "royals",
-    "american-idiot",
-    "material-girl"
-  ],
-  "2026-06-29": [
-    "drivers-license",
-    "please-please-please",
-    "viva-la-vida",
-    "smells-like-teen-spirit",
-    "my-own-worst-enemy"
-  ],
-  "2026-06-30": [
-    "feel-so-close---radio-edit",
-    "sm",
-    "whiskey-glasses",
-    "my-own-summer-shove-it",
-    "party-rock-anthem"
-  ],
-  "2026-07-01": [
-    "cheerleader---felix-jaehn-remix-radio-edit",
-    "pompeii",
-    "believer",
-    "closing-time",
-    "ice-ice-baby"
-  ],
-  "2026-07-02": [
-    "when-it-rains-it-pours",
-    "uptown-girl",
-    "chandelier",
-    "bad-habits",
-    "who-let-the-dogs-out"
-  ],
-  "2026-07-03": [
-    "one-dance",
-    "sucker",
-    "falling-behind",
-    "fix-you",
-    "africa"
-  ],
-  "2026-07-04": [
-    "payphone",
-    "smooth-criminal",
-    "sweater-weather",
-    "decode",
-    "macarena"
-  ],
-  "2026-07-05": [
-    "wait-a-minute",
-    "pumped-up-kicks",
-    "side-to-side",
-    "new-person-same-old-mistakes",
-    "la-bamba"
-  ],
-  "2026-07-06": [
-    "thinking-out-loud",
-    "cant-stop-the-feeling",
-    "the-hardest-part",
-    "get-lucky",
-    "dancing-queen"
-  ],
-  "2026-07-07": [
-    "i-like-it",
-    "bang-bang",
-    "hold-on",
-    "killing-me-softly",
-    "sk8er-boi"
-  ],
-  "2026-07-08": [
-    "call-me-maybe",
-    "feathered-indians",
-    "last-friday-night-tgif",
-    "black-hole-sun",
-    "99-red-balloons"
-  ],
-  "2026-07-09": [
-    "beyond",
-    "calm-down",
-    "take-me-to-church",
-    "eventually",
-    "survivor"
-  ],
-  "2026-07-10": [
-    "blinding-lights",
-    "circles",
-    "animal-i-have-become",
-    "purple-rain",
-    "teenage-dirtbag"
-  ],
-  "2026-07-11": [
-    "thrift-shop",
-    "hotline-bling",
-    "the-adults-are-talking",
-    "wonderwall",
-    "we-will-rock-you"
-  ],
-  "2026-07-12": [
-    "price-tag",
-    "lovers-rock",
-    "save-your-tears",
-    "passionfruit",
-    "you-get-what-you-give"
-  ],
-  "2026-07-13": [
-    "born-this-way",
-    "do-i-wanna-know",
-    "save-your-tears",
-    "sweet-home-alabama",
-    "semi-charmed-life"
-  ],
-  "2026-07-14": [
-    "umbrella",
-    "wake-me-up",
-    "butter",
-    "redbone",
-    "wrecking-ball"
-  ],
-  "2026-07-15": [
-    "stay",
-    "titanium",
-    "sign-of-the-times",
-    "since-u-been-gone",
-    "girls-just-want-to-have-fun"
-  ],
-  "2026-07-16": [
-    "no-one",
-    "in-my-blood",
-    "we-fell-in-love-in-october",
-    "come-as-you-are",
-    "turn-down-for-what"
-  ],
-  "2026-07-17": [
-    "cry",
-    "for-the-first-time",
-    "thank-u-next",
-    "heathens",
-    "shots"
-  ],
-  "2026-07-18": [
-    "dive",
-    "industry-baby",
-    "all-i-need",
-    "dog-days-are-over",
-    "another-one-bites-the-dust"
-  ],
-  "2026-07-19": [
-    "thats-what-i-like",
-    "telephone",
-    "thunder",
-    "go-your-own-way",
-    "no-scrubs"
-  ],
-  "2026-07-20": [
-    "we-found-love",
-    "physical",
-    "kryptonite",
-    "american-pie",
-    "crazy-in-love"
-  ],
-  "2026-07-21": [
-    "tik-tok",
-    "dont-look-back-in-anger",
-    "still-into-you",
-    "hotel-california",
-    "dont-you-forget-about-me"
-  ],
-  "2026-07-22": [
-    "love-story",
-    "wet-dreamz",
-    "i-had-some-help-feat-morgan-wallen",
-    "everybody-hurts",
-    "cant-stop"
-  ],
-  "2026-07-23": [
-    "love-yourself",
-    "every-breath-you-take",
-    "cigarette-daydreams",
-    "under-the-bridge",
-    "lady-marmalade"
-  ],
-  "2026-07-24": [
-    "poker-face",
-    "drops-of-jupiter-tell-me",
-    "clarity",
-    "r-u-mine",
-    "tubthumping"
-  ],
-  "2026-07-25": [
-    "run-it",
-    "tennessee-whiskey",
-    "head-over-boots",
-    "work-song",
-    "walking-on-sunshine"
-  ],
-  "2026-07-26": [
-    "cant-stop-the-feeling-from-dreamworks-animations-trolls",
-    "shut-up-and-dance",
-    "the-perfect-pair",
-    "seven-nation-army",
-    "whats-my-age-again"
-  ],
-  "2026-07-27": [
-    "in-the-end",
-    "dirty-little-secret",
-    "tongue-tied",
-    "livin-on-a-prayer",
-    "like-a-prayer"
-  ],
-  "2026-07-28": [
-    "someone-like-you",
-    "how-to-save-a-life",
-    "coming-home",
-    "running-up-that-hill",
-    "take-on-me"
-  ],
-  "2026-07-29": [
-    "wagon-wheel",
-    "easy-on-me",
-    "i-wanna-dance-with-somebody",
-    "slide",
-    "tainted-love"
-  ],
-  "2026-07-30": [
-    "happy",
-    "someone-you-loved",
-    "birds-of-a-feather",
-    "losing-my-religion",
-    "gangnam-style"
-  ],
-  "2026-07-31": [
-    "lucid-dreams",
-    "bad-at-love",
-    "ride",
-    "dreams",
-    "rock-your-body"
-  ],
-  "2026-08-01": [
-    "i-gotta-feeling",
-    "what-ive-done",
-    "wake-me-up-before-you-go-go",
-    "scar-tissue",
-    "jump-around"
-  ],
-  "2026-08-02": [
-    "my-kind-of-woman",
-    "old-town-road",
-    "counting-stars",
-    "bittersweet-symphony",
-    "get-low"
-  ],
-  "2026-08-03": [
-    "not-allowed",
-    "somewhere-i-belong",
-    "let-down",
-    "dont-stop-believin",
-    "boom-boom-pow"
-  ],
-  "2026-08-04": [
-    "as-it-was",
-    "unholy",
-    "dont-start-now",
-    "bohemian-rhapsody",
-    "feel-good-inc"
-  ],
-  "2026-08-05": [
-    "bad-guy",
-    "money-trees",
-    "all-falls-down",
-    "man-in-the-mirror",
-    "everlong"
-  ],
-  "2026-08-06": [
-    "let-me-love-you",
-    "power-trip-feat-miguel",
-    "broken-window-serenade",
-    "heart-shaped-box",
-    "mamma-mia"
-  ],
-  "2026-08-07": [
-    "latch",
-    "no-role-modelz",
-    "careless-whisper",
-    "just-like-heaven",
-    "baby-one-more-time"
-  ],
-  "2026-08-08": [
-    "perfect",
-    "kiss-me-more-feat-sza",
-    "the-less-i-know-the-better",
-    "lush-life",
-    "no-hands-feat-roscoe-dash-wale"
-  ],
-  "2026-08-09": [
-    "kings-queens",
-    "centuries",
-    "borderline",
-    "clocks",
-    "under-pressure"
-  ],
-  "2026-08-10": [
-    "anti-hero",
-    "good-4-u",
-    "lips-of-an-angel",
-    "electric-feel",
-    "hollaback-girl"
-  ],
-  "2026-08-11": [
-    "without-me",
-    "billionaire",
-    "how-will-i-know",
-    "the-scientist",
-    "basket-case"
-  ],
-  "2026-08-12": [
-    "cant-feel-my-face",
-    "ocean-drive",
-    "deja-vu",
-    "vienna",
-    "the-real-slim-shady"
-  ],
-  "2026-08-13": [
-    "flowers",
-    "bring-me-to-life",
-    "heat-waves",
-    "eye-of-the-tiger",
-    "complicated"
-  ],
-  "2026-08-14": [
-    "yellow",
-    "im-every-woman",
-    "let-it-happen",
-    "apocalypse",
-    "ymca"
-  ],
-  "2026-08-15": [
-    "timber",
-    "space-song",
-    "dont-stop-the-music",
-    "the-chain",
-    "dont-stop-me-now"
-  ],
-  "2026-08-16": [
-    "locked-out-of-heaven",
-    "if-i-aint-got-you",
-    "sweet-but-psycho",
-    "edge-of-seventeen",
-    "i-will-survive"
-  ],
-  "2026-08-17": [
-    "blurred-lines",
-    "no-lie",
-    "bad-blood",
-    "escapism",
-    "whoomp-there-it-is"
-  ],
-  "2026-08-18": [
-    "heartless",
-    "somebody-told-me",
-    "24k-magic",
-    "time-after-time",
-    "in-da-club"
-  ],
-  "2026-08-19": [
-    "only-girl-in-the-world",
-    "drinkin-problem",
-    "chasin-you",
-    "what-you-know",
-    "mr-brightside"
-  ],
-  "2026-08-20": [
-    "taste",
-    "tiny-dancer",
-    "californication",
-    "cigarettes-out-the-window",
-    "lovefool"
-  ],
-  "2026-08-21": [
-    "beautiful-girls",
-    "mirrors",
-    "all-about-that-bass",
-    "gold-digger",
-    "thriller"
-  ],
-  "2026-08-22": [
-    "airplanes",
-    "stressed-out",
-    "a-sky-full-of-stars",
-    "promiscuous",
-    "all-the-small-things"
-  ],
-  "2026-08-23": [
-    "watermelon-sugar",
-    "rocket-man",
-    "flashing-lights",
-    "midnight-city",
-    "baby-got-back"
-  ],
-  "2026-08-24": [
-    "time-of-our-lives",
-    "peaches",
-    "traitor",
-    "somebody-else",
-    "ride-wit-me"
-  ],
-  "2026-08-25": [
-    "hard-times",
-    "the-joker",
-    "numb",
-    "whyd-you-only-call-me-when-youre-high",
-    "mambo-no-5"
-  ],
-  "2026-08-26": [
-    "chasing-cars",
-    "photograph",
-    "7-years",
-    "radioactive",
-    "creep"
-  ],
-  "2026-08-27": [
-    "dynamite",
-    "cheap-thrills",
-    "work-out",
-    "boulevard-of-broken-dreams",
-    "lady-marmalade"
-  ],
-  "2026-08-28": [
-    "adore-you",
-    "viva-la-vida",
-    "dj-got-us-fallin-in-love-feat-pitbull",
-    "american-idiot",
-    "another-one-bites-the-dust"
-  ],
-  "2026-08-29": [
-    "this-love",
-    "vampire",
-    "please-please-please",
-    "the-scientist",
-    "island-in-the-sun"
-  ],
-  "2026-08-30": [
+  [
     "faith",
-    "needed-me",
-    "lovely",
-    "my-own-summer-shove-it",
-    "my-own-worst-enemy"
+    "a-bar-song-tipsy",
+    "imagine",
+    "stressed-out",
+    "tennessee-whiskey"
   ],
-  "2026-08-31": [
-    "havana",
-    "sm",
-    "royals",
-    "closing-time",
-    "ice-ice-baby"
-  ],
-  "2026-09-01": [
-    "outside-feat-ellie-goulding",
-    "falling-behind",
-    "uptown-girl",
-    "bad-habits",
-    "say-my-name"
-  ],
-  "2026-09-02": [
-    "positions",
-    "brown-eyed-girl",
-    "sweater-weather",
-    "fix-you",
-    "africa"
-  ],
-  "2026-09-03": [
-    "waterfall",
-    "espresso",
-    "whiskey-glasses",
-    "smells-like-teen-spirit",
-    "party-rock-anthem"
-  ],
-  "2026-09-04": [
-    "everybody-talks",
-    "pompeii",
-    "chandelier",
-    "new-person-same-old-mistakes",
-    "who-let-the-dogs-out"
-  ],
-  "2026-09-05": [
-    "thats-so-true",
-    "sucker",
-    "the-hardest-part",
-    "get-lucky",
-    "macarena"
-  ],
-  "2026-09-06": [
-    "one-dance",
-    "bang-bang",
-    "last-friday-night-tgif",
-    "killing-me-softly",
-    "la-bamba"
-  ],
-  "2026-09-07": [
-    "crazy-train",
-    "take-me-to-church",
-    "pumped-up-kicks",
-    "black-hole-sun",
-    "99-red-balloons"
-  ],
-  "2026-09-08": [
-    "uptown-funk-feat-bruno-mars",
-    "believer",
-    "animal-i-have-become",
-    "eventually",
-    "material-girl"
-  ],
-  "2026-09-09": [
-    "call-me-maybe",
+  [
+    "hey-soul-sister",
+    "how-will-i-know",
+    "chop-suey",
     "calm-down",
-    "the-adults-are-talking",
-    "purple-rain",
-    "teenage-dirtbag"
+    "stronger-kanye"
   ],
-  "2026-09-10": [
-    "when-it-rains-it-pours",
-    "lovers-rock",
-    "hold-on",
-    "wonderwall",
-    "dancing-queen"
+  [
+    "material-girl",
+    "bad-romance",
+    "iron-man",
+    "lean-on-me",
+    "when-it-rains-it-pours"
   ],
-  "2026-09-11": [
-    "cheerleader---felix-jaehn-remix-radio-edit",
-    "do-i-wanna-know",
-    "side-to-side",
-    "passionfruit",
-    "survivor"
+  [
+    "shivers",
+    "greedy",
+    "we-will-rock-you",
+    "drunk-in-love",
+    "nine-to-five"
   ],
-  "2026-09-12": [
-    "wait-a-minute",
-    "hold-on",
-    "feathered-indians",
-    "sweet-home-alabama",
-    "you-get-what-you-give"
+  [
+    "let-me-down-slowly",
+    "manic-monday",
+    "bohemian-rhapsody",
+    "blurred-lines",
+    "baby-got-back"
   ],
-  "2026-09-13": [
-    "gods-plan",
+  [
+    "sexy-and-i-know-it",
+    "as-it-was",
+    "boulevard-of-broken-dreams",
+    "love-the-way-you-lie",
+    "without-me"
+  ],
+  [
+    "one-kiss",
+    "uptown-funk-feat-bruno-mars",
+    "i-was-made-for-lovin-you",
+    "lady-marmalade",
+    "centuries"
+  ],
+  [
+    "bad-idea-right",
     "sign-of-the-times",
-    "circles",
-    "redbone",
-    "semi-charmed-life"
-  ],
-  "2026-09-14": [
-    "drivers-license",
-    "wake-me-up",
-    "we-fell-in-love-in-october",
-    "since-u-been-gone",
-    "sk8er-boi"
-  ],
-  "2026-09-15": [
-    "just-dance",
-    "for-the-first-time",
-    "in-my-blood",
-    "come-as-you-are",
-    "wrecking-ball"
-  ],
-  "2026-09-16": [
-    "nonsense",
-    "all-i-need",
-    "thank-u-next",
-    "heathens",
-    "girls-just-want-to-have-fun"
-  ],
-  "2026-09-17": [
-    "from-the-start",
-    "cant-stop-the-feeling",
-    "butter",
-    "dog-days-are-over",
-    "shots"
-  ],
-  "2026-09-18": [
-    "respect",
-    "thunder",
-    "industry-baby",
-    "go-your-own-way",
-    "no-scrubs"
-  ],
-  "2026-09-19": [
-    "thats-what-i-like",
-    "still-into-you",
-    "save-your-tears",
-    "thnks-fr-th-mmrs",
-    "boom-boom-pow"
-  ],
-  "2026-09-20": [
-    "shape-of-you",
-    "wet-dreamz",
-    "i-had-some-help-feat-morgan-wallen",
-    "hotel-california",
-    "dont-you-forget-about-me"
-  ],
-  "2026-09-21": [
-    "i-like-it",
-    "hotline-bling",
-    "cigarette-daydreams",
-    "lose-yourself",
-    "cant-stop"
-  ],
-  "2026-09-22": [
-    "umbrella",
-    "dont-look-back-in-anger",
-    "drops-of-jupiter-tell-me",
-    "under-the-bridge",
-    "we-will-rock-you"
-  ],
-  "2026-09-23": [
-    "blinding-lights",
-    "clarity",
-    "telephone",
-    "r-u-mine",
-    "crazy-in-love"
-  ],
-  "2026-09-24": [
-    "7-rings",
-    "fly-like-an-eagle",
-    "the-perfect-pair",
-    "work-song",
-    "walking-on-sunshine"
-  ],
-  "2026-09-25": [
-    "cry",
-    "physical",
-    "shut-up-and-dance",
-    "seven-nation-army",
-    "turn-down-for-what"
-  ],
-  "2026-09-26": [
-    "shake-it-off",
-    "dirty-little-secret",
-    "tennessee-whiskey",
-    "livin-on-a-prayer",
-    "like-a-prayer"
-  ],
-  "2026-09-27": [
-    "stand-by-me",
-    "coming-home",
-    "titanium",
-    "running-up-that-hill",
+    "everybody-hurts",
+    "chain-gang",
     "whats-my-age-again"
   ],
-  "2026-09-28": [
-    "go-away",
-    "see-you-again",
-    "how-to-save-a-life",
-    "slide",
-    "tainted-love"
+  [
+    "stitches",
+    "cant-stop-the-feeling-from-dreamworks-animations-trolls",
+    "hotel-california",
+    "sit-next-to-me",
+    "the-less-i-know-the-better"
   ],
-  "2026-09-29": [
-    "dive",
-    "birds-of-a-feather",
-    "head-over-boots",
-    "losing-my-religion",
-    "tubthumping"
-  ],
-  "2026-09-30": [
-    "love-story",
-    "ride",
-    "someone-you-loved",
-    "dreams",
-    "rock-your-body"
-  ],
-  "2026-10-01": [
-    "levitating-feat-dababy",
+  [
+    "taste",
+    "blank-space",
     "bad-at-love",
+    "nothing-compares-2-u",
+    "run-this-town"
+  ],
+  [
+    "thank-u-next",
+    "talking-to-the-moon",
+    "the-joker",
+    "say-my-name",
+    "aint-no-sunshine"
+  ],
+  [
+    "i-want-you-back",
+    "california-gurls",
+    "dream-on",
+    "the-hardest-part",
+    "take-me-home-country-roads"
+  ],
+  [
+    "talking-body",
+    "ymca",
+    "the-chain",
+    "congratulations",
+    "in-da-club"
+  ],
+  [
+    "dont-start-now",
+    "california-dreamin",
+    "let-it-be",
+    "i-had-some-help-feat-morgan-wallen",
+    "beautiful-girls"
+  ],
+  [
+    "timber",
+    "shake-it-off",
+    "all-star",
+    "i-believe-i-can-fly",
+    "the-box"
+  ],
+  [
+    "break-your-heart",
+    "good-luck-babe",
+    "bad-moon-rising",
+    "california-love",
+    "cruise"
+  ],
+  [
+    "last-friday-night-tgif",
+    "only-girl-in-the-world",
+    "zombie-cranberries",
+    "pumped-up-kicks",
+    "goosebumps"
+  ],
+  [
+    "escape-pina-colada-song",
+    "im-yours",
+    "pour-some-sugar-on-me",
+    "if-i-aint-got-you",
+    "night-fever"
+  ],
+  [
+    "abc-jackson-5",
+    "how-deep-is-your-love",
+    "light-my-fire",
+    "i-wish",
+    "i-heard-it-through-the-grapevine"
+  ],
+  [
+    "wrecking-ball",
+    "glad-you-came",
+    "uninvited",
+    "save-the-last-dance-for-me",
+    "survivor"
+  ],
+  [
+    "heart-of-glass",
+    "titanium",
+    "sex-on-fire",
+    "mockingbird",
+    "lets-get-it-on"
+  ],
+  [
+    "this-love",
+    "cool-for-the-summer",
+    "californication",
+    "lose-control",
+    "aint-no-mountain-high-enough"
+  ],
+  [
+    "take-on-me",
+    "cardigan",
+    "jailhouse-rock",
+    "sicko-mode",
+    "the-nights"
+  ],
+  [
+    "cant-feel-my-face",
+    "sexyback",
+    "all-i-need",
+    "old-town-road",
+    "i-cant-help-myself"
+  ],
+  [
+    "dusk-till-dawn",
+    "something-just-like-this",
+    "lips-of-an-angel",
+    "still-into-you",
+    "coming-home"
+  ],
+  [
+    "cry-me-a-river",
+    "girlfriend",
+    "everlong",
+    "georgia-on-my-mind",
+    "mask-off"
+  ],
+  [
+    "golden-hour",
+    "paris",
+    "crazy-train",
+    "somebody-that-i-used-to-know",
+    "ocean-avenue"
+  ],
+  [
+    "happier-than-ever",
+    "memories-maroon5",
+    "pretty-fly-for-a-white-guy",
+    "girl-on-fire",
+    "young-dumb-and-broke"
+  ],
+  [
+    "wake-me-up-before-you-go-go",
+    "ocean-eyes",
+    "money-pink-floyd",
+    "everybody-talks",
+    "life-is-a-highway"
+  ],
+  [
+    "someone-you-loved",
+    "upside-down-jack-johnson",
+    "summer-of-69",
+    "stolen-dance",
+    "not-like-us"
+  ],
+  [
+    "walking-on-a-dream",
+    "royals",
+    "for-whom-the-bell-tolls",
+    "this-aint-a-scene-its-an-arms-race",
+    "somewhere-i-belong"
+  ],
+  [
+    "photograph",
+    "just-dance",
+    "twist-and-shout",
+    "give-up-the-funk",
+    "ring-of-fire"
+  ],
+  [
+    "domino",
+    "rock-your-body",
+    "eye-of-the-tiger",
     "tongue-tied",
-    "scar-tissue",
+    "rock-with-you"
+  ],
+  [
+    "attention-charlie-puth",
+    "firework",
+    "take-me-out",
+    "young-wild-and-free",
+    "aint-too-proud-to-beg"
+  ],
+  [
+    "we-dont-talk-anymore",
+    "theres-nothing-holdin-me-back",
+    "american-pie",
+    "heathens",
+    "gold-digger"
+  ],
+  [
+    "marry-you",
+    "since-u-been-gone",
+    "radioactive",
+    "aint-it-fun",
     "jump-around"
   ],
-  "2026-10-02": [
-    "wagon-wheel",
-    "somewhere-i-belong",
-    "blue-hair",
-    "bittersweet-symphony",
-    "take-on-me"
+  [
+    "moves-like-jagger",
+    "sk8er-boi",
+    "walk-this-way",
+    "boogie-wonderland",
+    "in-the-end"
   ],
-  "2026-10-03": [
-    "poker-face",
-    "adventure-of-a-lifetime",
+  [
+    "drive-by",
+    "dont-stop-the-music",
+    "free-bird",
+    "wake-me-up",
+    "killing-me-softly"
+  ],
+  [
+    "7-years",
+    "pink-pony-club",
+    "la-bamba",
+    "thats-the-way",
+    "work-out"
+  ],
+  [
+    "footloose",
+    "party-rock-anthem",
+    "clocks",
+    "time-to-pretend",
+    "lets-groove"
+  ],
+  [
+    "beat-it",
+    "she-will-be-loved",
+    "start-me-up",
+    "humble",
+    "boogie-shoes"
+  ],
+  [
+    "last-christmas",
+    "girls-just-want-to-have-fun",
+    "thunderstruck",
+    "electric-feel",
+    "better-now"
+  ],
+  [
+    "call-me-maybe",
+    "flowers",
+    "island-in-the-sun",
+    "love-on-the-brain",
+    "super-freak"
+  ],
+  [
+    "save-your-tears",
+    "stay-cara",
+    "smells-like-teen-spirit",
+    "all-the-small-things",
+    "numb"
+  ],
+  [
+    "adore-you",
+    "sorry",
+    "somebody-told-me",
+    "signed-sealed-delivered",
+    "feel-so-close---radio-edit"
+  ],
+  [
+    "time-after-time",
+    "good-time",
+    "fortunate-son",
+    "hotline-bling",
+    "flashing-lights"
+  ],
+  [
+    "thriller",
+    "anti-hero",
+    "sultans-of-swing",
+    "single-ladies-put-a-ring-on-it",
+    "respect"
+  ],
+  [
+    "tainted-love",
+    "dont-let-me-down",
+    "paint-it-black",
+    "whats-going-on",
+    "end-of-beginning"
+  ],
+  [
+    "animals-maroon-5",
+    "you-found-me",
+    "under-the-bridge",
+    "my-own-worst-enemy",
+    "dirty-little-secret"
+  ],
+  [
+    "toxic",
+    "my-heart-will-go-on",
+    "come-together",
+    "friends-in-low-places",
+    "hold-on"
+  ],
+  [
+    "stereo-hearts",
+    "some-nights",
+    "long-cool-woman",
+    "no-role-modelz",
+    "purple-rain"
+  ],
+  [
+    "i-gotta-feeling",
+    "just-the-way-you-are",
+    "another-brick-in-the-wall",
+    "stay-with-me",
+    "chasing-cars"
+  ],
+  [
+    "circles",
+    "black-widow-iggy",
+    "danger-zone",
+    "head-over-boots",
+    "the-real-slim-shady"
+  ],
+  [
+    "best-day-of-my-life",
+    "stronger-what-doesnt-kill-you",
+    "back-in-black",
+    "i-feel-it-coming",
+    "kung-fu-fighting"
+  ],
+  [
+    "beautiful-things",
+    "what-do-you-mean",
+    "thunder",
+    "return-of-the-mack",
+    "take-me-to-church"
+  ],
+  [
+    "we-found-love",
+    "replay",
+    "enemy",
+    "die-a-happy-man",
+    "superstition"
+  ],
+  [
+    "carry-on",
+    "night-changes",
+    "r-u-mine",
+    "misery-business",
+    "heartless"
+  ],
+  [
+    "dancing-queen",
+    "please-please-please",
+    "losing-my-religion",
+    "play-that-funky-music",
+    "irreplaceable"
+  ],
+  [
+    "fast-car",
+    "young-and-beautiful",
+    "goodbye-yellow-brick-road",
+    "im-good-blue",
+    "riptide"
+  ],
+  [
+    "locked-out-of-heaven",
+    "walking-on-sunshine",
+    "the-scientist",
+    "earned-it",
+    "feel-good-inc"
+  ],
+  [
+    "grenade",
+    "boom-boom-pow",
+    "use-somebody",
+    "isnt-she-lovely",
+    "all-of-me"
+  ],
+  [
+    "how-to-save-a-life",
+    "mamma-mia",
+    "highway-to-hell",
+    "halo",
+    "this-is-what-you-came-for"
+  ],
+  [
+    "last-friday-night-new",
+    "i-will-survive",
+    "iris",
+    "lovely-day",
+    "no-one"
+  ],
+  [
+    "you-belong-with-me",
+    "in-case-you-didnt-know",
+    "bring-me-to-life",
+    "better-than",
+    "ride"
+  ],
+  [
+    "black-or-white",
+    "treat-you-better",
+    "mr-blue-sky",
+    "stand-by-me",
+    "paint-the-town-red"
+  ],
+  [
+    "love-me-like-you-do",
+    "lover",
+    "beggin",
+    "september",
+    "need-you-now"
+  ],
+  [
+    "hall-of-fame",
+    "one-last-time",
+    "here-comes-the-sun",
+    "lose-yourself",
+    "call-out-my-name"
+  ],
+  [
+    "teenage-dream",
+    "bad-liar-imagine-dragons",
+    "under-pressure",
+    "bitter-sweet-symphony",
+    "needed-me"
+  ],
+  [
+    "bad-habits",
+    "lost-on-you",
+    "jump",
+    "i-write-sins-not-tragedies",
+    "midnight-train-to-georgia"
+  ],
+  [
+    "deja-vu",
+    "who-let-the-dogs-out",
+    "every-breath-you-take",
+    "money-in-the-grave",
+    "not-afraid"
+  ],
+  [
+    "tubthumping",
+    "the-sign",
+    "on-top-of-the-world",
+    "beer-never-broke-my-heart",
+    "let-me-love-you"
+  ],
+  [
+    "birds-of-a-feather",
+    "happier",
+    "stairway-to-heaven",
+    "body-like-a-back-road",
+    "dj-got-us-fallin-in-love-feat-pitbull"
+  ],
+  [
+    "shape-of-you",
+    "i-took-a-pill-in-ibiza",
+    "seven-nation-army",
+    "get-down-tonight",
+    "before-he-cheats"
+  ],
+  [
+    "drivers-license",
+    "love-story",
+    "born-to-be-wild",
+    "stay-the-night",
+    "im-every-woman"
+  ],
+  [
+    "diamonds",
+    "ghost-justin-bieber",
+    "whatever-it-takes",
+    "kids",
+    "sweater-weather"
+  ],
+  [
+    "umbrella",
+    "maps-maroon5",
+    "november-rain",
+    "hard-times",
+    "sugar-were-goin-down"
+  ],
+  [
+    "tequila-dan-shay",
+    "blinding-lights",
+    "gimme-shelter",
+    "empire-state-of-mind",
+    "till-i-collapse"
+  ],
+  [
+    "traitor",
+    "higher-love-kygo",
+    "sweet-child-o-mine",
+    "this-is-how-we-do-it",
+    "too-sweet"
+  ],
+  [
+    "cheap-thrills",
+    "counting-stars",
+    "aint-no-rest-for-the-wicked",
+    "yeah",
+    "chicken-fried"
+  ],
+  [
+    "jealous-nick-jonas",
+    "summertime-sadness",
+    "mr-brightside",
+    "happy",
+    "wagon-wheel"
+  ],
+  [
+    "mirrors",
+    "drops-of-jupiter",
     "free-fallin",
+    "money-trees",
+    "gods-plan"
+  ],
+  [
+    "i-wanna-dance-with-somebody",
+    "when-i-was-your-man",
+    "the-twist",
+    "lets-stay-together",
+    "no-lie"
+  ],
+  [
+    "kiss-from-a-rose",
+    "where-is-the-love",
+    "viva-la-vida",
+    "teenage-dirtbag",
+    "dog-days-are-over"
+  ],
+  [
+    "baby-bieber",
+    "bad-guy",
+    "brown-eyed-girl",
+    "get-lucky",
+    "started-from-the-bottom"
+  ],
+  [
+    "espresso",
+    "style",
+    "fly-like-an-eagle",
+    "gangstas-paradise",
+    "ride-wit-me"
+  ],
+  [
+    "sweet-dreams-are-made-of-this",
+    "the-middle",
+    "sympathy-for-the-devil",
+    "kiss-me-more-feat-sza",
+    "wonderful-world"
+  ],
+  [
+    "billionaire",
+    "because-of-you",
+    "ill-be-there-for-you",
+    "run-it",
+    "thnks-fr-th-mmrs"
+  ],
+  [
+    "cheerleader---felix-jaehn-remix-radio-edit",
+    "perfect-ed-sheeran",
     "dont-stop-believin",
-    "gangnam-style"
+    "thrift-shop",
+    "woman-doja-cat"
+  ],
+  [
+    "take-my-breath-away",
+    "chandelier",
+    "its-still-rock-and-roll-to-me",
+    "leave-the-door-open",
+    "redbone"
+  ],
+  [
+    "oops-i-did-it-again",
+    "all-about-that-bass",
+    "closing-time",
+    "sir-duke",
+    "daddy-issues"
+  ],
+  [
+    "dont-you-forget-about-me",
+    "bye-bye-bye",
+    "fly-sugar-ray",
+    "whoomp-there-it-is",
+    "power-kanye"
+  ],
+  [
+    "cruel-summer",
+    "hollaback-girl",
+    "edge-of-seventeen",
+    "no-scrubs",
+    "waterfalls"
+  ],
+  [
+    "shallow",
+    "price-tag",
+    "dont-speak",
+    "drop-it-like-its-hot",
+    "funkytown"
+  ],
+  [
+    "no-tears-left-to-cry",
+    "shape-of-you-new",
+    "all-along-the-watchtower",
+    "just-the-two-of-us",
+    "ice-ice-baby"
+  ],
+  [
+    "break-free",
+    "vampire",
+    "say-it-aint-so",
+    "when-doves-cry",
+    "crazy-in-love"
+  ],
+  [
+    "without-you-guetta",
+    "give-me-everything",
+    "lonely-boy",
+    "beautiful-crazy",
+    "apocalypse"
+  ],
+  [
+    "i-dont-care",
+    "set-fire-to-the-rain",
+    "the-adults-are-talking",
+    "pompeii",
+    "levels"
+  ],
+  [
+    "complicated",
+    "hips-dont-lie",
+    "yellow",
+    "demons",
+    "burn-it-down"
+  ],
+  [
+    "payphone",
+    "adventure-of-a-lifetime",
+    "crazy-little-thing-called-love",
+    "tears-in-heaven",
+    "another-one-bites-the-dust"
+  ],
+  [
+    "high-hopes",
+    "99-red-balloons",
+    "should-i-stay-or-should-i-go",
+    "torn",
+    "my-sharona"
+  ],
+  [
+    "i-like-me-better",
+    "baby-one-more-time",
+    "piano-man",
+    "do-i-wanna-know",
+    "how-you-remind-me"
+  ],
+  [
+    "intentions",
+    "new-rules",
+    "house-of-the-rising-sun",
+    "have-you-ever-seen-the-rain",
+    "cant-stop"
+  ],
+  [
+    "watermelon-sugar",
+    "problem",
+    "dreams",
+    "sweet-home-alabama",
+    "go-your-own-way"
+  ],
+  [
+    "in-my-blood",
+    "peaches",
+    "even-flow",
+    "livin-on-a-prayer",
+    "break-stuff"
+  ],
+  [
+    "when-the-partys-over",
+    "fireflies",
+    "africa",
+    "welcome-to-the-jungle",
+    "my-immortal"
+  ],
+  [
+    "lovefool",
+    "cant-get-you-out-of-my-head",
+    "tiny-dancer",
+    "rocket-man",
+    "dont-stop-me-now"
+  ],
+  [
+    "havana",
+    "party-in-the-usa",
+    "fix-you",
+    "you-give-love-a-bad-name",
+    "paradise"
+  ],
+  [
+    "sweet-but-psycho",
+    "turn-me-on",
+    "we-are-the-champions",
+    "american-idiot",
+    "see-you-again"
+  ],
+  [
+    "smooth-criminal",
+    "dark-horse",
+    "we-are-never-ever-getting-back-together",
+    "born-this-way",
+    "we-r-who-we-r"
+  ],
+  [
+    "more-than-my-hometown",
+    "bang-bang",
+    "rolling-in-the-deep",
+    "seorita",
+    "bleeding-love"
+  ],
+  [
+    "someone-like-you",
+    "tik-tok",
+    "everybody-wants-to-rule-the-world",
+    "apologize",
+    "uptown-funk"
+  ],
+  [
+    "castle-on-the-hill",
+    "die-young",
+    "shotgun",
+    "love-yourself",
+    "thats-what-i-like"
+  ],
+  [
+    "crocodile-rock",
+    "careless-whisper",
+    "stayin-alive",
+    "i-aint-worried",
+    "call-me-blondie"
+  ],
+  [
+    "cant-take-my-eyes-off-you",
+    "good-4-u",
+    "fly-me-to-the-moon",
+    "secrets",
+    "shut-up-and-dance"
+  ],
+  [
+    "cake-by-the-ocean",
+    "7-rings",
+    "bad-blood",
+    "shout",
+    "cant-stop-the-feeling"
+  ],
+  [
+    "dont-stop-til-you-get-enough",
+    "closer",
+    "we-are-young",
+    "levitating",
+    "i-want-it-that-way"
+  ],
+  [
+    "quit-playing-games-with-my-heart",
+    "before-you-go",
+    "the-middle-jimmy-eat-world",
+    "poker-face",
+    "sugar"
+  ],
+  [
+    "let-her-go",
+    "no-roots",
+    "kings-queens",
+    "man-in-the-mirror",
+    "a-sky-full-of-stars"
   ]
-}
+]

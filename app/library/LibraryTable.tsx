@@ -4,14 +4,6 @@ import { useState, useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { Song } from "@/data/puzzles";
 
-const DIFFICULTY_ORDER = ["easy", "medium", "hard", "viral"];
-
-const DIFF_COLORS: Record<string, string> = {
-  easy: "text-[color:var(--color-green)]",
-  medium: "text-yellow-400",
-  hard: "text-[color:var(--color-coral)]",
-  viral: "text-[color:var(--color-purple)]",
-};
 
 const GENRE_COLORS: Record<string, string> = {
   "Pop":         "bg-pink-500/20 text-pink-300",
@@ -28,7 +20,7 @@ const GENRE_COLORS: Record<string, string> = {
   "Pop-Punk":    "bg-fuchsia-500/20 text-fuchsia-300",
 };
 
-type SortKey = "title" | "artist" | "year" | "genre" | "difficulty";
+type SortKey = "title" | "artist" | "year" | "genre";
 type SortDir = "asc" | "desc";
 
 const ALL_GENRES = ["Pop", "R&B", "Hip-Hop", "Rock", "Alternative", "Indie", "Electronic", "Country", "Metal", "Funk/Disco", "Latin", "Pop-Punk"];
@@ -74,10 +66,9 @@ function SortButton({ label, sortKey, current, dir, onClick }: {
 }
 
 export default function LibraryTable({ songs }: { songs: Song[] }) {
-  const [sortKey, setSortKey] = useState<SortKey>("difficulty");
+  const [sortKey, setSortKey] = useState<SortKey>("genre");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [filterGenre, setFilterGenre] = useState("");
-  const [filterDiff, setFilterDiff] = useState("");
   const [search, setSearch] = useState("");
 
   function handleSort(key: SortKey) {
@@ -92,7 +83,6 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
   const filtered = useMemo(() => {
     let list = [...songs];
     if (filterGenre) list = list.filter((s) => s.genre === filterGenre);
-    if (filterDiff) list = list.filter((s) => s.difficulty === filterDiff);
     if (search) {
       const q = search.toLowerCase();
       list = list.filter(
@@ -109,20 +99,11 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
       else if (sortKey === "artist") cmp = a.artist.localeCompare(b.artist);
       else if (sortKey === "year") cmp = Number(a.releaseYear) - Number(b.releaseYear);
       else if (sortKey === "genre") cmp = (a.genre ?? "").localeCompare(b.genre ?? "");
-      else if (sortKey === "difficulty") {
-        cmp = DIFFICULTY_ORDER.indexOf(a.difficulty) - DIFFICULTY_ORDER.indexOf(b.difficulty);
-        if (cmp === 0) cmp = a.title.localeCompare(b.title);
-      }
       return sortDir === "asc" ? cmp : -cmp;
     });
 
     return list;
-  }, [songs, sortKey, sortDir, filterGenre, filterDiff, search]);
-
-  const counts = DIFFICULTY_ORDER.map((d) => ({
-    d,
-    n: songs.filter((s) => s.difficulty === d).length,
-  }));
+  }, [songs, sortKey, sortDir, filterGenre, search]);
 
   const genreCounts = useMemo(() =>
     ALL_GENRES
@@ -138,10 +119,7 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Song Library</h1>
         <p className="text-[color:var(--color-muted)] text-sm mt-1">
-          {songs.length} songs total &nbsp;·&nbsp;
-          {counts.map(({ d, n }) => (
-            <span key={d} className={`${DIFF_COLORS[d]} mr-3`}>{n} {d}</span>
-          ))}
+          {songs.length} songs total
         </p>
       </div>
 
@@ -187,7 +165,7 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
               </Pie>
               <Tooltip
                 contentStyle={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 8, fontSize: 12 }}
-                formatter={(value: number, name: string) => [`${value} songs`, name]}
+                formatter={(value) => [`${value ?? 0} songs`]}
               />
             </PieChart>
           </ResponsiveContainer>
@@ -228,20 +206,9 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
           ))}
         </select>
 
-        <select
-          value={filterDiff}
-          onChange={(e) => setFilterDiff(e.target.value)}
-          className="text-sm px-3 py-1.5 rounded-lg bg-[color:var(--color-card)] border border-[color:var(--color-border)] text-white outline-none focus:border-white/30"
-        >
-          <option value="">All difficulties</option>
-          {DIFFICULTY_ORDER.map((d) => (
-            <option key={d} value={d}>{d}</option>
-          ))}
-        </select>
-
-        {(filterGenre || filterDiff || search) && (
+        {(filterGenre || search) && (
           <button
-            onClick={() => { setFilterGenre(""); setFilterDiff(""); setSearch(""); }}
+            onClick={() => { setFilterGenre(""); setSearch(""); }}
             className="text-xs text-[color:var(--color-muted)] hover:text-white px-3 py-1.5 rounded-lg border border-[color:var(--color-border)] transition-colors"
           >
             Clear
@@ -263,7 +230,6 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
             <th className="pb-2 pr-6 text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">Synonym</th>
             <SortButton label="Genre"      sortKey="genre"      current={sortKey} dir={sortDir} onClick={handleSort} />
             <SortButton label="Year"       sortKey="year"       current={sortKey} dir={sortDir} onClick={handleSort} />
-            <SortButton label="Difficulty" sortKey="difficulty" current={sortKey} dir={sortDir} onClick={handleSort} />
           </tr>
         </thead>
         <tbody>
@@ -284,7 +250,6 @@ export default function LibraryTable({ songs }: { songs: Song[] }) {
                   </span>
                 </td>
                 <td className="py-2 pr-6 text-[color:var(--color-muted)] tabular-nums">{song.releaseYear}</td>
-                <td className={`py-2 font-semibold whitespace-nowrap ${DIFF_COLORS[song.difficulty]}`}>{song.difficulty}</td>
               </tr>
             );
           })}

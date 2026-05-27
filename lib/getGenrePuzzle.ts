@@ -41,7 +41,7 @@ function isNicheGenre(genre: string): boolean {
 }
 
 function matchesGenre(song: Song, slug: string): boolean {
-  const genre = song.hints[1].toLowerCase();
+  const genre = (song.genre ?? "").toLowerCase();
   const year = parseInt(song.releaseYear);
 
   switch (slug) {

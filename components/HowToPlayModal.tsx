@@ -2,23 +2,6 @@
 
 import { useEffect } from "react";
 import { X } from "lucide-react";
-import StarRating from "@/components/StarRating";
-
-const DIFFICULTY_STYLES: Record<string, string> = {
-  Easy: "bg-[color:var(--color-green)] text-[color:var(--color-navy)]",
-  Medium: "bg-yellow-400 text-[color:var(--color-navy)]",
-  Hard: "bg-[color:var(--color-coral)] text-white",
-  Viral: "bg-[color:var(--color-purple)] text-white",
-};
-
-function Badge({ label }: { label: string }) {
-  return (
-    <span className={`text-xs font-bold px-3 py-1 rounded-full ${DIFFICULTY_STYLES[label]}`}>
-      {label}
-    </span>
-  );
-}
-
 export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
   // Close on Escape
   useEffect(() => {
@@ -81,28 +64,6 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             </p>
           </div>
 
-          {/* Each Day */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Each Day</h3>
-            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { label: "Easy", desc: "Minimal changes. Very recognizable." },
-                  { label: "Medium", desc: "2–3 word swaps. Requires some thought." },
-                  { label: "Medium", desc: "A second medium to keep you honest." },
-                  { label: "Hard", desc: "More abstract. Still fair and solvable." },
-                  { label: "Viral", desc: "A throwback or a TikTok-era banger." },
-                ].map((row, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <span className="text-xs text-[color:var(--color-muted)] w-4">{i + 1}</span>
-                    <Badge label={row.label} />
-                    <span className="text-sm text-[color:var(--color-muted)]">{row.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
           {/* Guessing */}
           <div className="flex flex-col gap-3">
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Guessing</h3>
@@ -154,12 +115,21 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
                   <span>Who's the artist?</span>
                   <span className="font-bold text-[color:var(--color-green)]">+150 pts</span>
                 </div>
-                <div className="flex items-center justify-between text-sm">
-                  <span>What year was it released?</span>
-                  <span className="font-bold text-[color:var(--color-green)]">+100 pts</span>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center justify-between text-sm">
+                    <span>What year was it released? (exact)</span>
+                    <span className="font-bold text-[color:var(--color-green)]">+100 pts</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm text-[color:var(--color-muted)]">
+                    <span>Within ±1 year</span>
+                    <span className="font-bold text-yellow-400">+50 pts</span>
+                  </div>
                 </div>
               </div>
-              <p className="text-xs text-[color:var(--color-muted)]">Year accepted within ±1.</p>
+              <div className="flex flex-col gap-1 text-xs text-[color:var(--color-muted)] border-t border-[color:var(--color-border)] pt-3">
+                <p>Using hint 3 (artist reveal) forfeits the artist bonus.</p>
+                <p>Using hint 2 or 3 forfeits the year bonus.</p>
+              </div>
             </div>
           </div>
 
@@ -195,24 +165,6 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               </div>
             </div>
 
-            {/* Star ratings */}
-            <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">Star Ratings</p>
-              <div className="flex flex-col gap-2">
-                {([
-                  [5, "4,500–6,250 pts"],
-                  [4, "3,500–4,499 pts"],
-                  [3, "2,500–3,499 pts"],
-                  [2, "1,000–2,499 pts"],
-                  [1, "1–999 pts"],
-                ] as [number, string][]).map(([count, range]) => (
-                  <div key={count} className="flex items-center justify-between">
-                    <StarRating stars={count} size={14} />
-                    <span className="text-sm text-[color:var(--color-muted)]">{range}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Bottom padding */}
