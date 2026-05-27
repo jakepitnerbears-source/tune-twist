@@ -515,10 +515,10 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     {s.solved && (
                       <div className="flex gap-2 text-xs">
                         <span style={{ color: s.artistCorrect ? "#22c55e" : "#ef4444" }}>
-                          {s.artistCorrect ? <><Check style={{ color: "#22c55e" }} /> Artist</> : "✕ Artist"}
+                          {s.artistCorrect ? <><Check className="text-[#22c55e]" /> Artist</> : "✕ Artist"}
                         </span>
                         <span style={{ color: s.yearCorrect === "exact" ? "#22c55e" : s.yearCorrect === "close" ? "#facc15" : "#ef4444" }}>
-                          {s.yearCorrect === "exact" ? <><Check style={{ color: "#22c55e" }} /> Year</> : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
+                          {s.yearCorrect === "exact" ? <><Check className="text-[#22c55e]" /> Year</> : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
                         </span>
                       </div>
                     )}

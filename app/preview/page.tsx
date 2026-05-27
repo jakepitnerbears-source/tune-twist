@@ -81,7 +81,7 @@ export default function PreviewPage() {
  const today = new Date().toISOString().split("T")[0];
 const futureDates = Object.keys(schedule).filter((d) => d >= today).sort();
 
-const scheduleByDate = schedule as Record<string, string[]>;
+const scheduleByDate = schedule as unknown as Record<string, string[]>;
 
 const scheduledIds = new Set(
   futureDates.flatMap((d) => scheduleByDate[d] ?? [])
@@ -113,7 +113,7 @@ const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
         </div>
 
         {futureDates.map((date) => {
-          const ids = schedule[date] as string[];
+          const ids = scheduleByDate[date] ?? [];
           const songs = ids.map((id) => songMap[id]).filter(Boolean) as Song[];
           return (
             <div
