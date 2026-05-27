@@ -131,7 +131,7 @@ body {
   background: conic-gradient(
     from var(--border-angle),
     transparent 60%,
-    var(--gradient-a) 75%,
+    rgba(0, 180, 255, 0.5) 75%,
     var(--gradient-b) 85%,
     transparent 95%
   );
