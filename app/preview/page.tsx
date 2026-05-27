@@ -78,11 +78,16 @@ export default function PreviewPage() {
   const { schedule, library } = loadScheduleAndLibrary();
   const songMap = Object.fromEntries(library.map((s: Song) => [s.id, s]));
 
-  const today = new Date().toISOString().split("T")[0];
-  const futureDates = Object.keys(schedule).filter((d) => d >= today).sort();
+ const today = new Date().toISOString().split("T")[0];
+const futureDates = Object.keys(schedule).filter((d) => d >= today).sort();
 
-  const scheduledIds = new Set(futureDates.flatMap((d) => schedule[d] as string[]));
-  const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
+const scheduleByDate = schedule as Record<string, string[]>;
+
+const scheduledIds = new Set(
+  futureDates.flatMap((d) => scheduleByDate[d] ?? [])
+);
+
+const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
   const genreGroups = Array.from(new Set(unscheduled.map((s: Song) => s.genre ?? "Other")))
     .sort()
     .map((genre) => ({
