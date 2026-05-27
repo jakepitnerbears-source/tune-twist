@@ -4,6 +4,17 @@ import { Song } from "@/data/puzzles";
 
 export const dynamic = "force-dynamic";
 
+const EPOCH_MS = new Date("2026-04-13T12:00:00").getTime();
+
+function dayIndexToDateString(dayIndex: number): string {
+  const ms = EPOCH_MS + dayIndex * 86_400_000;
+  const d = new Date(ms);
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(d.getUTCDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 function stripFeaturing(title: string): string {
   return title
     .replace(/\s*\(feat\..*?\)/gi, "")
@@ -78,16 +89,15 @@ export default function PreviewPage() {
   const { schedule, library } = loadScheduleAndLibrary();
   const songMap = Object.fromEntries(library.map((s: Song) => [s.id, s]));
 
- const today = new Date().toISOString().split("T")[0];
-const futureDates = Object.keys(schedule).filter((d) => d >= today).sort();
+  const today = new Date().toISOString().split("T")[0];
 
-const scheduleByDate = schedule as unknown as Record<string, string[]>;
+  const scheduledDays = schedule
+    .map((ids, dayIndex) => ({ date: dayIndexToDateString(dayIndex), ids }))
+    .filter(({ date }) => date >= today)
+    .sort((a, b) => a.date.localeCompare(b.date));
 
-const scheduledIds = new Set(
-  futureDates.flatMap((d) => scheduleByDate[d] ?? [])
-);
-
-const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
+  const scheduledIds = new Set(schedule.flat());
+  const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
   const genreGroups = Array.from(new Set(unscheduled.map((s: Song) => s.genre ?? "Other")))
     .sort()
     .map((genre) => ({
@@ -102,19 +112,18 @@ const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight">Song Preview</h1>
           <p className="text-[color:var(--color-muted)] text-sm mt-1">
-            {library.length} songs · {futureDates.length} days scheduled · {unscheduled.length} unscheduled
+            {library.length} songs · {scheduledDays.length} days scheduled · {unscheduled.length} unscheduled
           </p>
         </div>
 
         {/* Upcoming scheduled days */}
         <div className="flex items-center gap-3 pb-2 border-b-2 border-[color:var(--color-purple)]">
           <h2 className="text-xl font-bold tracking-tight">Scheduled Days</h2>
-          <span className="text-sm text-[color:var(--color-muted)] ml-auto">{futureDates.length} upcoming</span>
+          <span className="text-sm text-[color:var(--color-muted)] ml-auto">{scheduledDays.length} upcoming</span>
         </div>
 
-        {futureDates.map((date) => {
-          const ids = scheduleByDate[date] ?? [];
-          const songs = ids.map((id) => songMap[id]).filter(Boolean) as Song[];
+        {scheduledDays.map(({ date, ids }) => {
+          const songs = ids.map((id: string) => songMap[id]).filter(Boolean) as Song[];
           return (
             <div
               key={date}
@@ -147,7 +156,7 @@ const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
           );
         })}
 
-        {futureDates.length === 0 && (
+        {scheduledDays.length === 0 && (
           <p className="text-center text-[color:var(--color-muted)]">No upcoming scheduled days.</p>
         )}
 
