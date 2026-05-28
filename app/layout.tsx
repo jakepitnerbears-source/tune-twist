@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Anton, Poppins } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/Nav";
 
@@ -39,20 +40,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.className} ${anton.variable} ${poppins.variable} antialiased`}>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `
-          window.__hydrationErrors = [];
-          window.onerror = function(msg, src, line, col, err) {
-            var e = {msg: msg, src: src, line: line, col: col, stack: err && err.stack};
-            window.__hydrationErrors.push(e);
-            console.error('[HYDRATION-ERROR]', JSON.stringify(e));
-          };
-          window.onunhandledrejection = function(ev) {
-            var e = {msg: String(ev.reason), stack: ev.reason && ev.reason.stack};
-            window.__hydrationErrors.push(e);
-            console.error('[HYDRATION-REJECTION]', JSON.stringify(e));
-          };
-          console.log('[DIAG] early script ran, UA=' + navigator.userAgent);
-        `}} />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-V5D7Y5EPEP" strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-V5D7Y5EPEP');
+        `}</Script>
       </head>
       <body className="h-full flex flex-col bg-navy text-white">
         <Nav />
