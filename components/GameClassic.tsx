@@ -539,7 +539,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
   // ── Game screen ───────────────────────────────────────────────────────────
   return (
-    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6 pb-24 sm:pb-6 overflow-x-hidden overflow-y-auto">
+    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6 overflow-x-hidden overflow-y-auto">
 
       {/* Scattered background elements */}
       <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
@@ -841,53 +841,6 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
         </div>
 
       </div>
-
-      {/* Mobile fixed input bar */}
-      {!gameOver && !state.solved && !state.skipped && (
-        <div className="fixed bottom-0 left-0 right-0 sm:hidden z-50 bg-[color:var(--color-navy)]/95 backdrop-blur-md border-t border-[color:var(--color-border)] px-3 py-2" style={{ paddingBottom: "max(8px, env(safe-area-inset-bottom))" }}>
-          <div className="flex items-center gap-2 max-w-[560px] mx-auto">
-            <button
-              type="button"
-              onClick={handleHint}
-              disabled={state.hintsUsed >= current.hints.length}
-              className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] disabled:opacity-30 transition-colors touch-manipulation"
-            >
-              <span className="text-base font-bold">H</span>
-              <span className="text-[8px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "Hint"}</span>
-            </button>
-            <input
-              ref={inputRef}
-              type="text"
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck={false}
-              value={state.guess}
-              onChange={(e) => updateState(songIndex, { guess: e.target.value, feedback: "" })}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              placeholder="Name that track…"
-              className="flex-1 bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-xl px-3 py-2 text-sm text-white placeholder:text-[color:var(--color-muted)] outline-none focus:border-[color:var(--color-green)] transition-colors"
-            />
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="flex items-center justify-center w-10 h-10 rounded-xl font-bold text-base shrink-0 hover:opacity-90 transition-opacity touch-manipulation text-white"
-              style={{ background: "var(--btn-gradient)" }}
-            >
-              ▶
-            </button>
-            <button
-              type="button"
-              onClick={handleReveal}
-              disabled={state.hintsUsed < current.hints.length}
-              className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-coral)] disabled:opacity-30 transition-colors touch-manipulation"
-            >
-              <span className="text-base font-bold">R</span>
-              <span className="text-[8px] uppercase tracking-widest">Skip</span>
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Full-screen confetti */}
       {fullConfetti && (
