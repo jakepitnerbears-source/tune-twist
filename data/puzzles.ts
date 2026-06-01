@@ -8,6 +8,7 @@ export interface Song {
   hints: [string, string, string]; // [alt_synonym, release_year, artist]
   previewUrl?: string;
   altTitles?: string[];
+  status?: "remove" | "redo-synonym";
 }
 
 export const songs: Song[] = [

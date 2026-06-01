@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { loadScheduleAndLibrary } from "@/lib/getDailyPuzzle";
 import { Song } from "@/data/puzzles";
-import { logout } from "@/app/actions/admin-auth";
 
 export const dynamic = "force-dynamic";
 
@@ -113,9 +112,17 @@ export default function AdminPage() {
       <div className="w-full max-w-[700px] flex flex-col gap-8">
 
         {/* Stats */}
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-[color:var(--color-muted)] text-sm mt-1">{today}</p>
+        <div className="flex items-start justify-between">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
+            <p className="text-[color:var(--color-muted)] text-sm mt-1">{today}</p>
+          </div>
+          <Link
+            href="/admin/songs"
+            className="text-xs font-semibold px-4 py-2 rounded-full border border-[color:var(--color-purple)]/40 text-[color:var(--color-purple)] hover:bg-[color:var(--color-purple)]/10 transition-colors"
+          >
+            Manage Songs →
+          </Link>
         </div>
 
         <div className="grid grid-cols-3 gap-3">
