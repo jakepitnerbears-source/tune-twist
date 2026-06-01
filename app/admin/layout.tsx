@@ -7,6 +7,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="flex items-center gap-3">
           <span className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-purple)]">Admin</span>
           <span className="text-sm font-semibold text-white">TuneTwist</span>
+          <a href="/" className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors ml-2">← Public site</a>
         </div>
         <form action={logout}>
           <button
