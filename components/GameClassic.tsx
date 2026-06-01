@@ -773,8 +773,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
               </div>
             ) : (
               <>
-                {/* Desktop input + controls */}
-                <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="hidden sm:block w-full">
+                <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="w-full">
                   <div className="gradient-border w-full">
                     <input
                       ref={inputRef}
@@ -791,9 +790,9 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   </div>
                 </form>
                 {state.feedback && (
-                  <p className={`hidden sm:block text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>{state.feedback}</p>
+                  <p className={`text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>{state.feedback}</p>
                 )}
-                <div className="hidden sm:flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
                   <button
                     type="button"
                     onClick={handleSubmit}
@@ -819,11 +818,6 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     Reveal · 0 pts {state.hintsUsed < current.hints.length ? "(unlocks after 3 hints)" : ""}
                   </button>
                 </div>
-
-                {/* Mobile feedback */}
-                {state.feedback && (
-                  <p className={`sm:hidden text-sm text-center ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>{state.feedback}</p>
-                )}
               </>
             )}
 
