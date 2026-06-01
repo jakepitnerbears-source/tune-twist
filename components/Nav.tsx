@@ -36,10 +36,6 @@ export default function Nav() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-<Link href="/archive" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Archive</Link>
-            <Link href="/songs" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Songs</Link>
-            <Link href="/schedule" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Schedule</Link>
-            <Link href="/preview" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Preview</Link>
             <Link href="/genres" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Genres</Link>
             <Link href="/contact" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
             <button onClick={() => setShowModal(true)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">How to Play</button>
@@ -72,10 +68,6 @@ export default function Nav() {
         {/* Mobile dropdown */}
         {menuOpen && (
           <div className="md:hidden flex flex-col px-6 pb-5 gap-4 border-t border-[color:var(--color-border)]">
-<Link href="/archive" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Archive</Link>
-            <Link href="/songs" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Songs</Link>
-            <Link href="/schedule" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Schedule</Link>
-            <Link href="/preview" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Preview</Link>
             <Link href="/genres" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Genres</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
             <button onClick={() => { setShowModal(true); setMenuOpen(false); }} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors text-left">How to Play</button>
