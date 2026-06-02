@@ -608,7 +608,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
           )}
 
           {/* Card header */}
-          <div className="px-5 pt-3 pb-3 flex flex-col items-center text-center">
+          <div className="px-5 pt-2 pb-2 flex flex-col items-center text-center">
             <div className="relative flex items-center justify-center w-full mb-2">
               <span className="absolute left-0 text-[10px] text-[color:var(--color-muted)] opacity-60">
                 {state.solved ? "Identified" : state.skipped ? "Skipped" : "Song"} {songIndex + 1}/{puzzle.length}
@@ -622,7 +622,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
             </div>
 
             <p
-              className="leading-[1.15] text-[2.2rem] font-semibold pb-1"
+              className="leading-[1.15] text-[1.9rem] font-semibold pb-1"
               style={{ fontFamily: "var(--font-poppins)", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "visible" }}
             >
               {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
@@ -648,7 +648,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
           )}
 
           {/* Main content — single question slot, card height stays fixed */}
-          <div className="flex flex-col gap-3 px-5 pt-4 pb-5">
+          <div className="flex flex-col gap-3 px-5 pt-3 pb-4">
 
             {/* Phase: guessing */}
             {!state.solved && !state.skipped && (

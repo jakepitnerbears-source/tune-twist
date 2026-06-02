@@ -29,9 +29,9 @@ export default function Nav() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[color:var(--color-border)] bg-[color:var(--color-navy)]">
-        <div className="flex items-center justify-between px-6 py-4">
+        <div className="flex items-center justify-between px-6 py-2">
           <Link href="/" className="hover:opacity-80 transition-opacity" onClick={() => setMenuOpen(false)}>
-            <Image src="/logo.png" alt="TitleTwist" width={120} height={60} className="object-contain" />
+            <Image src="/logo.png" alt="TitleTwist" width={90} height={45} className="object-contain" />
           </Link>
 
           {/* Desktop nav */}
