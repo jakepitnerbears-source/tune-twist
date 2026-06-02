@@ -565,8 +565,8 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
       <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-6">
 
-        {/* Dot tracker */}
-        <div className="flex justify-center gap-2">
+        {/* Dot tracker — desktop only */}
+        <div className="hidden sm:flex justify-center gap-2">
           {puzzle.map((_, i) => {
             const s = states[i];
             const isDone = s.solved || s.skipped;
@@ -818,6 +818,33 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
               </button>
             )}
           </div>
+
+          {/* Mobile progress bar */}
+          <div className="sm:hidden flex gap-1 px-4 pb-3">
+            {puzzle.map((_, i) => {
+              const s = states[i];
+              const isDone = s.solved || s.skipped;
+              const isActive = i === songIndex;
+              return (
+                <button
+                  key={i}
+                  onClick={() => isDone ? setSongIndex(i) : undefined}
+                  disabled={!isDone && !isActive}
+                  className="flex-1 h-1 rounded-full transition-all"
+                  style={{
+                    background: isActive
+                      ? "rgba(255,255,255,0.9)"
+                      : isDone && s.solved
+                      ? "var(--color-green)"
+                      : isDone
+                      ? "var(--color-red)"
+                      : "rgba(255,255,255,0.15)",
+                  }}
+                />
+              );
+            })}
+          </div>
+
         </div>
         </div>
         </div>
