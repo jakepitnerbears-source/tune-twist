@@ -656,122 +656,11 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
             </div>
           )}
 
-          {/* Main content */}
-          <div className="flex flex-col gap-3 px-5 pt-4 pb-5 overflow-y-auto max-h-[calc(100svh-18rem)] sm:max-h-none">
-            {state.solved ? (
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm" style={{ color: "#22c55e" }}>✓ {current.title}</span>
-                  <span className="text-xs text-[color:var(--color-muted)]">+{titleScore(state.hintsUsed, true)} pts</span>
-                </div>
-                <p className="text-[color:var(--color-muted)] text-sm -mt-2">{state.feedback}</p>
+          {/* Main content — single question slot, card height stays fixed */}
+          <div className="flex flex-col gap-3 px-5 pt-4 pb-5">
 
-                {!bonusComplete ? (
-                  <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
-                    <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">
-                      Bonus Round — up to +{state.hintsUsed >= 3 ? YEAR_BONUS : ARTIST_BONUS + YEAR_BONUS} pts
-                    </p>
-
-                    {state.hintsUsed < 3 && (
-                      <div className="flex flex-col gap-1.5">
-                        <label className="text-xs text-[color:var(--color-muted)]">Who&apos;s the artist?</label>
-                        {state.artistCorrect === null ? (
-                          <div className="relative" ref={artistDropdownRef}>
-                            <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }} className="w-full">
-                              <div className="gradient-border mx-[2px]">
-                              <div className="flex items-center bg-[color:var(--color-navy)] rounded-[11px] px-3 py-2 gap-2">
-                              <input
-                                ref={artistRef}
-                                type="text"
-                                value={state.artistGuess}
-                                onChange={(e) => { updateState(songIndex, { artistGuess: e.target.value, artistFeedback: "" }); setArtistDropdownOpen(true); }}
-                                onFocus={() => setArtistDropdownOpen(true)}
-                                onBlur={() => setTimeout(() => setArtistDropdownOpen(false), 150)}
-                                placeholder=""
-                                className="flex-1 min-w-0 bg-transparent text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
-                              />
-                              <span className="text-xs font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>+{ARTIST_BONUS} pts</span>
-                              </div>
-                              </div>
-                            </form>
-                            {artistDropdownOpen && state.artistGuess.trim().length > 0 && (() => {
-                              const q = state.artistGuess.toLowerCase();
-                              const matches = allArtists.filter((a) => a.toLowerCase().includes(q)).slice(0, 8);
-                              return matches.length > 0 ? (
-                                <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-hidden shadow-xl">
-                                  {matches.map((a) => (
-                                    <button key={a} onMouseDown={() => { setArtistDropdownOpen(false); updateState(songIndex, { artistGuess: a, artistFeedback: "", artistCorrect: validateArtist(a, current.artist) }); }} className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors">{a}</button>
-                                  ))}
-                                </div>
-                              ) : null;
-                            })()}
-                          </div>
-                        ) : (
-                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.5rem 0.75rem", borderRadius: "0.75rem", border: `1px solid ${state.artistCorrect ? "#22c55e" : "#ef4444"}`, background: state.artistCorrect ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)" }}>
-                            {state.artistCorrect ? (
-                              <span className="text-sm text-white">{state.artistGuess}</span>
-                            ) : state.artistGuess.trim() ? (
-                              <span className="text-sm" style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                                <span style={{ color: "#ef4444", textDecoration: "line-through", opacity: 0.8 }}>{state.artistGuess}</span>
-                                <span style={{ color: "rgba(255,255,255,0.4)" }}>→</span>
-                                <span style={{ color: "#fff" }}>{current.artist}</span>
-                              </span>
-                            ) : (
-                              <span className="text-sm" style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                                <span style={{ color: "rgba(255,255,255,0.4)" }}>Skipped →</span>
-                                <span style={{ color: "#fff" }}>{current.artist}</span>
-                              </span>
-                            )}
-                            <span className="text-sm font-bold" style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>{state.artistCorrect ? `+${ARTIST_BONUS}` : "✗"}</span>
-                          </div>
-                        )}
-                      </div>
-                    )}
-
-                    {(state.hintsUsed >= 3 || state.artistCorrect !== null) && (
-                    <div className="flex flex-col gap-1.5">
-                      <label className="text-xs text-[color:var(--color-muted)]">What year was it released?</label>
-                      {state.yearCorrect === null ? (
-                        <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }} className="w-full">
-                          <div className="gradient-border mx-[2px]">
-                          <div className="flex items-center bg-[color:var(--color-navy)] rounded-[11px] px-3 py-2 gap-2">
-                          <input type="text" inputMode="numeric" enterKeyHint="go" value={state.yearGuess} onChange={(e) => updateState(songIndex, { yearGuess: e.target.value, yearFeedback: "" })} placeholder="" className="flex-1 min-w-0 bg-transparent text-base text-white placeholder:text-[color:var(--color-muted)] outline-none" />
-                          <span className="text-xs font-semibold whitespace-nowrap" style={{ color: "rgba(255,255,255,0.35)" }}>+{YEAR_BONUS} pts</span>
-                          </div>
-                          </div>
-                          <button type="submit" className="mt-2 w-full py-2 rounded-xl text-sm font-bold text-white hover:opacity-90 transition-opacity" style={{ background: 'var(--btn-gradient)' }}>Submit Year</button>
-                        </form>
-                      ) : (
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.5rem 0.75rem", borderRadius: "0.75rem", border: `1px solid ${state.yearCorrect === "exact" ? "#22c55e" : state.yearCorrect === "close" ? "#facc15" : "#ef4444"}`, background: state.yearCorrect === "exact" ? "rgba(34,197,94,0.15)" : state.yearCorrect === "close" ? "rgba(250,204,21,0.15)" : "rgba(239,68,68,0.15)" }}>
-                          <span className="text-sm text-white">{state.yearCorrect ? state.yearGuess : `${state.yearGuess} — answer: ${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? "?"}`}</span>
-                          <span className="text-sm font-bold" style={{ color: state.yearCorrect === "exact" ? "#22c55e" : state.yearCorrect === "close" ? "#facc15" : "#ef4444" }}>{state.yearCorrect === "exact" ? `+${YEAR_BONUS}` : state.yearCorrect === "close" ? `+${YEAR_BONUS_CLOSE}` : "✗"}</span>
-                        </div>
-                      )}
-                    </div>
-                    )}
-
-                    <button type="button" onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left cursor-pointer">Skip →</button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
-                    <div className="flex gap-3 text-sm">
-                      <span style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>
-                        {state.artistCorrect ? `✓ Artist +${ARTIST_BONUS}` : `✗ Artist (${current.artist})`}
-                      </span>
-                      <span style={{ color: state.yearCorrect === "exact" ? "#22c55e" : state.yearCorrect === "close" ? "#facc15" : "#ef4444" }}>
-                        {state.yearCorrect === "exact" ? `✓ Year +${YEAR_BONUS}` : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
-                      </span>
-                    </div>
-                    <SongReveal info={state.songInfo} />
-                  </div>
-                )}
-              </div>
-            ) : state.skipped ? (
-              <div className="flex flex-col gap-1">
-                <p className="text-xs text-[color:var(--color-coral)] font-medium">{state.feedback}</p>
-                <p className="text-sm text-[color:var(--color-muted)]">{current.title} — {current.artist}</p>
-              </div>
-            ) : (
+            {/* Phase: guessing */}
+            {!state.solved && !state.skipped && (
               <>
                 <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} className="w-full">
                   <div className="gradient-border w-full">
@@ -819,6 +708,118 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   </button>
                 </div>
               </>
+            )}
+
+            {/* Phase: artist bonus */}
+            {state.solved && !bonusComplete && state.artistCorrect === null && (
+              <>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold" style={{ color: "#22c55e" }}>✓ {current.title}</span>
+                  <span className="text-xs text-[color:var(--color-muted)]">+{titleScore(state.hintsUsed, true)} pts</span>
+                </div>
+                <p className="text-[color:var(--color-muted)] text-sm -mt-1">{state.feedback}</p>
+                <label className="text-xs text-[color:var(--color-muted)] mt-1">Who&apos;s the artist? <span className="opacity-50">(+{ARTIST_BONUS} pts)</span></label>
+                <div className="relative" ref={artistDropdownRef}>
+                  <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }} className="w-full">
+                    <div className="gradient-border mx-[2px]">
+                      <input
+                        ref={artistRef}
+                        type="text"
+                        value={state.artistGuess}
+                        onChange={(e) => { updateState(songIndex, { artistGuess: e.target.value, artistFeedback: "" }); setArtistDropdownOpen(true); }}
+                        onFocus={() => setArtistDropdownOpen(true)}
+                        onBlur={() => setTimeout(() => setArtistDropdownOpen(false), 150)}
+                        placeholder="Type to search…"
+                        className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                      />
+                    </div>
+                  </form>
+                  {artistDropdownOpen && state.artistGuess.trim().length > 0 && (() => {
+                    const q = state.artistGuess.toLowerCase();
+                    const matches = allArtists.filter((a) => a.toLowerCase().includes(q)).slice(0, 8);
+                    return matches.length > 0 ? (
+                      <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-hidden shadow-xl">
+                        {matches.map((a) => (
+                          <button key={a} onMouseDown={() => { setArtistDropdownOpen(false); updateState(songIndex, { artistGuess: a, artistFeedback: "", artistCorrect: validateArtist(a, current.artist) }); }} className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors">{a}</button>
+                        ))}
+                      </div>
+                    ) : null;
+                  })()}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleArtistSubmit}
+                  className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity cursor-pointer touch-manipulation"
+                  style={{ background: 'var(--btn-gradient)' }}
+                >
+                  Submit Artist
+                </button>
+                <button type="button" onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left cursor-pointer">
+                  Skip →
+                </button>
+              </>
+            )}
+
+            {/* Phase: year bonus */}
+            {state.solved && !bonusComplete && state.artistCorrect !== null && state.yearCorrect === null && (
+              <>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold" style={{ color: "#22c55e" }}>✓ {current.title}</span>
+                  <span className="text-xs text-[color:var(--color-muted)]">+{titleScore(state.hintsUsed, true)} pts</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.4rem 0.75rem", borderRadius: "0.6rem", border: `1px solid ${state.artistCorrect ? "#22c55e" : "#ef4444"}`, background: state.artistCorrect ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)" }}>
+                  <span className="text-sm text-white">{state.artistCorrect ? state.artistGuess || current.artist : current.artist}</span>
+                  <span className="text-xs font-bold" style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>{state.artistCorrect ? `+${ARTIST_BONUS}` : "✗"}</span>
+                </div>
+                <label className="text-xs text-[color:var(--color-muted)]">What year was it released? <span className="opacity-50">(+{YEAR_BONUS} pts)</span></label>
+                <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }} className="w-full">
+                  <div className="gradient-border mx-[2px]">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      enterKeyHint="go"
+                      value={state.yearGuess}
+                      onChange={(e) => updateState(songIndex, { yearGuess: e.target.value, yearFeedback: "" })}
+                      placeholder="e.g. 1984"
+                      className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                    />
+                  </div>
+                </form>
+                <button
+                  type="button"
+                  onClick={handleYearSubmit}
+                  className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity cursor-pointer touch-manipulation"
+                  style={{ background: 'var(--btn-gradient)' }}
+                >
+                  Submit Year
+                </button>
+                <button type="button" onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left cursor-pointer">
+                  Skip →
+                </button>
+              </>
+            )}
+
+            {/* Phase: skipped */}
+            {state.skipped && (
+              <div className="flex flex-col gap-1">
+                <p className="text-xs text-[color:var(--color-coral)] font-medium">{state.feedback}</p>
+                <p className="text-sm text-[color:var(--color-muted)]">{current.title} — {current.artist}</p>
+              </div>
+            )}
+
+            {/* Phase: bonus complete */}
+            {state.solved && bonusComplete && (
+              <div className="flex flex-col gap-3">
+                <div className="flex gap-3 text-sm">
+                  <span style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>
+                    {state.artistCorrect ? `✓ Artist +${ARTIST_BONUS}` : `✗ Artist (${current.artist})`}
+                  </span>
+                  <span style={{ color: state.yearCorrect === "exact" ? "#22c55e" : state.yearCorrect === "close" ? "#facc15" : "#ef4444" }}>
+                    {state.yearCorrect === "exact" ? `✓ Year +${YEAR_BONUS}` : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
+                  </span>
+                </div>
+                <SongReveal info={state.songInfo} />
+              </div>
             )}
 
             {(state.skipped || (state.solved && bonusComplete)) && (
