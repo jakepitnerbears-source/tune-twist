@@ -608,8 +608,8 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
           )}
 
           {/* Card header */}
-          <div className="px-5 pt-4 pb-4 flex flex-col items-center text-center">
-            <div className="relative flex items-center justify-center w-full mb-3">
+          <div className="px-5 pt-3 pb-3 flex flex-col items-center text-center">
+            <div className="relative flex items-center justify-center w-full mb-2">
               <span className="absolute left-0 text-[10px] text-[color:var(--color-muted)] opacity-60">
                 {state.solved ? "Identified" : state.skipped ? "Skipped" : "Song"} {songIndex + 1}/{puzzle.length}
               </span>
@@ -622,7 +622,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
             </div>
 
             <p
-              className="leading-[1.15] text-[2.6rem] font-semibold pb-1"
+              className="leading-[1.15] text-[2.2rem] font-semibold pb-1"
               style={{ fontFamily: "var(--font-poppins)", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "visible" }}
             >
               {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
@@ -676,7 +676,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   <button
                     type="button"
                     onClick={handleSubmit}
-                    className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity cursor-pointer touch-manipulation"
+                    className="w-full py-2 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity cursor-pointer touch-manipulation"
                     style={{ background: 'var(--btn-gradient)' }}
                   >
                     Submit
@@ -685,7 +685,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     type="button"
                     onClick={handleHint}
                     disabled={state.hintsUsed >= current.hints.length}
-                    className="w-full py-3 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
+                    className="w-full py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
                   >
                     Hint {state.hintsUsed < current.hints.length ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(${state.hintsUsed}/${current.hints.length} used)`}
                   </button>
@@ -693,7 +693,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     type="button"
                     onClick={handleReveal}
                     disabled={state.hintsUsed < current.hints.length}
-                    className="w-full py-3 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors cursor-pointer text-sm font-semibold"
+                    className="w-full py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors cursor-pointer text-sm font-semibold"
                   >
                     Reveal · 0 pts {state.hintsUsed < current.hints.length ? "(unlocks after 3 hints)" : ""}
                   </button>
