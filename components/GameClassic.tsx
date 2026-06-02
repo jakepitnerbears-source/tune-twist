@@ -14,17 +14,8 @@ const YEAR_BONUS = 100;
 const YEAR_BONUS_CLOSE = 50;
 const MAX_SONG_SCORE = BASE_SCORE + ARTIST_BONUS + YEAR_BONUS;
 
-const CORRECT_MESSAGES = [
-  "Nice. That was quick.",
-  "You got that 👀",
-  "Clean solve.",
-  "That one trips people up.",
-  "Locked in.",
-];
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close. One more try.", "Getting warm…"];
-const HINT_MESSAGES = ["Here's a nudge.", "Getting warmer.", "Almost there…"];
-const SKIP_MESSAGES = ["No points for this one.", "Revealed."];
 
 const GENRE_HEX: Record<string, string> = {
   "Pop": "#f472b6", "R&B": "#fb923c", "Hip-Hop": "#facc15",
@@ -319,7 +310,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
       const autoSkipYear = state.hintsUsed >= 2;
       updateState(songIndex, {
         solved: true,
-        feedback: randomFrom(CORRECT_MESSAGES),
+        feedback: "",
         songInfo: "loading",
         glow: true,
         shake: false,
@@ -388,14 +379,14 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     if (state.hintsUsed >= current.hints.length || state.solved) return;
     updateState(songIndex, {
       hintsUsed: state.hintsUsed + 1,
-      feedback: randomFrom(HINT_MESSAGES),
+      feedback: "",
       feedbackWarm: false,
     });
   }
 
   function handleReveal() {
     if (state.hintsUsed < current.hints.length) return;
-    updateState(songIndex, { skipped: true, feedback: randomFrom(SKIP_MESSAGES) });
+    updateState(songIndex, { skipped: true, feedback: "" });
   }
 
   function handleNext() {
@@ -717,8 +708,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   <span className="text-sm font-semibold" style={{ color: "#22c55e" }}>✓ {current.title}</span>
                   <span className="text-xs text-[color:var(--color-muted)]">+{titleScore(state.hintsUsed, true)} pts</span>
                 </div>
-                <p className="text-[color:var(--color-muted)] text-sm -mt-1">{state.feedback}</p>
-                <label className="text-xs text-[color:var(--color-muted)] mt-1">Who&apos;s the artist? <span className="opacity-50">(+{ARTIST_BONUS} pts)</span></label>
+                <label className="text-xs text-[color:var(--color-muted)]">Who&apos;s the artist? <span className="opacity-50">(+{ARTIST_BONUS} pts)</span></label>
                 <div className="relative" ref={artistDropdownRef}>
                   <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }} className="w-full">
                     <div className="gradient-border mx-[2px]">
