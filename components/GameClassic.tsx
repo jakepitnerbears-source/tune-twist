@@ -681,22 +681,24 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   >
                     Submit
                   </button>
-                  <button
-                    type="button"
-                    onClick={handleHint}
-                    disabled={state.hintsUsed >= current.hints.length}
-                    className="w-full py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
-                  >
-                    Hint {state.hintsUsed < current.hints.length ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(${state.hintsUsed}/${current.hints.length} used)`}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleReveal}
-                    disabled={state.hintsUsed < current.hints.length}
-                    className="w-full py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors cursor-pointer text-sm font-semibold"
-                  >
-                    Reveal · 0 pts {state.hintsUsed < current.hints.length ? "(unlocks after 3 hints)" : ""}
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={handleHint}
+                      disabled={state.hintsUsed >= current.hints.length}
+                      className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
+                    >
+                      Hint {state.hintsUsed < current.hints.length ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(${state.hintsUsed}/${current.hints.length} used)`}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleReveal}
+                      disabled={state.hintsUsed < current.hints.length}
+                      className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors cursor-pointer text-sm font-semibold"
+                    >
+                      Reveal
+                    </button>
+                  </div>
                 </div>
               </>
             )}
