@@ -834,9 +834,11 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   style={{
                     background: isActive
                       ? "rgba(255,255,255,0.9)"
-                      : isDone && s.solved
+                      : s.solved && s.hintsUsed === 0
                       ? "var(--color-green)"
-                      : isDone
+                      : s.solved && s.hintsUsed > 0
+                      ? "#facc15"
+                      : s.skipped
                       ? "var(--color-red)"
                       : "rgba(255,255,255,0.15)",
                   }}
