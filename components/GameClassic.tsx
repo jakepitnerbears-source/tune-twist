@@ -657,7 +657,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
           )}
 
           {/* Main content */}
-          <div className="flex flex-col gap-3 px-5 pt-4 pb-5">
+          <div className="flex flex-col gap-3 px-5 pt-4 pb-5 overflow-y-auto max-h-[calc(100svh-18rem)] sm:max-h-none">
             {state.solved ? (
               <div className="flex flex-col gap-4">
                 <div className="flex items-center justify-between">
