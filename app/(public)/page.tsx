@@ -1,12 +1,15 @@
-import { getDailyPuzzle, getPuzzleNumber, loadScheduleAndLibrary } from "@/lib/getDailyPuzzle";
-import GameClassic from "@/components/GameClassic";
-
-export const revalidate = 3600; // revalidate once per hour — puzzle changes daily
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const puzzle = getDailyPuzzle();
-  const puzzleNumber = getPuzzleNumber();
-  const { library } = loadScheduleAndLibrary();
-  const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring|&|\bwith\b|\bx\b).*$/i, "").trim()))].sort();
-  return <GameClassic puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} />;
+  const router = useRouter();
+  useEffect(() => {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, "0");
+    const dd = String(now.getDate()).padStart(2, "0");
+    router.replace(`/play/${yyyy}-${mm}-${dd}`);
+  }, [router]);
+  return null;
 }

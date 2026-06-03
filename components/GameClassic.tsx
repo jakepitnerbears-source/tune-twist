@@ -614,7 +614,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                 {state.solved ? "Identified" : state.skipped ? "Skipped" : "Song"} {songIndex + 1}/{puzzle.length}
               </span>
               <span
-                className="text-xs font-bold px-3 py-1 rounded-full"
+                className="text-xs font-bold px-3 py-1 rounded-full mt-3 mb-1"
                 style={{ background: `${genreColor}22`, color: genreColor }}
               >
                 {current.genre ?? "Unknown"} · {decade}

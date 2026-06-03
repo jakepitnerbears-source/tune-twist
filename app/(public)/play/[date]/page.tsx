@@ -2,6 +2,8 @@ import { getDailyPuzzle, getPuzzleNumber, loadScheduleAndLibrary } from "@/lib/g
 import GameClassic from "@/components/GameClassic";
 import { notFound } from "next/navigation";
 
+export const revalidate = 86400;
+
 export default async function PlayDate({
   params,
 }: {
