@@ -88,8 +88,8 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               <div className="flex flex-col gap-2">
                 {[
                   { n: "1", text: `Another synonym title — e.g. "Glaring Beams"` },
-                  { n: "2", text: `Genre — e.g. "Pop/R&B"` },
-                  { n: "3", text: `Artist name — e.g. "Artist: The Weeknd"` },
+                  { n: "2", text: `A lyric snippet from the song` },
+                  { n: "3", text: `Artist name — reveals the answer (forfeits artist bonus)` },
                 ].map((h) => (
                   <div
                     key={h.n}
@@ -128,7 +128,7 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               </div>
               <div className="flex flex-col gap-1 text-xs text-[color:var(--color-muted)] border-t border-[color:var(--color-border)] pt-3">
                 <p>Using hint 3 (artist reveal) forfeits the artist bonus.</p>
-                <p>Using hint 2 or 3 forfeits the year bonus.</p>
+                <p>Using any hint forfeits the year bonus.</p>
               </div>
             </div>
           </div>
