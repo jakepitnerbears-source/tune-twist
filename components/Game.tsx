@@ -458,10 +458,19 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
   }
 
   function handleNext() {
-    if (songIndex < puzzle.length - 1) {
-      setSongIndex(songIndex + 1);
-    } else {
+    const allDone = states.every(s => s.solved || s.skipped);
+    if (allDone) {
       setGameOver(true);
+      return;
+    }
+    // Advance to next unsolved song, wrapping around if needed
+    const nextIdx = states.findIndex((s, i) => i > songIndex && !s.solved && !s.skipped);
+    if (nextIdx !== -1) {
+      setSongIndex(nextIdx);
+    } else {
+      const firstUnsolved = states.findIndex(s => !s.solved && !s.skipped);
+      if (firstUnsolved !== -1) setSongIndex(firstUnsolved);
+      else setGameOver(true);
     }
   }
 
@@ -909,7 +918,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
             {/* Next / Results */}
             {(state.skipped || (state.solved && bonusComplete)) && (
               <button onClick={handleNext} className="w-full py-2.5 rounded-xl bg-[color:var(--color-green)] text-[color:var(--color-navy)] text-sm font-bold hover:opacity-90 transition-opacity">
-                {songIndex < puzzle.length - 1 ? "Next Song →" : "See Results →"}
+                {states.every(s => s.solved || s.skipped) ? "See Results →" : "Next Song →"}
               </button>
             )}
           </div>
