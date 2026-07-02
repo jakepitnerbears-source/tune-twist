@@ -32,6 +32,49 @@ function primaryArtist(artist: string): string {
   return artist.split(/,|&/)[0].trim().toLowerCase();
 }
 
+function buildDiverseSchedule(songSlots: Song[], seed: number): Song[][] {
+  const shuffled = seededShuffle(songSlots, seed);
+  const remaining = [...shuffled];
+  const days: Song[][] = [];
+
+  for (let d = 0; d < CYCLE_LENGTH; d++) {
+    const day: Song[] = [];
+    const usedArtists = new Set<string>();
+    const genreCounts: Record<string, number> = {};
+    let hasNonPop = false;
+
+    let i = 0;
+    while (day.length < 5 && i < remaining.length) {
+      const song = remaining[i];
+      const genre = song.genre ?? "Other";
+      const artist = primaryArtist(song.artist);
+      const isNonPop = genre !== "Pop";
+      const genreOk = (genreCounts[genre] ?? 0) < 2;
+      const artistOk = !usedArtists.has(artist);
+      const nonPopOk = day.length < 4 || hasNonPop || isNonPop;
+
+      if (genreOk && artistOk && nonPopOk) {
+        day.push(song);
+        usedArtists.add(artist);
+        genreCounts[genre] = (genreCounts[genre] ?? 0) + 1;
+        if (isNonPop) hasNonPop = true;
+        remaining.splice(i, 1);
+      } else {
+        i++;
+      }
+    }
+
+    // Fallback: fill remaining slots ignoring rules if necessary
+    while (day.length < 5 && remaining.length > 0) {
+      day.push(remaining.shift()!);
+    }
+
+    days.push(day);
+  }
+
+  return days;
+}
+
 export function getPuzzleNumber(dateOverride?: string): number {
   return getDaysFromEpoch(dateOverride) + 1;
 }
@@ -81,10 +124,15 @@ export function getDailyPuzzle(dateOverride?: string): DailyPuzzle {
 
   if (schedule.length > 0) {
     const flatIds = schedule.flat();
-    const orderedIds = cycleNum === 0 ? flatIds : seededShuffle(flatIds, cycleNum);
-    const daySlot = orderedIds.slice(dayIndex * 5, dayIndex * 5 + 5);
-    const songs = daySlot.map((id) => songMap[id]).filter(Boolean) as Song[];
-    if (songs.length === 5) return songs;
+    const songSlots = flatIds.map((id) => songMap[id]).filter(Boolean) as Song[];
+
+    if (cycleNum === 0) {
+      const daySlot = songSlots.slice(dayIndex * 5, dayIndex * 5 + 5);
+      if (daySlot.length === 5) return daySlot;
+    } else {
+      const days = buildDiverseSchedule(songSlots, cycleNum);
+      if (days[dayIndex]?.length === 5) return days[dayIndex];
+    }
   }
 
   // Fallback: genre-based rotation — 3 Pop + 2 from other genres
