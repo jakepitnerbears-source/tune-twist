@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { href: "/admin/schedule", label: "Schedule" },
   { href: "/admin/library", label: "Library" },
   { href: "/admin/preview", label: "Preview" },
-  { href: "/admin/play", label: "Play" },
+  { href: "/admin/play", label: "Overview" },
   { href: "/admin/jukebox", label: "Jukebox" },
   { href: "/admin/media", label: "Media" },
   { href: "/admin/test", label: "Test" },
