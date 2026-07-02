@@ -1,0 +1,124 @@
+sweet-home-alabama | Sweet Home Alabama | Lynyrd Skynyrd
+hotel-california | Hotel California | Eagles
+we-will-rock-you | We Will Rock You | Queen
+we-are-the-champions | We Are The Champions | Queen
+another-brick-in-the-wall | Another Brick In The Wall | Pink Floyd
+every-breath-you-take | Every Breath You Take | The Police
+dont-stop-believin | Don't Stop Believin' | Journey
+livin-on-a-prayer | Livin' On A Prayer | Bon Jovi
+sweet-child-o-mine | Sweet Child O' Mine | Guns N' Roses
+pour-some-sugar-on-me | Pour Some Sugar On Me | Def Leppard
+mr-brightside | Mr. Brightside | The Killers
+boulevard-of-broken-dreams | Boulevard of Broken Dreams | Green Day
+american-idiot | American Idiot | Green Day
+smells-like-teen-spirit | Smells Like Teen Spirit | Nirvana
+come-as-you-are | Come As You Are | Nirvana
+seven-nation-army | Seven Nation Army | The White Stripes
+use-somebody | Use Somebody | Kings of Leon
+sex-on-fire | Sex on Fire | Kings of Leon
+radioactive | Radioactive | Imagine Dragons
+demons | Demons | Imagine Dragons
+viva-la-vida | Viva La Vida | Coldplay
+fix-you | Fix You | Coldplay
+clocks | Clocks | Coldplay
+paradise | Paradise | Coldplay
+yellow | Yellow | Coldplay
+the-scientist | The Scientist | Coldplay
+bring-me-to-life | Bring Me to Life | Evanescence
+my-immortal | My Immortal | Evanescence
+take-me-out | Take Me Out | Franz Ferdinand
+thunder | Thunder | Imagine Dragons
+whatever-it-takes | Whatever It Takes | Imagine Dragons
+on-top-of-the-world | On Top of the World | Imagine Dragons
+island-in-the-sun | Island In The Sun | Weezer
+cant-stop | Can't Stop | Red Hot Chili Peppers
+somebody-told-me | Somebody Told Me | The Killers
+all-i-need | All I Need | Radiohead
+do-i-wanna-know | Do I Wanna Know? | Arctic Monkeys
+the-adults-are-talking | The Adults Are Talking | The Strokes
+californication | Californication | Red Hot Chili Peppers
+under-the-bridge | Under the Bridge | Red Hot Chili Peppers
+closing-time | Closing Time | Semisonic
+r-u-mine | R U Mine? | Arctic Monkeys
+losing-my-religion | Losing My Religion | R.E.M.
+everybody-hurts | Everybody Hurts | R.E.M.
+bad-at-love | Bad At Love | Halsey
+bohemian-rhapsody | Bohemian Rhapsody | Queen
+eye-of-the-tiger | Eye of the Tiger | Survivor
+la-bamba | La Bamba | Los Lobos
+go-your-own-way | Go Your Own Way | Fleetwood Mac
+dreams | Dreams | Fleetwood Mac
+the-chain | The Chain | Fleetwood Mac
+africa | Africa | Toto
+dont-stop-me-now | Don't Stop Me Now | Queen
+under-pressure | Under Pressure | Queen & David Bowie
+piano-man | Piano Man | Billy Joel
+let-it-be | Let It Be | The Beatles
+come-together | Come Together | The Beatles
+twist-and-shout | Twist and Shout | The Beatles
+how-you-remind-me | How You Remind Me | Nickelback
+lips-of-an-angel | Lips of an Angel | Hinder
+you-give-love-a-bad-name | You Give Love a Bad Name | Bon Jovi
+tiny-dancer | Tiny Dancer | Elton John
+rocket-man | Rocket Man | Elton John
+the-joker | The Joker | Steve Miller Band
+fly-like-an-eagle | Fly Like an Eagle | Steve Miller Band
+free-fallin | Free Fallin' | Tom Petty
+here-comes-the-sun | Here Comes the Sun | The Beatles
+brown-eyed-girl | Brown Eyed Girl | Van Morrison
+summer-of-69 | Summer of '69 | Bryan Adams
+edge-of-seventeen | Edge of Seventeen | Stevie Nicks
+american-pie | American Pie | Don McLean
+another-one-bites-the-dust | Another One Bites the Dust | Queen
+stairway-to-heaven | Stairway to Heaven | Led Zeppelin
+imagine | Imagine | John Lennon
+all-along-the-watchtower | All Along the Watchtower | Jimi Hendrix
+money-pink-floyd | Money | Pink Floyd
+gimme-shelter | Gimme Shelter | The Rolling Stones
+goodbye-yellow-brick-road | Goodbye Yellow Brick Road | Elton John
+highway-to-hell | Highway to Hell | AC/DC
+november-rain | November Rain | Guns N' Roses
+walk-this-way | Walk This Way | Aerosmith
+jump | Jump | Van Halen
+light-my-fire | Light My Fire | The Doors
+dream-on | Dream On | Aerosmith
+tears-in-heaven | Tears in Heaven | Eric Clapton
+iris | Iris | Goo Goo Dolls
+everlong | Everlong | Foo Fighters
+jailhouse-rock | Jailhouse Rock | Elvis Presley
+free-bird | Free Bird | Lynyrd Skynyrd
+my-sharona | My Sharona | The Knack
+the-twist | The Twist | Chubby Checker
+crazy-little-thing-called-love | Crazy Little Thing Called Love | Queen
+its-still-rock-and-roll-to-me | It's Still Rock and Roll to Me | Billy Joel
+torn | Torn | Natalie Imbruglia
+ill-be-there-for-you | I'll Be There for You | The Rembrandts
+fly-sugar-ray | Fly | Sugar Ray
+uninvited | Uninvited | Alanis Morissette
+all-star | All Star | Smash Mouth
+somewhere-only-we-know | Somewhere Only We Know | Keane
+have-you-ever-seen-the-rain | Have You Ever Seen The Rain | Creedence Clearwater Revival
+thunderstruck | Thunderstruck | AC/DC
+beggin | Beggin' | Måneskin
+back-in-black | Back In Black | AC/DC
+enemy | Enemy | Imagine Dragons
+fortunate-son | Fortunate Son | Creedence Clearwater Revival
+sultans-of-swing | Sultans of Swing | Dire Straits
+zombie-cranberries | Zombie | The Cranberries
+paint-it-black | Paint It, Black | The Rolling Stones
+welcome-to-the-jungle | Welcome To The Jungle | Guns N' Roses
+should-i-stay-or-should-i-go | Should I Stay or Should I Go | The Clash
+house-of-the-rising-sun | House of the Rising Sun | The Animals
+mr-blue-sky | Mr. Blue Sky | Electric Light Orchestra
+bad-moon-rising | Bad Moon Rising | Creedence Clearwater Revival
+danger-zone | Danger Zone | Kenny Loggins
+pretty-fly-for-a-white-guy | Pretty Fly (For A White Guy) | The Offspring
+say-it-aint-so | Say It Ain't So | Weezer
+long-cool-woman | Long Cool Woman (In a Black Dress) | The Hollies
+born-to-be-wild | Born To Be Wild | Steppenwolf
+lonely-boy | Lonely Boy | The Black Keys
+sympathy-for-the-devil | Sympathy For The Devil | The Rolling Stones
+even-flow | Even Flow | Pearl Jam
+start-me-up | Start Me Up | The Rolling Stones
+aint-no-rest-for-the-wicked | Ain't No Rest For The Wicked | Cage The Elephant
+i-was-made-for-lovin-you | I Was Made For Lovin' You | KISS

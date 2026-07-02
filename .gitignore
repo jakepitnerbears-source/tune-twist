@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Lyric generation output artifacts
+data/lyrics-*.txt
+data/song-list-for-lyrics.txt
