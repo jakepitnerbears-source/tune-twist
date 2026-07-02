@@ -458,20 +458,15 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
   }
 
   function handleNext() {
-    const allDone = states.every(s => s.solved || s.skipped);
-    if (allDone) {
-      setGameOver(true);
-      return;
-    }
-    // Advance to next unsolved song, wrapping around if needed
+    // Pure navigation — never ends the game
     const nextIdx = states.findIndex((s, i) => i > songIndex && !s.solved && !s.skipped);
     if (nextIdx !== -1) {
       setSongIndex(nextIdx);
-    } else {
-      const firstUnsolved = states.findIndex(s => !s.solved && !s.skipped);
-      if (firstUnsolved !== -1) setSongIndex(firstUnsolved);
-      else setGameOver(true);
+      return;
     }
+    // All remaining songs are after wrap-around, or none left — go to next song cyclically
+    const nextCyclic = (songIndex + 1) % puzzle.length;
+    setSongIndex(nextCyclic);
   }
 
   function buildShareText(score: number): string {
@@ -915,10 +910,10 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
               </>
             )}
 
-            {/* Next / Results */}
+            {/* Next Song — navigation only */}
             {(state.skipped || (state.solved && bonusComplete)) && (
               <button onClick={handleNext} className="w-full py-2.5 rounded-xl bg-[color:var(--color-green)] text-[color:var(--color-navy)] text-sm font-bold hover:opacity-90 transition-opacity">
-                {states.every(s => s.solved || s.skipped) ? "See Results →" : "Next Song →"}
+                Next Song →
               </button>
             )}
           </div>
@@ -932,6 +927,16 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
             <span>{states.filter((s) => s.solved).length} of {puzzle.length} solved</span>
           </div>
         </div>
+
+        {/* See Results — only when every song is finished */}
+        {states.every(s => s.solved || s.skipped) && (
+          <button
+            onClick={() => setGameOver(true)}
+            className="w-full py-3.5 rounded-xl border border-[color:var(--color-purple)] text-[color:var(--color-purple)] text-sm font-bold hover:bg-[color:var(--color-purple)]/10 transition-colors"
+          >
+            See Results →
+          </button>
+        )}
 
       </div> {/* end relative z-10 */}
 
