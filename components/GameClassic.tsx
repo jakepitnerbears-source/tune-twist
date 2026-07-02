@@ -707,6 +707,9 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                       Reveal
                     </button>
                   </div>
+                  <button type="button" onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right cursor-pointer w-full">
+                    {songIndex < puzzle.length - 1 ? "Next song →" : "See results →"}
+                  </button>
                 </div>
               </>
             )}
