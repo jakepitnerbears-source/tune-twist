@@ -40,6 +40,16 @@ export function loadScheduleAndLibrary() {
   return { schedule: loadSchedule(), library: loadSongLibrary() };
 }
 
+export function loadLyrics(): Record<string, string> {
+  try {
+    const jsonPath = path.join(process.cwd(), "data/lyrics.json");
+    if (fs.existsSync(jsonPath)) {
+      return JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
+    }
+  } catch {}
+  return {};
+}
+
 function loadSongLibrary(): Song[] {
   try {
     const jsonPath = path.join(process.cwd(), "data/songs.json");
