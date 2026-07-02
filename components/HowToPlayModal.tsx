@@ -87,7 +87,7 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               </p>
               <div className="flex flex-col gap-2">
                 {[
-                  { n: "1", text: `Another synonym title — e.g. "Glaring Beams"` },
+                  { n: "1", text: `Release year — e.g. "Released in 2019"` },
                   { n: "2", text: `A lyric snippet from the song` },
                   { n: "3", text: `Artist name — reveals the answer (forfeits artist bonus)` },
                 ].map((h) => (
