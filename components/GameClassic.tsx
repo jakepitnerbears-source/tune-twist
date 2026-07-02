@@ -221,7 +221,15 @@ function Countdown() {
   );
 }
 
-export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtists = [] }: { puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[] }) {
+function buildHints(song: DailyPuzzle[number], lyrics: Record<string, string>): [string, string, string] {
+  return [
+    song.hints[0],
+    lyrics[song.id] ? `"${lyrics[song.id]}"` : "",
+    song.hints[1],
+  ];
+}
+
+export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtists = [], lyrics = {} }: { puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[]; lyrics?: Record<string, string> }) {
   const [songIndex, setSongIndex] = useState(0);
   const [states, setStates] = useState<SongState[]>(puzzle.map(initialSongState));
   const [gameOver, setGameOver] = useState(false);
@@ -307,7 +315,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     const correct = validateGuess(state.guess, current.title, current.altTitles);
     if (correct) {
       const autoSkipArtist = state.hintsUsed >= 3;
-      const autoSkipYear = state.hintsUsed >= 2;
+      const autoSkipYear = state.hintsUsed >= 1;
       updateState(songIndex, {
         solved: true,
         feedback: "",
@@ -376,7 +384,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
   }
 
   function handleHint() {
-    if (state.hintsUsed >= current.hints.length || state.solved) return;
+    if (state.hintsUsed >= 3 || state.solved) return;
     updateState(songIndex, {
       hintsUsed: state.hintsUsed + 1,
       feedback: "",
@@ -385,7 +393,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
   }
 
   function handleReveal() {
-    if (state.hintsUsed < current.hints.length) return;
+    if (state.hintsUsed < 3) return;
     updateState(songIndex, { skipped: true, feedback: "" });
   }
 
@@ -638,7 +646,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
           {/* Hints */}
           {state.hintsUsed > 0 && (
             <div className="px-5 pt-4 flex flex-col gap-1.5">
-              {current.hints.slice(0, state.hintsUsed).map((hint, hi) => (
+              {buildHints(current, lyrics).slice(0, state.hintsUsed).map((hint, hi) => (
                 <div key={hi} className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-[color:var(--color-navy)] border border-[color:var(--color-purple)] text-[color:var(--color-purple)]">
                   <span className="opacity-60 text-xs">Hint {hi + 1}</span>
                   <span>{hint}</span>
@@ -685,15 +693,15 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     <button
                       type="button"
                       onClick={handleHint}
-                      disabled={state.hintsUsed >= current.hints.length}
+                      disabled={state.hintsUsed >= 3}
                       className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
                     >
-                      Hint {state.hintsUsed < current.hints.length ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(${state.hintsUsed}/${current.hints.length} used)`}
+                      Hint {state.hintsUsed < 3 ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(3/3 used)`}
                     </button>
                     <button
                       type="button"
                       onClick={handleReveal}
-                      disabled={state.hintsUsed < current.hints.length}
+                      disabled={state.hintsUsed < 3}
                       className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors cursor-pointer text-sm font-semibold"
                     >
                       Reveal

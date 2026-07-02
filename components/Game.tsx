@@ -257,7 +257,15 @@ function Countdown() {
   );
 }
 
-export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = [], previewUrls = [] }: { puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[]; previewUrls?: string[] }) {
+function buildHints(song: DailyPuzzle[number], lyrics: Record<string, string>): [string, string, string] {
+  return [
+    song.hints[0],
+    lyrics[song.id] ? `"${lyrics[song.id]}"` : "",
+    song.hints[1],
+  ];
+}
+
+export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = [], previewUrls = [], lyrics = {} }: { puzzle: DailyPuzzle; puzzleNumber?: number; genreLabel?: string; allArtists?: string[]; previewUrls?: string[]; lyrics?: Record<string, string> }) {
   const [songIndex, setSongIndex] = useState(0);
   const [states, setStates] = useState<SongState[]>(puzzle.map(initialSongState));
   const [gameOver, setGameOver] = useState(false);
@@ -349,9 +357,8 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     if (!state.guess.trim() || state.solved) return;
     const correct = validateGuess(state.guess, current.title, current.altTitles);
     if (correct) {
-      // hint[1] = release year, hint[2] = artist — skip those bonuses if already revealed
       const autoSkipArtist = state.hintsUsed >= 3;
-      const autoSkipYear = state.hintsUsed >= 2;
+      const autoSkipYear = state.hintsUsed >= 1;
       updateState(songIndex, {
         solved: true,
         feedback: randomFrom(CORRECT_MESSAGES),
@@ -437,7 +444,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
   }
 
   function handleHint() {
-    if (state.hintsUsed >= current.hints.length || state.solved) return;
+    if (state.hintsUsed >= 3 || state.solved) return;
     updateState(songIndex, {
       hintsUsed: state.hintsUsed + 1,
       feedback: randomFrom(HINT_MESSAGES),
@@ -446,7 +453,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
   }
 
   function handleReveal() {
-    if (state.hintsUsed < current.hints.length) return;
+    if (state.hintsUsed < 3) return;
     updateState(songIndex, { skipped: true, feedback: randomFrom(SKIP_MESSAGES) });
   }
 
@@ -746,7 +753,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
           {/* Hints */}
           {state.hintsUsed > 0 && (
             <div className="px-5 pt-4 flex flex-col gap-1.5">
-              {current.hints.slice(0, state.hintsUsed).map((hint, hi) => (
+              {buildHints(current, lyrics).slice(0, state.hintsUsed).map((hint, hi) => (
                 <div key={hi} className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg bg-[color:var(--color-navy)] border border-[color:var(--color-purple)] text-[color:var(--color-purple)]">
                   <span className="opacity-60 text-xs">Hint {hi + 1}</span>
                   <span>{hint}</span>
@@ -770,7 +777,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                 {!bonusComplete ? (
                   <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
                     <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">
-                      Bonus Round — up to +{state.hintsUsed >= 3 ? 0 : state.hintsUsed >= 2 ? ARTIST_BONUS : ARTIST_BONUS + YEAR_BONUS} pts
+                      Bonus Round — up to +{state.hintsUsed >= 3 ? 0 : state.hintsUsed >= 1 ? ARTIST_BONUS : ARTIST_BONUS + YEAR_BONUS} pts
                     </p>
 
                     {state.hintsUsed < 3 && (
@@ -813,7 +820,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                       </div>
                     )}
 
-                    {state.hintsUsed < 2 && (
+                    {state.hintsUsed < 1 && (
                       <div className="flex flex-col gap-1.5">
                         <label className="text-xs text-[color:var(--color-muted)]">What year was it released?</label>
                         {state.yearCorrect === null ? (
@@ -869,11 +876,11 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                 <div className="hidden sm:flex items-center gap-3 pt-1">
                   <button
                     onClick={handleHint}
-                    disabled={state.hintsUsed >= current.hints.length}
+                    disabled={state.hintsUsed >= 3}
                     className="flex flex-col items-center gap-0.5 w-14 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] disabled:opacity-30 transition-colors"
                   >
                     <span className="text-2xl leading-none">⏮</span>
-                    <span className="text-[9px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "Hint"}</span>
+                    <span className="text-[9px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/3` : "Hint"}</span>
                   </button>
                   <button
                     onClick={handleSubmit}
@@ -883,8 +890,8 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                   </button>
                   <button
                     onClick={handleReveal}
-                    disabled={state.hintsUsed < current.hints.length}
-                    title={state.hintsUsed < current.hints.length ? `Use all ${current.hints.length} hints to unlock` : "Reveal answer (0 pts)"}
+                    disabled={state.hintsUsed < 3}
+                    title={state.hintsUsed < 3 ? `Use all 3 hints to unlock` : "Reveal answer (0 pts)"}
                     className="flex flex-col items-center gap-0.5 w-14 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-coral)] disabled:opacity-30 transition-colors"
                   >
                     <span className="text-2xl leading-none">⏭</span>
@@ -925,11 +932,11 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
           <div className="flex items-center gap-2 max-w-[560px] mx-auto">
             <button
               onClick={handleHint}
-              disabled={state.hintsUsed >= current.hints.length}
+              disabled={state.hintsUsed >= 3}
               className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] disabled:opacity-30 transition-colors"
             >
               <span className="text-lg leading-none">⏮</span>
-              <span className="text-[8px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/${current.hints.length}` : "Hint"}</span>
+              <span className="text-[8px] uppercase tracking-widest">{state.hintsUsed > 0 ? `${state.hintsUsed}/3` : "Hint"}</span>
             </button>
             <input
               ref={inputRef}
@@ -948,7 +955,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
             </button>
             <button
               onClick={handleReveal}
-              disabled={state.hintsUsed < current.hints.length}
+              disabled={state.hintsUsed < 3}
               className="flex flex-col items-center justify-center gap-0.5 w-10 h-10 shrink-0 text-[color:var(--color-muted)] hover:text-[color:var(--color-coral)] disabled:opacity-30 transition-colors"
             >
               <span className="text-lg leading-none">⏭</span>
