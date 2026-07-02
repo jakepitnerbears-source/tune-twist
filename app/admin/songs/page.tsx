@@ -12,7 +12,7 @@ export default function AdminSongsPage() {
 
   return (
     <main className="flex flex-col items-center px-4 pt-8 pb-16">
-      <div className="w-full max-w-[700px] flex flex-col gap-6">
+      <div className="w-full max-w-[1200px] flex flex-col gap-6">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Song Library</h1>
           <p className="text-sm text-[color:var(--color-muted)] mt-1">

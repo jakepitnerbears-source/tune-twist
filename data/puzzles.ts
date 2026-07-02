@@ -5,7 +5,7 @@ export interface Song {
   releaseYear: string;
   synonymTitle: string;
   genre?: string;
-  hints: [string, string, string]; // [alt_synonym, release_year, artist]
+  hints: [string, string]; // [release_year, artist]
   previewUrl?: string;
   altTitles?: string[];
   status?: "remove" | "redo-synonym";
@@ -19,7 +19,7 @@ export const songs: Song[] = [
     releaseYear: "2017",
     synonymTitle: "Form of You",
     genre: "Pop",
-    hints: ["Contour of Yourself", "Pop", "Artist: Ed Sheeran"],
+    hints: ["Released in 2017", "Artist: Ed Sheeran"],
   },
   {
     id: "blinding-lights",
@@ -28,7 +28,7 @@ export const songs: Song[] = [
     releaseYear: "2019",
     synonymTitle: "Dazzling Illumination",
     genre: "Pop",
-    hints: ["Glaring Beams", "Pop/R&B", "Artist: The Weeknd"],
+    hints: ["Released in 2019", "Artist: The Weeknd"],
   },
   {
     id: "rolling-in-the-deep",
@@ -37,7 +37,7 @@ export const songs: Song[] = [
     releaseYear: "2010",
     synonymTitle: "Moving Within the Depths",
     genre: "Pop",
-    hints: ["Tumbling Through the Abyss", "Soul/pop", "Artist: Adele"],
+    hints: ["Released in 2010", "Artist: Adele"],
   },
   {
     id: "smells-like-teen-spirit",
@@ -46,7 +46,7 @@ export const songs: Song[] = [
     releaseYear: "1991",
     synonymTitle: "Adolescent Essence Aroma",
     genre: "Rock",
-    hints: ["Reeks of Youthful Energy", "Rock", "Artist: Nirvana"],
+    hints: ["Released in 1991", "Artist: Nirvana"],
   },
   {
     id: "counting-stars",
@@ -55,7 +55,7 @@ export const songs: Song[] = [
     releaseYear: "2013",
     synonymTitle: "Tallying Celestial Bodies",
     genre: "Pop",
-    hints: ["Tallying Galaxies", "Pop rock", "Artist: OneRepublic"],
+    hints: ["Released in 2013", "Artist: OneRepublic"],
   },
   {
     id: "firework",
@@ -64,7 +64,7 @@ export const songs: Song[] = [
     releaseYear: "2010",
     synonymTitle: "Pyrotechnic Burst",
     genre: "Pop",
-    hints: ["Explosive Spark", "Pop", "Artist: Katy Perry"],
+    hints: ["Released in 2010", "Artist: Katy Perry"],
   },
   {
     id: "electric-feel",
@@ -73,7 +73,7 @@ export const songs: Song[] = [
     releaseYear: "2008",
     synonymTitle: "Charged Sensation",
     genre: "Indie",
-    hints: ["Voltage Perception", "Indie/psych", "Artist: MGMT"],
+    hints: ["Released in 2008", "Artist: MGMT"],
   },
   {
     id: "take-me-to-church",
@@ -82,7 +82,7 @@ export const songs: Song[] = [
     releaseYear: "2013",
     synonymTitle: "Escort Me to the Sanctuary",
     genre: "R&B",
-    hints: ["Bring Me to the Temple", "Indie/soul", "Artist: Hozier"],
+    hints: ["Released in 2013", "Artist: Hozier"],
   },
   {
     id: "midnight-city",
@@ -91,7 +91,7 @@ export const songs: Song[] = [
     releaseYear: "2011",
     synonymTitle: "Witching Hour Metropolis",
     genre: "Electronic",
-    hints: ["Witching Hour Settlement", "Synth/electronic", "Artist: M83"],
+    hints: ["Released in 2011", "Artist: M83"],
   },
   {
     id: "levitating",
@@ -100,7 +100,7 @@ export const songs: Song[] = [
     releaseYear: "2020",
     synonymTitle: "Floating Skyward",
     genre: "Pop",
-    hints: ["Hovering Weightlessly", "Pop", "Artist: Dua Lipa"],
+    hints: ["Released in 2020", "Artist: Dua Lipa"],
   },
   {
     id: "uptown-funk",
@@ -109,7 +109,7 @@ export const songs: Song[] = [
     releaseYear: "2015",
     synonymTitle: "Elevated District Groove",
     genre: "Pop",
-    hints: ["Highbrow District Groove", "Funk/pop", "Artist: Bruno Mars"],
+    hints: ["Released in 2015", "Artist: Bruno Mars"],
   },
   {
     id: "somebody-that-i-used-to-know",
@@ -118,7 +118,7 @@ export const songs: Song[] = [
     releaseYear: "2011",
     synonymTitle: "An Individual I Once Recognized",
     genre: "Indie",
-    hints: ["A Figure I Once Recalled", "Indie pop", "Artist: Gotye"],
+    hints: ["Released in 2011", "Artist: Gotye"],
   },
   {
     id: "pumped-up-kicks",
@@ -127,7 +127,7 @@ export const songs: Song[] = [
     releaseYear: "2010",
     synonymTitle: "Inflated Footwear",
     genre: "Indie",
-    hints: ["Inflated Sneakers", "Indie pop", "Artist: Foster the People"],
+    hints: ["Released in 2010", "Artist: Foster the People"],
   },
   {
     id: "all-star",
@@ -136,7 +136,7 @@ export const songs: Song[] = [
     releaseYear: "1999",
     synonymTitle: "Every Celestial Body",
     genre: "Rock",
-    hints: ["Total Celestial Body", "Alt rock", "Artist: Smash Mouth"],
+    hints: ["Released in 1999", "Artist: Smash Mouth"],
   },
   {
     id: "mr-brightside",
@@ -145,7 +145,7 @@ export const songs: Song[] = [
     releaseYear: "2003",
     synonymTitle: "Mr. Optimistic",
     genre: "Rock",
-    hints: ["Mr. Sunny Disposition", "Indie rock", "Artist: The Killers"],
+    hints: ["Released in 2003", "Artist: The Killers"],
   },
   {
     id: "hey-ya",
@@ -154,7 +154,7 @@ export const songs: Song[] = [
     releaseYear: "2003",
     synonymTitle: "Greetings, You!",
     genre: "Hip-Hop",
-    hints: ["Salutations, You!", "Hip hop/funk", "Artist: Outkast"],
+    hints: ["Released in 2003", "Artist: Outkast"],
   },
   {
     id: "party-in-the-usa",
@@ -163,6 +163,6 @@ export const songs: Song[] = [
     releaseYear: "2009",
     synonymTitle: "Celebration in the United States",
     genre: "Pop",
-    hints: ["Gathering in the Nation", "Pop", "Artist: Miley Cyrus"],
+    hints: ["Released in 2009", "Artist: Miley Cyrus"],
   },
 ];

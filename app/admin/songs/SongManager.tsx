@@ -33,6 +33,12 @@ export default function SongManager({ initialSongs }: { initialSongs: Song[] }) 
     [songs]
   );
 
+  const genreCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const s of songs) counts[s.genre ?? "Other"] = (counts[s.genre ?? "Other"] ?? 0) + 1;
+    return counts;
+  }, [songs]);
+
   const filtered = useMemo(() => {
     return songs.filter((s) => {
       if (filter === "remove" && s.status !== "remove") return false;
@@ -78,7 +84,7 @@ export default function SongManager({ initialSongs }: { initialSongs: Song[] }) 
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-5">
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
         {[
@@ -93,7 +99,7 @@ export default function SongManager({ initialSongs }: { initialSongs: Song[] }) 
         ))}
       </div>
 
-      {/* Filters */}
+      {/* Status filters */}
       <div className="flex flex-wrap gap-2">
         {(["all", "remove", "redo-synonym", "clean"] as FilterMode[]).map((f) => (
           <button
@@ -108,14 +114,6 @@ export default function SongManager({ initialSongs }: { initialSongs: Song[] }) 
             {f === "all" ? `All (${songs.length})` : f === "remove" ? `Remove (${counts.remove})` : f === "redo-synonym" ? `Redo Synonym (${counts.redo})` : `Clean (${counts.clean})`}
           </button>
         ))}
-        <select
-          value={genreFilter}
-          onChange={(e) => setGenreFilter(e.target.value)}
-          className="text-xs bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-full px-3 py-1.5 text-[color:var(--color-muted)] outline-none"
-        >
-          <option value="all">All Genres</option>
-          {genres.map((g) => <option key={g} value={g}>{g}</option>)}
-        </select>
         <input
           type="text"
           placeholder="Search title or artist…"
@@ -125,69 +123,100 @@ export default function SongManager({ initialSongs }: { initialSongs: Song[] }) 
         />
       </div>
 
-      <p className="text-xs text-[color:var(--color-muted)]">{filtered.length} songs shown</p>
+      {/* Genre pills */}
+      <div className="flex flex-wrap gap-2">
+        <button
+          onClick={() => setGenreFilter("all")}
+          className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+            genreFilter === "all"
+              ? "bg-white/10 border-white/30 text-white"
+              : "border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-white"
+          }`}
+        >
+          All Genres ({songs.length})
+        </button>
+        {genres.map((g) => (
+          <button
+            key={g}
+            onClick={() => setGenreFilter(g)}
+            className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-colors ${
+              genreFilter === g
+                ? `${GENRE_COLORS[g] ?? "bg-zinc-500/20 text-zinc-300"} border-transparent opacity-100`
+                : "border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-white"
+            }`}
+          >
+            {g} ({genreCounts[g] ?? 0})
+          </button>
+        ))}
+      </div>
 
-      {/* Song list */}
-      <div className="flex flex-col gap-2">
-        {filtered.map((song) => {
-          const isSaving = saving === song.id;
-          const statusColor =
-            song.status === "remove" ? "border-red-500/50 bg-red-500/5" :
-            song.status === "redo-synonym" ? "border-yellow-500/50 bg-yellow-500/5" :
-            "border-[color:var(--color-border)]";
+      <p className="text-xs text-[color:var(--color-muted)] -mt-2">{filtered.length} songs</p>
 
-          return (
-            <div
-              key={song.id}
-              className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${statusColor}`}
-            >
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm font-bold truncate">{song.title}</span>
-                  {song.genre && (
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full shrink-0 ${GENRE_COLORS[song.genre] ?? "bg-zinc-500/20 text-zinc-300"}`}>
-                      {song.genre}
-                    </span>
-                  )}
-                  {song.status === "remove" && (
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 shrink-0">Remove</span>
-                  )}
-                  {song.status === "redo-synonym" && (
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400 shrink-0">Redo Synonym</span>
-                  )}
-                </div>
-                <p className="text-xs text-[color:var(--color-muted)] mt-0.5">
-                  {song.artist} · {song.releaseYear} · <span className="text-white/60 italic">{song.synonymTitle}</span>
-                </p>
-              </div>
+      {/* Spreadsheet table */}
+      <div className="overflow-x-auto rounded-xl border border-[color:var(--color-border)]">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="border-b border-[color:var(--color-border)] bg-[color:var(--color-card)]">
+              <th className="text-left text-xs font-semibold text-[color:var(--color-muted)] uppercase tracking-wider px-4 py-2.5">Title</th>
+              <th className="text-left text-xs font-semibold text-[color:var(--color-muted)] uppercase tracking-wider px-4 py-2.5">Artist</th>
+              <th className="text-left text-xs font-semibold text-[color:var(--color-muted)] uppercase tracking-wider px-4 py-2.5">Year</th>
+              <th className="text-left text-xs font-semibold text-[color:var(--color-muted)] uppercase tracking-wider px-4 py-2.5">Synonym</th>
+              <th className="text-left text-xs font-semibold text-[color:var(--color-muted)] uppercase tracking-wider px-4 py-2.5">Genre</th>
+              <th className="px-4 py-2.5"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((song, i) => {
+              const isSaving = saving === song.id;
+              const rowBg =
+                song.status === "remove" ? "bg-red-500/5" :
+                song.status === "redo-synonym" ? "bg-yellow-500/5" :
+                i % 2 === 0 ? "bg-transparent" : "bg-white/[0.02]";
 
-              <div className="flex items-center gap-1.5 shrink-0">
-                <button
-                  disabled={isSaving}
-                  onClick={() => setStatus(song.id, song.status === "remove" ? null : "remove")}
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
-                    song.status === "remove"
-                      ? "bg-red-500/30 text-red-300 hover:bg-red-500/20"
-                      : "bg-[color:var(--color-card)] text-[color:var(--color-muted)] hover:text-red-400 border border-[color:var(--color-border)]"
-                  }`}
-                >
-                  Remove
-                </button>
-                <button
-                  disabled={isSaving}
-                  onClick={() => setStatus(song.id, song.status === "redo-synonym" ? null : "redo-synonym")}
-                  className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${
-                    song.status === "redo-synonym"
-                      ? "bg-yellow-500/30 text-yellow-300 hover:bg-yellow-500/20"
-                      : "bg-[color:var(--color-card)] text-[color:var(--color-muted)] hover:text-yellow-400 border border-[color:var(--color-border)]"
-                  }`}
-                >
-                  Redo
-                </button>
-              </div>
-            </div>
-          );
-        })}
+              return (
+                <tr key={song.id} className={`border-b border-[color:var(--color-border)]/50 last:border-0 ${rowBg}`}>
+                  <td className="px-4 py-2.5 font-semibold whitespace-nowrap">{song.title}</td>
+                  <td className="px-4 py-2.5 text-[color:var(--color-muted)] whitespace-nowrap">{song.artist}</td>
+                  <td className="px-4 py-2.5 text-[color:var(--color-muted)] whitespace-nowrap">{song.releaseYear}</td>
+                  <td className="px-4 py-2.5 text-[color:var(--color-muted)] italic whitespace-nowrap">{song.synonymTitle}</td>
+                  <td className="px-4 py-2.5">
+                    {song.genre && (
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded-full whitespace-nowrap ${GENRE_COLORS[song.genre] ?? "bg-zinc-500/20 text-zinc-300"}`}>
+                        {song.genre}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-4 py-2.5">
+                    <div className="flex items-center gap-1.5 justify-end">
+                      <button
+                        disabled={isSaving}
+                        onClick={() => setStatus(song.id, song.status === "remove" ? null : "remove")}
+                        className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors whitespace-nowrap ${
+                          song.status === "remove"
+                            ? "bg-red-500/30 text-red-300 hover:bg-red-500/20"
+                            : "bg-[color:var(--color-card)] text-[color:var(--color-muted)] hover:text-red-400 border border-[color:var(--color-border)]"
+                        }`}
+                      >
+                        Remove
+                      </button>
+                      <button
+                        disabled={isSaving}
+                        onClick={() => setStatus(song.id, song.status === "redo-synonym" ? null : "redo-synonym")}
+                        className={`text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors whitespace-nowrap ${
+                          song.status === "redo-synonym"
+                            ? "bg-yellow-500/30 text-yellow-300 hover:bg-yellow-500/20"
+                            : "bg-[color:var(--color-card)] text-[color:var(--color-muted)] hover:text-yellow-400 border border-[color:var(--color-border)]"
+                        }`}
+                      >
+                        Redo
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
