@@ -398,11 +398,14 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
   }
 
   function handleNext() {
-    if (songIndex < puzzle.length - 1) {
-      setSongIndex(songIndex + 1);
-    } else {
-      setGameOver(true);
+    // Pure navigation — never ends the game
+    const nextIdx = states.findIndex((s, i) => i > songIndex && !s.solved && !s.skipped);
+    if (nextIdx !== -1) {
+      setSongIndex(nextIdx);
+      return;
     }
+    // Cycle to next song (wrap around)
+    setSongIndex((songIndex + 1) % puzzle.length);
   }
 
   function buildShareText(score: number): string {
@@ -708,7 +711,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     </button>
                   </div>
                   <button type="button" onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right cursor-pointer w-full">
-                    {songIndex < puzzle.length - 1 ? "Next song →" : "See results →"}
+                    Next song →
                   </button>
                 </div>
               </>
@@ -827,7 +830,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
             {(state.skipped || (state.solved && bonusComplete)) && (
               <button type="button" onClick={handleNext} className="w-full py-2.5 rounded-xl text-white text-sm font-bold hover:opacity-90 transition-opacity cursor-pointer" style={{ background: 'var(--btn-gradient)' }}>
-                {songIndex < puzzle.length - 1 ? "Next Song →" : "See Results →"}
+                Next Song →
               </button>
             )}
           </div>
@@ -872,6 +875,17 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
             <span>{states.filter((s) => s.solved).length} of {puzzle.length} solved</span>
           </div>
         </div>
+
+        {/* See Results — only when every song is finished */}
+        {states.every(s => s.solved || s.skipped) && (
+          <button
+            type="button"
+            onClick={() => setGameOver(true)}
+            className="w-full py-3.5 rounded-xl border border-[color:var(--color-purple)] text-[color:var(--color-purple)] text-sm font-bold hover:bg-[color:var(--color-purple)]/10 transition-colors"
+          >
+            See Results →
+          </button>
+        )}
 
       </div>
 
