@@ -7,6 +7,7 @@ import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 import SongReveal from "@/components/SongReveal";
 import StarRating from "@/components/StarRating";
+import FeedbackWidget from "@/components/FeedbackWidget";
 
 const HINT_COSTS = [200, 300, 400];
 const BASE_SCORE = 1000;
@@ -612,6 +613,8 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
               })}
             </div>
           </div>
+
+          <FeedbackWidget />
 
           <Countdown />
 
