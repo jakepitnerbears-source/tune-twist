@@ -10,11 +10,12 @@ export default function ContactPage() {
     setStatus("submitting");
     const data = new FormData(e.currentTarget);
     try {
-      const res = await fetch("https://formspree.io/f/xdarpjeq", {
+      const res = await fetch("https://formspree.io/f/xeebvglo", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: data,
       });
+      if (!res.ok) console.error("Formspree error", res.status, await res.text());
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");

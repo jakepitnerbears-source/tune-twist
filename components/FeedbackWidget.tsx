@@ -16,7 +16,7 @@ export default function FeedbackWidget() {
   async function pick(label: string) {
     setSelected(label);
     try {
-      await fetch("https://formspree.io/f/xdarpjeq", {
+      await fetch("https://formspree.io/f/xeebvglo", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ reaction: label, _subject: "TuneTwist puzzle reaction" }),
