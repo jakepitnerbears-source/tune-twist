@@ -865,22 +865,10 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                 ) : (
                   <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
                     <div className="flex gap-2 text-sm">
-                      <span
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
-                        style={state.artistCorrect
-                          ? { background: "rgba(var(--color-green-rgb,74,222,128),0.12)", color: "var(--color-green)" }
-                          : { background: "rgba(249,115,22,0.12)", color: "var(--color-red)" }}
-                      >
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${state.artistCorrect ? "border-green-500/30 text-green-400" : "border-red-500/30 text-red-400"}`}>
                         {state.artistCorrect ? <><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</> : `✕ Artist (${current.artist})`}
                       </span>
-                      <span
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium"
-                        style={state.yearCorrect === "exact"
-                          ? { background: "rgba(var(--color-green-rgb,74,222,128),0.12)", color: "var(--color-green)" }
-                          : state.yearCorrect === "close"
-                          ? { background: "rgba(250,204,21,0.12)", color: "#facc15" }
-                          : { background: "rgba(249,115,22,0.12)", color: "var(--color-red)" }}
-                      >
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${state.yearCorrect === "exact" ? "border-green-500/30 text-green-400" : state.yearCorrect === "close" ? "border-yellow-500/30 text-yellow-400" : "border-red-500/30 text-red-400"}`}>
                         {state.yearCorrect === "exact" ? <><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</> : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✕ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
                       </span>
                     </div>
