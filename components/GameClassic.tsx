@@ -412,10 +412,27 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
   }
 
   function handleCopyResults(score: number) {
-    navigator.clipboard.writeText(buildShareText(score)).then(() => {
+    const text = buildShareText(score);
+    const onSuccess = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    });
+    };
+    const fallback = () => {
+      const el = document.createElement("textarea");
+      el.value = text;
+      el.style.position = "fixed";
+      el.style.opacity = "0";
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      onSuccess();
+    };
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(fallback);
+    } else {
+      fallback();
+    }
   }
 
   function togglePreview(song: DailyPuzzle[number]) {
