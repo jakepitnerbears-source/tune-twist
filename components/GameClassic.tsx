@@ -756,7 +756,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                       disabled={state.hintsUsed >= 3}
                       className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
                     >
-                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} · ${TITLE_SCORES[state.hintsUsed + 1].toLocaleString()} pts` : `Hint (3/3 used)`}
+                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} · -${(TITLE_SCORES[state.hintsUsed] - TITLE_SCORES[state.hintsUsed + 1]).toLocaleString()} pts` : `Hint (3/3 used)`}
                     </button>
                     <button
                       type="button"
