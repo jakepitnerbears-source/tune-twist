@@ -494,7 +494,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
       .map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"))
       .join(" ");
     const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
-    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.com`;
+    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.io`;
   }
 
   function handleCopyResults(score: number) {

@@ -412,7 +412,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     const solvedCount = states.filter((s) => s.solved).length;
     const emojis = states.map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨")).join(" ");
     const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
-    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${score.toLocaleString()} pts\n\n${emojis}\n\ntunetwist.com`;
+    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${score.toLocaleString()} pts\n\n${emojis}\n\ntunetwist.io`;
   }
 
   function handleCopyResults(score: number) {

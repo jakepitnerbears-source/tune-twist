@@ -300,7 +300,7 @@ export default function GameJukebox({ puzzle, puzzleNumber, genreLabel, allArtis
     const starEmojis="⭐".repeat(stars)+"☆".repeat(5-stars);
     const emojis=states.map(s=>(!s.solved?"⬜":s.hintsUsed===0?"🟩":"🟨")).join(" ");
     const label=genreLabel?genreLabel:`#${puzzleNumber}`;
-    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.com`;
+    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.io`;
   }
   function handleCopyResults(score: number) {
     navigator.clipboard.writeText(buildShareText(score)).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2000);});
