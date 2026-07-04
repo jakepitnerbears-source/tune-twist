@@ -21,6 +21,7 @@ export default function Nav() {
           <div className="hidden md:flex items-center gap-6">
             <Link href="/genres" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Genres</Link>
             <button onClick={() => setShowModal(true)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">How to Play</button>
+            <Link href="/about" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
             <Link href="/contact" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
             <Link href="/" className="text-sm font-bold px-4 py-2 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)] hover:opacity-90 transition-opacity">Play Now!</Link>
           </div>
@@ -42,6 +43,7 @@ export default function Nav() {
           <div className="md:hidden flex flex-col px-6 pb-5 gap-4 border-t border-[color:var(--color-border)]">
             <Link href="/genres" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Genres</Link>
             <button onClick={() => { setShowModal(true); setMenuOpen(false); }} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors text-left">How to Play</button>
+            <Link href="/about" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
             <Link href="/" onClick={() => setMenuOpen(false)} className="text-sm font-bold px-4 py-2 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)] hover:opacity-90 transition-opacity text-center">Play Now!</Link>
           </div>
