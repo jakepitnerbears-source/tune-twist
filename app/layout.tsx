@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
     url: "https://tunetwist.io",
     siteName: "TuneTwist",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "TuneTwist" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "TuneTwist" }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "TuneTwist — Daily Music Word Game",
     description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 
