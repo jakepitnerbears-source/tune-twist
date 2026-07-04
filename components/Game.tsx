@@ -864,12 +864,12 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                   </div>
                 ) : (
                   <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
-                    <div className="flex gap-3 text-sm">
-                      <span className={state.artistCorrect ? "text-[color:var(--color-green)]" : "text-[color:var(--color-red)]"}>
-                        {state.artistCorrect ? <><Check className="text-[color:var(--color-green)]" /> Artist +{ARTIST_BONUS}</> : `✕ Artist (${current.artist})`}
+                    <div className="flex gap-2 text-sm">
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${state.artistCorrect ? "bg-[color:var(--color-green)]/10 text-[color:var(--color-green)]" : "bg-[color:var(--color-red)]/10 text-[color:var(--color-red)]"}`}>
+                        {state.artistCorrect ? <><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</> : `✕ Artist (${current.artist})`}
                       </span>
-                      <span className={state.yearCorrect === "exact" ? "text-[color:var(--color-green)]" : state.yearCorrect === "close" ? "text-yellow-400" : "text-[color:var(--color-red)]"}>
-                        {state.yearCorrect === "exact" ? <><Check className="text-[color:var(--color-green)]" /> Year +{YEAR_BONUS}</> : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✕ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium ${state.yearCorrect === "exact" ? "bg-[color:var(--color-green)]/10 text-[color:var(--color-green)]" : state.yearCorrect === "close" ? "bg-yellow-400/10 text-yellow-400" : "bg-[color:var(--color-red)]/10 text-[color:var(--color-red)]"}`}>
+                        {state.yearCorrect === "exact" ? <><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</> : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✕ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
                       </span>
                     </div>
                     <SongReveal info={state.songInfo} />
