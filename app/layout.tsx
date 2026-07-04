@@ -37,14 +37,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.className} ${anton.variable} ${poppins.variable} antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.className} ${anton.variable} ${poppins.variable} antialiased`} suppressHydrationWarning>
       <head>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-V5D7Y5EPEP" strategy="afterInteractive" />
+        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('tt_theme');if(t==='brutal'){var r=document.documentElement;r.setAttribute('data-theme','brutal');var v={'--color-navy':'#0a0a0a','--color-card':'#141414','--color-border':'#f5d000','--color-green':'#f5d000','--color-coral':'#ff1493','--color-red':'#ff3300','--color-purple':'#ff1493','--color-muted':'rgba(255,255,255,0.55)','--gradient-a':'rgba(245,208,0,0.7)','--gradient-b':'rgba(255,20,147,0.7)','--btn-gradient':'linear-gradient(135deg,#f5d000 0%,#ff1493 100%)','--blob-a-hi':'#f5d000cc','--blob-a-lo':'#f5d00033','--blob-b-hi':'#ff1493bb','--blob-b-lo':'#ff149333','--blob-c-hi':'#ff330099','--blob-c-lo':'#ff330022'};for(var k in v)r.style.setProperty(k,v[k]);}}catch(e){}` }} />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-1R55HLRRG2" strategy="afterInteractive" />
         <Script id="ga-init" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-V5D7Y5EPEP');
+          gtag('config', 'G-1R55HLRRG2');
         `}</Script>
       </head>
       <body className="h-full flex flex-col bg-navy text-white">
