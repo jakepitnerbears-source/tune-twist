@@ -866,13 +866,13 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                   <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
                     <div className="flex gap-2 text-sm">
                       {state.artistCorrect
-                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{border:"1px solid rgba(34,197,94,0.4)",color:"#4ade80"}}><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</span>
-                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{border:"1px solid rgba(249,115,22,0.4)",color:"#fb923c"}}>✕ Artist ({current.artist})</span>}
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{background:"rgba(34,197,94,0.15)",border:"1px solid rgba(34,197,94,0.4)",color:"#4ade80"}}><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</span>
+                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{background:"rgba(249,115,22,0.15)",border:"1px solid rgba(249,115,22,0.4)",color:"#fb923c"}}>✕ Artist ({current.artist})</span>}
                       {state.yearCorrect === "exact"
-                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{border:"1px solid rgba(34,197,94,0.4)",color:"#4ade80"}}><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</span>
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{background:"rgba(34,197,94,0.15)",border:"1px solid rgba(34,197,94,0.4)",color:"#4ade80"}}><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</span>
                         : state.yearCorrect === "close"
-                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{border:"1px solid rgba(250,204,21,0.4)",color:"#facc15"}}>~ Year +{YEAR_BONUS_CLOSE}</span>
-                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{border:"1px solid rgba(249,115,22,0.4)",color:"#fb923c"}}>✕ Year ({state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})</span>}
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{background:"rgba(250,204,21,0.15)",border:"1px solid rgba(250,204,21,0.4)",color:"#facc15"}}>~ Year +{YEAR_BONUS_CLOSE}</span>
+                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium" style={{background:"rgba(249,115,22,0.15)",border:"1px solid rgba(249,115,22,0.4)",color:"#fb923c"}}>✕ Year ({state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})</span>}
                     </div>
                     <SongReveal info={state.songInfo} />
                   </div>
