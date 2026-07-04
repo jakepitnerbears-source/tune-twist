@@ -9,6 +9,12 @@ import SongReveal from "@/components/SongReveal";
 import StarRating from "@/components/StarRating";
 import FeedbackWidget from "@/components/FeedbackWidget";
 
+function trackEvent(name: string, params?: Record<string, string | number>) {
+  if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: Function }).gtag === "function") {
+    (window as unknown as { gtag: Function }).gtag("event", name, params);
+  }
+}
+
 const HINT_COSTS = [200, 300, 400];
 const BASE_SCORE = 1000;
 const ARTIST_BONUS = 150;
@@ -306,6 +312,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     const newStreak = solved >= 3 ? streakRef.current + 1 : 0;
     streakRef.current = newStreak;
     setStreak(newStreak);
+    trackEvent("streak_day", { streak: newStreak, solved_count: solved });
     try {
       localStorage.setItem(
         "tunedecode_streak",
@@ -358,6 +365,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     if (!state.guess.trim() || state.solved) return;
     const correct = validateGuess(state.guess, current.title, current.altTitles);
     if (correct) {
+      trackEvent("song_correct", { song_index: songIndex, hints_used: state.hintsUsed });
       const autoSkipArtist = state.hintsUsed >= 3;
       const autoSkipYear = state.hintsUsed >= 1;
       updateState(songIndex, {
@@ -446,6 +454,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
 
   function handleHint() {
     if (state.hintsUsed >= 3 || state.solved) return;
+    trackEvent("hint_used", { song_index: songIndex, hint_number: state.hintsUsed + 1 });
     updateState(songIndex, {
       hintsUsed: state.hintsUsed + 1,
       feedback: randomFrom(HINT_MESSAGES),
@@ -455,7 +464,14 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
 
   function handleReveal() {
     if (state.hintsUsed < 3) return;
+    trackEvent("song_skipped", { song_index: songIndex });
     updateState(songIndex, { skipped: true, feedback: randomFrom(SKIP_MESSAGES) });
+  }
+
+  function handleSeeResults() {
+    const solvedCount = states.filter((s) => s.solved).length;
+    trackEvent("puzzle_complete", { score: totalScore, solved_count: solvedCount, streak });
+    setGameOver(true);
   }
 
   function handleNext() {
@@ -934,7 +950,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
         {/* See Results — only when every song is finished */}
         {states.every(s => s.solved || s.skipped) && (
           <button
-            onClick={() => setGameOver(true)}
+            onClick={handleSeeResults}
             className="w-full py-3.5 rounded-xl border border-[color:var(--color-purple)] text-[color:var(--color-purple)] text-sm font-bold hover:bg-[color:var(--color-purple)]/10 transition-colors"
           >
             See Results →

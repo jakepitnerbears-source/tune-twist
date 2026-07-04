@@ -16,6 +16,10 @@ export default function ContactPage() {
         body: data,
       });
       if (!res.ok) console.error("Formspree error", res.status, await res.text());
+      if (res.ok && typeof window !== "undefined" && typeof (window as unknown as { gtag?: Function }).gtag === "function") {
+        (window as unknown as { gtag: Function }).gtag("event", "contact_submit");
+      }
+      if (!res.ok) console.error("Formspree error", res.status, await res.text());
       setStatus(res.ok ? "done" : "error");
     } catch {
       setStatus("error");

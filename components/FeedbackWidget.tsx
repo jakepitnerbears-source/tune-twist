@@ -15,6 +15,9 @@ export default function FeedbackWidget() {
 
   async function pick(label: string) {
     setSelected(label);
+    if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: Function }).gtag === "function") {
+      (window as unknown as { gtag: Function }).gtag("event", "feedback_reaction", { reaction: label });
+    }
     try {
       await fetch("https://formspree.io/f/xeebvglo", {
         method: "POST",
