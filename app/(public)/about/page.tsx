@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -74,7 +75,7 @@ export default function About() {
           <div className="flex flex-col gap-4">
             {[
               { n: "01", heading: "A new puzzle drops every day", body: "Five songs, five synonymized titles. The puzzle resets at midnight — so there's always something new to decode." },
-              { n: "02", heading: "Synonyms replace key words", body: "\"Blinding Lights\" becomes \"Dazzling Illumination.\" The structure stays the same — your job is to work backwards to the real title." },
+              { n: "02", heading: "Synonyms replace key words", body: <><span className="text-white font-bold">Blinding Lights</span> becomes <span className="text-[color:var(--color-purple)] font-bold">Dazzling Illumination</span>. Same structure, totally twisted — work backwards and name that track.</> },
               { n: "03", heading: "Hints are available, but they cost you", body: "Each song has 3 escalating hints. Use them sparingly — every hint lowers the points you can earn for that song." },
               { n: "04", heading: "Earn stars for perfection", body: "Solve a song with no hints, then correctly name the artist and release year, and you'll earn a ★. Max 5 per day." },
             ].map((step) => (
@@ -82,7 +83,7 @@ export default function About() {
                 <span className="text-xs font-bold text-[color:var(--color-purple)] mt-0.5 shrink-0 w-6">{step.n}</span>
                 <div className="flex flex-col gap-1">
                   <p className="text-sm font-semibold text-white">{step.heading}</p>
-                  <p className="text-sm text-[color:var(--color-muted)] leading-relaxed">{step.body}</p>
+                  <p className="text-sm text-[color:var(--color-muted)] leading-relaxed">{step.body as React.ReactNode}</p>
                 </div>
               </div>
             ))}
