@@ -626,7 +626,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
               </span>
               <span
                 className="text-xs font-bold px-3 py-1 rounded-full mt-3 mb-1"
-                style={{ background: `${genreColor}22`, color: genreColor }}
+                style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
               >
                 {current.genre ?? "Unknown"} · {decade}
               </span>
