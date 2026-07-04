@@ -1,5 +1,4 @@
 import Link from "next/link";
-import StarRating from "@/components/StarRating";
 
 const DIFFICULTY_STYLES: Record<string, string> = {
   Easy: "bg-[color:var(--color-green)] text-[color:var(--color-navy)]",
@@ -99,7 +98,7 @@ export default function HowToPlay() {
         <Section title="Hints">
           <Card>
             <p className="text-sm text-[color:var(--color-muted)]">
-              Each song has 3 escalating hints. Using them costs points but keeps you in the game.
+              Each song has 3 escalating hints. Using them lowers your available points for that song.
             </p>
             <div className="flex flex-col gap-2">
               {[
@@ -123,20 +122,20 @@ export default function HowToPlay() {
         <Section title="Bonus Round">
           <Card>
             <p className="text-sm text-[color:var(--color-muted)]">
-              Once you decode the title, you unlock a bonus round for extra points.
+              After decoding the title, guess the artist and release year. These don't affect your score — but get all three right with no hints and you earn a ★.
             </p>
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between text-sm">
-                <span>Who's the artist?</span>
-                <span className="font-bold text-[color:var(--color-green)]">+150 pts</span>
+            <div className="flex flex-col gap-2 text-sm">
+              <div className="flex items-center gap-2">
+                <span style={{ color: "#facc15" }}>★</span>
+                <span className="text-[color:var(--color-muted)]">Perfect song: correct title + artist + year, no hints used</span>
               </div>
-              <div className="flex items-center justify-between text-sm">
-                <span>What year was it released?</span>
-                <span className="font-bold text-[color:var(--color-green)]">+100 pts</span>
+              <div className="flex items-center gap-2">
+                <span style={{ color: "rgba(255,255,255,0.2)" }}>★</span>
+                <span className="text-[color:var(--color-muted)]">Max 5 stars per daily game</span>
               </div>
             </div>
             <p className="text-xs text-[color:var(--color-muted)]">
-              Year is accepted within ±1. You can skip the bonus and move on anytime.
+              Year is accepted within ±1 for the bonus display, but only an exact match earns a star.
             </p>
           </Card>
         </Section>
@@ -145,51 +144,30 @@ export default function HowToPlay() {
         <Section title="Scoring">
           <Card>
             <div className="flex flex-col gap-2 text-sm">
-              <div className="flex justify-between">
-                <span>Base score per song</span>
-                <span className="font-bold">1,000 pts</span>
+              <div className="flex justify-between font-medium">
+                <span>No hints used</span>
+                <span className="font-bold text-[color:var(--color-green)]">1,000 pts</span>
               </div>
               <div className="flex justify-between text-[color:var(--color-muted)]">
-                <span>Hint 1 used</span>
-                <span>–200 pts</span>
+                <span>Correct after hint 1</span>
+                <span>750 pts</span>
               </div>
               <div className="flex justify-between text-[color:var(--color-muted)]">
-                <span>Hint 2 used</span>
-                <span>–300 pts</span>
+                <span>Correct after hint 2</span>
+                <span>500 pts</span>
               </div>
               <div className="flex justify-between text-[color:var(--color-muted)]">
-                <span>Hint 3 used</span>
-                <span>–400 pts</span>
+                <span>Correct after hint 3</span>
+                <span>250 pts</span>
               </div>
               <div className="flex justify-between text-[color:var(--color-muted)]">
-                <span>Song revealed (not solved)</span>
+                <span>Song not solved</span>
                 <span>0 pts</span>
               </div>
               <div className="border-t border-[color:var(--color-border)] pt-2 flex justify-between font-bold">
-                <span>Max per song (with bonus)</span>
-                <span className="text-[color:var(--color-green)]">1,250 pts</span>
-              </div>
-              <div className="flex justify-between font-bold">
                 <span>Max daily total</span>
-                <span className="text-[color:var(--color-green)]">6,250 pts</span>
+                <span className="text-[color:var(--color-green)]">5,000 pts</span>
               </div>
-            </div>
-          </Card>
-          <Card>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)] mb-1">Star Ratings</p>
-            <div className="flex flex-col gap-2">
-              {[
-                [5, "4,500–6,250 pts"],
-                [4, "3,500–4,499 pts"],
-                [3, "2,500–3,499 pts"],
-                [2, "1,000–2,499 pts"],
-                [1, "1–999 pts"],
-              ].map(([count, range]) => (
-                <div key={count} className="flex items-center justify-between">
-                  <StarRating stars={count as number} size={14} />
-                  <span className="text-sm text-[color:var(--color-muted)]">{range}</span>
-                </div>
-              ))}
             </div>
           </Card>
         </Section>

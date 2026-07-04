@@ -83,13 +83,13 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Hints</h3>
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
               <p className="text-sm text-[color:var(--color-muted)]">
-                Each song has 3 escalating hints. Using them costs points but keeps you in the game.
+                Each song has 3 escalating hints. Using them lowers your available points for that song.
               </p>
               <div className="flex flex-col gap-2">
                 {[
                   { n: "1", text: `Release year — e.g. "Released in 2019"` },
                   { n: "2", text: `A lyric snippet from the song` },
-                  { n: "3", text: `Artist name — reveals the answer (forfeits artist bonus)` },
+                  { n: "3", text: `Artist name` },
                 ].map((h) => (
                   <div
                     key={h.n}
@@ -108,27 +108,17 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Bonus Round</h3>
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
               <p className="text-sm text-[color:var(--color-muted)]">
-                Decode the title, then unlock bonus questions for extra points.
+                After decoding the title, guess the artist and release year. These don't affect your score — but get all three right with no hints and you earn a ★.
               </p>
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Who's the artist?</span>
-                  <span className="font-bold text-[color:var(--color-green)]">+150 pts</span>
+              <div className="flex flex-col gap-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <span style={{ color: "#facc15" }}>★</span>
+                  <span className="text-[color:var(--color-muted)]">Perfect song: correct title + artist + year, no hints used</span>
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center justify-between text-sm">
-                    <span>What year was it released? (exact)</span>
-                    <span className="font-bold text-[color:var(--color-green)]">+100 pts</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm text-[color:var(--color-muted)]">
-                    <span>Within ±1 year</span>
-                    <span className="font-bold text-yellow-400">+50 pts</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span style={{ color: "rgba(255,255,255,0.2)" }}>★</span>
+                  <span className="text-[color:var(--color-muted)]">Max 5 stars per daily game</span>
                 </div>
-              </div>
-              <div className="flex flex-col gap-1 text-xs text-[color:var(--color-muted)] border-t border-[color:var(--color-border)] pt-3">
-                <p>Using hint 3 (artist reveal) forfeits the artist bonus.</p>
-                <p>Using any hint forfeits the year bonus.</p>
               </div>
             </div>
           </div>
@@ -138,33 +128,28 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Scoring</h3>
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
               <div className="flex flex-col gap-2 text-sm">
-                <div className="flex justify-between">
-                  <span>Base score per song</span>
-                  <span className="font-bold">1,000 pts</span>
+                <div className="flex justify-between font-medium">
+                  <span>No hints used</span>
+                  <span className="font-bold text-[color:var(--color-green)]">1,000 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Hint 1 used</span><span>–200 pts</span>
+                  <span>Correct after hint 1</span><span>750 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Hint 2 used</span><span>–300 pts</span>
+                  <span>Correct after hint 2</span><span>500 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Hint 3 used</span><span>–400 pts</span>
+                  <span>Correct after hint 3</span><span>250 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Song revealed (not solved)</span><span>0 pts</span>
+                  <span>Song not solved</span><span>0 pts</span>
                 </div>
                 <div className="border-t border-[color:var(--color-border)] pt-2 flex justify-between font-bold">
-                  <span>Max per song (with bonus)</span>
-                  <span className="text-[color:var(--color-green)]">1,250 pts</span>
-                </div>
-                <div className="flex justify-between font-bold">
                   <span>Max daily total</span>
-                  <span className="text-[color:var(--color-green)]">6,250 pts</span>
+                  <span className="text-[color:var(--color-green)]">5,000 pts</span>
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* Bottom padding */}
