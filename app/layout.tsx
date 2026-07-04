@@ -21,8 +21,23 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "TuneTwist",
-  description: "Twist the song. One synonym at a time.",
+  title: "TuneTwist — Daily Music Word Game",
+  description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all? A free daily music puzzle game.",
+  metadataBase: new URL("https://tunetwist.io"),
+  openGraph: {
+    title: "TuneTwist — Daily Music Word Game",
+    description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
+    url: "https://tunetwist.io",
+    siteName: "TuneTwist",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "TuneTwist" }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TuneTwist — Daily Music Word Game",
+    description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
+    images: ["/og-image.png"],
+  },
 };
 
 export const viewport: Viewport = {
