@@ -43,9 +43,9 @@ export default function RootLayout({
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-G51X30L960" strategy="afterInteractive" />
         <Script id="ga-init" strategy="afterInteractive">{`
           window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-G51X30L960');
+          window.gtag = function(){window.dataLayer.push(arguments);}
+          window.gtag('js', new Date());
+          window.gtag('config', 'G-G51X30L960');
         `}</Script>
       </head>
       <body className="h-full flex flex-col bg-navy text-white">
