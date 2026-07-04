@@ -7,12 +7,7 @@ import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 import SongReveal from "@/components/SongReveal";
 
-const HINT_COSTS = [200, 300, 400];
-const BASE_SCORE = 1000;
-const ARTIST_BONUS = 150;
-const YEAR_BONUS = 100;
-const YEAR_BONUS_CLOSE = 50;
-const MAX_SONG_SCORE = BASE_SCORE + ARTIST_BONUS + YEAR_BONUS;
+const TITLE_SCORES = [1000, 750, 500, 250];
 
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close. One more try.", "Getting warm…"];
@@ -120,16 +115,15 @@ function validateYear(guess: string, correct: string): "exact" | "close" | false
 
 function titleScore(hintsUsed: number, solved: boolean): number {
   if (!solved) return 0;
-  const deduction = HINT_COSTS.slice(0, hintsUsed).reduce((a, b) => a + b, 0);
-  return Math.max(100, BASE_SCORE - deduction);
+  return TITLE_SCORES[Math.min(hintsUsed, 3)];
 }
 
 function totalSongScore(s: SongState): number {
-  return (
-    titleScore(s.hintsUsed, s.solved) +
-    (s.artistCorrect ? ARTIST_BONUS : 0) +
-    (s.yearCorrect === "exact" ? YEAR_BONUS : s.yearCorrect === "close" ? YEAR_BONUS_CLOSE : 0)
-  );
+  return titleScore(s.hintsUsed, s.solved);
+}
+
+function songEarnedStar(s: SongState): boolean {
+  return s.solved && s.hintsUsed === 0 && s.artistCorrect === true && s.yearCorrect === "exact";
 }
 
 function getToday(): string {
@@ -347,7 +341,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     updateState(songIndex, {
       artistCorrect: correct,
       artistFeedback: correct
-        ? randomFrom(["+150. You know your stuff.", "Artist locked in."])
+        ? randomFrom(["You know your stuff.", "Artist locked in."])
         : randomFrom(["Not quite. Try again.", "Close?"]),
     });
   }
@@ -362,9 +356,9 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     updateState(songIndex, {
       yearCorrect: correct,
       yearFeedback: correct === "exact"
-        ? randomFrom(["+100. Dialed in.", "Year on point."])
+        ? randomFrom(["Dialed in.", "Year on point."])
         : correct === "close"
-        ? randomFrom(["+50. One year off.", "Close — within a year."])
+        ? randomFrom(["One year off.", "Close — within a year."])
         : randomFrom(["Wrong year. Guess again.", "Off by more than one."]),
     });
   }
@@ -410,9 +404,11 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
   function buildShareText(score: number): string {
     const solvedCount = states.filter((s) => s.solved).length;
+    const starCount = states.filter(songEarnedStar).length;
     const emojis = states.map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨")).join(" ");
+    const stars = "★".repeat(starCount) + "☆".repeat(puzzle.length - starCount);
     const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
-    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${score.toLocaleString()} pts\n\n${emojis}\n\ntunetwist.io`;
+    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${score.toLocaleString()} / 5,000 pts\n${stars}\n\n${emojis}\n\ntunetwist.io`;
   }
 
   function handleCopyResults(score: number) {
@@ -443,7 +439,6 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
     state.bonusDone || (state.artistCorrect !== null && state.yearCorrect !== null);
 
   const totalScore = states.reduce((sum, s) => sum + totalSongScore(s), 0);
-  const maxScore = puzzle.length * MAX_SONG_SCORE;
 
   const genreColor = GENRE_HEX[current.genre ?? ""] ?? "#71717a";
   const decade = current.releaseYear
@@ -453,6 +448,11 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
   // ── Results screen ────────────────────────────────────────────────────────
   if (gameOver) {
     const solvedCount = states.filter((s) => s.solved).length;
+    const starCount = states.filter(songEarnedStar).length;
+    const noHintSolves = states.filter((s) => s.solved && s.hintsUsed === 0).length;
+    const artistsCorrect = states.filter((s) => s.artistCorrect).length;
+    const exactYears = states.filter((s) => s.yearCorrect === "exact").length;
+    const totalHintsUsed = states.reduce((sum, s) => sum + s.hintsUsed, 0);
     return (
       <main className="flex flex-col items-center justify-start min-h-[calc(100svh-8rem)] px-4 pt-8 pb-6">
         <div className="w-full max-w-[560px] flex flex-col gap-6">
@@ -477,22 +477,56 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
             {copied ? <><Check className="text-[color:var(--color-navy)]" /> Copied!</> : "Copy Results"}
           </button>
 
-          <div className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-8 flex flex-col gap-5">
+          <div className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-6 flex flex-col gap-5">
             <p className="text-[color:var(--color-muted)] text-xs uppercase tracking-widest text-center">
               {genreLabel ? genreLabel : `Today's Results — #${puzzleNumber}`}
             </p>
-            <p className="text-3xl font-bold text-center">{totalScore.toLocaleString()} pts</p>
-            <p className="text-[color:var(--color-muted)] text-sm text-center">
-              {solvedCount} of {puzzle.length} songs decoded
-            </p>
+
+            {/* Primary score */}
+            <div className="text-center">
+              <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)] mb-1">Score</p>
+              <p className="text-4xl font-bold">{totalScore.toLocaleString()} <span className="text-2xl text-[color:var(--color-muted)] font-normal">/ 5,000</span></p>
+            </div>
+
+            {/* Stars */}
+            <div className="text-center">
+              <div className="text-3xl tracking-wide" style={{ color: "#facc15" }}>
+                {"★".repeat(starCount)}
+                <span style={{ color: "rgba(255,255,255,0.2)" }}>{"★".repeat(puzzle.length - starCount)}</span>
+              </div>
+              <p className="text-sm text-[color:var(--color-muted)] mt-1">
+                {starCount === 0 ? "No perfect songs" : `${starCount} Perfect Song${starCount !== 1 ? "s" : ""}`}
+              </p>
+            </div>
+
+            {/* Emoji row */}
             <div className="text-center text-2xl tracking-widest">
               {states.map((s, i) => (
                 <span key={i}>{!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}</span>
               ))}
             </div>
-            <div className="flex flex-col gap-3 mt-1">
+
+            {/* Stats summary */}
+            <div className="flex flex-col gap-2 border-t border-[color:var(--color-border)] pt-4">
+              {([
+                ["Songs solved", `${solvedCount} / ${puzzle.length}`],
+                ["No hint solves", `${noHintSolves}`],
+                ["Artists correct", `${artistsCorrect} / ${puzzle.length}`],
+                ["Exact years correct", `${exactYears} / ${puzzle.length}`],
+                ["Hints used", `${totalHintsUsed}`],
+              ] as [string, string][]).map(([label, value]) => (
+                <div key={label} className="flex justify-between text-sm">
+                  <span className="text-[color:var(--color-muted)]">{label}</span>
+                  <span className="font-semibold">{value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Per-song breakdown */}
+            <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
               {puzzle.map((song, i) => {
                 const s = states[i];
+                const star = songEarnedStar(s);
                 return (
                   <div key={song.id} className="flex flex-col gap-1.5">
                     <div className="flex items-center justify-between text-sm">
@@ -510,17 +544,20 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                           {song.title}
                         </span>
                       </div>
-                      <span className={`font-semibold ${s.solved ? "text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}`}>
-                        {totalSongScore(s)} pts
-                      </span>
+                      <div className="flex items-center gap-2">
+                        {star && <span style={{ color: "#facc15" }}>★</span>}
+                        <span className={`font-semibold ${s.solved ? "text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}`}>
+                          {totalSongScore(s)} pts
+                        </span>
+                      </div>
                     </div>
                     {s.solved && (
                       <div className="flex gap-2 text-xs">
                         <span style={{ color: s.artistCorrect ? "#22c55e" : "#ef4444" }}>
-                          {s.artistCorrect ? <><Check className="text-[#22c55e]" /> Artist</> : "✕ Artist"}
+                          {s.artistCorrect ? "✓ Artist" : "✕ Artist"}
                         </span>
                         <span style={{ color: s.yearCorrect === "exact" ? "#22c55e" : s.yearCorrect === "close" ? "#facc15" : "#ef4444" }}>
-                          {s.yearCorrect === "exact" ? <><Check className="text-[#22c55e]" /> Year</> : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
+                          {s.yearCorrect === "exact" ? "✓ Year" : s.yearCorrect === "close" ? "~ Year" : "✕ Year"}
                         </span>
                       </div>
                     )}
@@ -692,6 +729,9 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   >
                     Submit
                   </button>
+                  <p className="text-xs text-center text-[color:var(--color-muted)]">
+                    {TITLE_SCORES[state.hintsUsed].toLocaleString()} pts available
+                  </p>
                   <div className="flex gap-2">
                     <button
                       type="button"
@@ -699,7 +739,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                       disabled={state.hintsUsed >= 3}
                       className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
                     >
-                      Hint {state.hintsUsed < 3 ? `(−${HINT_COSTS[state.hintsUsed]} pts)` : `(3/3 used)`}
+                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} · ${TITLE_SCORES[state.hintsUsed + 1].toLocaleString()} pts` : `Hint (3/3 used)`}
                     </button>
                     <button
                       type="button"
@@ -724,7 +764,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   <span className="text-sm font-semibold" style={{ color: "#22c55e" }}>✓ {current.title}</span>
                   <span className="text-xs text-[color:var(--color-muted)]">+{titleScore(state.hintsUsed, true)} pts</span>
                 </div>
-                <label className="text-xs text-[color:var(--color-muted)]">Who&apos;s the artist? <span className="opacity-50">(+{ARTIST_BONUS} pts)</span></label>
+                <label className="text-xs text-[color:var(--color-muted)]">Who&apos;s the artist?</label>
                 <div className="relative" ref={artistDropdownRef}>
                   <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }} className="w-full">
                     <div className="gradient-border mx-[2px]">
@@ -775,9 +815,9 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.4rem 0.75rem", borderRadius: "0.6rem", border: `1px solid ${state.artistCorrect ? "#22c55e" : "#ef4444"}`, background: state.artistCorrect ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.1)" }}>
                   <span className="text-sm text-white">{state.artistCorrect ? state.artistGuess || current.artist : current.artist}</span>
-                  <span className="text-xs font-bold" style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>{state.artistCorrect ? `+${ARTIST_BONUS}` : "✗"}</span>
+                  <span className="text-xs font-bold" style={{ color: state.artistCorrect ? "#22c55e" : "#ef4444" }}>{state.artistCorrect ? "✓" : "✗"}</span>
                 </div>
-                <label className="text-xs text-[color:var(--color-muted)]">What year was it released? <span className="opacity-50">(+{YEAR_BONUS} pts)</span></label>
+                <label className="text-xs text-[color:var(--color-muted)]">What year was it released?</label>
                 <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }} className="w-full">
                   <div className="gradient-border mx-[2px]">
                     <input
@@ -818,10 +858,10 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
               <div className="flex flex-col gap-3">
                 <div className="flex gap-2 text-sm">
                   <span style={{ display:"inline-flex", alignItems:"center", gap:"4px", padding:"3px 10px", borderRadius:"999px", fontSize:"12px", fontWeight:500, background: state.artistCorrect ? "rgba(34,197,94,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${state.artistCorrect ? "rgba(34,197,94,0.4)" : "rgba(239,68,68,0.4)"}`, color: state.artistCorrect ? "#4ade80" : "#f87171" }}>
-                    {state.artistCorrect ? `✓ Artist +${ARTIST_BONUS}` : `✗ Artist (${current.artist})`}
+                    {state.artistCorrect ? "✓ Artist" : `✗ Artist (${current.artist})`}
                   </span>
                   <span style={{ display:"inline-flex", alignItems:"center", gap:"4px", padding:"3px 10px", borderRadius:"999px", fontSize:"12px", fontWeight:500, background: state.yearCorrect === "exact" ? "rgba(34,197,94,0.15)" : state.yearCorrect === "close" ? "rgba(250,204,21,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${state.yearCorrect === "exact" ? "rgba(34,197,94,0.4)" : state.yearCorrect === "close" ? "rgba(250,204,21,0.4)" : "rgba(239,68,68,0.4)"}`, color: state.yearCorrect === "exact" ? "#4ade80" : state.yearCorrect === "close" ? "#facc15" : "#f87171" }}>
-                    {state.yearCorrect === "exact" ? `✓ Year +${YEAR_BONUS}` : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE} (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
+                    {state.yearCorrect === "exact" ? "✓ Year" : state.yearCorrect === "close" ? `~ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
                   </span>
                 </div>
                 <SongReveal info={state.songInfo} />
@@ -869,7 +909,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
         {/* Score bar */}
         <div className="flex justify-between items-center text-xs text-[color:var(--color-muted)]">
-          <span>Score: {totalScore.toLocaleString()} / {maxScore.toLocaleString()}</span>
+          <span>Score: {totalScore.toLocaleString()} / {(puzzle.length * 1000).toLocaleString()}</span>
           <div className="flex items-center gap-3">
             {streak > 0 && <span className="text-white font-semibold">🔥 {streak}</span>}
             <span>{states.filter((s) => s.solved).length} of {puzzle.length} solved</span>
