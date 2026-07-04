@@ -865,12 +865,14 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
                 ) : (
                   <div className="flex flex-col gap-3 border-t border-[color:var(--color-border)] pt-4">
                     <div className="flex gap-2 text-sm">
-                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${state.artistCorrect ? "border-green-500/30 text-green-400" : "border-red-500/30 text-red-400"}`}>
-                        {state.artistCorrect ? <><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</> : `✕ Artist (${current.artist})`}
-                      </span>
-                      <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border ${state.yearCorrect === "exact" ? "border-green-500/30 text-green-400" : state.yearCorrect === "close" ? "border-yellow-500/30 text-yellow-400" : "border-red-500/30 text-red-400"}`}>
-                        {state.yearCorrect === "exact" ? <><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</> : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✕ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
-                      </span>
+                      {state.artistCorrect
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border border-green-500/30 text-green-400"><Check className="w-3 h-3" /> Artist +{ARTIST_BONUS}</span>
+                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border border-red-500/30 text-red-400">✕ Artist ({current.artist})</span>}
+                      {state.yearCorrect === "exact"
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border border-green-500/30 text-green-400"><Check className="w-3 h-3" /> Year +{YEAR_BONUS}</span>
+                        : state.yearCorrect === "close"
+                        ? <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border border-yellow-500/30 text-yellow-400">~ Year +{YEAR_BONUS_CLOSE}</span>
+                        : <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium border border-red-500/30 text-red-400">✕ Year ({state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})</span>}
                     </div>
                     <SongReveal info={state.songInfo} />
                   </div>
