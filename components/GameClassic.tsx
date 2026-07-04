@@ -821,7 +821,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                     {state.artistCorrect ? `✓ Artist +${ARTIST_BONUS}` : `✗ Artist (${current.artist})`}
                   </span>
                   <span style={{ display:"inline-flex", alignItems:"center", gap:"4px", padding:"3px 10px", borderRadius:"999px", fontSize:"12px", fontWeight:500, background: state.yearCorrect === "exact" ? "rgba(34,197,94,0.15)" : state.yearCorrect === "close" ? "rgba(250,204,21,0.15)" : "rgba(239,68,68,0.15)", border: `1px solid ${state.yearCorrect === "exact" ? "rgba(34,197,94,0.4)" : state.yearCorrect === "close" ? "rgba(250,204,21,0.4)" : "rgba(239,68,68,0.4)"}`, color: state.yearCorrect === "exact" ? "#4ade80" : state.yearCorrect === "close" ? "#facc15" : "#f87171" }}>
-                    {state.yearCorrect === "exact" ? `✓ Year +${YEAR_BONUS}` : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE}` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
+                    {state.yearCorrect === "exact" ? `✓ Year +${YEAR_BONUS}` : state.yearCorrect === "close" ? `~ Year +${YEAR_BONUS_CLOSE} (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})` : `✗ Year (${state.songInfo && state.songInfo !== "loading" ? state.songInfo.releaseYear : current.releaseYear ?? ""})`}
                   </span>
                 </div>
                 <SongReveal info={state.songInfo} />
