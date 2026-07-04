@@ -45,7 +45,7 @@ export default function About() {
       <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-8">
 
         {/* Logo */}
-        <div className="flex justify-center">
+        <div className="relative z-20 flex justify-center">
           <Image src="/logo.png" alt="TuneTwist" width={200} height={100} className="object-contain" />
         </div>
 
