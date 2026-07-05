@@ -491,7 +491,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
     const stars = starRating(score, maxScore);
     const starEmojis = "⭐".repeat(stars) + "☆".repeat(5 - stars);
     const emojis = states
-      .map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"))
+      .map((s) => !s.solved ? "⬜" : (s.hintsUsed === 0 && s.artistCorrect && s.yearCorrect === "exact") ? "🟩" : "🟨")
       .join(" ");
     const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
     return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${starEmojis}\n\n${emojis}\n\ntunetwist.io`;
@@ -562,7 +562,7 @@ export default function Game({ puzzle, puzzleNumber, genreLabel, allArtists = []
             <div className="text-center text-2xl tracking-widest">
               {states.map((s, i) => (
                 <span key={i}>
-                  {!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}
+                  {!s.solved ? "⬜" : (s.hintsUsed === 0 && s.artistCorrect && s.yearCorrect === "exact") ? "🟩" : "🟨"}
                 </span>
               ))}
             </div>
