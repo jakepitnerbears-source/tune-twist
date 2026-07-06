@@ -502,6 +502,16 @@ export default function GameV2({
           )}
           {/* Card header */}
           <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
+            {bonusComplete && state.songInfo && state.songInfo !== "loading" && state.songInfo.artworkUrl && (
+              <img
+                src={state.songInfo.artworkUrl}
+                alt={current.title}
+                width={88}
+                height={88}
+                className="rounded-xl shadow-lg mb-0.5"
+                style={{ objectFit: "cover" }}
+              />
+            )}
             <span
               className="text-xs font-bold px-3 py-0.5 rounded-full"
               style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
