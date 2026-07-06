@@ -42,7 +42,7 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
 
           {/* Subtitle */}
           <p className="text-sm text-center text-[color:var(--color-muted)] leading-snug">
-            Every title gets dressed up in synonyms.<br />Unscramble it to find the real song.
+            Every song title gets twisted with synonyms.<br />Untwist it and figure out the real song!
           </p>
 
           {/* Example card */}
@@ -51,8 +51,10 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
             <p className="text-xl font-bold text-white">Demolition Sphere</p>
             <span className="text-[color:var(--color-muted)] text-sm">↓</span>
             <div className="w-full border-t border-[color:var(--color-border)]" />
-            <p className="text-xl font-bold" style={{ color: "#e879f9" }}>Wrecking Ball</p>
-            <p className="text-xs text-[color:var(--color-muted)]">Miley Cyrus</p>
+            <div className="w-full rounded-lg px-4 py-3 flex flex-col items-center gap-1" style={{ background: "linear-gradient(135deg, rgba(245,158,11,0.12) 0%, rgba(245,158,11,0.06) 100%)", border: "1px solid rgba(245,158,11,0.2)" }}>
+              <p className="text-xl font-bold" style={{ color: "var(--color-green)" }}>Wrecking Ball</p>
+              <p className="text-xs text-[color:var(--color-muted)]">Miley Cyrus</p>
+            </div>
           </div>
 
           {/* 2x2 tiles */}
