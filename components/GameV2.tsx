@@ -6,7 +6,7 @@ import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
-const TITLE_SCORES = [800, 600, 400, 200];
+const TITLE_SCORES = [800, 600, 400];
 const ARTIST_PTS = 100;
 const YEAR_PTS = 100;
 
@@ -153,8 +153,8 @@ function isPerfect(s: SongState) {
   return s.solved && s.hintsUsed === 0 && s.artistCorrect === true && s.yearCorrect === "exact";
 }
 
-function buildHints(song: DailyPuzzle[number], lyrics: Record<string, string>): [string, string, string] {
-  return [song.hints[0], lyrics[song.id] ? `"${lyrics[song.id]}"` : "", song.hints[1]];
+function buildHints(song: DailyPuzzle[number], lyrics: Record<string, string>): [string, string] {
+  return [lyrics[song.id] ? `"${lyrics[song.id]}"` : "", song.hints[1]];
 }
 
 function Countdown() {
@@ -301,8 +301,8 @@ export default function GameV2({
     if (!state.guess.trim() || state.solved) return;
     const correct = validateGuess(state.guess, current.title, current.altTitles);
     if (correct) {
-      const autoSkipArtist = state.hintsUsed >= 3;
-      const autoSkipYear = state.hintsUsed >= 1;
+      const autoSkipArtist = state.hintsUsed >= 2;
+      const autoSkipYear = false;
       update(songIndex, {
         solved: true, feedback: "", songInfo: "loading", glow: true, shake: false,
         ...(autoSkipArtist ? { artistCorrect: false } : {}),
@@ -338,7 +338,7 @@ export default function GameV2({
   }
 
   function handleSkipBonus() {
-    if (state.artistCorrect === null && state.hintsUsed < 3) {
+    if (state.artistCorrect === null && state.hintsUsed < 2) {
       update(songIndex, { artistCorrect: false });
     } else {
       update(songIndex, {
@@ -350,12 +350,12 @@ export default function GameV2({
   }
 
   function handleHint() {
-    if (state.hintsUsed >= 3 || state.solved) return;
+    if (state.hintsUsed >= 2 || state.solved) return;
     update(songIndex, { hintsUsed: state.hintsUsed + 1, feedback: "", feedbackWarm: false });
   }
 
   function handleReveal() {
-    if (state.hintsUsed < 3) return;
+    if (state.hintsUsed < 2) return;
     update(songIndex, { skipped: true, feedback: "" });
   }
 
@@ -436,7 +436,7 @@ export default function GameV2({
 
   // ── Game screen ───────────────────────────────────────────────────────
   const allDone = states.every((s) => s.solved || s.skipped);
-  const hintCost = state.hintsUsed < 3
+  const hintCost = state.hintsUsed < 2
     ? TITLE_SCORES[state.hintsUsed] - TITLE_SCORES[state.hintsUsed + 1]
     : 0;
 
@@ -682,7 +682,7 @@ export default function GameV2({
                           disabled={state.hintsUsed >= 3}
                           className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
                         >
-                          {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "3/3 hints used"}
+                          {state.hintsUsed < 2 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "2/2 hints used"}
                         </button>
                         <button
                           onPointerDown={(e) => e.preventDefault()}
