@@ -28,7 +28,7 @@ export default function ContactPage() {
 
   if (status === "done") {
     return (
-      <main className="flex flex-col items-center px-4 pt-[88px] pb-12">
+      <main className="flex flex-col items-center px-4 pt-[108px] pb-12">
         <div className="w-full max-w-[560px] flex flex-col gap-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight">Thanks!</h1>
           <p className="text-[color:var(--color-muted)]">Your message was sent. I'll get back to you soon.</p>
@@ -38,7 +38,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="flex flex-col items-center px-4 pt-[88px] pb-12">
+    <main className="flex flex-col items-center px-4 pt-[108px] pb-12">
       <div className="w-full max-w-[560px] flex flex-col gap-8">
 
         <div className="flex flex-col gap-2">
