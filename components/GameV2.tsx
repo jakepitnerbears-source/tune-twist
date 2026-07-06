@@ -13,6 +13,19 @@ const YEAR_PTS = 150;
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close.", "Getting warm…"];
 
+const CONFETTI_PARTICLES = [
+  { idx: 0, color: "#00b4ff", delay: 0 },
+  { idx: 1, color: "#7b61ff", delay: 30 },
+  { idx: 2, color: "#00b4ff", delay: 60 },
+  { idx: 3, color: "#ff6b3d", delay: 20 },
+  { idx: 4, color: "#7b61ff", delay: 50 },
+  { idx: 5, color: "#00b4ff", delay: 40 },
+  { idx: 6, color: "#ff6b3d", delay: 10 },
+  { idx: 7, color: "#7b61ff", delay: 70 },
+  { idx: 8, color: "#00b4ff", delay: 15 },
+  { idx: 9, color: "#ff6b3d", delay: 55 },
+];
+
 const GENRE_HEX: Record<string, string> = {
   "Pop": "#f472b6", "R&B": "#fb923c", "Hip-Hop": "#facc15",
   "Rock": "#f87171", "Alternative": "#fb7185", "Indie": "#a3e635",
@@ -213,6 +226,7 @@ export default function GameV2({
   const [streak, setStreak] = useState(0);
   const [copied, setCopied] = useState(false);
   const [artistDropdownOpen, setArtistDropdownOpen] = useState(false);
+  const [fullConfetti, setFullConfetti] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
 
@@ -255,6 +269,29 @@ export default function GameV2({
   useEffect(() => {
     if (!state.solved && !state.skipped) inputRef.current?.focus({ preventScroll: true });
   }, [songIndex, state.solved, state.skipped]);
+
+  useEffect(() => {
+    const s = states[songIndex];
+    if (s.solved && s.artistCorrect === true && s.yearCorrect === "exact") {
+      setFullConfetti(true);
+      const t = setTimeout(() => setFullConfetti(false), 3000);
+      return () => clearTimeout(t);
+    }
+  }, [songIndex, states[songIndex]?.artistCorrect, states[songIndex]?.yearCorrect]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const confettiPieces = useMemo(() => {
+    if (!fullConfetti) return [];
+    const colors = ["#00b4ff", "#7b61ff", "#ff6b3d", "#ffffff", "#ffd700"];
+    return Array.from({ length: 80 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      size: 6 + Math.random() * 7,
+      round: Math.random() > 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      duration: 1.8 + Math.random() * 1.8,
+      delay: Math.random() * 1.0,
+    }));
+  }, [fullConfetti]);
 
   function update(index: number, patch: Partial<SongState>) {
     setStates((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
@@ -404,11 +441,37 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="min-h-[100svh] flex flex-col items-center overflow-x-hidden px-4 pt-3 pb-16">
+    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6 overflow-x-hidden overflow-y-auto">
 
-      <div className="w-full max-w-[480px] flex flex-col gap-3">
+      {/* Scattered background music notes */}
+      <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
+        {[
+          { symbol: "♪", x: "8%",  y: "12%", size: 28, rot: -15 },
+          { symbol: "♫", x: "88%", y: "8%",  size: 24, rot: 10  },
+          { symbol: "+", x: "5%",  y: "55%", size: 26, rot: 0   },
+          { symbol: "♩", x: "92%", y: "42%", size: 22, rot: 20  },
+          { symbol: "♪", x: "15%", y: "82%", size: 20, rot: -8  },
+          { symbol: "♫", x: "82%", y: "75%", size: 26, rot: -12 },
+          { symbol: "+", x: "78%", y: "22%", size: 20, rot: 45  },
+          { symbol: "♩", x: "22%", y: "30%", size: 18, rot: 5   },
+          { symbol: "♪", x: "94%", y: "62%", size: 20, rot: 15  },
+          { symbol: "+", x: "35%", y: "88%", size: 22, rot: 30  },
+          { symbol: "♫", x: "4%",  y: "35%", size: 18, rot: -20 },
+          { symbol: "♩", x: "68%", y: "90%", size: 20, rot: 8   },
+        ].map((el, i) => (
+          <span key={i} style={{
+            position: "absolute", left: el.x, top: el.y,
+            fontSize: el.size, transform: `rotate(${el.rot}deg)`,
+            color: "rgba(255,255,255,0.28)",
+            animation: `dot-float ${3.5 + (i % 4) * 0.8}s ease-in-out ${i * 0.5}s infinite`,
+            fontFamily: "serif",
+          }}>{el.symbol}</span>
+        ))}
+      </div>
 
-        {/* Top stats bar + song label combined */}
+      <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-4">
+
+        {/* Stats bar */}
         <div className="flex items-center justify-between px-1">
           <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">
             Song {songIndex + 1} of {puzzle.length}
@@ -420,11 +483,45 @@ export default function GameV2({
           </div>
         </div>
 
-        {/* Card */}
+        {/* Progress dots */}
+        <div className="flex justify-center gap-2">
+          {puzzle.map((_, i) => {
+            const s = states[i];
+            const isActive = i === songIndex;
+            return (
+              <button key={i} onClick={() => setSongIndex(i)}
+                className="rounded-full transition-all"
+                style={{
+                  width: isActive ? 24 : 8, height: 8,
+                  background: isActive ? "white"
+                    : s.solved && isPerfect(s) ? "#facc15"
+                    : s.solved ? "var(--color-green)"
+                    : s.skipped ? "var(--color-red)"
+                    : "rgba(255,255,255,0.15)",
+                }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Card with glow blobs + gradient border */}
+        <div className="relative w-full">
+          <div className="absolute pointer-events-none" style={{ inset: "-120px", zIndex: 0 }}>
+            <div style={{ position: "absolute", top: "0%", left: "-15%", width: "75%", height: "80%", background: "radial-gradient(ellipse at center, var(--blob-a-hi) 0%, var(--blob-a-lo) 45%, transparent 72%)", filter: "blur(50px)", animation: "blob-drift-a 12s ease-in-out infinite" }} />
+            <div style={{ position: "absolute", bottom: "0%", right: "-12%", width: "72%", height: "78%", background: "radial-gradient(ellipse at center, var(--blob-b-hi) 0%, var(--blob-b-lo) 45%, transparent 72%)", filter: "blur(54px)", animation: "blob-drift-b 15s ease-in-out 2s infinite" }} />
+            <div style={{ position: "absolute", top: "25%", right: "0%", width: "55%", height: "60%", background: "radial-gradient(ellipse at center, var(--blob-c-hi) 0%, var(--blob-c-lo) 45%, transparent 72%)", filter: "blur(46px)", animation: "blob-drift-c 18s ease-in-out 5s infinite" }} />
+          </div>
+          <div className="relative z-10 w-full p-[2px] rounded-3xl" style={{ background: `linear-gradient(135deg, ${genreColor}99 0%, var(--color-purple) 40%, var(--color-coral) 70%, ${genreColor}44 100%)` }}>
         <div
-          className={`w-full rounded-2xl overflow-hidden flex flex-col transition-all ${state.shake ? "animate-shake" : ""} ${state.glow ? "animate-glow" : ""}`}
-          style={{ background: "var(--color-card)", border: "1px solid rgba(255,255,255,0.08)" }}
+          className={`relative w-full bg-[color:var(--color-card)] rounded-[22px] overflow-hidden flex flex-col ${state.shake ? "animate-shake" : ""} ${state.glow ? "animate-glow" : ""}`}
         >
+          {state.glow && (
+            <div className="absolute top-1/3 left-1/2 pointer-events-none" aria-hidden="true">
+              {CONFETTI_PARTICLES.map((p) => (
+                <span key={p.idx} style={{ position: "absolute", width: 7, height: 7, borderRadius: "50%", background: p.color, animation: `confetti-${p.idx} 0.75s ease-out ${p.delay}ms forwards` }} />
+              ))}
+            </div>
+          )}
           {/* Card header */}
           <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
             <span
@@ -648,36 +745,42 @@ export default function GameV2({
             </div>
           </div>
         </div>
-
-        {/* Mobile progress dots */}
-        <div className="flex gap-1.5 justify-center">
-          {puzzle.map((_, i) => {
-            const s = states[i];
-            const isActive = i === songIndex;
-            return (
-              <button
-                key={i}
-                onClick={() => setSongIndex(i)}
-                className="rounded-full transition-all"
-                style={{
-                  width: isActive ? 24 : 8,
-                  height: 8,
-                  background: isActive
-                    ? "white"
-                    : s.solved && isPerfect(s)
-                    ? "#facc15"
-                    : s.solved
-                    ? "var(--color-green)"
-                    : s.skipped
-                    ? "var(--color-red)"
-                    : "rgba(255,255,255,0.15)",
-                }}
-              />
-            );
-          })}
+          </div>
         </div>
 
+        {/* Score bar */}
+        <div className="flex justify-between items-center text-xs text-[color:var(--color-muted)] px-1">
+          <span>{runningTotal.toLocaleString()} pts · {states.filter((s) => s.solved).length}/{puzzle.length} solved</span>
+          {streak > 0 && <span className="text-white font-semibold">🔥 {streak}</span>}
+        </div>
+
+        {/* See Results */}
+        {states.every((s) => s.solved || s.skipped) && (
+          <button
+            onPointerDown={(e) => e.preventDefault()}
+            onClick={() => setGameOver(true)}
+            className="w-full py-3.5 rounded-xl border border-[color:var(--color-purple)] text-[color:var(--color-purple)] text-sm font-bold hover:bg-[color:var(--color-purple)]/10 transition-colors"
+          >
+            See Results →
+          </button>
+        )}
+
       </div>
+
+      {/* Full-screen confetti */}
+      {fullConfetti && (
+        <div className="fixed inset-0 pointer-events-none z-[200] overflow-hidden" aria-hidden="true">
+          {confettiPieces.map((p) => (
+            <div key={p.id} style={{
+              position: "absolute", left: `${p.left}%`, top: "-12px",
+              width: p.size, height: p.size,
+              borderRadius: p.round ? "50%" : "2px",
+              background: p.color,
+              animation: `confetti-fall ${p.duration}s ease-in ${p.delay}s forwards`,
+            }} />
+          ))}
+        </div>
+      )}
     </main>
   );
 }
