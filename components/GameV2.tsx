@@ -411,7 +411,7 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6">
+    <main className="fixed inset-0 flex flex-col items-center overflow-y-auto px-4 py-6" style={{ top: "6rem" }}>
 
       <div className="w-full max-w-[480px] flex flex-col gap-4">
 
