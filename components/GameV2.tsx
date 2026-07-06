@@ -188,13 +188,13 @@ function CheckIcon({ ok, warn }: { ok: boolean; warn?: boolean }) {
 }
 
 function ScoreRow({ label, value, ok, pts, warn }: { label: string; value: string; ok: boolean; pts: number; warn?: boolean }) {
-  const glow = warn ? "rgba(234,179,8,0.05)" : ok ? "rgba(34,197,94,0.05)" : "rgba(239,68,68,0.04)";
-  const border = warn ? "rgba(234,179,8,0.15)" : ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
+  const glow = warn ? "rgba(234,179,8,0.1)" : ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
+  const border = warn ? "rgba(234,179,8,0.5)" : ok ? "rgba(34,197,94,0.45)" : "rgba(239,68,68,0.4)";
   const leak = warn
-    ? "radial-gradient(ellipse at bottom right, rgba(234,179,8,0.08) 0%, transparent 70%)"
+    ? "radial-gradient(ellipse at bottom right, rgba(234,179,8,0.15) 0%, transparent 70%)"
     : ok
-    ? "radial-gradient(ellipse at bottom right, rgba(34,197,94,0.07) 0%, transparent 70%)"
-    : "radial-gradient(ellipse at bottom right, rgba(239,68,68,0.06) 0%, transparent 70%)";
+    ? "radial-gradient(ellipse at bottom right, rgba(34,197,94,0.12) 0%, transparent 70%)"
+    : "radial-gradient(ellipse at bottom right, rgba(239,68,68,0.1) 0%, transparent 70%)";
   return (
     <div
       className="relative flex items-center gap-3 px-4 py-3 rounded-xl overflow-hidden"
