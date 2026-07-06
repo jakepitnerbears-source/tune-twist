@@ -173,24 +173,25 @@ function Countdown() {
   );
 }
 
-function CheckIcon({ ok }: { ok: boolean }) {
+function CheckIcon({ ok, warn }: { ok: boolean; warn?: boolean }) {
+  const bg = warn ? "rgba(234,179,8,0.2)" : ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)";
+  const color = warn ? "#eab308" : ok ? "#4ade80" : "#f87171";
   return (
     <div
       className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold"
-      style={{
-        background: ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)",
-        color: ok ? "#4ade80" : "#f87171",
-      }}
+      style={{ background: bg, color }}
     >
-      {ok ? "✓" : "✗"}
+      {ok || warn ? "✓" : "✗"}
     </div>
   );
 }
 
-function ScoreRow({ label, value, ok, pts }: { label: string; value: string; ok: boolean; pts: number }) {
-  const glow = ok ? "rgba(34,197,94,0.05)" : "rgba(239,68,68,0.04)";
-  const border = ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
-  const leak = ok
+function ScoreRow({ label, value, ok, pts, warn }: { label: string; value: string; ok: boolean; pts: number; warn?: boolean }) {
+  const glow = warn ? "rgba(234,179,8,0.05)" : ok ? "rgba(34,197,94,0.05)" : "rgba(239,68,68,0.04)";
+  const border = warn ? "rgba(234,179,8,0.15)" : ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
+  const leak = warn
+    ? "radial-gradient(ellipse at bottom right, rgba(234,179,8,0.08) 0%, transparent 70%)"
+    : ok
     ? "radial-gradient(ellipse at bottom right, rgba(34,197,94,0.07) 0%, transparent 70%)"
     : "radial-gradient(ellipse at bottom right, rgba(239,68,68,0.06) 0%, transparent 70%)";
   return (
@@ -200,12 +201,12 @@ function ScoreRow({ label, value, ok, pts }: { label: string; value: string; ok:
     >
       <div className="absolute inset-0 pointer-events-none" style={{ background: leak }} />
       <div className="relative flex items-center gap-3 w-full">
-      <CheckIcon ok={ok} />
+      <CheckIcon ok={ok} warn={warn} />
       <div className="flex flex-col flex-1 min-w-0">
         <span className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] leading-none mb-0.5">{label}</span>
         <span className="text-sm font-semibold text-white truncate">{value}</span>
       </div>
-      <span className="text-sm font-bold shrink-0" style={{ color: ok ? "#4ade80" : "rgba(255,255,255,0.3)" }}>
+      <span className="text-sm font-bold shrink-0" style={{ color: warn ? "#eab308" : ok ? "#4ade80" : "rgba(255,255,255,0.3)" }}>
         {pts > 0 ? `+${pts}` : "—"}
       </span>
       </div>
@@ -559,7 +560,8 @@ export default function GameV2({
                 <ScoreRow
                   label="Year"
                   value={releaseYear}
-                  ok={state.yearCorrect === "exact" || state.yearCorrect === "close"}
+                  ok={state.yearCorrect === "exact"}
+                  warn={state.yearCorrect === "close"}
                   pts={yearPts(state)}
                 />
               )}
