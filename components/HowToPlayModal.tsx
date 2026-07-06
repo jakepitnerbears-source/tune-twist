@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { X } from "lucide-react";
-export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
+export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: () => void; onDontShowAgain?: () => void }) {
   // Close on Escape
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -160,6 +160,18 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               </div>
             </div>
           </div>
+
+          {/* Don't show again */}
+          {onDontShowAgain && (
+            <div className="flex justify-center pb-1">
+              <button
+                onClick={onDontShowAgain}
+                className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
+              >
+                Don&apos;t show this again
+              </button>
+            </div>
+          )}
 
           {/* Bottom padding */}
           <div className="h-2" />

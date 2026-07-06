@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { DailyPuzzle } from "@/lib/getDailyPuzzle";
 import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
+import HowToPlayModal from "@/components/HowToPlayModal";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
 const TITLE_SCORES = [800, 600, 400];
@@ -227,6 +228,7 @@ export default function GameV2({
   const [copied, setCopied] = useState(false);
   const [artistDropdownOpen, setArtistDropdownOpen] = useState(false);
   const [fullConfetti, setFullConfetti] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
 
@@ -265,6 +267,12 @@ export default function GameV2({
       localStorage.setItem("tunedecode_streak", JSON.stringify({ lastPlayed: getToday(), streak: newStreak }));
     } catch {}
   }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem("tunedecode_seen_how_to_play")) setShowHowToPlay(true);
+    } catch {}
+  }, []);
 
   useEffect(() => {
     if (!state.solved && !state.skipped) inputRef.current?.focus({ preventScroll: true });
@@ -441,6 +449,7 @@ export default function GameV2({
     : 0;
 
   return (
+    <>
     <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[100svh] md:min-h-[calc(100svh-8rem)] px-4 pt-[78px] md:pt-6 pb-6 overflow-x-hidden overflow-y-auto">
 
       {/* Scattered background music notes */}
@@ -741,5 +750,15 @@ export default function GameV2({
         </div>
       )}
     </main>
+    {showHowToPlay && (
+      <HowToPlayModal
+        onClose={() => setShowHowToPlay(false)}
+        onDontShowAgain={() => {
+          try { localStorage.setItem("tunedecode_seen_how_to_play", "1"); } catch {}
+          setShowHowToPlay(false);
+        }}
+      />
+    )}
+    </>
   );
 }
