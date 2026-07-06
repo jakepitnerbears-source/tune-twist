@@ -502,15 +502,20 @@ export default function GameV2({
           )}
           {/* Card header */}
           <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
-            {bonusComplete && state.songInfo && state.songInfo !== "loading" && state.songInfo.artworkUrl && (
-              <img
-                src={state.songInfo.artworkUrl}
-                alt={current.title}
-                width={88}
-                height={88}
-                className="rounded-xl shadow-lg mb-0.5"
-                style={{ objectFit: "cover" }}
-              />
+            {bonusComplete && (
+              state.songInfo === "loading" ? (
+                <div className="w-[88px] h-[88px] rounded-xl mb-0.5" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
+              ) : state.songInfo?.artworkUrl ? (
+                <img
+                  src={state.songInfo.artworkUrl}
+                  alt={current.title}
+                  width={88}
+                  height={88}
+                  className="rounded-xl shadow-lg mb-0.5"
+                  style={{ objectFit: "cover" }}
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
+              ) : null
             )}
             <span
               className="text-xs font-bold px-3 py-0.5 rounded-full"
