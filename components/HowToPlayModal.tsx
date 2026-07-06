@@ -33,9 +33,9 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
         <div className="flex flex-col bg-[color:var(--color-card)] rounded-2xl overflow-hidden px-5 pt-5 pb-5 gap-4">
 
           {/* Header */}
-          <div className="flex items-center justify-between">
+          <div className="relative flex items-center justify-center">
             <h2 className="text-lg font-bold">How to Play</h2>
-            <button onClick={onClose} className="text-[color:var(--color-muted)] hover:text-white transition-colors p-1" aria-label="Close">
+            <button onClick={onClose} className="absolute right-0 text-[color:var(--color-muted)] hover:text-white transition-colors p-1" aria-label="Close">
               <X size={18} />
             </button>
           </div>
@@ -48,11 +48,11 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
           {/* Example card */}
           <div className="rounded-xl bg-[color:var(--color-navy)] border border-[color:var(--color-border)] px-5 py-4 flex flex-col items-center gap-2">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">You see this</p>
-            <p className="text-xl font-bold text-white">Peck From A Bloom</p>
+            <p className="text-xl font-bold text-white">Demolition Sphere</p>
             <span className="text-[color:var(--color-muted)] text-sm">↓</span>
             <div className="w-full border-t border-[color:var(--color-border)]" />
-            <p className="text-xl font-bold" style={{ color: "#e879f9" }}>Kiss From A Rose</p>
-            <p className="text-xs text-[color:var(--color-muted)]">Seal</p>
+            <p className="text-xl font-bold" style={{ color: "#e879f9" }}>Wrecking Ball</p>
+            <p className="text-xs text-[color:var(--color-muted)]">Miley Cyrus</p>
           </div>
 
           {/* 2x2 tiles */}
