@@ -441,7 +441,7 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6 overflow-x-hidden overflow-y-auto">
+    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 pt-2 pb-6 overflow-x-hidden overflow-y-auto">
 
       {/* Scattered background music notes */}
       <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
@@ -470,39 +470,6 @@ export default function GameV2({
       </div>
 
       <div className="relative z-10 w-full max-w-[560px] flex flex-col gap-4">
-
-        {/* Stats bar */}
-        <div className="flex items-center justify-between px-1">
-          <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">
-            Song {songIndex + 1} of {puzzle.length}
-            {bonusComplete || state.skipped ? " · Result" : ""}
-          </p>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="font-bold tabular-nums">{runningTotal.toLocaleString()} PTS</span>
-            {streak > 0 && <span className="text-[color:var(--color-muted)]">🔥 {streak}</span>}
-          </div>
-        </div>
-
-        {/* Progress dots */}
-        <div className="flex justify-center gap-2">
-          {puzzle.map((_, i) => {
-            const s = states[i];
-            const isActive = i === songIndex;
-            return (
-              <button key={i} onClick={() => setSongIndex(i)}
-                className="rounded-full transition-all"
-                style={{
-                  width: isActive ? 24 : 8, height: 8,
-                  background: isActive ? "white"
-                    : s.solved && isPerfect(s) ? "#facc15"
-                    : s.solved ? "var(--color-green)"
-                    : s.skipped ? "var(--color-red)"
-                    : "rgba(255,255,255,0.15)",
-                }}
-              />
-            );
-          })}
-        </div>
 
         {/* Card with glow blobs + gradient border */}
         <div className="relative w-full">
@@ -734,24 +701,16 @@ export default function GameV2({
                       </button>
                     )}
 
-                    {step === "title" && (
-                      <button onPointerDown={(e) => e.preventDefault()} onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
-                        Next song →
-                      </button>
-                    )}
                   </>
                 );
               })()}
             </div>
+            <p className="text-xs text-center text-[color:var(--color-muted)] uppercase tracking-widest pt-1">
+              Song {songIndex + 1} of {puzzle.length}
+            </p>
           </div>
         </div>
           </div>
-        </div>
-
-        {/* Score bar */}
-        <div className="flex justify-between items-center text-xs text-[color:var(--color-muted)] px-1">
-          <span>{runningTotal.toLocaleString()} pts · {states.filter((s) => s.solved).length}/{puzzle.length} solved</span>
-          {streak > 0 && <span className="text-white font-semibold">🔥 {streak}</span>}
         </div>
 
         {/* See Results */}
