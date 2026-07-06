@@ -411,28 +411,21 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="min-h-[100svh] flex flex-col items-center overflow-x-hidden px-4 pt-6 pb-16">
+    <main className="min-h-[100svh] flex flex-col items-center overflow-x-hidden px-4 pt-3 pb-16">
 
-      <div className="w-full max-w-[480px] flex flex-col gap-4">
+      <div className="w-full max-w-[480px] flex flex-col gap-3">
 
-        {/* Top stats bar */}
+        {/* Top stats bar + song label combined */}
         <div className="flex items-center justify-between px-1">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full" style={{ background: "var(--color-green)" }} />
-            <span className="text-sm font-bold tabular-nums">{runningTotal.toLocaleString()} PTS</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-sm text-[color:var(--color-muted)]">
-            <span>★</span>
-            <span>{starsEarned} today</span>
-            {streak > 0 && <span className="ml-2">🔥 {streak}</span>}
+          <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">
+            Song {songIndex + 1} of {puzzle.length}
+            {bonusComplete || state.skipped ? " · Result" : ""}
+          </p>
+          <div className="flex items-center gap-3 text-sm">
+            <span className="font-bold tabular-nums">{runningTotal.toLocaleString()} PTS</span>
+            {streak > 0 && <span className="text-[color:var(--color-muted)]">🔥 {streak}</span>}
           </div>
         </div>
-
-        {/* Song label */}
-        <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)] px-1">
-          Song {songIndex + 1} of {puzzle.length}
-          {bonusComplete || state.skipped ? " · Result" : ""}
-        </p>
 
         {/* Card */}
         <div
@@ -440,15 +433,15 @@ export default function GameV2({
           style={{ background: "var(--color-card)", border: "1px solid rgba(255,255,255,0.08)" }}
         >
           {/* Card header */}
-          <div className="px-5 pt-5 pb-4 flex flex-col items-center text-center gap-2">
+          <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
             <span
-              className="text-xs font-bold px-3 py-1 rounded-full"
+              className="text-xs font-bold px-3 py-0.5 rounded-full"
               style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
             >
               {current.genre ?? "Unknown"} · {decade}
             </span>
 
-            <p className="text-[1.75rem] font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
+            <p className="text-2xl font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
               {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
             </p>
 
@@ -481,11 +474,11 @@ export default function GameV2({
             </div>
           )}
 
-          {/* Fixed-height content area: rows stack top, input stays bottom */}
-          <div className="flex flex-col px-5 pt-4 pb-5" style={{ minHeight: 260 }}>
+          {/* Content area */}
+          <div className="flex flex-col px-5 pt-3 pb-5 gap-2">
 
-            {/* ── Top zone: result rows build up here ── */}
-            <div className="flex flex-col gap-2 mb-3">
+            {/* Result rows */}
+            <div className="flex flex-col gap-2">
               {state.skipped && (
                 <ScoreRow label="Title" value={`${current.title} — skipped`} ok={false} pts={0} />
               )}
@@ -520,8 +513,8 @@ export default function GameV2({
               )}
             </div>
 
-            {/* ── Bottom zone: active input — always in the same spot ── */}
-            <div className="flex flex-col gap-2 mt-auto">
+            {/* Active input zone */}
+            <div className="flex flex-col gap-2">
 
               {/* Guessing phase */}
               {!state.solved && !state.skipped && (
