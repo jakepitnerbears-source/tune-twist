@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { X } from "lucide-react";
+import { X, Infinity, Lightbulb, Star, Trophy } from "lucide-react";
 
 export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: () => void; onDontShowAgain?: () => void }) {
   useEffect(() => {
@@ -23,84 +23,68 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
       aria-modal="true"
       role="dialog"
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
 
       {/* Gradient border wrapper */}
       <div
-        className="relative z-10 w-full max-w-[480px] p-[1px] rounded-2xl shadow-[0_8px_40px_rgba(124,58,237,0.4)]"
+        className="relative z-10 w-full max-w-[400px] p-[1px] rounded-2xl shadow-[0_8px_40px_rgba(124,58,237,0.4)]"
         style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, #c026d3 50%, var(--color-green) 100%)" }}
       >
-        {/* Panel */}
-        <div className="flex flex-col bg-[color:var(--color-card)] rounded-2xl overflow-hidden">
+        <div className="flex flex-col bg-[color:var(--color-card)] rounded-2xl overflow-hidden px-5 pt-5 pb-5 gap-4">
 
-          {/* Header with gradient glow */}
-          <div
-            className="flex items-center justify-between px-5 py-4 shrink-0"
-            style={{ background: "linear-gradient(180deg, rgba(124,58,237,0.18) 0%, transparent 100%)" }}
-          >
-            <h2 className="text-base font-bold tracking-tight">How to Play</h2>
-            <button onClick={onClose} className="text-[color:var(--color-muted)] hover:text-white transition-colors" aria-label="Close">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold">How to Play</h2>
+            <button onClick={onClose} className="text-[color:var(--color-muted)] hover:text-white transition-colors p-1" aria-label="Close">
               <X size={18} />
             </button>
           </div>
 
-          {/* Content */}
-          <div className="px-5 pb-5 flex flex-col gap-4">
+          {/* Subtitle */}
+          <p className="text-sm text-center text-[color:var(--color-muted)] leading-snug">
+            Every title gets dressed up in synonyms.<br />Unscramble it to find the real song.
+          </p>
 
-            {/* Example */}
-            <div
-              className="rounded-xl p-4 flex flex-col gap-2"
-              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(192,38,211,0.08) 100%)", border: "1px solid rgba(124,58,237,0.25)" }}
-            >
-              <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">You see this</p>
-              <p className="text-xl font-bold">Dazzling Illumination</p>
-              <div className="flex items-center gap-2 pt-1 border-t border-white/10">
-                <span className="text-sm font-bold" style={{ color: "var(--color-green)" }}>✓ Blinding Lights</span>
-                <span className="text-xs text-[color:var(--color-muted)]">— The Weeknd</span>
-              </div>
-            </div>
-
-            {/* Quick rules */}
-            <ul className="flex flex-col gap-2.5 text-sm text-[color:var(--color-muted)]">
-              <li className="flex gap-2.5">
-                <span style={{ color: "var(--color-purple)" }}>♪</span>
-                <span>Every word is synonym-swapped — reverse-engineer the real title</span>
-              </li>
-              <li className="flex gap-2.5">
-                <span style={{ color: "var(--color-purple)" }}>✓</span>
-                <span>Unlimited guesses — typos &amp; small words like "the" are forgiven</span>
-              </li>
-              <li className="flex gap-2.5">
-                <span style={{ color: "var(--color-purple)" }}>💡</span>
-                <span>2 hints per song (lyric snippet, then artist) — each one costs points</span>
-              </li>
-              <li className="flex gap-2.5">
-                <span style={{ color: "var(--color-green)" }}>★</span>
-                <span>Bonus: guess the artist <span className="text-white font-medium">+100</span> and year <span className="text-white font-medium">+100</span> (within 1 yr: <span className="text-white font-medium">+50</span>)</span>
-              </li>
-            </ul>
-
-            {/* Score pill */}
-            <div className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <span className="text-[color:var(--color-muted)]">Max per song</span>
-              <span style={{ color: "var(--color-green)" }} className="font-bold">1,000 pts</span>
-              <span className="text-[color:var(--color-muted)]">Daily max</span>
-              <span style={{ color: "var(--color-green)" }} className="font-bold">5,000 pts</span>
-            </div>
-
-            {/* Don't show again */}
-            {onDontShowAgain && (
-              <div className="flex justify-center pt-1">
-                <button
-                  onClick={onDontShowAgain}
-                  className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
-                >
-                  Don&apos;t show this again
-                </button>
-              </div>
-            )}
+          {/* Example card */}
+          <div className="rounded-xl bg-[color:var(--color-navy)] border border-[color:var(--color-border)] px-5 py-4 flex flex-col items-center gap-2">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">You see this</p>
+            <p className="text-xl font-bold text-white">Peck From A Bloom</p>
+            <span className="text-[color:var(--color-muted)] text-sm">↓</span>
+            <div className="w-full border-t border-[color:var(--color-border)]" />
+            <p className="text-xl font-bold" style={{ color: "#e879f9" }}>Kiss From A Rose</p>
+            <p className="text-xs text-[color:var(--color-muted)]">Seal</p>
           </div>
+
+          {/* 2x2 tiles */}
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { icon: <Infinity size={22} />, label: "Unlimited guesses" },
+              { icon: <Lightbulb size={22} />, label: <>2 hints <span className="text-[color:var(--color-muted)] font-normal">(cost pts)</span></> },
+              { icon: <Star size={22} />, label: "+100 artist / year" },
+              { icon: <Trophy size={22} />, label: "1,000 max / song" },
+            ].map((tile, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center gap-2 rounded-xl bg-[color:var(--color-navy)] border border-[color:var(--color-border)] py-4 px-3"
+              >
+                <span className="text-white/80">{tile.icon}</span>
+                <span className="text-xs font-semibold text-center text-white leading-tight">{tile.label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Don't show again */}
+          {onDontShowAgain && (
+            <div className="flex justify-center pt-1">
+              <button
+                onClick={onDontShowAgain}
+                className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
+              >
+                Don&apos;t show this again
+              </button>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
