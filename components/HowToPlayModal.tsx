@@ -61,17 +61,18 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
           {/* 2x2 tiles */}
           <div className="grid grid-cols-2 gap-2">
             {[
-              { icon: <Infinity size={22} />, label: "Unlimited guesses" },
-              { icon: <Lightbulb size={22} />, label: <>2 hints <span className="text-[color:var(--color-muted)] font-normal">(cost pts)</span></> },
-              { icon: <Star size={22} />, label: "+100 artist / year" },
-              { icon: <Trophy size={22} />, label: "1,000 max / song" },
+              { icon: <Infinity size={22} />, label: "Unlimited guesses", sub: "(for the song title)" },
+              { icon: <Lightbulb size={22} />, label: "2 hints", sub: "(cost pts)" },
+              { icon: <Star size={22} />, label: "+100 artist / year", sub: null },
+              { icon: <Trophy size={22} />, label: "1,000 max / song", sub: null },
             ].map((tile, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center justify-center gap-2 rounded-xl bg-[color:var(--color-navy)] border border-[color:var(--color-border)] py-4 px-3"
+                className="flex flex-col items-center justify-center gap-1.5 rounded-xl bg-[color:var(--color-navy)] border border-[color:var(--color-border)] py-4 px-3"
               >
                 <span className="text-white/80">{tile.icon}</span>
                 <span className="text-xs font-semibold text-center text-white leading-tight">{tile.label}</span>
+                {tile.sub && <span className="text-[10px] text-[color:var(--color-muted)] font-normal text-center">{tile.sub}</span>}
               </div>
             ))}
           </div>
