@@ -11,8 +11,11 @@ export default function Nav() {
 
   return (
     <>
+      {/* Subtle gradient glow behind pill */}
+      <div className="md:hidden fixed top-0 left-0 right-0 h-32 pointer-events-none z-40" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.35) 0%, rgba(192,38,211,0.18) 45%, transparent 72%)" }} />
+
       {/* Mobile: floating pill */}
-      <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-sm">
+      <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[80%] max-w-xs">
         <div className="flex items-center justify-between px-4 py-1.5 rounded-full bg-[color:var(--color-card)] border border-[color:var(--color-border)] shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
           <Link href="/" onClick={() => setMenuOpen(false)} className="hover:opacity-80 transition-opacity">
             <Image src="/logo.png" alt="TuneTwist" width={76} height={38} className="object-contain" />
