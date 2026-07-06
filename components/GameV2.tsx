@@ -441,7 +441,7 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 pt-6 pb-6 overflow-x-hidden overflow-y-auto">
+    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-9rem)] md:min-h-[calc(100svh-8rem)] px-4 pt-4 pb-6 overflow-x-hidden overflow-y-auto">
 
       {/* Scattered background music notes */}
       <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
