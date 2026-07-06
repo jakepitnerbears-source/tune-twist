@@ -568,8 +568,8 @@ export default function GameV2({
                           <input
                             ref={inputRef}
                             type="text"
-                            inputMode={step === "year" ? "numeric" : "text"}
-                            enterKeyHint={step === "year" ? "go" : "next"}
+                            inputMode="text"
+                            enterKeyHint="next"
                             autoComplete="off"
                             autoCorrect="off"
                             autoCapitalize="off"

@@ -1,6 +1,6 @@
 import { getGenrePuzzle, GENRES } from "@/lib/getGenrePuzzle";
 import { loadScheduleAndLibrary, loadLyrics } from "@/lib/getDailyPuzzle";
-import GameClassic from "@/components/GameClassic";
+import GameV2 from "@/components/GameV2";
 import { notFound } from "next/navigation";
 
 export default async function GenrePlayPage({
@@ -19,5 +19,5 @@ export default async function GenrePlayPage({
   const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
   const lyrics = loadLyrics();
 
-  return <GameClassic puzzle={puzzle} genreLabel={genre.name} allArtists={allArtists} lyrics={lyrics} />;
+  return <GameV2 puzzle={puzzle} genreLabel={genre.name} allArtists={allArtists} lyrics={lyrics} />;
 }

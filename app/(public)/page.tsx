@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getDailyPuzzle, getPuzzleNumber, loadScheduleAndLibrary, loadLyrics } from "@/lib/getDailyPuzzle";
-import GameClassic from "@/components/GameClassic";
+import GameV2 from "@/components/GameV2";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
@@ -20,5 +20,5 @@ export default async function Home() {
   const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
   const lyrics = loadLyrics();
 
-  return <GameClassic puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} lyrics={lyrics} />;
+  return <GameV2 puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} lyrics={lyrics} />;
 }
