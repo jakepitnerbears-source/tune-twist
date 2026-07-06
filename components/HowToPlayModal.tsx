@@ -42,7 +42,7 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
 
           {/* Subtitle */}
           <p className="text-sm text-center text-[color:var(--color-muted)] leading-snug">
-            Every song title gets twisted with synonyms.<br />Untwist it and figure out the real song!
+            Every song gets twisted with synonyms.<br />Untwist it and figure out the real song title!
           </p>
 
           {/* Example card */}
