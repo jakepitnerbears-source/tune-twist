@@ -572,7 +572,7 @@ export default function GameV2({
                 >
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">This Song</p>
-                    <p className="text-xl font-bold" style={{ color: "var(--color-green)" }}>+{songTotal(state).toLocaleString()}</p>
+                    <p className="text-xl font-bold" style={{ color: "#4ade80" }}>+{songTotal(state).toLocaleString()}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">Running Total</p>
