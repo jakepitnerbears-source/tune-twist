@@ -569,7 +569,7 @@ export default function GameV2({
                             ref={inputRef}
                             type="text"
                             inputMode={step === "year" ? "numeric" : "text"}
-                            enterKeyHint={step === "year" ? "go" : "done"}
+                            enterKeyHint={step === "year" ? "go" : "next"}
                             autoComplete="off"
                             autoCorrect="off"
                             autoCapitalize="off"
@@ -602,6 +602,7 @@ export default function GameV2({
                     )}
 
                     <button
+                      onPointerDown={(e) => e.preventDefault()}
                       onClick={handleUnifiedSubmit}
                       className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
                       style={{ background: "var(--btn-gradient)" }}
@@ -612,6 +613,7 @@ export default function GameV2({
                     {step === "title" && (
                       <div className="flex gap-2">
                         <button
+                          onPointerDown={(e) => e.preventDefault()}
                           onClick={handleHint}
                           disabled={state.hintsUsed >= 3}
                           className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
@@ -619,6 +621,7 @@ export default function GameV2({
                           {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "3/3 hints used"}
                         </button>
                         <button
+                          onPointerDown={(e) => e.preventDefault()}
                           onClick={handleReveal}
                           disabled={state.hintsUsed < 3}
                           className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors text-sm font-semibold"
@@ -629,13 +632,13 @@ export default function GameV2({
                     )}
 
                     {(step === "artist" || step === "year") && (
-                      <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
+                      <button onPointerDown={(e) => e.preventDefault()} onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
                         Skip →
                       </button>
                     )}
 
                     {step === "title" && (
-                      <button onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
+                      <button onPointerDown={(e) => e.preventDefault()} onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
                         Next song →
                       </button>
                     )}
