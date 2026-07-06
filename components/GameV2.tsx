@@ -5,6 +5,7 @@ import { DailyPuzzle } from "@/lib/getDailyPuzzle";
 import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 import HowToPlayModal from "@/components/HowToPlayModal";
+import { Lightbulb } from "lucide-react";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
 const TITLE_SCORES = [800, 600, 400];
@@ -691,7 +692,10 @@ export default function GameV2({
                           disabled={state.hintsUsed >= 3}
                           className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
                         >
-                          {state.hintsUsed < 2 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "2/2 hints used"}
+                          <span className="flex items-center justify-center gap-1.5">
+                            <Lightbulb size={14} />
+                            {state.hintsUsed < 2 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "2/2 hints used"}
+                          </span>
                         </button>
                         <button
                           onPointerDown={(e) => e.preventDefault()}
