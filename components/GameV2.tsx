@@ -1,0 +1,702 @@
+"use client";
+
+import { useState, useRef, useEffect, useMemo } from "react";
+import { DailyPuzzle } from "@/lib/getDailyPuzzle";
+import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
+import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
+
+// Scoring: title 600 + artist 250 + year 150 = 1000 max per song
+const TITLE_SCORES = [600, 450, 300, 150];
+const ARTIST_PTS = 250;
+const YEAR_PTS = 150;
+
+const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
+const ALMOST_MESSAGES = ["You're very close 👀", "So close.", "Getting warm…"];
+
+const GENRE_HEX: Record<string, string> = {
+  "Pop": "#f472b6", "R&B": "#fb923c", "Hip-Hop": "#facc15",
+  "Rock": "#f87171", "Alternative": "#fb7185", "Indie": "#a3e635",
+  "Electronic": "#22d3ee", "Country": "#fbbf24", "Metal": "#a1a1aa",
+  "Funk": "#c084fc", "Funk/Disco": "#c084fc", "Jazz": "#60a5fa",
+  "Latin": "#34d399", "Pop-Punk": "#e879f9", "Folk": "#86efac",
+};
+
+function randomFrom(arr: string[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function stripFeaturing(title: string) {
+  return title
+    .replace(/\s*\(feat\..*?\)/gi, "")
+    .replace(/\s*\(ft\..*?\)/gi, "")
+    .replace(/\s*\(featuring.*?\)/gi, "")
+    .replace(/\s*feat\..*$/gi, "")
+    .trim();
+}
+
+const NUMBER_ONES: Record<string, number> = {
+  zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,
+  ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,fifteen:15,
+  sixteen:16,seventeen:17,eighteen:18,nineteen:19,
+};
+const NUMBER_TENS: Record<string, number> = {
+  twenty:20,thirty:30,forty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90,
+};
+
+function collapseNumbers(str: string) {
+  let s = str.toLowerCase().replace(/-/g, " ");
+  s = s.replace(/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\s+(one|two|three|four|five|six|seven|eight|nine)\b/g,
+    (_, tens, ones) => String(NUMBER_TENS[tens] + NUMBER_ONES[ones]));
+  s = s.replace(/\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\b/g,
+    (_, tens) => String(NUMBER_TENS[tens]));
+  s = s.replace(/\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)\b/g,
+    (_, ones) => String(NUMBER_ONES[ones]));
+  return s;
+}
+
+function normalizeArtist(str: string) {
+  return collapseNumbers(str).replace(/[^a-z0-9\s]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function validateArtist(guess: string, correct: string): boolean {
+  const g = normalizeArtist(guess);
+  const c = normalizeArtist(correct);
+  if (!g) return false;
+  const stripThe = (s: string) => s.replace(/^the\s+/, "");
+  if (g === c || stripThe(g) === stripThe(c)) return true;
+  const cWords = c.split(/\s+/);
+  const gWords = g.split(/\s+/);
+  return gWords.every((gw) => cWords.some((cw) => cw === gw));
+}
+
+function validateYear(guess: string, correct: string): "exact" | "close" | false {
+  const g = parseInt(guess.trim(), 10);
+  const c = parseInt(correct, 10);
+  if (isNaN(g)) return false;
+  if (g === c) return "exact";
+  if (Math.abs(g - c) === 1) return "close";
+  return false;
+}
+
+function getToday() { return new Date().toISOString().split("T")[0]; }
+function getYesterday() {
+  const d = new Date(); d.setDate(d.getDate() - 1);
+  return d.toISOString().split("T")[0];
+}
+
+function formatCountdown() {
+  const now = new Date();
+  const next = new Date(); next.setUTCHours(24, 0, 0, 0);
+  const diff = next.getTime() - now.getTime();
+  if (diff <= 0) return "00:00:00";
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+}
+
+interface SongState {
+  hintsUsed: number;
+  solved: boolean;
+  skipped: boolean;
+  guess: string;
+  feedback: string;
+  feedbackWarm: boolean;
+  shake: boolean;
+  glow: boolean;
+  songInfo: SongInfo | null | "loading";
+  artistGuess: string;
+  artistCorrect: boolean | null;
+  yearGuess: string;
+  yearCorrect: "exact" | "close" | false | null;
+  bonusDone: boolean;
+}
+
+function init(): SongState {
+  return {
+    hintsUsed: 0, solved: false, skipped: false,
+    guess: "", feedback: "", feedbackWarm: false,
+    shake: false, glow: false, songInfo: null,
+    artistGuess: "", artistCorrect: null,
+    yearGuess: "", yearCorrect: null, bonusDone: false,
+  };
+}
+
+function titlePts(s: SongState) {
+  return s.solved ? TITLE_SCORES[Math.min(s.hintsUsed, 3)] : 0;
+}
+function artistPts(s: SongState) {
+  return s.artistCorrect === true ? ARTIST_PTS : 0;
+}
+function yearPts(s: SongState) {
+  if (s.yearCorrect === "exact") return YEAR_PTS;
+  if (s.yearCorrect === "close") return Math.round(YEAR_PTS / 2);
+  return 0;
+}
+function songTotal(s: SongState) {
+  return titlePts(s) + artistPts(s) + yearPts(s);
+}
+function isPerfect(s: SongState) {
+  return s.solved && s.hintsUsed === 0 && s.artistCorrect === true && s.yearCorrect === "exact";
+}
+
+function buildHints(song: DailyPuzzle[number], lyrics: Record<string, string>): [string, string, string] {
+  return [song.hints[0], lyrics[song.id] ? `"${lyrics[song.id]}"` : "", song.hints[1]];
+}
+
+function Countdown() {
+  const [time, setTime] = useState(formatCountdown());
+  useEffect(() => {
+    const id = setInterval(() => setTime(formatCountdown()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="text-center flex flex-col gap-1">
+      <p className="text-xs text-[color:var(--color-muted)] uppercase tracking-widest">Next puzzle in</p>
+      <p className="text-xl font-bold tabular-nums">{time}</p>
+    </div>
+  );
+}
+
+function CheckIcon({ ok }: { ok: boolean }) {
+  return (
+    <div
+      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold"
+      style={{
+        background: ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)",
+        color: ok ? "#4ade80" : "#f87171",
+      }}
+    >
+      {ok ? "✓" : "✗"}
+    </div>
+  );
+}
+
+function ScoreRow({ label, value, ok, pts }: { label: string; value: string; ok: boolean; pts: number }) {
+  const glow = ok ? "rgba(34,197,94,0.05)" : "rgba(239,68,68,0.04)";
+  const border = ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
+  const leak = ok
+    ? "radial-gradient(ellipse at bottom right, rgba(34,197,94,0.07) 0%, transparent 70%)"
+    : "radial-gradient(ellipse at bottom right, rgba(239,68,68,0.06) 0%, transparent 70%)";
+  return (
+    <div
+      className="relative flex items-center gap-3 px-4 py-3 rounded-xl overflow-hidden"
+      style={{ background: glow, border: `1px solid ${border}` }}
+    >
+      <div className="absolute inset-0 pointer-events-none" style={{ background: leak }} />
+      <div className="relative flex items-center gap-3 w-full">
+      <CheckIcon ok={ok} />
+      <div className="flex flex-col flex-1 min-w-0">
+        <span className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] leading-none mb-0.5">{label}</span>
+        <span className="text-sm font-semibold text-white truncate">{value}</span>
+      </div>
+      <span className="text-sm font-bold shrink-0" style={{ color: ok ? "#4ade80" : "rgba(255,255,255,0.3)" }}>
+        {pts > 0 ? `+${pts}` : "—"}
+      </span>
+      </div>
+    </div>
+  );
+}
+
+export default function GameV2({
+  puzzle, puzzleNumber, genreLabel, allArtists = [], lyrics = {},
+}: {
+  puzzle: DailyPuzzle;
+  puzzleNumber?: number;
+  genreLabel?: string;
+  allArtists?: string[];
+  lyrics?: Record<string, string>;
+}) {
+  const [songIndex, setSongIndex] = useState(0);
+  const [states, setStates] = useState<SongState[]>(puzzle.map(init));
+  const [gameOver, setGameOver] = useState(false);
+  const [streak, setStreak] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const [artistDropdownOpen, setArtistDropdownOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const artistRef = useRef<HTMLInputElement>(null);
+  const streakRef = useRef(0);
+
+  const current = puzzle[songIndex];
+  const state = states[songIndex];
+
+  const bonusComplete = state.bonusDone || (state.artistCorrect !== null && state.yearCorrect !== null);
+  const runningTotal = states.reduce((sum, s) => sum + songTotal(s), 0);
+  const starsEarned = states.filter(isPerfect).length;
+  const genreColor = GENRE_HEX[current.genre ?? ""] ?? "#71717a";
+  const decade = current.releaseYear ? `${Math.floor(parseInt(current.releaseYear) / 10) * 10}s` : "";
+  const releaseYear = state.songInfo && state.songInfo !== "loading"
+    ? state.songInfo.releaseYear
+    : current.releaseYear ?? "";
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("tunedecode_streak");
+      if (stored) {
+        const data = JSON.parse(stored) as { lastPlayed: string; streak: number };
+        if (data.lastPlayed === getToday() || data.lastPlayed === getYesterday()) {
+          streakRef.current = data.streak;
+          setStreak(data.streak);
+        }
+      }
+    } catch {}
+  }, []);
+
+  useEffect(() => {
+    if (!gameOver) return;
+    const solved = states.filter((s) => s.solved).length;
+    const newStreak = solved >= 3 ? streakRef.current + 1 : 0;
+    streakRef.current = newStreak;
+    setStreak(newStreak);
+    try {
+      localStorage.setItem("tunedecode_streak", JSON.stringify({ lastPlayed: getToday(), streak: newStreak }));
+    } catch {}
+  }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!state.solved && !state.skipped) inputRef.current?.focus();
+  }, [songIndex, state.solved, state.skipped]);
+
+  useEffect(() => {
+    if (state.solved && !state.bonusDone && state.artistCorrect === null) {
+      artistRef.current?.focus();
+    }
+  }, [state.solved, state.bonusDone, state.artistCorrect]);
+
+  function update(index: number, patch: Partial<SongState>) {
+    setStates((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
+  }
+
+  async function handleSubmit() {
+    if (!state.guess.trim() || state.solved) return;
+    const correct = validateGuess(state.guess, current.title, current.altTitles);
+    if (correct) {
+      const autoSkipArtist = state.hintsUsed >= 3;
+      const autoSkipYear = state.hintsUsed >= 1;
+      update(songIndex, {
+        solved: true, feedback: "", songInfo: "loading", glow: true, shake: false,
+        ...(autoSkipArtist ? { artistCorrect: false } : {}),
+        ...(autoSkipYear ? { yearCorrect: false as false } : {}),
+      });
+      setTimeout(() => update(songIndex, { glow: false }), 800);
+      const info = await fetchSongInfo(current.title, current.artist);
+      if (info && current.releaseYear) info.releaseYear = current.releaseYear;
+      if (info && current.genre) info.genre = current.genre;
+      update(songIndex, { songInfo: info });
+    } else {
+      const almost = isAlmostCorrect(state.guess, current.title, current.altTitles);
+      update(songIndex, {
+        feedback: almost ? randomFrom(ALMOST_MESSAGES) : randomFrom(WRONG_MESSAGES),
+        feedbackWarm: almost, shake: true,
+      });
+      setTimeout(() => update(songIndex, { shake: false }), 500);
+    }
+  }
+
+  function handleArtistSubmit() {
+    if (!state.artistGuess.trim() || state.artistCorrect !== null) return;
+    const correct = validateArtist(state.artistGuess, current.artist);
+    update(songIndex, {
+      artistCorrect: correct,
+    });
+  }
+
+  function handleYearSubmit() {
+    if (!state.yearGuess.trim() || state.yearCorrect !== null) return;
+    const correct = validateYear(state.yearGuess, releaseYear);
+    update(songIndex, { yearCorrect: correct });
+  }
+
+  function handleSkipBonus() {
+    if (state.artistCorrect === null && state.hintsUsed < 3) {
+      update(songIndex, { artistCorrect: false });
+    } else {
+      update(songIndex, {
+        bonusDone: true,
+        artistCorrect: state.artistCorrect ?? false,
+        yearCorrect: state.yearCorrect ?? (false as false),
+      });
+    }
+  }
+
+  function handleHint() {
+    if (state.hintsUsed >= 3 || state.solved) return;
+    update(songIndex, { hintsUsed: state.hintsUsed + 1, feedback: "", feedbackWarm: false });
+  }
+
+  function handleReveal() {
+    if (state.hintsUsed < 3) return;
+    update(songIndex, { skipped: true, feedback: "" });
+  }
+
+  function handleNext() {
+    const nextIdx = states.findIndex((s, i) => i > songIndex && !s.solved && !s.skipped);
+    if (nextIdx !== -1) { setSongIndex(nextIdx); return; }
+    setSongIndex((songIndex + 1) % puzzle.length);
+  }
+
+  function buildShareText() {
+    const solvedCount = states.filter((s) => s.solved).length;
+    const emojis = states.map((s) => (!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨")).join(" ");
+    const stars = "★".repeat(starsEarned) + "☆".repeat(puzzle.length - starsEarned);
+    const label = genreLabel ? genreLabel : `#${puzzleNumber}`;
+    return `TuneTwist ${label}  ${solvedCount}/${puzzle.length}\n${runningTotal.toLocaleString()} / 5,000 pts\n${stars}\n\n${emojis}\n\ntunetwist.io`;
+  }
+
+  function handleCopy() {
+    const text = buildShareText();
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(done);
+    else done();
+  }
+
+  // ── Results screen ────────────────────────────────────────────────────
+  if (gameOver) {
+    const solvedCount = states.filter((s) => s.solved).length;
+    return (
+      <main className="flex flex-col items-center justify-start min-h-[calc(100svh-8rem)] px-4 pt-8 pb-6">
+        <div className="w-full max-w-[480px] flex flex-col gap-5">
+          <div className="text-center">
+            <p className="text-3xl font-bold">{runningTotal.toLocaleString()} <span className="text-xl font-normal text-[color:var(--color-muted)]">/ 5,000</span></p>
+            <p className="text-sm text-[color:var(--color-muted)] mt-1">{solvedCount}/{puzzle.length} solved · {starsEarned} perfect</p>
+            {streak > 0 && <p className="text-sm text-white font-semibold mt-1">🔥 {streak}-day streak</p>}
+          </div>
+
+          <div className="text-3xl tracking-wide text-center" style={{ color: "#facc15" }}>
+            {"★".repeat(starsEarned)}
+            <span style={{ color: "rgba(255,255,255,0.15)" }}>{"★".repeat(puzzle.length - starsEarned)}</span>
+          </div>
+
+          <div className="text-center text-2xl tracking-widest">
+            {states.map((s, i) => (
+              <span key={i}>{!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}</span>
+            ))}
+          </div>
+
+          <button
+            onClick={handleCopy}
+            className="w-full py-3.5 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+            style={{ background: "var(--btn-gradient)" }}
+          >
+            {copied ? "✓ Copied!" : "Copy Results"}
+          </button>
+
+          <div className="flex flex-col gap-2 bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-5">
+            {puzzle.map((song, i) => {
+              const s = states[i];
+              const total = songTotal(s);
+              return (
+                <div key={song.id} className="flex items-center justify-between text-sm">
+                  <span className={s.solved ? "text-white font-medium" : "text-[color:var(--color-muted)] line-through"}>
+                    {song.title}
+                  </span>
+                  <span className={`font-semibold ${s.solved ? "text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}`}>
+                    {total > 0 ? `+${total}` : "—"}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          <Countdown />
+        </div>
+      </main>
+    );
+  }
+
+  // ── Game screen ───────────────────────────────────────────────────────
+  const allDone = states.every((s) => s.solved || s.skipped);
+  const hintCost = state.hintsUsed < 3
+    ? TITLE_SCORES[state.hintsUsed] - TITLE_SCORES[state.hintsUsed + 1]
+    : 0;
+
+  return (
+    <main className="relative flex flex-col items-center justify-start md:justify-center min-h-[calc(100svh-8rem)] px-4 py-6">
+
+      <div className="w-full max-w-[480px] flex flex-col gap-4">
+
+        {/* Top stats bar */}
+        <div className="flex items-center justify-between px-1">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full" style={{ background: "var(--color-green)" }} />
+            <span className="text-sm font-bold tabular-nums">{runningTotal.toLocaleString()} PTS</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-sm text-[color:var(--color-muted)]">
+            <span>★</span>
+            <span>{starsEarned} today</span>
+            {streak > 0 && <span className="ml-2">🔥 {streak}</span>}
+          </div>
+        </div>
+
+        {/* Song label */}
+        <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)] px-1">
+          Song {songIndex + 1} of {puzzle.length}
+          {bonusComplete || state.skipped ? " · Result" : ""}
+        </p>
+
+        {/* Card */}
+        <div
+          className={`w-full rounded-2xl overflow-hidden flex flex-col transition-all ${state.shake ? "animate-shake" : ""} ${state.glow ? "animate-glow" : ""}`}
+          style={{ background: "var(--color-card)", border: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          {/* Card header */}
+          <div className="px-5 pt-5 pb-4 flex flex-col items-center text-center gap-2">
+            <span
+              className="text-xs font-bold px-3 py-1 rounded-full"
+              style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
+            >
+              {current.genre ?? "Unknown"} · {decade}
+            </span>
+
+            <p className="text-[1.75rem] font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
+              {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
+            </p>
+
+            {(bonusComplete || state.skipped) && (
+              <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
+            )}
+
+            {bonusComplete && !state.skipped && isPerfect(state) && (
+              <span
+                className="text-xs font-bold px-4 py-1.5 rounded-full"
+                style={{ background: "rgba(192,38,211,0.15)", color: "#e879f9", border: "1px solid rgba(192,38,211,0.4)" }}
+              >
+                ★ Perfect song
+              </span>
+            )}
+          </div>
+
+          <div className="h-px mx-5" style={{ background: "rgba(255,255,255,0.07)" }} />
+
+          {/* Hints */}
+          {state.hintsUsed > 0 && !bonusComplete && !state.skipped && (
+            <div className="px-5 pt-4 flex flex-col gap-1.5">
+              {buildHints(current, lyrics).slice(0, state.hintsUsed).map((hint, hi) => (
+                <div key={hi} className="flex items-center gap-2 text-sm px-3 py-2 rounded-lg"
+                  style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)", color: "#c084fc" }}>
+                  <span className="opacity-60 text-xs">Hint {hi + 1}</span>
+                  <span>{hint}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="flex flex-col gap-3 px-5 pt-4 pb-5">
+
+            {/* Phase: guessing */}
+            {!state.solved && !state.skipped && (
+              <>
+                <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+                  <div className="gradient-border w-full">
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck={false}
+                      value={state.guess}
+                      onChange={(e) => update(songIndex, { guess: e.target.value, feedback: "" })}
+                      placeholder="Name that track…"
+                      className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                    />
+                  </div>
+                </form>
+                {state.feedback && (
+                  <p className={`text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>
+                    {state.feedback}
+                  </p>
+                )}
+                <button
+                  onClick={handleSubmit}
+                  className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                  style={{ background: "var(--btn-gradient)" }}
+                >
+                  Submit
+                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleHint}
+                    disabled={state.hintsUsed >= 3}
+                    className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
+                  >
+                    {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "3/3 hints used"}
+                  </button>
+                  <button
+                    onClick={handleReveal}
+                    disabled={state.hintsUsed < 3}
+                    className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors text-sm font-semibold"
+                  >
+                    Reveal
+                  </button>
+                </div>
+                <button onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
+                  Next song →
+                </button>
+              </>
+            )}
+
+            {/* Phase: skipped */}
+            {state.skipped && (
+              <ScoreRow label="Title" value={`${current.title} — skipped`} ok={false} pts={0} />
+            )}
+
+            {/* Progressive result rows — appear one by one as each step is completed */}
+            {state.solved && (
+              <>
+                {/* Title row — appears immediately on solve */}
+                <ScoreRow label="Title" value={current.title} ok={true} pts={titlePts(state)} />
+
+                {/* Artist input — while awaiting */}
+                {state.artistCorrect === null && (
+                  <>
+                    <div className="relative">
+                      <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }}>
+                        <div className="gradient-border mx-[2px]">
+                          <input
+                            ref={artistRef}
+                            type="text"
+                            value={state.artistGuess}
+                            onChange={(e) => { update(songIndex, { artistGuess: e.target.value }); setArtistDropdownOpen(true); }}
+                            onFocus={() => setArtistDropdownOpen(true)}
+                            onBlur={() => setTimeout(() => setArtistDropdownOpen(false), 150)}
+                            placeholder="Who's the artist?"
+                            className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                          />
+                        </div>
+                      </form>
+                      {artistDropdownOpen && state.artistGuess.trim().length > 0 && (() => {
+                        const q = state.artistGuess.toLowerCase();
+                        const matches = allArtists.filter((a) => a.toLowerCase().includes(q)).slice(0, 8);
+                        return matches.length > 0 ? (
+                          <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-hidden shadow-xl">
+                            {matches.map((a) => (
+                              <button key={a}
+                                onMouseDown={() => { setArtistDropdownOpen(false); update(songIndex, { artistGuess: a, artistCorrect: validateArtist(a, current.artist) }); }}
+                                className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors"
+                              >{a}</button>
+                            ))}
+                          </div>
+                        ) : null;
+                      })()}
+                    </div>
+                    <button
+                      onClick={handleArtistSubmit}
+                      className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      style={{ background: "var(--btn-gradient)" }}
+                    >
+                      Submit Artist
+                    </button>
+                    <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
+                      Skip →
+                    </button>
+                  </>
+                )}
+
+                {/* Artist row — appears after artist is answered */}
+                {state.artistCorrect !== null && (
+                  <ScoreRow label="Artist" value={current.artist} ok={state.artistCorrect === true} pts={artistPts(state)} />
+                )}
+
+                {/* Year input — while awaiting */}
+                {state.artistCorrect !== null && state.yearCorrect === null && (
+                  <>
+                    <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }}>
+                      <div className="gradient-border mx-[2px]">
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          enterKeyHint="go"
+                          value={state.yearGuess}
+                          onChange={(e) => update(songIndex, { yearGuess: e.target.value })}
+                          placeholder="What year was it released?"
+                          className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                        />
+                      </div>
+                    </form>
+                    <button
+                      onClick={handleYearSubmit}
+                      className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      style={{ background: "var(--btn-gradient)" }}
+                    >
+                      Submit Year
+                    </button>
+                    <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
+                      Skip →
+                    </button>
+                  </>
+                )}
+
+                {/* Year row — appears after year is answered */}
+                {state.yearCorrect !== null && (
+                  <ScoreRow
+                    label="Year"
+                    value={releaseYear}
+                    ok={state.yearCorrect === "exact" || state.yearCorrect === "close"}
+                    pts={yearPts(state)}
+                  />
+                )}
+
+                {/* Totals — appear when all three are done */}
+                {bonusComplete && (
+                  <div
+                    className="flex items-center justify-between px-4 py-3 rounded-xl mt-1"
+                    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+                  >
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">This Song</p>
+                      <p className="text-xl font-bold" style={{ color: "var(--color-green)" }}>+{songTotal(state).toLocaleString()}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">Running Total</p>
+                      <p className="text-xl font-bold text-white">{runningTotal.toLocaleString()}</p>
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
+
+            {(state.skipped || (state.solved && bonusComplete)) && (
+              <button
+                onClick={allDone ? () => setGameOver(true) : handleNext}
+                className="w-full py-3.5 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity mt-1"
+                style={{ background: "var(--btn-gradient)" }}
+              >
+                {allDone ? "See Results →" : "Next Song →"}
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile progress dots */}
+        <div className="flex gap-1.5 justify-center">
+          {puzzle.map((_, i) => {
+            const s = states[i];
+            const isActive = i === songIndex;
+            return (
+              <button
+                key={i}
+                onClick={() => setSongIndex(i)}
+                className="rounded-full transition-all"
+                style={{
+                  width: isActive ? 24 : 8,
+                  height: 8,
+                  background: isActive
+                    ? "white"
+                    : s.solved && isPerfect(s)
+                    ? "#facc15"
+                    : s.solved
+                    ? "var(--color-green)"
+                    : s.skipped
+                    ? "var(--color-red)"
+                    : "rgba(255,255,255,0.15)",
+                }}
+              />
+            );
+          })}
+        </div>
+
+      </div>
+    </main>
+  );
+}

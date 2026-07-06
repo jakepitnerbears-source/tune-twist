@@ -22,7 +22,7 @@ export default function Nav() {
             <button onClick={() => setShowModal(true)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">How to Play</button>
             <Link href="/about" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
             <Link href="/contact" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
-            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)] hover:opacity-90 transition-opacity">Play Now!</Link>
+            <Link href="/" className="text-sm font-bold px-4 py-2 rounded-full text-white hover:opacity-90 transition-opacity" style={{ background: "var(--btn-gradient)" }}>Play Now!</Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -43,7 +43,7 @@ export default function Nav() {
             <button onClick={() => { setShowModal(true); setMenuOpen(false); }} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors text-left">How to Play</button>
             <Link href="/about" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
-            <Link href="/" onClick={() => setMenuOpen(false)} className="text-sm font-bold px-4 py-2 rounded-full bg-[color:var(--color-green)] text-[color:var(--color-navy)] hover:opacity-90 transition-opacity text-center">Play Now!</Link>
+            <Link href="/" onClick={() => setMenuOpen(false)} className="text-sm font-bold px-4 py-2 rounded-full text-white hover:opacity-90 transition-opacity text-center" style={{ background: "var(--btn-gradient)" }}>Play Now!</Link>
           </div>
         )}
       </nav>

@@ -32,6 +32,48 @@
   --blob-c-lo: #c026d333;
 }
 
+
+/* ══ BRUTAL BOLD ══ */
+
+[data-theme="brutal"] *:not(path):not(polyline):not(circle):not(ellipse):not(line):not(svg) {
+  border-radius: 0 !important;
+}
+
+[data-theme="brutal"] nav {
+  border-bottom: 3px solid #f5d000 !important;
+  background: #000 !important;
+}
+
+[data-theme="brutal"] input {
+  border: 2px solid #f5d000 !important;
+  font-family: var(--font-bbh), sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  background: #0a0a0a !important;
+}
+
+[data-theme="brutal"] input::placeholder {
+  letter-spacing: 0.06em;
+}
+
+[data-theme="brutal"] button {
+  font-family: var(--font-bbh), sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+}
+
+[data-theme="brutal"] div[class*="border"],
+[data-theme="brutal"] div[class*="rounded"] {
+  border: 2px solid #f5d000 !important;
+  box-shadow: 4px 4px 0 0 #ff1493 !important;
+}
+
+[data-theme="brutal"] .gradient-border {
+  background: #f5d000 !important;
+  animation: none !important;
+  padding: 2px !important;
+}
+
 html, body {
   overflow-x: hidden;
 }

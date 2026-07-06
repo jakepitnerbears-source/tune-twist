@@ -674,10 +674,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
           {/* Card header */}
           <div className="px-5 pt-2 pb-2 flex flex-col items-center text-center">
-            <div className="relative flex items-center justify-center w-full mb-2">
-              <span className="absolute left-0 text-[10px] text-[color:var(--color-muted)] opacity-60">
-                {state.solved ? "Identified" : state.skipped ? "Skipped" : "Song"} {songIndex + 1}/{puzzle.length}
-              </span>
+            <div className="flex items-center justify-center w-full mb-2">
               <span
                 className="text-xs font-bold px-3 py-1 rounded-full mt-3 mb-1"
                 style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
@@ -746,9 +743,6 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                   >
                     Submit
                   </button>
-                  <p className="text-xs text-center text-[color:var(--color-muted)]">
-                    {TITLE_SCORES[state.hintsUsed].toLocaleString()} pts available
-                  </p>
                   <div className="flex gap-2">
                     <button
                       type="button"
@@ -756,7 +750,7 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
                       disabled={state.hintsUsed >= 3}
                       className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors cursor-pointer touch-manipulation text-sm font-semibold"
                     >
-                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} · -${(TITLE_SCORES[state.hintsUsed] - TITLE_SCORES[state.hintsUsed + 1]).toLocaleString()} pts` : `Hint (3/3 used)`}
+                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (-${(TITLE_SCORES[state.hintsUsed] - TITLE_SCORES[state.hintsUsed + 1]).toLocaleString()} pts)` : `Hint (3/3 used)`}
                     </button>
                     <button
                       type="button"
@@ -926,11 +920,8 @@ export default function GameClassic({ puzzle, puzzleNumber, genreLabel, allArtis
 
         {/* Score bar */}
         <div className="flex justify-between items-center text-xs text-[color:var(--color-muted)]">
-          <span>Score: {totalScore.toLocaleString()} / {(puzzle.length * 1000).toLocaleString()}</span>
-          <div className="flex items-center gap-3">
-            {streak > 0 && <span className="text-white font-semibold">🔥 {streak}</span>}
-            <span>{states.filter((s) => s.solved).length} of {puzzle.length} solved</span>
-          </div>
+          <span>{totalScore.toLocaleString()} pts · {states.filter((s) => s.solved).length}/{puzzle.length} solved</span>
+          {streak > 0 && <span className="text-white font-semibold">🔥 {streak}</span>}
         </div>
 
         {/* See Results — only when every song is finished */}
