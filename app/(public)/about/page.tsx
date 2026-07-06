@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <main className="relative flex flex-col items-center justify-start min-h-[calc(100svh-8rem)] px-4 py-12 overflow-x-hidden">
+    <main className="relative flex flex-col items-center justify-start min-h-[calc(100svh-8rem)] px-4 pt-[88px] pb-12 overflow-x-hidden">
 
       {/* Scattered background notes */}
       <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
