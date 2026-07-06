@@ -43,12 +43,12 @@ export default function AdminPage() {
     songs: ids.map((id: string) => songMap[id]).filter(Boolean) as Song[],
   }));
 
-  const upcomingDays = allScheduledDays
-    .filter(({ date }) => date >= today)
-    .sort((a, b) => a.date.localeCompare(b.date));
+  const allDaysSorted = allScheduledDays.sort((a, b) => a.date.localeCompare(b.date));
 
-  const todayEntry = upcomingDays.find(({ date }) => date === today);
-  const nextDays = upcomingDays.filter(({ date }) => date > today).slice(0, 14);
+  const todayEntry = allDaysSorted.find(({ date }) => date === today);
+  const upcomingDays = allDaysSorted.filter(({ date }) => date >= today);
+  const nextDays = allDaysSorted.filter(({ date }) => date > today);
+  const pastDays = allDaysSorted.filter(({ date }) => date < today).reverse();
 
   const scheduledIds = new Set(schedule.flat());
   const unscheduled = library.filter((s: Song) => !scheduledIds.has(s.id));
@@ -74,7 +74,7 @@ export default function AdminPage() {
         <div className="grid grid-cols-3 gap-3">
           {[
             { label: "Total Songs", value: library.length, href: "/admin/library" },
-            { label: "Days Scheduled", value: upcomingDays.length, href: "/admin/play" },
+            { label: "Days Scheduled", value: allDaysSorted.length, href: "/admin/play" },
             { label: "Unscheduled", value: unscheduled.length, href: "/admin/preview" },
           ].map(({ label, value, href }) => (
             <Link
@@ -123,13 +123,11 @@ export default function AdminPage() {
           )}
         </div>
 
-        {/* Upcoming — compact rows */}
+        {/* Upcoming — all future days */}
         <div className="flex flex-col gap-0">
           <div className="flex items-center justify-between pb-2 border-b border-[color:var(--color-border)]">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Upcoming</h2>
-            <Link href="/admin/preview" className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors">
-              Full preview →
-            </Link>
+            <span className="text-xs text-[color:var(--color-muted)]">{nextDays.length} days</span>
           </div>
 
           {nextDays.length > 0 ? (
@@ -154,6 +152,33 @@ export default function AdminPage() {
             <p className="text-sm text-[color:var(--color-muted)] py-4">No upcoming scheduled days.</p>
           )}
         </div>
+
+        {/* Past puzzles */}
+        {pastDays.length > 0 && (
+          <div className="flex flex-col gap-0">
+            <div className="flex items-center justify-between pb-2 border-b border-[color:var(--color-border)]">
+              <h2 className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Past Puzzles</h2>
+              <span className="text-xs text-[color:var(--color-muted)]">{pastDays.length} days</span>
+            </div>
+            <div className="flex flex-col">
+              {pastDays.map(({ date, dayNumber, songs }) => (
+                <div key={date} className="flex items-center gap-4 py-2.5 border-b border-[color:var(--color-border)] last:border-0 group">
+                  <span className="text-xs font-semibold text-[color:var(--color-muted)] w-24 shrink-0">{formatDate(date)}</span>
+                  <span className="text-[10px] text-[color:var(--color-muted)] w-8 shrink-0 opacity-50">#{dayNumber}</span>
+                  <span className="flex-1 text-xs text-[color:var(--color-muted)] opacity-60 truncate min-w-0">
+                    {songs.map(s => s.title).join(" · ")}
+                  </span>
+                  <Link
+                    href={`/play/${date}`}
+                    className="text-[10px] font-semibold text-[color:var(--color-purple)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                  >
+                    Play →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Genre breakdown */}
         <div className="flex flex-col gap-3">
