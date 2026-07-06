@@ -215,6 +215,7 @@ export default function GameV2({
   const [artistDropdownOpen, setArtistDropdownOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const artistRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
 
   const current = puzzle[songIndex];
@@ -262,6 +263,12 @@ export default function GameV2({
       artistRef.current?.focus({ preventScroll: true });
     }
   }, [state.solved, state.bonusDone, state.artistCorrect]);
+
+  useEffect(() => {
+    if (state.solved && state.artistCorrect !== null && state.yearCorrect === null && !state.bonusDone) {
+      yearRef.current?.focus({ preventScroll: true });
+    }
+  }, [state.solved, state.artistCorrect, state.yearCorrect, state.bonusDone]);
 
   function update(index: number, patch: Partial<SongState>) {
     setStates((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
@@ -621,6 +628,7 @@ export default function GameV2({
                   <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }}>
                     <div className="gradient-border mx-[2px]">
                       <input
+                        ref={yearRef}
                         type="text"
                         inputMode="numeric"
                         enterKeyHint="go"
