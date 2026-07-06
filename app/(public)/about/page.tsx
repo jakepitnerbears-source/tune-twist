@@ -75,8 +75,8 @@ export default function About() {
           <div className="flex flex-col gap-4">
             {[
               { n: "01", heading: "A new puzzle drops every day", body: "Five songs, five synonymized titles. The puzzle resets at midnight — so there's always something new to decode." },
-              { n: "02", heading: "Synonyms replace key words", body: <><span className="text-white font-bold">Blinding Lights</span> becomes <span className="text-[color:var(--color-purple)] font-bold">Dazzling Illumination</span>. Same structure, totally twisted — work backwards and name that track.</> },
-              { n: "03", heading: "Hints are available, but they cost you", body: "Each song has 3 escalating hints. Use them sparingly — every hint lowers the points you can earn for that song." },
+              { n: "02", heading: "Synonyms replace key words", body: <><span className="text-white font-bold">Wrecking Ball</span> becomes <span className="text-[color:var(--color-purple)] font-bold">Demolition Sphere</span>. Same structure, totally twisted — work backwards and name that track.</> },
+              { n: "03", heading: "Hints are available, but they cost you", body: "Each song has 2 escalating hints. Use them sparingly — every hint lowers the points you can earn for that song." },
               { n: "04", heading: "Earn stars for perfection", body: "Solve a song with no hints, then correctly name the artist and release year, and you'll earn a ★. Max 5 per day." },
             ].map((step) => (
               <div key={step.n} className="flex gap-4">
@@ -95,19 +95,26 @@ export default function About() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[color:var(--color-muted)]">Scoring</p>
           <div className="flex flex-col gap-2 text-sm">
             {[
-              { label: "No hints used", pts: "1,000 pts", highlight: true },
-              { label: "Correct after hint 1", pts: "750 pts", highlight: false },
-              { label: "Correct after hint 2", pts: "500 pts", highlight: false },
-              { label: "Correct after hint 3", pts: "250 pts", highlight: false },
+              { label: "No hints used", pts: "800 pts", highlight: true },
+              { label: "Correct after hint 1", pts: "600 pts", highlight: false },
+              { label: "Correct after hint 2", pts: "400 pts", highlight: false },
+              { label: "+ Correct artist", pts: "+100 pts", highlight: false },
+              { label: "+ Correct year", pts: "+100 pts", highlight: false },
             ].map((row) => (
               <div key={row.label} className="flex justify-between">
                 <span className={row.highlight ? "font-medium text-white" : "text-[color:var(--color-muted)]"}>{row.label}</span>
-                <span className={row.highlight ? "font-bold text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}>{row.pts}</span>
+                <span className={row.highlight ? "font-bold" : "text-[color:var(--color-muted)]"} style={row.highlight ? { color: "#4ade80" } : {}}>{row.pts}</span>
               </div>
             ))}
-            <div className="border-t border-[color:var(--color-border)] pt-2 flex justify-between font-bold">
-              <span>Max daily total</span>
-              <span className="text-[color:var(--color-green)]">5,000 pts</span>
+            <div className="border-t border-[color:var(--color-border)] pt-2 flex flex-col gap-1">
+              <div className="flex justify-between font-bold">
+                <span>Max per song</span>
+                <span style={{ color: "#4ade80" }}>1,000 pts</span>
+              </div>
+              <div className="flex justify-between font-bold">
+                <span>Max daily total</span>
+                <span style={{ color: "#4ade80" }}>5,000 pts</span>
+              </div>
             </div>
           </div>
         </div>
