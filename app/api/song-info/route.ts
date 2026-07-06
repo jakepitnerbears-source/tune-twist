@@ -48,6 +48,7 @@ export async function GET(req: NextRequest) {
       genre: match.primaryGenreName,
       releaseYear: new Date(match.releaseDate).getFullYear().toString(),
       trackViewUrl: match.trackViewUrl,
+      previewUrl: match.previewUrl ?? "",
     });
   } catch {
     return NextResponse.json(null);

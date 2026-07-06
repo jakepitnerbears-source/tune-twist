@@ -234,6 +234,7 @@ export default function GameV2({
   const [showHowToPlay, setShowHowToPlay] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const current = puzzle[songIndex];
   const state = states[songIndex];
@@ -289,6 +290,24 @@ export default function GameV2({
       return () => clearTimeout(t);
     }
   }, [songIndex, states[songIndex]?.artistCorrect, states[songIndex]?.yearCorrect]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Autoplay preview when bonus round completes and songInfo arrives
+  useEffect(() => {
+    if (!bonusComplete) return;
+    const info = state.songInfo;
+    if (!info || info === "loading" || !info.previewUrl) return;
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    const audio = new Audio(info.previewUrl);
+    audio.volume = 0.6;
+    audioRef.current = audio;
+    audio.play().catch(() => {});
+    return () => { audio.pause(); audioRef.current = null; };
+  }, [bonusComplete, state.songInfo]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Stop audio when moving to next song
+  useEffect(() => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+  }, [songIndex]);
 
   const confettiPieces = useMemo(() => {
     if (!fullConfetti) return [];

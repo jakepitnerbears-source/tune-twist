@@ -6,6 +6,7 @@ export interface SongInfo {
   genre: string;
   releaseYear: string;
   trackViewUrl: string;
+  previewUrl: string;
 }
 
 export async function fetchSongInfo(
