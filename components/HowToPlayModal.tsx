@@ -87,9 +87,9 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
               </p>
               <div className="flex flex-col gap-2">
                 {[
-                  { n: "1", text: `Release year — e.g. "Released in 2019"` },
+                  { n: "1", text: `A clue about the song` },
                   { n: "2", text: `A lyric snippet from the song` },
-                  { n: "3", text: `Artist name` },
+                  { n: "3", text: `A second clue about the song` },
                 ].map((h) => (
                   <div
                     key={h.n}
@@ -108,7 +108,7 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Bonus Round</h3>
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
               <p className="text-sm text-[color:var(--color-muted)]">
-                After decoding the title, guess the artist and release year. These don't affect your score — but get all three right with no hints and you earn a ★.
+                After decoding the title, guess the artist (+100 pts) and release year (+100 pts). Get the year within one year and earn +50 pts. Get all three right with no hints and you earn a ★.
               </p>
               <div className="flex flex-col gap-2 text-sm">
                 <div className="flex items-center gap-2">
@@ -129,22 +129,35 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5">
               <div className="flex flex-col gap-2 text-sm">
                 <div className="flex justify-between font-medium">
-                  <span>No hints used</span>
-                  <span className="font-bold text-[color:var(--color-green)]">1,000 pts</span>
+                  <span>Title — no hints</span>
+                  <span className="font-bold text-[color:var(--color-green)]">800 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Correct after hint 1</span><span>750 pts</span>
+                  <span>Title — after hint 1</span><span>600 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Correct after hint 2</span><span>500 pts</span>
+                  <span>Title — after hint 2</span><span>400 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Correct after hint 3</span><span>250 pts</span>
+                  <span>Title — after hint 3</span><span>200 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Artist bonus</span><span>+100 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Year bonus (exact)</span><span>+100 pts</span>
+                </div>
+                <div className="flex justify-between text-[color:var(--color-muted)]">
+                  <span>Year bonus (within 1 year)</span><span>+50 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
                   <span>Song not solved</span><span>0 pts</span>
                 </div>
                 <div className="border-t border-[color:var(--color-border)] pt-2 flex justify-between font-bold">
+                  <span>Max per song</span>
+                  <span className="text-[color:var(--color-green)]">1,000 pts</span>
+                </div>
+                <div className="flex justify-between font-bold">
                   <span>Max daily total</span>
                   <span className="text-[color:var(--color-green)]">5,000 pts</span>
                 </div>

@@ -6,9 +6,9 @@ import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
-const TITLE_SCORES = [600, 450, 300, 150];
-const ARTIST_PTS = 250;
-const YEAR_PTS = 150;
+const TITLE_SCORES = [800, 600, 400, 200];
+const ARTIST_PTS = 100;
+const YEAR_PTS = 100;
 
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close.", "Getting warm…"];
