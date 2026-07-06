@@ -83,13 +83,12 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
             <h3 className="text-sm font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Hints</h3>
             <div className="bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-2xl p-5 flex flex-col gap-3">
               <p className="text-sm text-[color:var(--color-muted)]">
-                Each song has 3 escalating hints. Using them lowers your available points for that song.
+                Each song has 2 hints. Using them lowers your available points for that song.
               </p>
               <div className="flex flex-col gap-2">
                 {[
-                  { n: "1", text: `A clue about the song` },
-                  { n: "2", text: `A lyric snippet from the song` },
-                  { n: "3", text: `A second clue about the song` },
+                  { n: "1", text: `A lyric snippet from the song` },
+                  { n: "2", text: `The artist name` },
                 ].map((h) => (
                   <div
                     key={h.n}
@@ -137,9 +136,6 @@ export default function HowToPlayModal({ onClose }: { onClose: () => void }) {
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
                   <span>Title — after hint 2</span><span>400 pts</span>
-                </div>
-                <div className="flex justify-between text-[color:var(--color-muted)]">
-                  <span>Title — after hint 3</span><span>200 pts</span>
                 </div>
                 <div className="flex justify-between text-[color:var(--color-muted)]">
                   <span>Artist bonus</span><span>+100 pts</span>
