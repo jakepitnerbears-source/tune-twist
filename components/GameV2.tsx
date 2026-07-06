@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useMemo } from "react";
+import Image from "next/image";
 import { DailyPuzzle } from "@/lib/getDailyPuzzle";
 import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
@@ -506,14 +507,13 @@ export default function GameV2({
               state.songInfo === "loading" ? (
                 <div className="w-[88px] h-[88px] rounded-xl mb-0.5" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
               ) : state.songInfo?.artworkUrl ? (
-                <img
+                <Image
                   src={state.songInfo.artworkUrl}
                   alt={current.title}
                   width={88}
                   height={88}
                   className="rounded-xl shadow-lg mb-0.5"
                   style={{ objectFit: "cover" }}
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                 />
               ) : null
             )}
