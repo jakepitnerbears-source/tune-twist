@@ -502,51 +502,61 @@ export default function GameV2({
             </div>
           )}
           {/* Card header */}
-          <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
-            {bonusComplete && (
-              state.songInfo === "loading" ? (
-                <div className="w-[88px] h-[88px] rounded-xl mb-0.5" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
+          {bonusComplete ? (
+            <div className="px-5 pt-4 pb-3 flex items-center gap-4">
+              {state.songInfo === "loading" ? (
+                <div className="w-[88px] h-[88px] rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
               ) : state.songInfo?.artworkUrl ? (
                 <Image
                   src={state.songInfo.artworkUrl}
                   alt={current.title}
                   width={88}
                   height={88}
-                  className="rounded-xl shadow-lg mb-0.5"
+                  className="rounded-xl shadow-lg shrink-0"
                   style={{ objectFit: "cover" }}
                 />
-              ) : null
-            )}
-            <span
-              className="text-xs font-bold px-3 py-0.5 rounded-full"
-              style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
-            >
-              {current.genre ?? "Unknown"} · {decade}
-            </span>
-
-            <p className="text-2xl font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
-              {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
-            </p>
-
-            {(bonusComplete || state.skipped) && (
-              <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
-            )}
-
-            {bonusComplete && !state.skipped && isPerfect(state) && (
+              ) : (
+                <div className="w-[88px] h-[88px] rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
+              )}
+              <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+                <p className="text-xl font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
+                  {current.title}
+                </p>
+                <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
+                {!state.skipped && isPerfect(state) && (
+                  <span
+                    className="text-xs font-bold px-3 py-1 rounded-full mt-1 self-start"
+                    style={{
+                      background: "linear-gradient(135deg, rgba(234,179,8,0.25) 0%, rgba(251,191,36,0.15) 50%, rgba(217,119,6,0.2) 100%)",
+                      color: "#fbbf24",
+                      border: "1px solid rgba(251,191,36,0.5)",
+                      boxShadow: "0 0 12px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
+                      textShadow: "0 0 8px rgba(251,191,36,0.6)",
+                    }}
+                  >
+                    ★ Perfect song
+                  </span>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="px-5 pt-4 pb-3 flex flex-col items-center text-center gap-1.5">
               <span
-                className="text-xs font-bold px-4 py-1.5 rounded-full"
-                style={{
-                  background: "linear-gradient(135deg, rgba(234,179,8,0.25) 0%, rgba(251,191,36,0.15) 50%, rgba(217,119,6,0.2) 100%)",
-                  color: "#fbbf24",
-                  border: "1px solid rgba(251,191,36,0.5)",
-                  boxShadow: "0 0 12px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
-                  textShadow: "0 0 8px rgba(251,191,36,0.6)",
-                }}
+                className="text-xs font-bold px-3 py-0.5 rounded-full"
+                style={{ background: `${genreColor}22`, color: genreColor, border: `1px solid ${genreColor}55` }}
               >
-                ★ Perfect song
+                {current.genre ?? "Unknown"} · {decade}
               </span>
-            )}
-          </div>
+
+              <p className="text-2xl font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
+                {state.solved || state.skipped ? current.title : stripFeaturing(current.synonymTitle)}
+              </p>
+
+              {state.skipped && (
+                <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
+              )}
+            </div>
+          )}
 
           <div className="h-px mx-5" style={{ background: "rgba(255,255,255,0.07)" }} />
 
