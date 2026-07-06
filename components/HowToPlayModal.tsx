@@ -62,7 +62,7 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
           <div className="grid grid-cols-2 gap-2">
             {[
               { icon: <Infinity size={22} />, label: "Unlimited guesses", sub: "(for the song title)" },
-              { icon: <Lightbulb size={22} />, label: "2 hints", sub: "(cost pts)" },
+              { icon: <Lightbulb size={22} />, label: "2 hints", sub: null },
               { icon: <Star size={22} />, label: "+100 artist / year", sub: null },
               { icon: <Trophy size={22} />, label: "1,000 max / song", sub: null },
             ].map((tile, i) => (
