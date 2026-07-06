@@ -214,8 +214,6 @@ export default function GameV2({
   const [copied, setCopied] = useState(false);
   const [artistDropdownOpen, setArtistDropdownOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const artistRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
 
   const current = puzzle[songIndex];
@@ -257,18 +255,6 @@ export default function GameV2({
   useEffect(() => {
     if (!state.solved && !state.skipped) inputRef.current?.focus({ preventScroll: true });
   }, [songIndex, state.solved, state.skipped]);
-
-  useEffect(() => {
-    if (state.solved && !state.bonusDone && state.artistCorrect === null) {
-      artistRef.current?.focus({ preventScroll: true });
-    }
-  }, [state.solved, state.bonusDone, state.artistCorrect]);
-
-  useEffect(() => {
-    if (state.solved && state.artistCorrect !== null && state.yearCorrect === null && !state.bonusDone) {
-      yearRef.current?.focus({ preventScroll: true });
-    }
-  }, [state.solved, state.artistCorrect, state.yearCorrect, state.bonusDone]);
 
   function update(index: number, patch: Partial<SongState>) {
     setStates((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
@@ -520,148 +506,142 @@ export default function GameV2({
               )}
             </div>
 
-            {/* Active input zone */}
+            {/* Active input zone — single persistent input so iOS keyboard never dismisses */}
             <div className="flex flex-col gap-2">
+              {(() => {
+                const step =
+                  state.skipped || bonusComplete ? "done"
+                  : !state.solved ? "title"
+                  : state.artistCorrect === null ? "artist"
+                  : state.yearCorrect === null ? "year"
+                  : "done";
 
-              {/* Guessing phase */}
-              {!state.solved && !state.skipped && (
-                <>
-                  <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
-                    <div className="gradient-border w-full">
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        autoComplete="off"
-                        autoCorrect="off"
-                        autoCapitalize="off"
-                        spellCheck={false}
-                        value={state.guess}
-                        onChange={(e) => update(songIndex, { guess: e.target.value, feedback: "" })}
-                        placeholder="Name that track…"
-                        className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
-                      />
-                    </div>
-                  </form>
-                  {state.feedback && (
-                    <p className={`text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>
-                      {state.feedback}
-                    </p>
-                  )}
-                  <button
-                    onClick={handleSubmit}
-                    className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
-                    style={{ background: "var(--btn-gradient)" }}
-                  >
-                    Submit
-                  </button>
-                  <div className="flex gap-2">
+                if (step === "done") {
+                  return (
                     <button
-                      onClick={handleHint}
-                      disabled={state.hintsUsed >= 3}
-                      className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
+                      onClick={allDone ? () => setGameOver(true) : handleNext}
+                      className="w-full py-3.5 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      style={{ background: "var(--btn-gradient)" }}
                     >
-                      {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "3/3 hints used"}
+                      {allDone ? "See Results →" : "Next Song →"}
                     </button>
-                    <button
-                      onClick={handleReveal}
-                      disabled={state.hintsUsed < 3}
-                      className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors text-sm font-semibold"
-                    >
-                      Reveal
-                    </button>
-                  </div>
-                  <button onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
-                    Next song →
-                  </button>
-                </>
-              )}
+                  );
+                }
 
-              {/* Artist input */}
-              {state.solved && state.artistCorrect === null && (
-                <>
-                  <div className="relative">
-                    <form onSubmit={(e) => { e.preventDefault(); handleArtistSubmit(); }}>
-                      <div className="gradient-border mx-[2px]">
-                        <input
-                          ref={artistRef}
-                          type="text"
-                          value={state.artistGuess}
-                          onChange={(e) => { update(songIndex, { artistGuess: e.target.value }); setArtistDropdownOpen(true); }}
-                          onFocus={() => setArtistDropdownOpen(true)}
-                          onBlur={() => setTimeout(() => setArtistDropdownOpen(false), 150)}
-                          placeholder="Who's the artist?"
-                          className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
-                        />
-                      </div>
-                    </form>
-                    {artistDropdownOpen && state.artistGuess.trim().length > 0 && (() => {
-                      const q = state.artistGuess.toLowerCase();
-                      const matches = allArtists.filter((a) => a.toLowerCase().includes(q)).slice(0, 8);
-                      return matches.length > 0 ? (
+                const inputValue =
+                  step === "title" ? state.guess
+                  : step === "artist" ? state.artistGuess
+                  : state.yearGuess;
+
+                const placeholder =
+                  step === "title" ? "Name that track…"
+                  : step === "artist" ? "Who's the artist?"
+                  : "What year was it released?";
+
+                const submitLabel =
+                  step === "title" ? "Submit"
+                  : step === "artist" ? "Submit Artist"
+                  : "Submit Year";
+
+                function handleChange(val: string) {
+                  if (step === "title") update(songIndex, { guess: val, feedback: "" });
+                  else if (step === "artist") { update(songIndex, { artistGuess: val }); setArtistDropdownOpen(true); }
+                  else update(songIndex, { yearGuess: val });
+                }
+
+                function handleUnifiedSubmit() {
+                  if (step === "title") handleSubmit();
+                  else if (step === "artist") handleArtistSubmit();
+                  else handleYearSubmit();
+                }
+
+                const artistMatches =
+                  step === "artist" && artistDropdownOpen && state.artistGuess.trim().length > 0
+                    ? allArtists.filter((a) => a.toLowerCase().includes(state.artistGuess.toLowerCase())).slice(0, 8)
+                    : [];
+
+                return (
+                  <>
+                    <div className="relative">
+                      <form onSubmit={(e) => { e.preventDefault(); handleUnifiedSubmit(); }}>
+                        <div className="gradient-border w-full">
+                          <input
+                            ref={inputRef}
+                            type="text"
+                            inputMode={step === "year" ? "numeric" : "text"}
+                            enterKeyHint={step === "year" ? "go" : "done"}
+                            autoComplete="off"
+                            autoCorrect="off"
+                            autoCapitalize="off"
+                            spellCheck={false}
+                            value={inputValue}
+                            onChange={(e) => handleChange(e.target.value)}
+                            onFocus={() => { if (step === "artist") setArtistDropdownOpen(true); }}
+                            onBlur={() => { if (step === "artist") setTimeout(() => setArtistDropdownOpen(false), 150); }}
+                            placeholder={placeholder}
+                            className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
+                          />
+                        </div>
+                      </form>
+                      {artistMatches.length > 0 && (
                         <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-y-auto shadow-xl" style={{ maxHeight: 192 }}>
-                          {matches.map((a) => (
+                          {artistMatches.map((a) => (
                             <button key={a}
                               onMouseDown={() => { setArtistDropdownOpen(false); update(songIndex, { artistGuess: a, artistCorrect: validateArtist(a, current.artist) }); }}
                               className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/10 transition-colors"
                             >{a}</button>
                           ))}
                         </div>
-                      ) : null;
-                    })()}
-                  </div>
-                  <button
-                    onClick={handleArtistSubmit}
-                    className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
-                    style={{ background: "var(--btn-gradient)" }}
-                  >
-                    Submit Artist
-                  </button>
-                  <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
-                    Skip →
-                  </button>
-                </>
-              )}
-
-              {/* Year input */}
-              {state.solved && state.artistCorrect !== null && state.yearCorrect === null && (
-                <>
-                  <form onSubmit={(e) => { e.preventDefault(); handleYearSubmit(); }}>
-                    <div className="gradient-border mx-[2px]">
-                      <input
-                        ref={yearRef}
-                        type="text"
-                        inputMode="numeric"
-                        enterKeyHint="go"
-                        value={state.yearGuess}
-                        onChange={(e) => update(songIndex, { yearGuess: e.target.value })}
-                        placeholder="What year was it released?"
-                        className="w-full bg-[color:var(--color-navy)] rounded-[11px] px-4 py-3 text-base text-white placeholder:text-[color:var(--color-muted)] outline-none"
-                      />
+                      )}
                     </div>
-                  </form>
-                  <button
-                    onClick={handleYearSubmit}
-                    className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
-                    style={{ background: "var(--btn-gradient)" }}
-                  >
-                    Submit Year
-                  </button>
-                  <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
-                    Skip →
-                  </button>
-                </>
-              )}
 
-              {/* Next/Results button */}
-              {(state.skipped || bonusComplete) && (
-                <button
-                  onClick={allDone ? () => setGameOver(true) : handleNext}
-                  className="w-full py-3.5 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
-                  style={{ background: "var(--btn-gradient)" }}
-                >
-                  {allDone ? "See Results →" : "Next Song →"}
-                </button>
-              )}
+                    {step === "title" && state.feedback && (
+                      <p className={`text-sm ${state.feedbackWarm ? "text-[color:var(--color-coral)]" : "text-[color:var(--color-red)]"}`}>
+                        {state.feedback}
+                      </p>
+                    )}
+
+                    <button
+                      onClick={handleUnifiedSubmit}
+                      className="w-full py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
+                      style={{ background: "var(--btn-gradient)" }}
+                    >
+                      {submitLabel}
+                    </button>
+
+                    {step === "title" && (
+                      <div className="flex gap-2">
+                        <button
+                          onClick={handleHint}
+                          disabled={state.hintsUsed >= 3}
+                          className="flex-1 py-2 rounded-xl border border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-[color:var(--color-purple)] hover:border-[color:var(--color-purple)] disabled:opacity-30 transition-colors text-sm font-semibold"
+                        >
+                          {state.hintsUsed < 3 ? `Hint ${state.hintsUsed + 1} (−${hintCost} pts)` : "3/3 hints used"}
+                        </button>
+                        <button
+                          onClick={handleReveal}
+                          disabled={state.hintsUsed < 3}
+                          className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors text-sm font-semibold"
+                        >
+                          Reveal
+                        </button>
+                      </div>
+                    )}
+
+                    {(step === "artist" || step === "year") && (
+                      <button onClick={handleSkipBonus} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-left">
+                        Skip →
+                      </button>
+                    )}
+
+                    {step === "title" && (
+                      <button onClick={handleNext} className="text-xs text-[color:var(--color-muted)] hover:text-white transition-colors text-right">
+                        Next song →
+                      </button>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           </div>
         </div>
