@@ -520,7 +520,13 @@ export default function GameV2({
             {bonusComplete && !state.skipped && isPerfect(state) && (
               <span
                 className="text-xs font-bold px-4 py-1.5 rounded-full"
-                style={{ background: "rgba(192,38,211,0.15)", color: "#e879f9", border: "1px solid rgba(192,38,211,0.4)" }}
+                style={{
+                  background: "linear-gradient(135deg, rgba(234,179,8,0.25) 0%, rgba(251,191,36,0.15) 50%, rgba(217,119,6,0.2) 100%)",
+                  color: "#fbbf24",
+                  border: "1px solid rgba(251,191,36,0.5)",
+                  boxShadow: "0 0 12px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
+                  textShadow: "0 0 8px rgba(251,191,36,0.6)",
+                }}
               >
                 ★ Perfect song
               </span>
