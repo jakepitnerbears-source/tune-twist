@@ -254,12 +254,12 @@ export default function GameV2({
   }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!state.solved && !state.skipped) inputRef.current?.focus();
+    if (!state.solved && !state.skipped) inputRef.current?.focus({ preventScroll: true });
   }, [songIndex, state.solved, state.skipped]);
 
   useEffect(() => {
     if (state.solved && !state.bonusDone && state.artistCorrect === null) {
-      artistRef.current?.focus();
+      artistRef.current?.focus({ preventScroll: true });
     }
   }, [state.solved, state.bonusDone, state.artistCorrect]);
 
@@ -354,7 +354,7 @@ export default function GameV2({
   if (gameOver) {
     const solvedCount = states.filter((s) => s.solved).length;
     return (
-      <main className="flex flex-col items-center justify-start min-h-[calc(100svh-8rem)] px-4 pt-8 pb-6">
+      <main className="flex flex-col items-center justify-start min-h-[100svh] px-4 pt-8 pb-6">
         <div className="w-full max-w-[480px] flex flex-col gap-5">
           <div className="text-center">
             <p className="text-3xl font-bold">{runningTotal.toLocaleString()} <span className="text-xl font-normal text-[color:var(--color-muted)]">/ 5,000</span></p>
@@ -411,7 +411,7 @@ export default function GameV2({
     : 0;
 
   return (
-    <main className="fixed inset-0 flex flex-col items-center overflow-y-auto px-4 py-6" style={{ top: "6rem" }}>
+    <main className="min-h-[100svh] flex flex-col items-center overflow-x-hidden px-4 pt-6 pb-16">
 
       <div className="w-full max-w-[480px] flex flex-col gap-4">
 
@@ -598,7 +598,7 @@ export default function GameV2({
                       const q = state.artistGuess.toLowerCase();
                       const matches = allArtists.filter((a) => a.toLowerCase().includes(q)).slice(0, 8);
                       return matches.length > 0 ? (
-                        <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-hidden shadow-xl">
+                        <div className="absolute z-50 left-0 right-0 top-full mt-1 bg-[color:var(--color-navy)] border border-[color:var(--color-border)] rounded-xl overflow-y-auto shadow-xl" style={{ maxHeight: 192 }}>
                           {matches.map((a) => (
                             <button key={a}
                               onMouseDown={() => { setArtistDropdownOpen(false); update(songIndex, { artistGuess: a, artistCorrect: validateArtist(a, current.artist) }); }}
