@@ -19,7 +19,7 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center"
+      className="fixed inset-0 z-[100] flex items-center justify-center px-5"
       aria-modal="true"
       role="dialog"
     >
@@ -28,11 +28,11 @@ export default function HowToPlayModal({ onClose, onDontShowAgain }: { onClose: 
 
       {/* Gradient border wrapper */}
       <div
-        className="relative z-10 w-full sm:max-w-[480px] p-[1px] rounded-t-3xl sm:rounded-2xl shadow-[0_8px_40px_rgba(124,58,237,0.4)]"
+        className="relative z-10 w-full max-w-[480px] p-[1px] rounded-2xl shadow-[0_8px_40px_rgba(124,58,237,0.4)]"
         style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, #c026d3 50%, var(--color-green) 100%)" }}
       >
         {/* Panel */}
-        <div className="flex flex-col bg-[color:var(--color-card)] rounded-t-3xl sm:rounded-2xl overflow-hidden">
+        <div className="flex flex-col bg-[color:var(--color-card)] rounded-2xl overflow-hidden">
 
           {/* Header with gradient glow */}
           <div
