@@ -16,7 +16,8 @@ export default function Nav() {
 
       {/* Mobile: floating pill */}
       <div className="md:hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[80%] max-w-xs">
-        <div className="flex items-center justify-between px-4 py-1 rounded-full bg-[color:var(--color-card)] border border-[color:var(--color-border)] shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+        <div className="p-[1px] rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.5)]" style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, var(--color-coral) 55%, rgba(124,58,237,0.5) 100%)" }}>
+        <div className="flex items-center justify-between px-4 py-1 rounded-full bg-[color:var(--color-card)]">
           <Link href="/" onClick={() => setMenuOpen(false)} className="hover:opacity-80 transition-opacity">
             <Image src="/logo.png" alt="TuneTwist" width={76} height={38} className="object-contain" />
           </Link>
@@ -29,6 +30,7 @@ export default function Nav() {
             <span className={`block h-0.5 w-5 bg-white transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
             <span className={`block h-0.5 w-5 bg-white transition-transform duration-200 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
           </button>
+        </div>
         </div>
 
         {menuOpen && (
