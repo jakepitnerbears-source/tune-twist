@@ -414,7 +414,7 @@ export default function GameV2({
   if (gameOver) {
     const solvedCount = states.filter((s) => s.solved).length;
     return (
-      <main className="flex flex-col items-center justify-start min-h-[100svh] px-4 pt-8 pb-6">
+      <main className="flex flex-col items-center justify-start min-h-[100svh] px-4 pt-[88px] md:pt-[100px] pb-8">
         <div className="w-full max-w-[480px] flex flex-col gap-5">
           <div className="text-center">
             <p className="text-3xl font-bold">{runningTotal.toLocaleString()} <span className="text-xl font-normal text-[color:var(--color-muted)]">/ 5,000</span></p>
