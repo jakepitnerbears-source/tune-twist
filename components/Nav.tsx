@@ -14,23 +14,23 @@ export default function Nav() {
       {/* Gradient glow behind pill — both mobile and desktop */}
       <div className="fixed top-0 left-0 right-0 h-32 pointer-events-none z-40" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.35) 0%, rgba(192,38,211,0.18) 45%, transparent 72%)" }} />
 
-      {/* Mobile: floating pill */}
-      <div className="md:hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[80%] max-w-xs">
-        <div className="p-[1px] rounded-full shadow-[0_4px_24px_rgba(0,0,0,0.5)]" style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, var(--color-coral) 55%, rgba(124,58,237,0.5) 100%)" }}>
-        <div className="flex items-center justify-between px-4 py-1 rounded-full bg-[color:var(--color-card)]">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="hover:opacity-80 transition-opacity">
-            <Image src="/logo.png" alt="TuneTwist" width={76} height={38} className="object-contain" />
-          </Link>
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Toggle menu"
-            className="flex flex-col justify-center gap-1.5 p-2"
-          >
-            <span className={`block h-0.5 w-5 bg-white transition-transform duration-200 ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
-            <span className={`block h-0.5 w-5 bg-white transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-5 bg-white transition-transform duration-200 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
-          </button>
-        </div>
+      {/* Mobile: dynamic island pill */}
+      <div className="md:hidden fixed top-3 left-1/2 -translate-x-1/2 z-50">
+        <div className="p-[1px] rounded-full shadow-[0_2px_16px_rgba(124,58,237,0.4),0_4px_24px_rgba(0,0,0,0.6)]" style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, var(--color-coral) 55%, rgba(124,58,237,0.5) 100%)" }}>
+          <div className="flex items-center gap-3 px-3 py-1 rounded-full bg-[color:var(--color-card)]">
+            <Link href="/" onClick={() => setMenuOpen(false)} className="hover:opacity-80 transition-opacity">
+              <Image src="/logo.png" alt="TuneTwist" width={58} height={29} className="object-contain" />
+            </Link>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Toggle menu"
+              className="flex flex-col justify-center gap-[5px] p-1"
+            >
+              <span className={`block h-[1.5px] w-4 bg-white transition-transform duration-200 ${menuOpen ? "translate-y-[6.5px] rotate-45" : ""}`} />
+              <span className={`block h-[1.5px] w-4 bg-white transition-opacity duration-200 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-[1.5px] w-4 bg-white transition-transform duration-200 ${menuOpen ? "-translate-y-[6.5px] -rotate-45" : ""}`} />
+            </button>
+          </div>
         </div>
 
         {menuOpen && (
