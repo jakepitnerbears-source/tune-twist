@@ -522,29 +522,29 @@ export default function GameV2({
           )}
           {/* Card header */}
           {bonusComplete ? (
-            <div className="px-5 pt-4 pb-3 flex items-center gap-4">
+            <div className="px-5 pt-5 pb-3 flex flex-col items-center text-center gap-2">
               {state.songInfo === "loading" ? (
-                <div className="w-[88px] h-[88px] rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
+                <div className="w-[96px] h-[96px] rounded-xl" style={{ background: "rgba(255,255,255,0.08)", animation: "pulse 1.5s ease-in-out infinite" }} />
               ) : state.songInfo?.artworkUrl ? (
                 <Image
                   src={state.songInfo.artworkUrl}
                   alt={current.title}
-                  width={88}
-                  height={88}
-                  className="rounded-xl shadow-lg shrink-0"
+                  width={96}
+                  height={96}
+                  className="rounded-xl shadow-lg"
                   style={{ objectFit: "cover" }}
                 />
               ) : (
-                <div className="w-[88px] h-[88px] rounded-xl shrink-0" style={{ background: "rgba(255,255,255,0.06)" }} />
+                <div className="w-[96px] h-[96px] rounded-xl" style={{ background: "rgba(255,255,255,0.06)" }} />
               )}
-              <div className="flex flex-col gap-0.5 min-w-0 flex-1">
+              <div className="flex flex-col gap-0.5">
                 <p className="text-xl font-bold leading-tight" style={{ fontFamily: "var(--font-poppins)" }}>
                   {current.title}
                 </p>
                 <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
                 {!state.skipped && isPerfect(state) && (
                   <span
-                    className="text-xs font-bold px-3 py-1 rounded-full mt-1 self-start"
+                    className="text-xs font-bold px-3 py-1 rounded-full mt-1 mx-auto"
                     style={{
                       background: "linear-gradient(135deg, rgba(234,179,8,0.25) 0%, rgba(251,191,36,0.15) 50%, rgba(217,119,6,0.2) 100%)",
                       color: "#fbbf24",
