@@ -441,13 +441,9 @@ export default function GameV2({
               {runningTotal.toLocaleString()}
               <span className="text-2xl font-normal text-[color:var(--color-muted)] ml-1">/ 5,000</span>
             </p>
-            <div className="text-3xl tracking-wide leading-none" style={{ color: "#facc15" }}>
-              {"★".repeat(starsEarned)}
-              <span style={{ color: "rgba(255,255,255,0.15)" }}>{"★".repeat(puzzle.length - starsEarned)}</span>
-            </div>
             {streak > 0 && (
               <span
-                className="text-sm font-bold px-4 py-1.5 rounded-full"
+                className="text-xs font-bold px-3 py-1 rounded-full"
                 style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.35)", color: "#fb923c" }}
               >
                 🔥 {streak}-day streak
@@ -465,11 +461,16 @@ export default function GameV2({
               <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Solved</p>
             </div>
             <div
-              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-1"
+              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-2"
               style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
             >
               <p className="text-4xl font-black" style={{ color: starsEarned > 0 ? "#fbbf24" : "rgba(255,255,255,0.4)" }}>{starsEarned}</p>
               <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Perfect</p>
+              <div className="flex gap-1 mt-0.5">
+                {states.map((s, i) => (
+                  <span key={i} className="text-base leading-none" style={{ color: isPerfect(s) ? "#fbbf24" : "rgba(255,255,255,0.15)" }}>★</span>
+                ))}
+              </div>
             </div>
           </div>
 
