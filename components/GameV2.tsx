@@ -431,47 +431,29 @@ export default function GameV2({
       <main className="flex flex-col items-center justify-start min-h-[100svh] px-4 pt-[88px] md:pt-[100px] pb-8">
         <div className="w-full max-w-[480px] flex flex-col gap-4">
 
-          {/* Score card */}
-          <div
-            className="w-full rounded-2xl p-6 flex flex-col items-center gap-3"
-            style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
-          >
-            <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">Today&apos;s Score</p>
-            <p className="text-5xl font-black leading-none">
-              {runningTotal.toLocaleString()}
-              <span className="text-2xl font-normal text-[color:var(--color-muted)] ml-1">/ 5,000</span>
-            </p>
+          {/* Results header */}
+          <div className="flex flex-col items-center text-center gap-2 py-4">
+            <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">Today&apos;s Results</p>
+            <p className="text-7xl font-black leading-none tracking-tight">{runningTotal.toLocaleString()}</p>
+            <p className="text-sm text-[color:var(--color-muted)]">total points</p>
+            {starsEarned > 0 ? (
+              <div className="flex flex-col items-center gap-0.5 mt-1">
+                <p className="text-lg font-bold" style={{ background: "linear-gradient(90deg, #fbbf24, #e879f9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  ✦ {starsEarned} perfect {starsEarned === 1 ? "song" : "songs"}
+                </p>
+                <p className="text-sm text-[color:var(--color-muted)]">out of {puzzle.length} today</p>
+              </div>
+            ) : (
+              <p className="text-sm text-[color:var(--color-muted)] mt-1">{solvedCount} of {puzzle.length} solved</p>
+            )}
             {streak > 0 && (
               <span
-                className="text-xs font-bold px-3 py-1 rounded-full"
+                className="text-xs font-bold px-3 py-1 rounded-full mt-1"
                 style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.35)", color: "#fb923c" }}
               >
                 🔥 {streak}-day streak
               </span>
             )}
-          </div>
-
-          {/* Solved / Perfect stats */}
-          <div className="grid grid-cols-2 gap-3">
-            <div
-              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-1"
-              style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
-            >
-              <p className="text-4xl font-black">{solvedCount}/{puzzle.length}</p>
-              <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Solved</p>
-            </div>
-            <div
-              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-2"
-              style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
-            >
-              <p className="text-4xl font-black" style={{ color: starsEarned > 0 ? "#fbbf24" : "rgba(255,255,255,0.4)" }}>{starsEarned}</p>
-              <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Perfect</p>
-              <div className="flex gap-1 mt-0.5">
-                {states.map((s, i) => (
-                  <span key={i} className="text-base leading-none" style={{ color: isPerfect(s) ? "#fbbf24" : "rgba(255,255,255,0.15)" }}>★</span>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Song breakdown */}
