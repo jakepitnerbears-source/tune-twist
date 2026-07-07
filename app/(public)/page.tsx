@@ -26,8 +26,6 @@ const FEATURED = [
   { title: "Rolling in the Deep", artist: "Adele", year: "2010" },
 ];
 
-// 5 picks for the desktop grid
-const DESKTOP_PICKS = [0, 2, 4, 9, 12]; // Queen, Billie, Stevie, A-ha, Eagles
 
 export default function Home() {
   const router = useRouter();
@@ -60,7 +58,7 @@ export default function Home() {
       <div className="md:hidden flex flex-col gap-0">
         {/* Hero text */}
         <div className="px-6 pb-8 flex flex-col gap-4">
-          <h1 className="text-5xl font-black leading-tight tracking-tight">
+          <h1 className="text-[2.4rem] font-black leading-tight tracking-tight">
             Familiar Songs.<br />Unfamiliar Titles.
           </h1>
           <p className="text-base text-[color:var(--color-muted)] max-w-sm">
