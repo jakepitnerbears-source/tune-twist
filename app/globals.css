@@ -175,6 +175,11 @@ body {
   to { --border-angle: 360deg; }
 }
 
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .gradient-border {
   border-radius: 0.75rem;
   padding: 1px;
