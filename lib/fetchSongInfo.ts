@@ -11,10 +11,11 @@ export interface SongInfo {
 
 export async function fetchSongInfo(
   title: string,
-  artist: string
+  artist: string,
+  year?: string
 ): Promise<SongInfo | null> {
   try {
-    const params = new URLSearchParams({ title, artist });
+    const params = new URLSearchParams({ title, artist, ...(year ? { year } : {}) });
     const res = await fetch(`/api/song-info?${params}`);
     if (!res.ok) return null;
     return await res.json();

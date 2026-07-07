@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const title = req.nextUrl.searchParams.get("title") ?? "";
   const artist = req.nextUrl.searchParams.get("artist") ?? "";
+  const year = req.nextUrl.searchParams.get("year") ?? "";
+  const expectedYear = year ? parseInt(year, 10) : null;
   if (!title || !artist) return NextResponse.json(null);
 
   const query = encodeURIComponent(`${title} ${artist}`);
@@ -35,6 +37,13 @@ export async function GET(req: NextRequest) {
       if (trackArtistLower.includes(primaryArtist)) score += 80;
       else if (primaryArtist.includes(trackArtistLower) && trackArtistLower.length > 3) score += 60;
       else if (trackArtistLower.includes(artistLower) || artistLower.includes(trackArtistLower)) score += 40;
+      if (expectedYear) {
+        const resultYear = new Date(r.releaseDate).getFullYear();
+        const diff = Math.abs(resultYear - expectedYear);
+        if (diff === 0) score += 60;
+        else if (diff <= 1) score += 20;
+        else score -= diff * 5;
+      }
       return score;
     }
 

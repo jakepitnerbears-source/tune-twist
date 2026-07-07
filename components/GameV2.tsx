@@ -342,7 +342,7 @@ export default function GameV2({
         ...(autoSkipYear ? { yearCorrect: false as false } : {}),
       });
       setTimeout(() => update(songIndex, { glow: false }), 800);
-      const info = await fetchSongInfo(current.title, current.artist);
+      const info = await fetchSongInfo(current.title, current.artist, current.releaseYear);
       if (info && current.releaseYear) info.releaseYear = current.releaseYear;
       if (info && current.genre) info.genre = current.genre;
       update(songIndex, { songInfo: info });
