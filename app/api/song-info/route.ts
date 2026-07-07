@@ -27,13 +27,19 @@ export async function GET(req: NextRequest) {
 
     const primaryArtist = artistLower.replace(/\s*(ft\.|feat\.|featuring|&|\+|with|x\s+).*$/i, "").trim();
 
+    function stripFeat(s: string): string {
+      return s.replace(/\s*\(feat\..*?\)/gi, "").replace(/\s*\(ft\..*?\)/gi, "").replace(/\s*feat\..*$/gi, "").trim();
+    }
+
     function scoreResult(r: any): number {
       const trackLower: string = r.trackName.toLowerCase();
+      const trackStripped: string = stripFeat(trackLower);
       const trackArtistLower: string = (r.artistName ?? "").toLowerCase();
       let score = 0;
-      if (trackLower === titleLower) score += 100;
-      else if (trackLower.startsWith(titleLower)) score += 60;
-      else if (trackLower.includes(titleLower)) score += 30;
+      // Compare stripped track name so "Baby (feat. Ludacris)" scores as exact match for "Baby"
+      if (trackStripped === titleLower || trackLower === titleLower) score += 100;
+      else if (trackStripped.startsWith(titleLower) || trackLower.startsWith(titleLower)) score += 60;
+      else if (trackStripped.includes(titleLower) || trackLower.includes(titleLower)) score += 30;
       if (trackArtistLower.includes(primaryArtist)) score += 80;
       else if (primaryArtist.includes(trackArtistLower) && trackArtistLower.length > 3) score += 60;
       else if (trackArtistLower.includes(artistLower) || artistLower.includes(trackArtistLower)) score += 40;
