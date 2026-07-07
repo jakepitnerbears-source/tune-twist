@@ -454,33 +454,32 @@ export default function GameV2({
           </div>
 
           {/* Song breakdown */}
-          <div
-            className="w-full rounded-2xl overflow-hidden"
-            style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
-          >
-            {puzzle.map((song, i) => {
-              const s = states[i];
-              const total = songTotal(s);
-              const perfect = isPerfect(s);
-              return (
-                <div
-                  key={song.id}
-                  className="flex items-center justify-between px-5 py-4"
-                  style={{ borderBottom: i < puzzle.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
-                >
-                  <span className={`font-semibold text-sm flex items-center gap-1.5 ${s.solved ? "text-white" : "text-[color:var(--color-muted)] line-through"}`}>
-                    {perfect && <span style={{ color: "#fbbf24" }}>★</span>}
-                    {song.title}
-                  </span>
-                  <span
-                    className="text-sm font-bold shrink-0 ml-3"
-                    style={{ color: s.solved ? "#a78bfa" : "rgba(255,255,255,0.25)" }}
+          <div className="w-full p-[2px] rounded-2xl" style={{ background: "linear-gradient(135deg, var(--color-purple) 0%, var(--color-coral) 50%, var(--color-purple) 100%)" }}>
+            <div className="w-full rounded-[14px] overflow-hidden" style={{ background: "var(--color-card)" }}>
+              {puzzle.map((song, i) => {
+                const s = states[i];
+                const total = songTotal(s);
+                const perfect = isPerfect(s);
+                return (
+                  <div
+                    key={song.id}
+                    className="flex items-center justify-between px-5 py-4"
+                    style={{ borderBottom: i < puzzle.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
                   >
-                    {total > 0 ? `+${total.toLocaleString()}` : "—"}
-                  </span>
-                </div>
-              );
-            })}
+                    <span className={`font-semibold text-sm flex items-center gap-1.5 ${s.solved ? "text-white" : "text-[color:var(--color-muted)] line-through"}`}>
+                      {perfect && <span style={{ color: "#fbbf24" }}>★</span>}
+                      {song.title}
+                    </span>
+                    <span
+                      className="text-sm font-bold shrink-0 ml-3"
+                      style={{ color: s.solved ? "#a78bfa" : "rgba(255,255,255,0.25)" }}
+                    >
+                      {total > 0 ? `+${total.toLocaleString()}` : "—"}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Copy Results */}
