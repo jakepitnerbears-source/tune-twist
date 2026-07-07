@@ -437,12 +437,9 @@ export default function GameV2({
             <p className="text-7xl font-black leading-none tracking-tight">{runningTotal.toLocaleString()}</p>
             <p className="text-sm text-[color:var(--color-muted)]">total points</p>
             {starsEarned > 0 ? (
-              <div className="flex flex-col items-center gap-0.5 mt-1">
-                <p className="text-lg font-bold" style={{ background: "linear-gradient(90deg, #fbbf24, #e879f9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  ✦ {starsEarned} perfect {starsEarned === 1 ? "song" : "songs"}
-                </p>
-                <p className="text-sm text-[color:var(--color-muted)]">out of {puzzle.length} today</p>
-              </div>
+              <p className="text-lg font-bold mt-1" style={{ background: "linear-gradient(90deg, #fbbf24, #e879f9)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                ✦ {starsEarned} perfect {starsEarned === 1 ? "song" : "songs"}
+              </p>
             ) : (
               <p className="text-sm text-[color:var(--color-muted)] mt-1">{solvedCount} of {puzzle.length} solved</p>
             )}
