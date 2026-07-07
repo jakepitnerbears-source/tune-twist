@@ -13,7 +13,7 @@ const FEATURED = [
   { title: "Bohemian Rhapsody", artist: "Queen", year: "1975" },
   { title: "Lose Yourself", artist: "Eminem", year: "2002" },
   { title: "bad guy", artist: "Billie Eilish", year: "2019" },
-  { title: "Purple Rain", artist: "Prince", year: "1984" },
+  { title: "Espresso", artist: "Sabrina Carpenter", year: "2024" },
   { title: "Thriller", artist: "Michael Jackson", year: "1982" },
   { title: "Mr. Brightside", artist: "The Killers", year: "2003" },
   { title: "Get Lucky", artist: "Daft Punk", year: "2013" },
