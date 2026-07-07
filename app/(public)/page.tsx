@@ -10,15 +10,20 @@ function localDateString() {
 }
 
 const FEATURED = [
-  { title: "Baby", artist: "Justin Bieber", year: "2010" },
+  { title: "Bohemian Rhapsody", artist: "Queen", year: "1975" },
+  { title: "Lose Yourself", artist: "Eminem", year: "2002" },
   { title: "bad guy", artist: "Billie Eilish", year: "2019" },
-  { title: "Brown Eyed Girl", artist: "Van Morrison", year: "1967" },
+  { title: "Sweet Child O' Mine", artist: "Guns N' Roses", year: "1988" },
+  { title: "Crazy in Love", artist: "Beyonce", year: "2003" },
+  { title: "Smells Like Teen Spirit", artist: "Nirvana", year: "1991" },
   { title: "Get Lucky", artist: "Daft Punk", year: "2013" },
-  { title: "Since U Been Gone", artist: "Kelly Clarkson", year: "2004" },
-  { title: "Rolling in the Deep", artist: "Adele", year: "2010" },
+  { title: "Jolene", artist: "Dolly Parton", year: "1973" },
+  { title: "Hotline Bling", artist: "Drake", year: "2015" },
+  { title: "Take On Me", artist: "A-ha", year: "1985" },
+  { title: "No Scrubs", artist: "TLC", year: "1999" },
   { title: "Blinding Lights", artist: "The Weeknd", year: "2019" },
-  { title: "Shape of You", artist: "Ed Sheeran", year: "2017" },
-  { title: "Started From The Bottom", artist: "Drake", year: "2013" },
+  { title: "Hotel California", artist: "Eagles", year: "1977" },
+  { title: "Rolling in the Deep", artist: "Adele", year: "2010" },
 ];
 
 export default function Home() {
