@@ -752,7 +752,7 @@ export default function GameV2({
                         <button
                           onPointerDown={(e) => e.preventDefault()}
                           onClick={handleReveal}
-                          disabled={state.hintsUsed < 3}
+                          disabled={state.hintsUsed < 2}
                           className="flex-1 py-2 rounded-xl border border-white/20 text-white/60 hover:text-[color:var(--color-coral)] hover:border-[color:var(--color-coral)] disabled:opacity-50 transition-colors text-sm font-semibold"
                         >
                           Reveal
