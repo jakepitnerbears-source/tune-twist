@@ -429,48 +429,88 @@ export default function GameV2({
     const solvedCount = states.filter((s) => s.solved).length;
     return (
       <main className="flex flex-col items-center justify-start min-h-[100svh] px-4 pt-[88px] md:pt-[100px] pb-8">
-        <div className="w-full max-w-[480px] flex flex-col gap-5">
-          <div className="text-center">
-            <p className="text-3xl font-bold">{runningTotal.toLocaleString()} <span className="text-xl font-normal text-[color:var(--color-muted)]">/ 5,000</span></p>
-            <p className="text-sm text-[color:var(--color-muted)] mt-1">{solvedCount}/{puzzle.length} solved · {starsEarned} perfect</p>
-            {streak > 0 && <p className="text-sm text-white font-semibold mt-1">🔥 {streak}-day streak</p>}
-          </div>
+        <div className="w-full max-w-[480px] flex flex-col gap-4">
 
-          <div className="text-3xl tracking-wide text-center" style={{ color: "#facc15" }}>
-            {"★".repeat(starsEarned)}
-            <span style={{ color: "rgba(255,255,255,0.15)" }}>{"★".repeat(puzzle.length - starsEarned)}</span>
-          </div>
-
-          <div className="text-center text-2xl tracking-widest">
-            {states.map((s, i) => (
-              <span key={i}>{!s.solved ? "⬜" : s.hintsUsed === 0 ? "🟩" : "🟨"}</span>
-            ))}
-          </div>
-
-          <button
-            onClick={handleCopy}
-            className="w-full py-3.5 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-opacity"
-            style={{ background: "var(--btn-gradient)" }}
+          {/* Score card */}
+          <div
+            className="w-full rounded-2xl p-6 flex flex-col items-center gap-3"
+            style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
           >
-            {copied ? "✓ Copied!" : "Copy Results"}
-          </button>
+            <p className="text-xs uppercase tracking-widest text-[color:var(--color-muted)]">Today&apos;s Score</p>
+            <p className="text-5xl font-black leading-none">
+              {runningTotal.toLocaleString()}
+              <span className="text-2xl font-normal text-[color:var(--color-muted)] ml-1">/ 5,000</span>
+            </p>
+            <div className="text-3xl tracking-wide leading-none" style={{ color: "#facc15" }}>
+              {"★".repeat(starsEarned)}
+              <span style={{ color: "rgba(255,255,255,0.15)" }}>{"★".repeat(puzzle.length - starsEarned)}</span>
+            </div>
+            {streak > 0 && (
+              <span
+                className="text-sm font-bold px-4 py-1.5 rounded-full"
+                style={{ background: "rgba(249,115,22,0.15)", border: "1px solid rgba(249,115,22,0.35)", color: "#fb923c" }}
+              >
+                🔥 {streak}-day streak
+              </span>
+            )}
+          </div>
 
-          <div className="flex flex-col gap-2 bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-2xl p-5">
+          {/* Solved / Perfect stats */}
+          <div className="grid grid-cols-2 gap-3">
+            <div
+              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-1"
+              style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+            >
+              <p className="text-4xl font-black">{solvedCount}/{puzzle.length}</p>
+              <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Solved</p>
+            </div>
+            <div
+              className="flex flex-col items-center justify-center py-5 rounded-2xl gap-1"
+              style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+            >
+              <p className="text-4xl font-black" style={{ color: starsEarned > 0 ? "#fbbf24" : "rgba(255,255,255,0.4)" }}>{starsEarned}</p>
+              <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)]">Perfect</p>
+            </div>
+          </div>
+
+          {/* Song breakdown */}
+          <div
+            className="w-full rounded-2xl overflow-hidden"
+            style={{ background: "var(--color-card)", border: "1px solid var(--color-border)" }}
+          >
             {puzzle.map((song, i) => {
               const s = states[i];
               const total = songTotal(s);
+              const perfect = isPerfect(s);
               return (
-                <div key={song.id} className="flex items-center justify-between text-sm">
-                  <span className={s.solved ? "text-white font-medium" : "text-[color:var(--color-muted)] line-through"}>
+                <div
+                  key={song.id}
+                  className="flex items-center justify-between px-5 py-4"
+                  style={{ borderBottom: i < puzzle.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none" }}
+                >
+                  <span className={`font-semibold text-sm flex items-center gap-1.5 ${s.solved ? "text-white" : "text-[color:var(--color-muted)] line-through"}`}>
+                    {perfect && <span style={{ color: "#fbbf24" }}>★</span>}
                     {song.title}
                   </span>
-                  <span className={`font-semibold ${s.solved ? "text-[color:var(--color-green)]" : "text-[color:var(--color-muted)]"}`}>
-                    {total > 0 ? `+${total}` : "—"}
+                  <span
+                    className="text-sm font-bold shrink-0 ml-3"
+                    style={{ color: s.solved ? "#a78bfa" : "rgba(255,255,255,0.25)" }}
+                  >
+                    {total > 0 ? `+${total.toLocaleString()}` : "—"}
                   </span>
                 </div>
               );
             })}
           </div>
+
+          {/* Copy Results */}
+          <button
+            onClick={handleCopy}
+            className="w-full py-4 rounded-2xl font-bold text-base text-white hover:opacity-90 transition-opacity"
+            style={{ background: "var(--btn-gradient)" }}
+          >
+            {copied ? "✓ Copied!" : "Copy Results"}
+          </button>
 
           <Countdown />
         </div>
