@@ -57,13 +57,13 @@ export default function Home() {
       {/* ── MOBILE layout ── */}
       <div className="md:hidden flex flex-col gap-0">
         {/* Hero text */}
-        <div className="px-6 pb-8 flex flex-col gap-4">
-          <h1 className="text-[2.4rem] font-black leading-tight tracking-tight">
-            Familiar Songs.<br />
-            <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
-          </h1>
+        <div className="px-6 pb-8 flex flex-col gap-3">
+          <h1 className="text-[2.4rem] font-black leading-tight tracking-tight">Familiar Songs.</h1>
           <p className="text-base text-[color:var(--color-muted)] max-w-sm">
             Every song name gets twisted into synonyms, can you figure them out?
+          </p>
+          <p className="text-[2.4rem] font-black leading-tight tracking-tight" style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            Unfamiliar Titles.
           </p>
         </div>
 
@@ -115,12 +115,13 @@ export default function Home() {
 
       {/* ── DESKTOP layout ── */}
       <div className="hidden md:flex flex-col items-center text-center gap-8 px-8">
-        <div className="flex flex-col gap-4 items-center">
-          <h1 className="text-6xl font-black leading-tight tracking-tight">
-            Familiar Songs. Unfamiliar Titles.
-          </h1>
+        <div className="flex flex-col gap-3 items-center">
+          <h1 className="text-6xl font-black leading-tight tracking-tight">Familiar Songs.</h1>
           <p className="text-lg text-[color:var(--color-muted)] max-w-lg">
             Every song name gets twisted into synonyms, can you figure them out?
+          </p>
+          <p className="text-6xl font-black leading-tight tracking-tight" style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            Unfamiliar Titles.
           </p>
         </div>
 
