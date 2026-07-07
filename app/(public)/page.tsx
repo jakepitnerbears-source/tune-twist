@@ -48,7 +48,10 @@ export default function Home() {
   const tiles = [...FEATURED, ...FEATURED];
 
   return (
-    <main className="flex flex-col justify-center min-h-[100svh] overflow-hidden gap-0">
+    <main className="relative flex flex-col justify-center min-h-[100svh] overflow-hidden gap-0">
+      {/* Background glows */}
+      <div className="absolute top-0 left-0 w-[340px] h-[340px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.22) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-0 right-0 w-[380px] h-[380px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.28) 0%, transparent 70%)" }} />
       {/* Hero text */}
       <div className="px-6 pb-8 flex flex-col gap-4">
         <h1 className="text-5xl font-black leading-tight tracking-tight">
