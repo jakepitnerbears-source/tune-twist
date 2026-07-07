@@ -177,9 +177,9 @@ function Countdown() {
   );
 }
 
-function CheckIcon({ ok, warn }: { ok: boolean; warn?: boolean }) {
-  const bg = warn ? "rgba(234,179,8,0.2)" : ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)";
-  const color = warn ? "#eab308" : ok ? "#4ade80" : "#f87171";
+function CheckIcon({ ok, warn, gold }: { ok: boolean; warn?: boolean; gold?: boolean }) {
+  const bg = gold ? "rgba(251,191,36,0.2)" : warn ? "rgba(234,179,8,0.2)" : ok ? "rgba(34,197,94,0.2)" : "rgba(239,68,68,0.2)";
+  const color = gold ? "#fbbf24" : warn ? "#eab308" : ok ? "#4ade80" : "#f87171";
   return (
     <div
       className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-sm font-bold"
@@ -190,14 +190,17 @@ function CheckIcon({ ok, warn }: { ok: boolean; warn?: boolean }) {
   );
 }
 
-function ScoreRow({ label, value, ok, pts, warn }: { label: string; value: string; ok: boolean; pts: number; warn?: boolean }) {
-  const glow = warn ? "rgba(234,179,8,0.1)" : ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
-  const border = warn ? "rgba(234,179,8,0.5)" : ok ? "rgba(34,197,94,0.45)" : "rgba(239,68,68,0.4)";
-  const leak = warn
+function ScoreRow({ label, value, ok, pts, warn, gold }: { label: string; value: string; ok: boolean; pts: number; warn?: boolean; gold?: boolean }) {
+  const glow = gold ? "rgba(251,191,36,0.1)" : warn ? "rgba(234,179,8,0.1)" : ok ? "rgba(34,197,94,0.1)" : "rgba(239,68,68,0.08)";
+  const border = gold ? "rgba(251,191,36,0.6)" : warn ? "rgba(234,179,8,0.5)" : ok ? "rgba(34,197,94,0.45)" : "rgba(239,68,68,0.4)";
+  const leak = gold
+    ? "radial-gradient(ellipse at bottom right, rgba(251,191,36,0.18) 0%, transparent 70%)"
+    : warn
     ? "radial-gradient(ellipse at bottom right, rgba(234,179,8,0.15) 0%, transparent 70%)"
     : ok
     ? "radial-gradient(ellipse at bottom right, rgba(34,197,94,0.12) 0%, transparent 70%)"
     : "radial-gradient(ellipse at bottom right, rgba(239,68,68,0.1) 0%, transparent 70%)";
+  const ptsColor = gold ? "#fbbf24" : warn ? "#eab308" : ok ? "#4ade80" : "rgba(255,255,255,0.3)";
   return (
     <div
       className="relative flex items-center gap-3 px-4 py-3 rounded-xl overflow-hidden"
@@ -205,14 +208,14 @@ function ScoreRow({ label, value, ok, pts, warn }: { label: string; value: strin
     >
       <div className="absolute inset-0 pointer-events-none" style={{ background: leak }} />
       <div className="relative flex items-center gap-3 w-full">
-      <CheckIcon ok={ok} warn={warn} />
-      <div className="flex flex-col flex-1 min-w-0">
-        <span className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] leading-none mb-0.5">{label}</span>
-        <span className="text-sm font-semibold text-white truncate">{value}</span>
-      </div>
-      <span className="text-sm font-bold shrink-0" style={{ color: warn ? "#eab308" : ok ? "#4ade80" : "rgba(255,255,255,0.3)" }}>
-        {pts > 0 ? `+${pts}` : "—"}
-      </span>
+        <CheckIcon ok={ok} warn={warn} gold={gold} />
+        <div className="flex flex-col flex-1 min-w-0">
+          <span className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] leading-none mb-0.5">{label}</span>
+          <span className="text-sm font-semibold text-white truncate">{value}</span>
+        </div>
+        <span className="text-sm font-bold shrink-0" style={{ color: ptsColor }}>
+          {pts > 0 ? `+${pts}` : "—"}
+        </span>
       </div>
     </div>
   );
@@ -520,15 +523,33 @@ export default function GameV2({
             <div style={{ position: "absolute", bottom: "0%", right: "-12%", width: "72%", height: "78%", background: "radial-gradient(ellipse at center, var(--blob-b-hi) 0%, var(--blob-b-lo) 45%, transparent 72%)", filter: "blur(54px)", animation: "blob-drift-b 15s ease-in-out 2s infinite" }} />
             <div style={{ position: "absolute", top: "25%", right: "0%", width: "55%", height: "60%", background: "radial-gradient(ellipse at center, var(--blob-c-hi) 0%, var(--blob-c-lo) 45%, transparent 72%)", filter: "blur(46px)", animation: "blob-drift-c 18s ease-in-out 5s infinite" }} />
           </div>
-          <div className="relative z-10 w-full p-[2px] rounded-3xl" style={{ background: `linear-gradient(135deg, ${genreColor}99 0%, var(--color-purple) 40%, var(--color-coral) 70%, ${genreColor}44 100%)` }}>
+          <div className="relative z-10 w-full p-[2px] rounded-3xl" style={{ background: bonusComplete && isPerfect(state) ? "linear-gradient(135deg, #fcd34d 0%, #f59e0b 40%, #fbbf24 70%, #fcd34d 100%)" : `linear-gradient(135deg, ${genreColor}99 0%, var(--color-purple) 40%, var(--color-coral) 70%, ${genreColor}44 100%)` }}>
         <div
           className={`relative w-full bg-[color:var(--color-card)] rounded-[22px] overflow-hidden flex flex-col ${state.shake ? "animate-shake" : ""} ${state.glow ? "animate-glow" : ""}`}
+          style={bonusComplete && isPerfect(state) ? { boxShadow: "0 0 40px rgba(251,191,36,0.3), 0 0 80px rgba(251,191,36,0.12)" } : {}}
         >
           {state.glow && (
             <div className="absolute top-1/3 left-1/2 pointer-events-none" aria-hidden="true">
               {CONFETTI_PARTICLES.map((p) => (
                 <span key={p.idx} style={{ position: "absolute", width: 7, height: 7, borderRadius: "50%", background: p.color, animation: `confetti-${p.idx} 0.75s ease-out ${p.delay}ms forwards` }} />
               ))}
+            </div>
+          )}
+          {/* Perfect ribbon */}
+          {bonusComplete && isPerfect(state) && (
+            <div className="absolute top-0 right-0 w-[90px] h-[90px] overflow-hidden pointer-events-none z-20" aria-hidden="true">
+              <div
+                className="absolute text-[9px] font-black text-white tracking-[0.15em] text-center"
+                style={{
+                  top: "17px", right: "-26px", width: "100px",
+                  transform: "rotate(45deg)",
+                  background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)",
+                  padding: "4px 0",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.35)",
+                }}
+              >
+                PERFECT
+              </div>
             </div>
           )}
           {/* Card header */}
@@ -556,26 +577,12 @@ export default function GameV2({
                 {state.songInfo && state.songInfo !== "loading" && state.songInfo.previewUrl && (
                   <button
                     onClick={() => setPlaying((p) => !p)}
-                    className="mt-1.5 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-80"
+                    className="mt-1.5 self-center flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-80"
                     style={{ background: "rgba(124,58,237,0.18)", border: "1px solid rgba(167,139,250,0.5)", color: "#c4b5fd" }}
                   >
                     {playing ? <Pause size={12} /> : <Play size={12} />}
                     {playing ? "Pause" : "Play Snippet"}
                   </button>
-                )}
-                {!state.skipped && isPerfect(state) && (
-                  <span
-                    className="text-xs font-bold px-3 py-1 rounded-full mt-1 mx-auto"
-                    style={{
-                      background: "linear-gradient(135deg, rgba(234,179,8,0.25) 0%, rgba(251,191,36,0.15) 50%, rgba(217,119,6,0.2) 100%)",
-                      color: "#fbbf24",
-                      border: "1px solid rgba(251,191,36,0.5)",
-                      boxShadow: "0 0 12px rgba(251,191,36,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
-                      textShadow: "0 0 8px rgba(251,191,36,0.6)",
-                    }}
-                  >
-                    ★ Perfect song
-                  </span>
                 )}
               </div>
             </div>
@@ -622,10 +629,10 @@ export default function GameV2({
                 <ScoreRow label="Title" value={`${current.title} — skipped`} ok={false} pts={0} />
               )}
               {state.solved && (
-                <ScoreRow label="Title" value={current.title} ok={true} pts={titlePts(state)} />
+                <ScoreRow label="Title" value={current.title} ok={true} pts={titlePts(state)} gold={isPerfect(state)} />
               )}
               {state.solved && state.artistCorrect !== null && (
-                <ScoreRow label="Artist" value={current.artist} ok={state.artistCorrect === true} pts={artistPts(state)} />
+                <ScoreRow label="Artist" value={current.artist} ok={state.artistCorrect === true} pts={artistPts(state)} gold={isPerfect(state)} />
               )}
               {state.solved && state.yearCorrect !== null && (
                 <ScoreRow
@@ -634,16 +641,20 @@ export default function GameV2({
                   ok={state.yearCorrect === "exact"}
                   warn={state.yearCorrect === "close"}
                   pts={yearPts(state)}
+                  gold={isPerfect(state)}
                 />
               )}
               {bonusComplete && (
                 <div
                   className="flex items-center justify-between px-4 py-3 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+                  style={{
+                    background: isPerfect(state) ? "rgba(251,191,36,0.08)" : "rgba(255,255,255,0.06)",
+                    border: isPerfect(state) ? "1px solid rgba(251,191,36,0.35)" : "1px solid rgba(255,255,255,0.1)",
+                  }}
                 >
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">This Song</p>
-                    <p className="text-xl font-bold" style={{ color: "#4ade80" }}>+{songTotal(state).toLocaleString()}</p>
+                    <p className="text-xl font-bold" style={{ color: isPerfect(state) ? "#fbbf24" : "#4ade80" }}>+{songTotal(state).toLocaleString()}</p>
                   </div>
                   <div className="text-right">
                     <p className="text-[10px] uppercase tracking-widest text-[color:var(--color-muted)] mb-0.5">Running Total</p>
