@@ -60,7 +60,7 @@ export default function Home() {
         <div className="px-6 pb-8 flex flex-col gap-4">
           <h1 className="text-[2.4rem] font-black leading-tight tracking-tight">
             Familiar Songs.<br />
-            <span style={{ background: "var(--btn-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
+            <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
           </h1>
           <p className="text-base text-[color:var(--color-muted)] max-w-sm">
             Every song name gets twisted into synonyms, can you figure them out?
