@@ -133,32 +133,38 @@ export default function Home() {
           ▶ Play Today&apos;s Puzzle
         </button>
 
-        {/* 5 album art tiles */}
-        <div className="flex gap-4">
-          {DESKTOP_PICKS.map((idx) => {
-            const song = FEATURED[idx];
-            const artwork = artworks[idx];
-            return (
-              <div
-                key={idx}
-                className="w-[140px] h-[140px] rounded-2xl overflow-hidden shrink-0"
-                style={{ background: "rgba(255,255,255,0.07)" }}
-              >
-                {artwork ? (
-                  <Image
-                    src={artwork}
-                    alt={song.title}
-                    width={140}
-                    height={140}
-                    className="w-full h-full object-cover"
-                    style={{ animation: "vinyl-spin 12s linear infinite" }}
-                  />
-                ) : (
-                  <div className="w-full h-full" style={{ animation: "pulse 1.5s ease-in-out infinite", background: "rgba(255,255,255,0.05)" }} />
-                )}
-              </div>
-            );
-          })}
+        {/* Scrolling marquee */}
+        <div
+          className="w-full overflow-hidden"
+          style={{ maskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)" }}
+        >
+          <div
+            className="flex gap-3 py-2"
+            style={{ width: "max-content", animation: "marquee 28s linear infinite" }}
+          >
+            {tiles.map((song, i) => {
+              const artwork = artworks[i % FEATURED.length];
+              return (
+                <div
+                  key={i}
+                  className="w-[140px] h-[140px] rounded-2xl overflow-hidden shrink-0"
+                  style={{ background: "rgba(255,255,255,0.07)" }}
+                >
+                  {artwork ? (
+                    <Image
+                      src={artwork}
+                      alt={song.title}
+                      width={140}
+                      height={140}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full" style={{ animation: "pulse 1.5s ease-in-out infinite", background: "rgba(255,255,255,0.05)" }} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </main>
