@@ -1,24 +1,21 @@
-import type { Metadata } from "next";
-import { getDailyPuzzle, getPuzzleNumber, loadScheduleAndLibrary, loadLyrics } from "@/lib/getDailyPuzzle";
-import GameV2 from "@/components/GameV2";
-import { notFound } from "next/navigation";
+"use client";
 
-export const revalidate = 0;
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "TuneTwist — Daily Music Word Game",
-  description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all? Free daily music puzzle.",
-};
+function localDateString() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
 
-export default async function Home() {
-  const puzzle = getDailyPuzzle();
-  const puzzleNumber = getPuzzleNumber();
-
-  if (!puzzle || puzzle.length === 0) notFound();
-
-  const { library } = loadScheduleAndLibrary();
-  const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
-  const lyrics = loadLyrics();
-
-  return <GameV2 puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} lyrics={lyrics} />;
+export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.replace(`/play/${localDateString()}`);
+  }, [router]);
+  return (
+    <main className="flex items-center justify-center min-h-[100svh]">
+      <div className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white animate-spin" />
+    </main>
+  );
 }

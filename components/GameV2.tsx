@@ -94,15 +94,18 @@ function validateYear(guess: string, correct: string): "exact" | "close" | false
   return false;
 }
 
-function getToday() { return new Date().toISOString().split("T")[0]; }
+function localDateStr(d = new Date()) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function getToday() { return localDateStr(); }
 function getYesterday() {
   const d = new Date(); d.setDate(d.getDate() - 1);
-  return d.toISOString().split("T")[0];
+  return localDateStr(d);
 }
 
 function formatCountdown() {
   const now = new Date();
-  const next = new Date(); next.setUTCHours(24, 0, 0, 0);
+  const next = new Date(); next.setDate(next.getDate() + 1); next.setHours(0, 0, 0, 0);
   const diff = next.getTime() - now.getTime();
   if (diff <= 0) return "00:00:00";
   const h = Math.floor(diff / 3600000);
