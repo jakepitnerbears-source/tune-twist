@@ -151,6 +151,7 @@ export default function Home() {
                     width={140}
                     height={140}
                     className="w-full h-full object-cover"
+                    style={{ animation: "vinyl-spin 12s linear infinite" }}
                   />
                 ) : (
                   <div className="w-full h-full" style={{ animation: "pulse 1.5s ease-in-out infinite", background: "rgba(255,255,255,0.05)" }} />
