@@ -6,7 +6,7 @@ import { DailyPuzzle } from "@/lib/getDailyPuzzle";
 import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 import HowToPlayModal from "@/components/HowToPlayModal";
-import { Lightbulb } from "lucide-react";
+import { Lightbulb, Play, Pause } from "lucide-react";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
 const TITLE_SCORES = [800, 600, 400];
@@ -238,6 +238,7 @@ export default function GameV2({
   const inputRef = useRef<HTMLInputElement>(null);
   const streakRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
 
   const current = puzzle[songIndex];
   const state = states[songIndex];
@@ -294,22 +295,29 @@ export default function GameV2({
     }
   }, [songIndex, states[songIndex]?.artistCorrect, states[songIndex]?.yearCorrect]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Autoplay preview when bonus round completes and songInfo arrives
+  // Play/pause preview on demand
   useEffect(() => {
-    if (!bonusComplete) return;
     const info = state.songInfo;
-    if (!info || info === "loading" || !info.previewUrl) return;
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
-    const audio = new Audio(info.previewUrl);
-    audio.volume = 0.6;
-    audioRef.current = audio;
-    audio.play().catch(() => {});
-    return () => { audio.pause(); audioRef.current = null; };
-  }, [bonusComplete, state.songInfo]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!playing || !info || info === "loading" || !info.previewUrl) {
+      audioRef.current?.pause();
+      return;
+    }
+    if (!audioRef.current || audioRef.current.src !== info.previewUrl) {
+      audioRef.current?.pause();
+      const audio = new Audio(info.previewUrl);
+      audio.volume = 0.7;
+      audio.onended = () => setPlaying(false);
+      audioRef.current = audio;
+    }
+    audioRef.current.play().catch(() => setPlaying(false));
+    return () => { audioRef.current?.pause(); };
+  }, [playing, state.songInfo]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Stop audio when moving to next song
+  // Stop audio and reset play state when moving to next song
   useEffect(() => {
-    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    audioRef.current?.pause();
+    audioRef.current = null;
+    setPlaying(false);
   }, [songIndex]);
 
   const confettiPieces = useMemo(() => {
@@ -545,6 +553,16 @@ export default function GameV2({
                   {current.title}
                 </p>
                 <p className="text-sm text-[color:var(--color-muted)]">{current.artist} · {releaseYear}</p>
+                {state.songInfo && state.songInfo !== "loading" && state.songInfo.previewUrl && (
+                  <button
+                    onClick={() => setPlaying((p) => !p)}
+                    className="mt-1.5 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-80"
+                    style={{ background: "var(--btn-gradient)", color: "#fff" }}
+                  >
+                    {playing ? <Pause size={12} /> : <Play size={12} />}
+                    {playing ? "Pause" : "Play Snippet"}
+                  </button>
+                )}
                 {!state.skipped && isPerfect(state) && (
                   <span
                     className="text-xs font-bold px-3 py-1 rounded-full mt-1 mx-auto"
