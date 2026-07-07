@@ -55,7 +55,7 @@ export default function Home() {
       {/* Hero text */}
       <div className="px-6 pb-8 flex flex-col gap-4">
         <h1 className="text-5xl font-black leading-tight tracking-tight">
-          Do you have<br />what it takes?
+          Familiar Songs.<br />Unfamiliar Titles.
         </h1>
         <p className="text-base text-[color:var(--color-muted)] max-w-sm">
           Every song name gets twisted into synonyms, can you figure them out?
