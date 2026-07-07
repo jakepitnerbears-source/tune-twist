@@ -43,9 +43,9 @@ export default function Home() {
   const tiles = [...FEATURED, ...FEATURED];
 
   return (
-    <main className="flex flex-col min-h-[100svh] overflow-hidden">
+    <main className="flex flex-col justify-center min-h-[100svh] overflow-hidden gap-0">
       {/* Hero text */}
-      <div className="px-6 pt-20 pb-8 flex flex-col gap-4">
+      <div className="px-6 pb-8 flex flex-col gap-4">
         <h1 className="text-5xl font-black leading-tight tracking-tight">
           Do you have<br />what it takes?
         </h1>
