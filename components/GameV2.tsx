@@ -557,7 +557,7 @@ export default function GameV2({
                   <button
                     onClick={() => setPlaying((p) => !p)}
                     className="mt-1.5 flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-opacity hover:opacity-80"
-                    style={{ background: "var(--color-purple)", color: "#fff" }}
+                    style={{ background: "rgba(124,58,237,0.18)", border: "1px solid rgba(167,139,250,0.5)", color: "#c4b5fd" }}
                   >
                     {playing ? <Pause size={12} /> : <Play size={12} />}
                     {playing ? "Pause" : "Play Snippet"}
