@@ -53,8 +53,8 @@ export default function Home() {
   return (
     <main className="relative flex flex-col justify-center min-h-[100svh] overflow-hidden gap-0">
       {/* Background glows */}
-      <div className="absolute top-0 left-0 w-[340px] h-[340px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.22) 0%, transparent 70%)" }} />
-      <div className="absolute bottom-0 right-0 w-[380px] h-[380px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.28) 0%, transparent 70%)" }} />
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.45) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-0 right-0 w-[520px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.55) 0%, transparent 70%)" }} />
 
       {/* ── MOBILE layout ── */}
       <div className="md:hidden flex flex-col gap-0">
