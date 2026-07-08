@@ -4,10 +4,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-function localDateString() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
 
 const FEATURED = [
   { title: "Bohemian Rhapsody", artist: "Queen", year: "1975" },
@@ -104,7 +100,7 @@ export default function Home() {
         {/* CTA */}
         <div className="px-6">
           <button
-            onClick={() => router.push(`/play/${localDateString()}`)}
+            onClick={() => router.push("/play")}
             className="w-full py-4 rounded-2xl font-bold text-base text-white hover:opacity-90 transition-opacity"
             style={{ background: "var(--btn-gradient)" }}
           >
@@ -126,7 +122,7 @@ export default function Home() {
         </div>
 
         <button
-          onClick={() => router.push(`/play/${localDateString()}`)}
+          onClick={() => router.push("/play")}
           className="px-10 py-4 rounded-full font-bold text-base text-white hover:opacity-90 transition-opacity"
           style={{ background: "var(--btn-gradient)" }}
         >
