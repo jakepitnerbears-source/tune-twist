@@ -251,22 +251,17 @@ export default function SplashLab() {
   const artworks = useArtworks();
 
   return (
-    <main className="min-h-screen px-8 py-10 flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">Splash Page Lab</h1>
-        <p className="text-sm text-[color:var(--color-muted)]">Test different home page layouts — changes here don&apos;t affect the live site</p>
-      </div>
-
-      {/* Design switcher */}
-      <div className="flex gap-2 flex-wrap">
+    <>
+      {/* Floating design switcher — fixed top right, out of the way */}
+      <div className="fixed top-4 right-4 z-50 flex gap-1.5 flex-wrap justify-end max-w-xs" style={{ background: "rgba(8,6,15,0.85)", backdropFilter: "blur(12px)", borderRadius: 999, padding: "6px 10px", border: "1px solid rgba(124,58,237,0.25)" }}>
         {DESIGNS.map((d) => (
           <button
             key={d}
             onClick={() => setActive(d)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-colors ${
+            className={`px-3 py-1 rounded-full text-xs font-semibold border transition-colors ${
               active === d
                 ? "text-white border-transparent"
-                : "border-[color:var(--color-border)] text-[color:var(--color-muted)] hover:text-white hover:border-white/30"
+                : "border-transparent text-[color:var(--color-muted)] hover:text-white"
             }`}
             style={active === d ? { background: "var(--btn-gradient)" } : {}}
           >
@@ -275,29 +270,17 @@ export default function SplashLab() {
         ))}
       </div>
 
-      {/* Preview canvas */}
-      <div
-        className="relative rounded-2xl overflow-hidden flex items-center justify-center"
-        style={{
-          minHeight: 520,
-          background: "var(--color-navy)",
-          border: "1px solid var(--color-border)",
-          padding: "48px 40px",
-        }}
-      >
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.45) 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 right-0 w-[520px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.55) 0%, transparent 70%)" }} />
-        <div className="relative w-full z-10">
+      {/* Full-viewport preview — identical to real home page */}
+      <main className="relative flex flex-col justify-center min-h-[100svh] overflow-hidden">
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.45) 0%, transparent 70%)", zIndex: 0 }} />
+        <div className="absolute bottom-0 right-0 w-[520px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.55) 0%, transparent 70%)", zIndex: 0 }} />
+        <div className="relative z-10 flex flex-col items-center px-8">
           {active === "Current" && <CurrentLayout artworks={artworks} />}
           {active === "Fan Carousel" && <FanCarousel artworks={artworks} />}
           {active === "Grid" && <GridLayout artworks={artworks} />}
           {active === "Stacked" && <StackedLayout artworks={artworks} />}
         </div>
-      </div>
-
-      <p className="text-xs text-center text-[color:var(--color-muted)]">
-        Tell me which layout you want live — I&apos;ll apply it to the real home page and push.
-      </p>
-    </main>
+      </main>
+    </>
   );
 }
