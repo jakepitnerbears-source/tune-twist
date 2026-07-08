@@ -26,12 +26,14 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
   return result;
 }
 
-function ensureNonPopFirst(songs: Song[]): Song[] {
-  if ((songs[0]?.genre ?? "") !== "Pop") return songs;
-  const firstNonPop = songs.findIndex((s) => (s.genre ?? "") !== "Pop");
-  if (firstNonPop === -1) return songs;
+const LEAD_GENRE_ROTATION = ["Pop", "Rock", "Hip-Hop", "R&B", "Country", "Alternative", "Electronic", "Pop", "Hip Hop", "Indie", "Country", "Latin", "Pop", "Funk"];
+
+function rotateLead(songs: Song[], dayIndex: number): Song[] {
+  const targetGenre = LEAD_GENRE_ROTATION[Math.abs(dayIndex) % LEAD_GENRE_ROTATION.length];
+  const idx = songs.findIndex((s) => (s.genre ?? "") === targetGenre);
+  if (idx < 0) return songs;
   const result = [...songs];
-  [result[0], result[firstNonPop]] = [result[firstNonPop], result[0]];
+  [result[0], result[idx]] = [result[idx], result[0]];
   return result;
 }
 
@@ -137,10 +139,10 @@ export function getDailyPuzzle(dateOverride?: string): DailyPuzzle {
 
     if (cycleNum === 0) {
       const daySlot = songSlots.slice(dayIndex * 5, dayIndex * 5 + 5);
-      if (daySlot.length === 5) return ensureNonPopFirst(seededShuffle(daySlot, days * 31 + 7));
+      if (daySlot.length === 5) return rotateLead(seededShuffle(daySlot, days * 31 + 7), days);
     } else {
       const scheduleDays = buildDiverseSchedule(songSlots, cycleNum);
-      if (scheduleDays[dayIndex]?.length === 5) return ensureNonPopFirst(seededShuffle(scheduleDays[dayIndex], days * 31 + 7));
+      if (scheduleDays[dayIndex]?.length === 5) return rotateLead(seededShuffle(scheduleDays[dayIndex], days * 31 + 7), days);
     }
   }
 
