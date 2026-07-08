@@ -128,10 +128,10 @@ export function getDailyPuzzle(dateOverride?: string): DailyPuzzle {
 
     if (cycleNum === 0) {
       const daySlot = songSlots.slice(dayIndex * 5, dayIndex * 5 + 5);
-      if (daySlot.length === 5) return daySlot;
+      if (daySlot.length === 5) return seededShuffle(daySlot, days * 31 + 7);
     } else {
-      const days = buildDiverseSchedule(songSlots, cycleNum);
-      if (days[dayIndex]?.length === 5) return days[dayIndex];
+      const scheduleDays = buildDiverseSchedule(songSlots, cycleNum);
+      if (scheduleDays[dayIndex]?.length === 5) return seededShuffle(scheduleDays[dayIndex], days * 31 + 7);
     }
   }
 
