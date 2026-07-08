@@ -11,7 +11,8 @@ const NAV_LINKS = [
   { href: "/admin/preview", label: "Preview" },
   { href: "/admin/play", label: "Overview" },
   { href: "/admin/jukebox", label: "Jukebox" },
-
+  { href: "/admin/design-lab", label: "Design Lab" },
+  { href: "/admin/splash-lab", label: "Splash Lab" },
   { href: "/admin/test", label: "Test" },
 ];
 
