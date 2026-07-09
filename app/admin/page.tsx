@@ -124,27 +124,35 @@ export default function AdminPage() {
         </div>
 
         {/* Upcoming — all future days */}
-        <div className="flex flex-col gap-0">
+        <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between pb-2 border-b border-[color:var(--color-border)]">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Upcoming</h2>
             <span className="text-xs text-[color:var(--color-muted)]">{nextDays.length} days</span>
           </div>
 
           {nextDays.length > 0 ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               {nextDays.map(({ date, dayNumber, songs }) => (
-                <div key={date} className="flex items-center gap-4 py-2.5 border-b border-[color:var(--color-border)] last:border-0 group">
-                  <span className="text-xs font-semibold text-white w-24 shrink-0">{formatDate(date)}</span>
-                  <span className="text-[10px] text-[color:var(--color-muted)] w-8 shrink-0">#{dayNumber}</span>
-                  <span className="flex-1 text-xs text-[color:var(--color-muted)] truncate min-w-0">
-                    {songs.map(s => s.title).join(" · ")}
-                  </span>
-                  <Link
-                    href={`/play/${date}`}
-                    className="text-[10px] font-semibold text-[color:var(--color-purple)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                  >
-                    Play →
-                  </Link>
+                <div key={date} className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-xl overflow-hidden">
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-[color:var(--color-border)]">
+                    <span className="text-xs font-semibold text-white">{formatDate(date)}</span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-[color:var(--color-muted)]">Puzzle #{dayNumber}</span>
+                      <Link href={`/play/${date}`} className="text-[10px] font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors">Play →</Link>
+                    </div>
+                  </div>
+                  {songs.map((song, i) => (
+                    <div key={song.id} className="flex items-center gap-3 px-4 py-2 border-b border-[color:var(--color-border)] last:border-0">
+                      <span className="text-[10px] text-[color:var(--color-muted)] w-4 shrink-0">{i + 1}</span>
+                      <span className="text-xs font-medium text-white flex-1 min-w-0 truncate">{song.title}</span>
+                      <span className="text-xs text-[color:var(--color-muted)] truncate hidden sm:block">{song.artist}</span>
+                      {song.genre && (
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${GENRE_COLORS[song.genre] ?? "bg-zinc-500/20 text-zinc-300"}`}>
+                          {song.genre}
+                        </span>
+                      )}
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
@@ -155,25 +163,30 @@ export default function AdminPage() {
 
         {/* Past puzzles */}
         {pastDays.length > 0 && (
-          <div className="flex flex-col gap-0">
+          <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between pb-2 border-b border-[color:var(--color-border)]">
               <h2 className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Past Puzzles</h2>
               <span className="text-xs text-[color:var(--color-muted)]">{pastDays.length} days</span>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               {pastDays.map(({ date, dayNumber, songs }) => (
-                <div key={date} className="flex items-center gap-4 py-2.5 border-b border-[color:var(--color-border)] last:border-0 group">
-                  <span className="text-xs font-semibold text-[color:var(--color-muted)] w-24 shrink-0">{formatDate(date)}</span>
-                  <span className="text-[10px] text-[color:var(--color-muted)] w-8 shrink-0 opacity-50">#{dayNumber}</span>
-                  <span className="flex-1 text-xs text-[color:var(--color-muted)] opacity-60 truncate min-w-0">
-                    {songs.map(s => s.title).join(" · ")}
-                  </span>
-                  <Link
-                    href={`/play/${date}`}
-                    className="text-[10px] font-semibold text-[color:var(--color-purple)] opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                  >
-                    Play →
-                  </Link>
+                <div key={date} className="bg-[color:var(--color-card)] border border-[color:var(--color-border)] rounded-xl overflow-hidden opacity-70">
+                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-[color:var(--color-border)]">
+                    <span className="text-xs font-semibold text-[color:var(--color-muted)]">{formatDate(date)}</span>
+                    <span className="text-xs text-[color:var(--color-muted)] opacity-60">Puzzle #{dayNumber}</span>
+                  </div>
+                  {songs.map((song, i) => (
+                    <div key={song.id} className="flex items-center gap-3 px-4 py-2 border-b border-[color:var(--color-border)] last:border-0">
+                      <span className="text-[10px] text-[color:var(--color-muted)] w-4 shrink-0">{i + 1}</span>
+                      <span className="text-xs font-medium text-[color:var(--color-muted)] flex-1 min-w-0 truncate">{song.title}</span>
+                      <span className="text-xs text-[color:var(--color-muted)] opacity-60 truncate hidden sm:block">{song.artist}</span>
+                      {song.genre && (
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 opacity-60 ${GENRE_COLORS[song.genre] ?? "bg-zinc-500/20 text-zinc-300"}`}>
+                          {song.genre}
+                        </span>
+                      )}
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
