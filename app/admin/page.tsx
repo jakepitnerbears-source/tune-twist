@@ -93,7 +93,7 @@ export default function AdminPage() {
           <div className="flex items-center justify-between pb-2 border-b border-[color:var(--color-border)]">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[color:var(--color-muted)]">Today</h2>
             {todayEntry && (
-              <Link href={`/play/${today}`} className="text-xs font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors">
+              <Link href={`/admin/game-v2/${today}`} className="text-xs font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors">
                 Play →
               </Link>
             )}
@@ -138,7 +138,7 @@ export default function AdminPage() {
                     <span className="text-xs font-semibold text-white">{formatDate(date)}</span>
                     <div className="flex items-center gap-3">
                       <span className="text-xs text-[color:var(--color-muted)]">Puzzle #{dayNumber}</span>
-                      <Link href={`/play/${date}`} className="text-[10px] font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors">Play →</Link>
+                      <Link href={`/admin/game-v2/${date}`} className="text-[10px] font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors">Play →</Link>
                     </div>
                   </div>
                   {songs.map((song, i) => (

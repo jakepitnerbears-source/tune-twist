@@ -115,7 +115,7 @@ export default function PlayOverview() {
                   return (
                     <Link
                       key={dom}
-                      href={`/play/${dateStr}`}
+                      href={`/admin/game-v2/${dateStr}`}
                       className={[
                         "flex flex-col items-center justify-center rounded-lg py-2 text-center transition-all hover:scale-105",
                         isToday

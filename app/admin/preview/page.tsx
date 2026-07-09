@@ -145,7 +145,7 @@ export default function PreviewPage() {
                     </span>
                   )}
                   <Link
-                    href={`/play/${date}`}
+                    href={`/admin/game-v2/${date}`}
                     className="text-[10px] font-semibold text-[color:var(--color-purple)] hover:text-white transition-colors"
                   >
                     Play →
