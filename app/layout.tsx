@@ -21,6 +21,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  other: {
+    "alldle-verify": "0LlLzf6COe8GsY3OiKLmW6v0SfMYFkiR",
+  },
   title: "TuneTwist — Daily Music Word Game",
   description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all? A free daily music puzzle game.",
   metadataBase: new URL("https://tunetwist.io"),
