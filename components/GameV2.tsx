@@ -829,16 +829,6 @@ export default function GameV2({
           </div>
         </div>
 
-        {/* See Results */}
-        {states.every((s) => s.solved || s.skipped) && (
-          <button
-            onPointerDown={(e) => e.preventDefault()}
-            onClick={() => setGameOver(true)}
-            className="w-full py-3.5 rounded-xl border border-[color:var(--color-purple)] text-[color:var(--color-purple)] text-sm font-bold hover:bg-[color:var(--color-purple)]/10 transition-colors"
-          >
-            See Results →
-          </button>
-        )}
 
       </div>
 
