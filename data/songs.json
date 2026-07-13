@@ -2809,18 +2809,6 @@
     ]
   },
   {
-    "id": "sir-duke",
-    "title": "Sir Duke",
-    "artist": "Stevie Wonder",
-    "genre": "R&B",
-    "synonymTitle": "Noble Musician",
-    "releaseYear": "1977",
-    "hints": [
-      "Released in 1977",
-      "Artist: Stevie Wonder"
-    ]
-  },
-  {
     "id": "play-that-funky-music",
     "title": "Play That Funky Music",
     "artist": "Wild Cherry",
