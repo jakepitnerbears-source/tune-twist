@@ -1,5 +1,12 @@
 import Link from "next/link";
 import { GENRES, getGenrePool } from "@/lib/getGenrePuzzle";
+import type { Metadata } from "next";
+
+// Work in progress (possible future email-gate) — not ready to be
+// indexed or promoted yet.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default function GenresPage() {
   const genresWithCounts = GENRES.map((g) => ({

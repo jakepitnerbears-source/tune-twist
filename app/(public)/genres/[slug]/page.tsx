@@ -2,6 +2,13 @@ import { getGenrePuzzle, GENRES } from "@/lib/getGenrePuzzle";
 import { loadScheduleAndLibrary, loadLyrics } from "@/lib/getDailyPuzzle";
 import GameV2 from "@/components/GameV2";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+// Genre pages are a work in progress (possible future email-gate) —
+// not ready to be indexed or promoted yet.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function GenrePlayPage({
   params,

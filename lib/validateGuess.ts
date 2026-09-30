@@ -148,6 +148,15 @@ export function isAlmostCorrect(guess: string, correctTitle: string, altTitles?:
 
 export function validateGuess(guess: string, correctTitle: string, altTitles?: string[]): boolean {
   if (altTitles?.some((alt) => validateGuess(guess, alt))) return true;
+
+  // Compound-word titles ("Funkytown") get tokenized as one word, but
+  // people naturally type them with a space ("Funky Town"). Comparing
+  // with all spaces removed catches this generically instead of
+  // requiring a per-song altTitles entry for every compound word.
+  if (normalize(guess).replace(/\s+/g, "") === normalize(correctTitle).replace(/\s+/g, "")) {
+    return true;
+  }
+
   const guessTokens = tokenize(guess).filter((w) => !IGNORE_WORDS.has(w));
   const titleTokens = tokenize(correctTitle).filter((w) => !IGNORE_WORDS.has(w));
 

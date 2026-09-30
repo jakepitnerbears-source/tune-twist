@@ -27,7 +27,7 @@ function dayIndexToDateString(dayIndex: number): string {
 
 export const revalidate = 3600;
 
-export default function SongsPage() {
+export default function SongLibraryPage() {
   const songsPath = path.join(process.cwd(), "data/songs.json");
   const schedulePath = path.join(process.cwd(), "data/schedule.json");
 
@@ -71,7 +71,7 @@ export default function SongsPage() {
   });
 
   return (
-    <main className="px-6 pt-20 pb-16">
+    <main className="px-6 pb-16">
       <SongsTable rows={rows} />
     </main>
   );

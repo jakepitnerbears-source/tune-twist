@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Archive — TuneTwist",
+  description: "Browse past TuneTwist puzzle days.",
+};
 
 const EPOCH = new Date("2026-04-13T12:00:00Z");
 

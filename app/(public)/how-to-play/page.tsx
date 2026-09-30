@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "How to Play — TuneTwist",
+  description:
+    "TuneTwist rewrites song titles using synonyms. Learn how the daily puzzle, hints, and scoring work.",
+};
 
 const DIFFICULTY_STYLES: Record<string, string> = {
   Easy: "bg-[color:var(--color-green)] text-[color:var(--color-navy)]",
