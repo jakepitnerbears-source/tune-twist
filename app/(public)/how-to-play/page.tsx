@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "How to Play — TuneTwist",
   description:
     "TuneTwist rewrites song titles using synonyms. Learn how the daily puzzle, hints, and scoring work.",
+  alternates: {
+    canonical: "/how-to-play",
+  },
 };
 
 const DIFFICULTY_STYLES: Record<string, string> = {

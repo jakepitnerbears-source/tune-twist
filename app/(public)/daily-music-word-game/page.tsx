@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "TuneTwist — A Daily Word Game for Music Lovers (Like Wordle, But for Songs)",
   description:
     "Love Wordle or Heardle? TuneTwist is a free daily word game for music fans — song titles get rewritten using synonyms, and it's your job to decode them. New puzzle every day.",
+  alternates: {
+    canonical: "/daily-music-word-game",
+  },
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

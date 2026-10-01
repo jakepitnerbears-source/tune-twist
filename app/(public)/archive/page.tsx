@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Archive — TuneTwist",
   description: "Browse past TuneTwist puzzle days.",
+  alternates: {
+    canonical: "/archive",
+  },
 };
 
 const EPOCH = new Date("2026-04-13T12:00:00Z");
@@ -40,6 +43,9 @@ export default function ArchivePage() {
 
         <div className="text-center">
           <h1 className="text-3xl font-bold tracking-tight">Archive</h1>
+          <p className="text-[color:var(--color-muted)] text-sm mt-2">
+            TuneTwist drops a new daily music word game puzzle every day — 5 song titles, rewritten with synonyms, waiting to be decoded. This is every day since launch.
+          </p>
           <p className="text-[color:var(--color-muted)] text-sm mt-1">
             {pastDates.length} past days · {futureDates.length} upcoming
           </p>

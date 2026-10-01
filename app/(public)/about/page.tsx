@@ -6,6 +6,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About — TuneTwist",
   description: "TuneTwist is a free daily music word game. Every day, 5 song titles get rewritten with synonyms — your job is to decode them.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export default function About() {

@@ -27,6 +27,9 @@ export const metadata: Metadata = {
   title: "TuneTwist — Daily Music Word Game",
   description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all? A free daily music puzzle game.",
   metadataBase: new URL("https://tunetwist.io"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "TuneTwist — Daily Music Word Game",
     description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
@@ -49,6 +52,24 @@ export const viewport: Viewport = {
   interactiveWidget: "resizes-visual",
 };
 
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "TuneTwist",
+      url: "https://tunetwist.io",
+      description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
+    },
+    {
+      "@type": "Organization",
+      name: "TuneTwist",
+      url: "https://tunetwist.io",
+      logo: "https://tunetwist.io/logo.png",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,6 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.className} ${anton.variable} ${poppins.variable} antialiased`} suppressHydrationWarning>
       <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }} />
         <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('tt_theme');if(t==='brutal'){var r=document.documentElement;r.setAttribute('data-theme','brutal');var v={'--color-navy':'#0a0a0a','--color-card':'#141414','--color-border':'#f5d000','--color-green':'#f5d000','--color-coral':'#ff1493','--color-red':'#ff3300','--color-purple':'#ff1493','--color-muted':'rgba(255,255,255,0.55)','--gradient-a':'rgba(245,208,0,0.7)','--gradient-b':'rgba(255,20,147,0.7)','--btn-gradient':'linear-gradient(135deg,#f5d000 0%,#ff1493 100%)','--blob-a-hi':'#f5d000cc','--blob-a-lo':'#f5d00033','--blob-b-hi':'#ff1493bb','--blob-b-lo':'#ff149333','--blob-c-hi':'#ff330099','--blob-c-lo':'#ff330022'};for(var k in v)r.style.setProperty(k,v[k]);}}catch(e){}` }} />
       </head>
       <body className="h-full flex flex-col bg-navy text-white">
