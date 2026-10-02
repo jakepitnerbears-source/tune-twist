@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { PACKS } from "@/lib/packs";
 
 const BASE = "https://tunetwist.io";
 
@@ -8,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE, changeFrequency: "daily", priority: 1, lastModified: now },
     { url: `${BASE}/play`, changeFrequency: "daily", priority: 1, lastModified: now },
     { url: `${BASE}/daily-music-word-game`, changeFrequency: "monthly", priority: 0.9, lastModified: now },
+    { url: `${BASE}/packs`, changeFrequency: "monthly", priority: 0.7, lastModified: now },
+    ...PACKS.map((p) => ({ url: `${BASE}/packs/${p.slug}`, changeFrequency: "monthly" as const, priority: 0.7, lastModified: now })),
     { url: `${BASE}/how-to-play`, changeFrequency: "monthly", priority: 0.8, lastModified: now },
     { url: `${BASE}/archive`, changeFrequency: "daily", priority: 0.6, lastModified: now },
     { url: `${BASE}/about`, changeFrequency: "monthly", priority: 0.7, lastModified: now },

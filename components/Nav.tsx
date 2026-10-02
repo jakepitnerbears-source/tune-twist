@@ -36,6 +36,7 @@ export default function Nav() {
         {menuOpen && (
           <div className="mt-2 flex flex-col rounded-2xl bg-[color:var(--color-card)] border border-[color:var(--color-border)] shadow-xl overflow-hidden">
             <button onClick={() => { setShowModal(true); setMenuOpen(false); }} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors text-left px-5 py-3.5 border-b border-[color:var(--color-border)]">How to Play</button>
+            <Link href="/packs" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors px-5 py-3.5 border-b border-[color:var(--color-border)]">Packs</Link>
             <Link href="/about" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors px-5 py-3.5 border-b border-[color:var(--color-border)]">About</Link>
             <Link href="/contact" onClick={() => setMenuOpen(false)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors px-5 py-3.5">Contact</Link>
           </div>
@@ -51,6 +52,7 @@ export default function Nav() {
             </Link>
             <div className="flex items-center gap-6">
               <button onClick={() => setShowModal(true)} className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors whitespace-nowrap">How to Play</button>
+              <Link href="/packs" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Packs</Link>
               <Link href="/about" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
               <Link href="/contact" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
               <Link href="/" className="text-sm font-bold px-4 py-1.5 rounded-full text-white hover:opacity-90 transition-opacity whitespace-nowrap" style={{ background: "var(--btn-gradient)" }}>Play Now!</Link>
