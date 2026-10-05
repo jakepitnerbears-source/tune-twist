@@ -50,17 +50,24 @@ export type EventParams = Record<string, string | number | boolean | undefined>;
 export function trackEvent(name: string, params: EventParams = {}): void {
   if (typeof window === "undefined") return;
   try {
+    const debug = isDebugRequested();
     if (!analyticsEnabled()) {
-      if (process.env.NODE_ENV !== "production") {
-        console.debug("[analytics:skipped]", name, params);
-      }
+      // Gated on debug mode, not NODE_ENV — on Vercel, `next build` sets
+      // NODE_ENV=production for every deployment (prod AND preview), so an
+      // env-based check here would silently never log on the live site,
+      // which is exactly when ?ga_debug=1 testing needs this visibility.
+      if (debug) console.debug("[analytics:skipped — host/debug gate]", name, params);
       return;
     }
     const gtag = getGtag();
-    if (!gtag) return;
-    const debug = isDebugRequested();
+    if (!gtag) {
+      if (debug) console.warn("[analytics:no-op — window.gtag is not a function]", name, params);
+      return;
+    }
     gtag("event", name, debug ? { ...params, debug_mode: true } : params);
-  } catch {
+    if (debug) console.debug("[analytics:sent]", name, debug ? { ...params, debug_mode: true } : params);
+  } catch (err) {
+    if (isDebugRequested()) console.warn("[analytics:error]", name, err);
     // Analytics must never break gameplay.
   }
 }
