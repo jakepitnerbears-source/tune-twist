@@ -10,5 +10,5 @@ export default function GameV2Page() {
   const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
   const lyrics = loadLyrics();
 
-  return <GameV2 puzzle={puzzle} allArtists={allArtists} lyrics={lyrics} />;
+  return <GameV2 puzzle={puzzle} allArtists={allArtists} lyrics={lyrics} isPreview />;
 }

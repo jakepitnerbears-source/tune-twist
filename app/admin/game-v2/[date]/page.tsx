@@ -15,5 +15,5 @@ export default async function AdminGameByDate({ params }: { params: Promise<{ da
   const allArtists = [...new Set(library.map((s) => s.artist.replace(/\s*(ft\.|feat\.|featuring).*$/i, "").trim()))].sort();
   const lyrics = loadLyrics();
 
-  return <GameV2 puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} lyrics={lyrics} />;
+  return <GameV2 puzzle={puzzle} puzzleNumber={puzzleNumber} allArtists={allArtists} lyrics={lyrics} isPreview />;
 }

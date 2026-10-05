@@ -7,11 +7,13 @@ import { validateGuess, isAlmostCorrect } from "@/lib/validateGuess";
 import { fetchSongInfo, SongInfo } from "@/lib/fetchSongInfo";
 import HowToPlayModal from "@/components/HowToPlayModal";
 import { Lightbulb, Play, Pause } from "lucide-react";
+import { trackEvent, trackOnce } from "@/lib/analytics";
 
 // Scoring: title 600 + artist 250 + year 150 = 1000 max per song
 const TITLE_SCORES = [800, 600, 400];
 const ARTIST_PTS = 100;
 const YEAR_PTS = 100;
+const MAX_SONG_SCORE = TITLE_SCORES[0] + ARTIST_PTS + YEAR_PTS;
 
 const WRONG_MESSAGES = ["Not quite…", "Try again.", "Hmm, no."];
 const ALMOST_MESSAGES = ["You're very close 👀", "So close.", "Getting warm…"];
@@ -116,6 +118,7 @@ function formatCountdown() {
 
 interface SongState {
   hintsUsed: number;
+  attempts: number;
   solved: boolean;
   skipped: boolean;
   guess: string;
@@ -133,7 +136,7 @@ interface SongState {
 
 function init(): SongState {
   return {
-    hintsUsed: 0, solved: false, skipped: false,
+    hintsUsed: 0, attempts: 0, solved: false, skipped: false,
     guess: "", feedback: "", feedbackWarm: false,
     shake: false, glow: false, songInfo: null,
     artistGuess: "", artistCorrect: null,
@@ -222,13 +225,14 @@ function ScoreRow({ label, value, ok, pts, warn, gold }: { label: string; value:
 }
 
 export default function GameV2({
-  puzzle, puzzleNumber, genreLabel, allArtists = [], lyrics = {},
+  puzzle, puzzleNumber, genreLabel, allArtists = [], lyrics = {}, isPreview = false,
 }: {
   puzzle: DailyPuzzle;
   puzzleNumber?: number;
   genreLabel?: string;
   allArtists?: string[];
   lyrics?: Record<string, string>;
+  isPreview?: boolean;
 }) {
   const [songIndex, setSongIndex] = useState(0);
   const [states, setStates] = useState<SongState[]>(puzzle.map(init));
@@ -242,6 +246,21 @@ export default function GameV2({
   const streakRef = useRef(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
+  const submittingRef = useRef(false);
+
+  // Admin puzzle-preview pages render this exact component on the production
+  // domain, so a hostname check alone can't tell preview traffic from real
+  // players — isPreview is how those pages opt out of analytics explicitly.
+  const gameMode: "daily" | "genre" = genreLabel ? "genre" : "daily";
+  const puzzleId = genreLabel
+    ? `genre-${genreLabel.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+    : puzzleNumber != null ? `daily-${puzzleNumber}` : "daily-unknown";
+  const track = (name: string, params: Record<string, string | number | boolean | undefined> = {}) => {
+    if (!isPreview) trackEvent(name, params);
+  };
+  const trackMilestone = (key: string, name: string, params: Record<string, string | number | boolean | undefined> = {}) => {
+    if (!isPreview) trackOnce(`${puzzleId}_${key}`, name, params);
+  };
 
   const current = puzzle[songIndex];
   const state = states[songIndex];
@@ -277,7 +296,31 @@ export default function GameV2({
     try {
       localStorage.setItem("tunedecode_streak", JSON.stringify({ lastPlayed: getToday(), streak: newStreak }));
     } catch {}
+    trackMilestone("game_complete", "game_complete", {
+      puzzle_id: puzzleId,
+      game_mode: gameMode,
+      score: states.reduce((sum, s) => sum + songTotal(s), 0),
+      max_score: puzzle.length * MAX_SONG_SCORE,
+    });
   }, [gameOver]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Fires once per song when it reaches its finished state (solved — including
+  // the artist/year bonus flow — or revealed). Keyed by trackOnce so React
+  // Strict Mode re-invoking this effect, or re-renders, can't double-count it.
+  useEffect(() => {
+    const s = states[songIndex];
+    if (!s) return;
+    const finished = s.skipped || s.bonusDone || (s.artistCorrect !== null && s.yearCorrect !== null);
+    if (!finished) return;
+    trackMilestone(`round_${songIndex}`, "round_complete", {
+      puzzle_id: puzzleId,
+      game_mode: gameMode,
+      round_number: songIndex + 1,
+      completion_type: s.skipped ? "revealed" : "solved",
+      score: songTotal(s),
+      max_score: MAX_SONG_SCORE,
+    });
+  }, [songIndex, states[songIndex]?.skipped, states[songIndex]?.bonusDone, states[songIndex]?.artistCorrect, states[songIndex]?.yearCorrect]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     try {
@@ -342,16 +385,30 @@ export default function GameV2({
   }
 
   async function handleSubmit() {
-    if (!state.guess.trim() || state.solved) return;
+    if (!state.guess.trim() || state.solved || submittingRef.current) return;
+    submittingRef.current = true;
+    const attemptNumber = state.attempts + 1;
     const correct = validateGuess(state.guess, current.title, current.altTitles);
+
+    trackMilestone("game_start", "game_start", { puzzle_id: puzzleId, game_mode: gameMode });
+    track("guess_submit", {
+      puzzle_id: puzzleId,
+      game_mode: gameMode,
+      round_number: songIndex + 1,
+      attempt_number: attemptNumber,
+      is_correct: correct,
+    });
+
     if (correct) {
       const autoSkipArtist = state.hintsUsed >= 2;
       const autoSkipYear = false;
       update(songIndex, {
+        attempts: attemptNumber,
         solved: true, feedback: "", songInfo: "loading", glow: true, shake: false,
         ...(autoSkipArtist ? { artistCorrect: false } : {}),
         ...(autoSkipYear ? { yearCorrect: false as false } : {}),
       });
+      submittingRef.current = false;
       setTimeout(() => update(songIndex, { glow: false }), 800);
       const info = await fetchSongInfo(current.title, current.artist, current.releaseYear);
       if (info && current.releaseYear) info.releaseYear = current.releaseYear;
@@ -360,9 +417,11 @@ export default function GameV2({
     } else {
       const almost = isAlmostCorrect(state.guess, current.title, current.altTitles);
       update(songIndex, {
+        attempts: attemptNumber,
         feedback: almost ? randomFrom(ALMOST_MESSAGES) : randomFrom(WRONG_MESSAGES),
         feedbackWarm: almost, shake: true,
       });
+      submittingRef.current = false;
       setTimeout(() => update(songIndex, { shake: false }), 500);
     }
   }
@@ -419,9 +478,16 @@ export default function GameV2({
 
   function handleCopy() {
     const text = buildShareText();
+    const shareParams = { puzzle_id: puzzleId, game_mode: gameMode, share_method: "clipboard" };
+    track("share_click", shareParams);
     const done = () => { setCopied(true); setTimeout(() => setCopied(false), 2000); };
-    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(done);
-    else done();
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text)
+        .then(() => { done(); track("share_success", shareParams); })
+        .catch(done);
+    } else {
+      done();
+    }
   }
 
   // ── Results screen ────────────────────────────────────────────────────

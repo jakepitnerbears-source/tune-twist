@@ -88,7 +88,19 @@ export default function RootLayout({
           window.dataLayer = window.dataLayer || [];
           window.gtag = function(){window.dataLayer.push(arguments);}
           window.gtag('js', new Date());
-          window.gtag('config', 'G-G51X30L960');
+          (function(){
+            try {
+              var host = window.location.hostname;
+              var isProd = host === 'tunetwist.io' || host === 'www.tunetwist.io';
+              var params = new URLSearchParams(window.location.search);
+              if (params.get('ga_debug') === '1') { try { sessionStorage.setItem('tt_ga_debug', '1'); } catch(e) {} }
+              var debugActive = false;
+              try { debugActive = sessionStorage.getItem('tt_ga_debug') === '1'; } catch(e) {}
+              if (isProd || debugActive) {
+                window.gtag('config', 'G-G51X30L960', debugActive ? { debug_mode: true } : undefined);
+              }
+            } catch (e) {}
+          })();
         `}</Script>
       </body>
     </html>
