@@ -98,7 +98,11 @@ export default function RootLayout({
               try { debugActive = sessionStorage.getItem('tt_ga_debug') === '1'; } catch(e) {}
               if (debugActive) { console.debug('[ga-init]', { host: host, isProd: isProd, debugActive: debugActive, hasGtagStub: typeof window.gtag === 'function' }); }
               if (isProd || debugActive) {
-                window.gtag('config', 'G-G51X30L960', debugActive ? { debug_mode: true } : undefined);
+                if (debugActive) {
+                  window.gtag('config', 'G-G51X30L960', { debug_mode: true });
+                } else {
+                  window.gtag('config', 'G-G51X30L960');
+                }
                 if (debugActive) { console.debug('[ga-init] config call sent'); }
               } else if (debugActive) {
                 console.debug('[ga-init] config call skipped — gate did not pass');
