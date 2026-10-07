@@ -122,11 +122,15 @@ export default function About() {
           </div>
         </div>
 
-        {/* Directory listing */}
-        <div className="flex justify-center">
+        {/* Directory listings */}
+        <div className="flex justify-center items-center gap-4">
           <a href="https://relaydle.com/" target="_blank" rel="noopener" className="opacity-80 hover:opacity-100 transition-opacity">
             {/* eslint-disable-next-line @next/next/no-img-element -- external badge, not worth a next/image remotePattern entry */}
             <img src="https://relaydle.com/badge.svg" alt="Listed on relaydle" height={28} />
+          </a>
+          <a href="https://nextdle.com/" target="_blank" rel="noopener" className="opacity-80 hover:opacity-100 transition-opacity">
+            {/* eslint-disable-next-line @next/next/no-img-element -- external badge, not worth a next/image remotePattern entry */}
+            <img src="https://nextdle.com/badge.svg" alt="Daily games on Nextdle" width={176} height={28} />
           </a>
         </div>
 
