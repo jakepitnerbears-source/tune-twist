@@ -59,11 +59,13 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-function PlayCTA() {
+function PlayCTA({ hero = false }: { hero?: boolean }) {
   return (
     <Link
       href="/play"
-      className="w-full py-3.5 rounded-xl text-sm font-bold text-center hover:opacity-90 transition-opacity"
+      className={`w-full rounded-xl text-center hover:opacity-90 transition-opacity ${
+        hero ? "py-5 text-lg font-black" : "py-3.5 text-sm font-bold"
+      }`}
       style={{ background: "var(--btn-gradient)", color: "white" }}
     >
       Play Today&apos;s Puzzle →
@@ -87,7 +89,7 @@ export default function DailyMusicWordGame() {
           </p>
         </div>
 
-        <PlayCTA />
+        <PlayCTA hero />
 
         {/* What is a music wordle */}
         <Section title="What Is a Music Wordle?">
@@ -167,6 +169,12 @@ export default function DailyMusicWordGame() {
             Curious about the story behind TuneTwist?{" "}
             <Link href="/about" className="text-[color:var(--color-green)] font-semibold hover:opacity-80 transition-opacity">
               About →
+            </Link>
+          </p>
+          <p>
+            Want a non-daily challenge you can replay anytime?{" "}
+            <Link href="/packs/taylor-swift" className="text-[color:var(--color-green)] font-semibold hover:opacity-80 transition-opacity">
+              Try the Taylor Swift song pack →
             </Link>
           </p>
         </div>
