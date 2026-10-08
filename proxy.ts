@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { PREVIEW_COOKIE, isValidPreviewToken } from "@/lib/previewAuth";
+import { ADMIN_SESSION_COOKIE, isValidAdminSession } from "@/lib/adminAuth";
 
-const ADMIN_SESSION_COOKIE = "admin_session";
 const PUBLIC_PREVIEW_PATHS = new Set(["/quizzes/preview-login"]);
 
 function withNoIndex(response: NextResponse) {
@@ -10,21 +10,14 @@ function withNoIndex(response: NextResponse) {
   return response;
 }
 
-function adminSessionValid(request: NextRequest): boolean {
-  const session = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
-  const secret = process.env.ADMIN_SESSION_SECRET;
-  const expected = secret && Buffer.from(secret).toString("base64");
-  return !!session && !!expected && session === expected;
-}
-
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Pre-existing /admin gate (unchanged behavior) — kept separate from the new preview gate
-  // below so the Content Manager isn't weaker OR stronger than every other /admin/* route.
+  // Pre-existing /admin gate — kept separate from the preview gate below so the Content
+  // Manager isn't weaker OR stronger than every other /admin/* route.
   if (pathname.startsWith("/admin")) {
     if (pathname === "/admin/login") return NextResponse.next();
-    if (!adminSessionValid(request)) {
+    if (!isValidAdminSession(request.cookies.get(ADMIN_SESSION_COOKIE)?.value)) {
       const loginUrl = new URL("/admin/login", request.url);
       loginUrl.searchParams.set("from", pathname);
       return NextResponse.redirect(loginUrl);
@@ -32,13 +25,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // New: private preview gate for the not-yet-public quiz library and its API.
+  // Private preview gate for the not-yet-public quiz library and its API.
   if (PUBLIC_PREVIEW_PATHS.has(pathname)) {
     return withNoIndex(NextResponse.next());
   }
 
-  const token = request.cookies.get(PREVIEW_COOKIE)?.value;
-  const authed = isValidPreviewToken(token);
+  const authed = isValidPreviewToken(request.cookies.get(PREVIEW_COOKIE)?.value);
 
   if (!authed) {
     if (pathname.startsWith("/api/")) {

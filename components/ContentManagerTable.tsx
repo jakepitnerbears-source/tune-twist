@@ -1,8 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { ContentRow } from "@/lib/contentManagerRows";
-import { saveSongDraft, publishSongDraft, discardSongDraft } from "@/app/actions/content-manager";
+import CatalogSideEditor from "./content-manager/CatalogSideEditor";
+import AddQuizSongForm from "./content-manager/AddQuizSongForm";
+import CatalogHistoryPanel from "./content-manager/CatalogHistoryPanel";
 
 type Filter = "all" | "daily" | "quiz" | "overlap";
 
@@ -13,98 +16,18 @@ const STATUS_COLORS: Record<string, string> = {
   unscheduled: "text-[color:var(--color-muted)] bg-white/5 border-[color:var(--color-border)]",
 };
 
-function EditableSynonym({
-  catalog,
-  id,
-  currentValue,
-  pending,
-  requireConfirmOnPublish,
+export default function ContentManagerTable({
+  rows,
+  packs,
 }: {
-  catalog: "daily" | "quiz";
-  id: string;
-  currentValue: string;
-  pending?: { field: string; draftValue: string };
-  requireConfirmOnPublish?: string;
+  rows: ContentRow[];
+  packs: { slug: string; heading: string }[];
 }) {
-  const [value, setValue] = useState(pending?.draftValue ?? currentValue);
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-  const [hasDraft, setHasDraft] = useState(!!pending);
-
-  async function handleSave() {
-    setBusy(true);
-    setMessage(null);
-    const res = await saveSongDraft(catalog, id, "synonymTitle", value);
-    setBusy(false);
-    if (res.ok) {
-      setHasDraft(true);
-      setMessage("Draft saved.");
-    } else {
-      setMessage(res.reason);
-    }
-  }
-
-  async function handlePublish() {
-    if (requireConfirmOnPublish && !window.confirm(requireConfirmOnPublish)) return;
-    setBusy(true);
-    setMessage(null);
-    const res = await publishSongDraft(catalog, id, "synonymTitle");
-    setBusy(false);
-    if (res.ok) {
-      setHasDraft(false);
-      setMessage("Published.");
-    } else {
-      setMessage(res.reason);
-    }
-  }
-
-  async function handleDiscard() {
-    setBusy(true);
-    setMessage(null);
-    const res = await discardSongDraft(catalog, id, "synonymTitle");
-    setBusy(false);
-    if (res.ok) {
-      setHasDraft(false);
-      setValue(currentValue);
-      setMessage("Draft discarded.");
-    } else {
-      setMessage(res.reason);
-    }
-  }
-
-  return (
-    <div className="flex flex-col gap-1 min-w-[220px]">
-      <div className="flex items-center gap-2">
-        <input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className="px-2 py-1 rounded-md bg-[color:var(--color-navy)] border border-[color:var(--color-border)] text-xs text-white w-full"
-        />
-        {hasDraft && <span className="text-xs text-amber-400 whitespace-nowrap">● draft</span>}
-      </div>
-      <div className="flex gap-2">
-        <button disabled={busy} onClick={handleSave} className="text-xs text-[color:var(--color-green)] hover:opacity-80 disabled:opacity-40">
-          Save Draft
-        </button>
-        {hasDraft && (
-          <>
-            <button disabled={busy} onClick={handlePublish} className="text-xs text-[color:var(--color-purple)] hover:opacity-80 disabled:opacity-40">
-              Publish
-            </button>
-            <button disabled={busy} onClick={handleDiscard} className="text-xs text-[color:var(--color-muted)] hover:text-white disabled:opacity-40">
-              Discard
-            </button>
-          </>
-        )}
-      </div>
-      {message && <span className="text-xs text-[color:var(--color-muted)]">{message}</span>}
-    </div>
-  );
-}
-
-export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
+  const router = useRouter();
   const [filter, setFilter] = useState<Filter>("all");
   const [search, setSearch] = useState("");
+
+  const refresh = () => router.refresh();
 
   const filtered = useMemo(() => {
     return rows.filter((row) => {
@@ -143,6 +66,12 @@ export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
           className="flex-1 min-w-[220px] px-3 py-1.5 rounded-full bg-white/5 border border-[color:var(--color-border)] text-sm text-white placeholder:text-[color:var(--color-muted)]"
         />
         <span className="text-xs text-[color:var(--color-muted)] whitespace-nowrap">{filtered.length} of {rows.length}</span>
+        <AddQuizSongForm availablePacks={packs} onSaved={refresh} />
+      </div>
+
+      <div className="flex gap-6">
+        <CatalogHistoryPanel catalog="daily" label="Daily catalog" onRolledBack={refresh} />
+        <CatalogHistoryPanel catalog="quiz" label="Quiz catalog" onRolledBack={refresh} />
       </div>
 
       <div className="overflow-x-auto rounded-xl border border-[color:var(--color-border)]">
@@ -153,8 +82,8 @@ export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
               <th className="px-3 py-2">Source</th>
               <th className="px-3 py-2">Daily status</th>
               <th className="px-3 py-2">Quiz packs</th>
-              <th className="px-3 py-2">Daily synonym title</th>
-              <th className="px-3 py-2">Quiz synonym title</th>
+              <th className="px-3 py-2">Daily editor</th>
+              <th className="px-3 py-2">Quiz editor</th>
             </tr>
           </thead>
           <tbody>
@@ -168,6 +97,11 @@ export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
                   <div className="flex gap-1 flex-wrap">
                     {row.inDaily && <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-950/50 border border-cyan-800 text-cyan-300">Daily</span>}
                     {row.inQuiz && <span className="text-xs px-2 py-0.5 rounded-full bg-pink-950/50 border border-pink-800 text-pink-300">Quiz</span>}
+                    {row.inDaily && row.inQuiz && (
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-amber-950/50 border border-amber-800 text-amber-300">Overlap</span>
+                    )}
+                    {row.quizArchived && <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-[color:var(--color-muted)]">Archived</span>}
+                    {row.pendingQuiz?.isNew && <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-950/50 border border-emerald-800 text-emerald-300">New (unpublished)</span>}
                   </div>
                 </td>
                 <td className="px-3 py-3">
@@ -177,14 +111,16 @@ export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
                     </span>
                   )}
                 </td>
-                <td className="px-3 py-3 text-xs text-[color:var(--color-muted)]">{row.quizPacks?.join(", ") ?? "—"}</td>
+                <td className="px-3 py-3 text-xs text-[color:var(--color-muted)]">{row.quizPacks?.join(", ") || "—"}</td>
                 <td className="px-3 py-3">
                   {row.inDaily && row.dailyId && (
-                    <EditableSynonym
+                    <CatalogSideEditor
                       catalog="daily"
                       id={row.dailyId}
-                      currentValue={row.dailySynonymTitle ?? ""}
+                      initialSynonymTitle={row.dailySynonymTitle ?? ""}
+                      initialHints={row.dailyHints ?? ["", ""]}
                       pending={row.pendingDaily}
+                      onPublished={refresh}
                       requireConfirmOnPublish={
                         row.dailyStatus === "today"
                           ? "This puzzle is LIVE right now. Publishing changes the answer players are currently guessing. Continue?"
@@ -197,7 +133,18 @@ export default function ContentManagerTable({ rows }: { rows: ContentRow[] }) {
                 </td>
                 <td className="px-3 py-3">
                   {row.inQuiz && row.quizId && (
-                    <EditableSynonym catalog="quiz" id={row.quizId} currentValue={row.quizSynonymTitle ?? ""} pending={row.pendingQuiz} />
+                    <CatalogSideEditor
+                      catalog="quiz"
+                      id={row.quizId}
+                      isNew={row.pendingQuiz?.isNew}
+                      initialSynonymTitle={row.quizSynonymTitle ?? ""}
+                      initialHints={row.quizHints ?? ["", ""]}
+                      initialQuizzes={row.quizPacks ?? []}
+                      initialArchived={row.quizArchived ?? false}
+                      availablePacks={packs}
+                      pending={row.pendingQuiz}
+                      onPublished={refresh}
+                    />
                   )}
                 </td>
               </tr>

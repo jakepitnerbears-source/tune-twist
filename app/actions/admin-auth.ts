@@ -2,30 +2,24 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
-const SESSION_COOKIE = "admin_session";
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
-
-function expectedToken() {
-  const secret = process.env.ADMIN_SESSION_SECRET;
-  if (!secret) throw new Error("ADMIN_SESSION_SECRET is not set");
-  return Buffer.from(secret).toString("base64");
-}
+import { signToken } from "@/lib/sessionToken";
+import { ADMIN_SESSION_COOKIE, ADMIN_COOKIE_MAX_AGE } from "@/lib/adminAuth";
 
 export async function login(formData: FormData) {
   const password = formData.get("password") as string;
   const adminPassword = process.env.ADMIN_PASSWORD;
+  const secret = process.env.ADMIN_SESSION_SECRET;
 
-  if (!adminPassword || password !== adminPassword) {
+  if (!adminPassword || !secret || password !== adminPassword) {
     redirect("/admin/login?error=1");
   }
 
   const jar = await cookies();
-  jar.set(SESSION_COOKIE, expectedToken(), {
+  jar.set(ADMIN_SESSION_COOKIE, signToken(secret, { role: "admin" }, ADMIN_COOKIE_MAX_AGE, Date.now() / 1000), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: COOKIE_MAX_AGE,
+    maxAge: ADMIN_COOKIE_MAX_AGE,
     path: "/",
   });
 
@@ -34,6 +28,6 @@ export async function login(formData: FormData) {
 
 export async function logout() {
   const jar = await cookies();
-  jar.delete(SESSION_COOKIE);
+  jar.delete(ADMIN_SESSION_COOKIE);
   redirect("/admin/login");
 }

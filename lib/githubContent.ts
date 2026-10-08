@@ -27,6 +27,16 @@ export interface RemoteFile {
   sha: string;
 }
 
+/** Thrown when GitHub rejects a write because the file changed since we read it (sha mismatch) —
+ * i.e. someone else published a change in between. Distinguished from other failures so callers
+ * can show "reload and retry" instead of a generic error. */
+export class GithubConflictError extends Error {
+  constructor(filePath: string) {
+    super(`"${filePath}" was changed by someone else since this page loaded.`);
+    this.name = "GithubConflictError";
+  }
+}
+
 async function githubFetch(path: string, config: ContentsConfig, init?: RequestInit) {
   const res = await fetch(`${API_BASE}${path}`, {
     ...init,
@@ -65,6 +75,12 @@ export async function commitFile(
       branch: config.branch,
     }),
   });
+  if (res.status === 409) throw new GithubConflictError(filePath);
+  if (res.status === 422 && !previousSha) {
+    // 422 with no sha usually means the file already exists and GitHub wanted one —
+    // treat the same as a conflict rather than a generic failure.
+    throw new GithubConflictError(filePath);
+  }
   if (!res.ok) throw new Error(`GitHub commit failed for ${filePath}: ${res.status} ${await res.text()}`);
   const data = await res.json();
   return { commitSha: data.commit?.sha };

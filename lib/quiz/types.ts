@@ -10,6 +10,8 @@ export interface QuizSong {
   /** Pack slugs this song is assigned to. A song can belong to more than one. */
   quizzes: string[];
   reviewStatus: "draft" | "published";
+  /** Soft-delete: kept in the catalog for history, excluded from every pack's active pool. */
+  archived?: boolean;
 }
 
 export type QuizKind = "artist" | "decade" | "seasonal";

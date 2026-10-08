@@ -27,10 +27,8 @@ function loadSchedule(): string[][] {
   }
 }
 
-/** Where (if anywhere) each daily song id is scheduled, classified against today's date. */
-export function getDailyScheduleStatuses(): Map<string, DailyScheduleInfo> {
-  const schedule = loadSchedule();
-  const today = new Date().toISOString().split("T")[0];
+/** Pure — testable without touching the filesystem or the real clock. */
+export function classifySchedule(schedule: string[][], today: string): Map<string, DailyScheduleInfo> {
   const byId = new Map<string, string[]>();
 
   schedule.forEach((ids, dayIndex) => {
@@ -49,4 +47,11 @@ export function getDailyScheduleStatuses(): Map<string, DailyScheduleInfo> {
     result.set(id, { status, dates });
   }
   return result;
+}
+
+/** Where (if anywhere) each daily song id is scheduled, classified against today's date. */
+export function getDailyScheduleStatuses(): Map<string, DailyScheduleInfo> {
+  const schedule = loadSchedule();
+  const today = new Date().toISOString().split("T")[0];
+  return classifySchedule(schedule, today);
 }

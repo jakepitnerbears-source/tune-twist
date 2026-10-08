@@ -1,14 +1,23 @@
-import { loadDailyCatalog, loadQuizCatalog } from "@/lib/quiz/catalog";
+import { redirect } from "next/navigation";
+import { loadDailyCatalog, loadQuizCatalog, loadQuizPacks } from "@/lib/quiz/catalog";
 import { loadDrafts } from "@/lib/contentDrafts";
 import { buildContentRows } from "@/lib/contentManagerRows";
 import { getContentsConfig } from "@/lib/githubContent";
+import { hasAdminAccess } from "@/lib/adminAuth";
 import ContentManagerTable from "@/components/ContentManagerTable";
 
 export const dynamic = "force-dynamic";
 
 export default async function ContentManagerPage() {
+  // Defense in depth behind proxy.ts's /admin gate — see the Next.js proxy docs' warning
+  // that route changes can silently stop a matcher from covering a given page.
+  if (!(await hasAdminAccess())) {
+    redirect("/admin/login?from=%2Fadmin%2Fcontent-manager");
+  }
+
   const daily = loadDailyCatalog();
   const quiz = loadQuizCatalog();
+  const packs = loadQuizPacks().map((p) => ({ slug: p.slug, heading: p.heading }));
   const drafts = await loadDrafts();
   const rows = buildContentRows(daily, quiz, drafts);
   const persistenceConfigured = getContentsConfig() !== null;
@@ -22,13 +31,13 @@ export default async function ContentManagerPage() {
         </p>
         {!persistenceConfigured && (
           <p className="text-sm text-amber-400 bg-amber-950/40 border border-amber-800 rounded-lg px-3 py-2 mt-2">
-            CONTENT_GITHUB_TOKEN / CONTENT_GITHUB_BRANCH aren&apos;t configured yet — you can browse and search
-            everything below, but Save Draft / Publish won&apos;t persist anywhere until that&apos;s set up
-            (see docs/content-manager-architecture.md).
+            CONTENT_GITHUB_TOKEN / CONTENT_GITHUB_BRANCH aren&apos;t configured yet — you can browse, search, and try
+            the editors below, but Save Draft / Publish / Rollback won&apos;t persist anywhere until that&apos;s set up
+            (see docs/content-manager-architecture.md for exact setup steps).
           </p>
         )}
       </div>
-      <ContentManagerTable rows={rows} />
+      <ContentManagerTable rows={rows} packs={packs} />
     </div>
   );
 }

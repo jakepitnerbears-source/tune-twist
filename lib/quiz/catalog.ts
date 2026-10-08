@@ -31,7 +31,7 @@ export function getQuizPack(slug: string): QuizPackConfig | undefined {
 /** Published songs assigned to a given pack slug. Never falls back to the daily catalog. */
 export function getQuizPackSongs(slug: string): QuizSong[] {
   return loadQuizCatalog().filter(
-    (s) => s.reviewStatus === "published" && s.quizzes.includes(slug)
+    (s) => s.reviewStatus === "published" && !s.archived && s.quizzes.includes(slug)
   );
 }
 

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { loadQuizPacks, getQuizPack, getQuizPackSongs } from "@/lib/quiz/catalog";
 import QuizEngine from "@/components/QuizEngine";
+import { hasPreviewAccess } from "@/lib/previewAuth";
 
 export function generateStaticParams() {
   return loadQuizPacks()
@@ -38,6 +39,13 @@ const QUIZ_JSON_LD = (pack: { heading: string; description: string }) => ({
 
 export default async function QuizPackPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+
+  // Defense in depth behind proxy.ts's preview gate — see the Next.js proxy docs' warning
+  // that route changes can silently stop a matcher from covering a given page.
+  if (!(await hasPreviewAccess())) {
+    redirect(`/quizzes/preview-login?next=${encodeURIComponent(`/quizzes/${slug}`)}`);
+  }
+
   const pack = getQuizPack(slug);
   if (!pack) notFound();
 

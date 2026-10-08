@@ -1,8 +1,16 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { loadQuizPacks, getQuizPackSongs } from "@/lib/quiz/catalog";
 import { previewLogout } from "@/app/actions/preview-auth";
+import { hasPreviewAccess } from "@/lib/previewAuth";
 
-export default function QuizzesHub() {
+export default async function QuizzesHub() {
+  // Defense in depth behind proxy.ts's preview gate — see the Next.js proxy docs' warning
+  // that route changes can silently stop a matcher from covering a given page.
+  if (!(await hasPreviewAccess())) {
+    redirect("/quizzes/preview-login?next=%2Fquizzes");
+  }
+
   const packs = loadQuizPacks()
     .map((pack) => ({ pack, songs: getQuizPackSongs(pack.slug) }))
     .filter(({ songs }) => songs.length > 0);

@@ -1,7 +1,9 @@
 # TuneTwist Content Manager & Quiz Library — storage architecture
 
-Written for Issue #4 (2026-10-08). Decides how content is stored, drafted, published, and
-rolled back, before building the editor UI on top of it.
+Written for Issue #4 (2026-10-08, updated 2026-10-08 after Phase 1 review). Decides how
+content is stored, drafted, published, and rolled back. Status: **the design below is now
+implemented and tested in code; the one remaining step is generating and configuring
+`CONTENT_GITHUB_TOKEN`, which only the repo owner can do** — see "Exact setup steps."
 
 ## Constraint
 
@@ -14,97 +16,121 @@ single-operator content tool editing a few hundred JSON records.
 ## Decision: GitHub Contents API as the datastore
 
 Content stays exactly where it already lives — JSON files in this repo
-(`data/songs.json`, `data/quizzes/catalog.json`, `data/quizzes/packs.json`) — and the
-Content Manager writes to them by committing through the **GitHub Contents API**
-(`PUT /repos/:owner/:repo/contents/:path`), not the local filesystem.
+(`data/songs.json`, `data/quizzes/catalog.json`) — and the Content Manager writes to them
+by committing through the **GitHub Contents API** (`PUT /repos/:owner/:repo/contents/:path`),
+not the local filesystem. Implemented in `lib/githubContent.ts`.
 
 Why this over a database:
 - **Durability for free.** A git commit is already a durable, replicated write. No new
   infrastructure, no new failure mode to operate.
 - **Version history and rollback for free.** `git log <path>` is the audit trail already.
   Rollback is "fetch the file at the previous commit, PUT it again as a new commit" — no
-  custom versioning table to design or get wrong.
+  custom versioning table to design or get wrong. Implemented: `listFileHistory()` /
+  `readFileAtCommit()` in `lib/githubContent.ts`, wired to a "View history" / "Roll back to
+  this" panel in the Content Manager UI (`components/content-manager/CatalogHistoryPanel.tsx`).
+- **Concurrency control for free.** Every write passes the `sha` of the file as it was last
+  read. GitHub rejects the write (409) if the file changed in between — i.e. real optimistic
+  concurrency control, not something hand-rolled. Implemented: `GithubConflictError` in
+  `lib/githubContent.ts`, caught in every write path in `lib/contentDrafts.ts` and surfaced
+  as "Someone else edited this since this page loaded — reload and reapply your edit"
+  rather than a raw error.
 - **Review surface already exists.** Changes to committed content show up as real git
-  commits/diffs, which is more inspectable than opaque DB rows, and composes naturally
-  with the branch/PR-based review process this whole project already runs on.
+  commits/diffs, composing naturally with the branch/PR-based review process this project
+  already runs on.
 - **Matches the data's actual size and write pattern.** A few hundred records, edited by
-  one person, a handful of times a day at most. This is well inside what file-based
-  storage handles fine; a database would mostly add ceremony here.
+  one person, a handful of times a day at most.
 
-Tradeoff, stated plainly: this does not scale to concurrent multi-editor writes (a second
-editor's commit could race the first) and every write is a real commit to the repo's
-history, which is noisier than a DB row update. Both are acceptable for a single-operator
-internal tool; if multiple people need to edit concurrently later, that's the point to
-revisit this decision, not before.
+Tradeoff, stated plainly: this does not scale to *simultaneous* multi-editor writes to the
+exact same record in the exact same second (the second write gets a conflict error and has
+to retry — annoying, not data-destroying). Acceptable for a single-operator internal tool.
 
-## Auth / credentials
+## Exact setup steps (the one thing only you can do)
 
-- New server-only env var: `CONTENT_GITHUB_TOKEN` — a GitHub fine-grained PAT scoped to
-  **this repo only**, with **Contents: read and write** permission and nothing else (no
-  org access, no other repos, no admin scopes).
-- Used exclusively inside Server Actions / Route Handlers (`app/admin/content-manager/**`,
-  `app/api/content/**`). Never sent to the client, never referenced in any client
-  component or `NEXT_PUBLIC_*` variable.
-- Separate from the git credential used for `git push` in this session (that's a
-  developer's personal credential; this is a scoped bot token for the running
-  application) and separate from `ADMIN_PASSWORD`/`ADMIN_SESSION_SECRET` (those gate who
-  can reach the UI; this token is what the server uses once someone's in).
-- **Not yet configured.** This is the one external dependency called out in the issue's
-  "document what's needed" instruction — a fine-grained PAT needs to be generated in
-  GitHub settings and added to Vercel's environment variables (preview scope only, to
-  start) before the Content Manager's publish/rollback actions can actually write. Until
-  then, the UI's draft/edit views work against the existing committed JSON directly; only
-  the "commit this change" step is blocked on the token.
+1. **Create a dedicated content branch** — separate from any code feature branch, so content
+   commits don't pile up in a PR's history and so this branch keeps working after the code
+   PR merges or closes:
+   ```
+   git fetch origin main
+   git branch content/quiz-library-data origin/main
+   git push origin content/quiz-library-data
+   ```
+2. **Generate a fine-grained GitHub PAT**: GitHub → Settings → Developer settings →
+   Personal access tokens → Fine-grained tokens → Generate new token.
+   - Repository access: **Only select repositories** → `jakepitnerbears-source/tune-twist`.
+   - Permissions: **Contents → Read and write**. Nothing else — no Issues, no Pull requests,
+     no Administration, no org access.
+   - Expiration: your call; a bot token like this is reasonable to set for 90 days and
+     rotate, or no-expiry if you'd rather manage rotation manually.
+3. **Add two environment variables in Vercel** (Project Settings → Environment Variables),
+   scoped to **Preview only** — do not add these to Production until launch is approved:
+   - `CONTENT_GITHUB_TOKEN` = the token from step 2.
+   - `CONTENT_GITHUB_BRANCH` = `content/quiz-library-data` (the branch from step 1).
+4. Redeploy the preview. The Content Manager's amber "not configured" banner disappears
+   once both vars are present, and Save Draft / Publish / Rollback start actually
+   committing to that branch.
+
+Nothing in the code invents a token, guesses a branch name, or silently falls back to
+writing to the local filesystem if these are missing — `getContentsConfig()` returns `null`
+and every write action reports exactly that reason instead of pretending to save.
 
 ## Draft vs. published
 
-Every catalog record (daily and quiz) carries a `reviewStatus: "draft" | "published"`
-field.
+Drafts are **record-level**, not field-level: `data/content-drafts.json` holds
+`{ catalog: "daily" | "quiz", id, isNew, draftRecord: {...}, editedAt }` entries
+(`lib/contentDrafts.ts`). `draftRecord` is a partial record — whatever fields were edited —
+merged onto the existing record (or, for a brand-new quiz song, used as the whole record)
+only at publish time. The Content Manager overlays pending drafts on top of published data
+so an editor previews the effective result before publishing.
 
-- `"draft"` — saved, versioned (it's in a commit), but invisible to anything player-facing.
-  The daily game's scheduler and every quiz page filter to `reviewStatus === "published"`
-  only.
-- `"published"` — live-eligible. For quiz songs, this means it can appear in a quiz's
-  active pool. For daily songs, "published" is actually the default/existing state for
-  all 600 current rows (they're already playable) — the new thing a draft status adds is
-  the ability to stage a *change* to one of those rows (e.g. a fixed `synonymTitle`)
-  without it taking effect until explicitly approved, even though the row itself was
-  already published.
+**Validation runs before every publish, not after**, and blocks the commit if it fails
+(`lib/quiz/publishValidation.ts`):
+- Daily songs: synonym title can't be empty; if hints are edited, both must be non-empty.
+- Quiz songs: the *entire resulting catalog* (existing + this edit) is run through the same
+  validator used for static-data checks (`lib/quiz/validate.ts`) — duplicate ids, duplicate
+  identities, missing fields, etc. all block publish. Daily/quiz overlap is still allowed
+  and never blocks, per the product decision in the issue thread.
 
-To support "edit a published row without instantly changing what players see," edits to
-an already-published record are staged as a **pending patch** alongside the record
-(`data/content-drafts.json`, keyed by record id — `{ id, field, draftValue, editedAt }`),
-not written into the live file directly. The Content Manager UI overlays pending patches
-on top of the published data so an editor previews the effective result. "Publish" copies
-the patch into the real record and commits that file; "discard" deletes the patch entry.
-This keeps the live JSON files simple (no stray draft-only rows mixed into data the game
-reads) while still giving edits a safe staging area.
+Quiz songs also support **archive** (`archived: true` on the record) — a soft delete that
+removes a song from every pack's active pool while keeping it in the catalog/history,
+editable the same way as any other field via the draft/publish flow.
 
 ## Preventing accidental edits to live/already-played daily puzzles
 
-`data/schedule.json` is a plain array of day-indexed song-id lists; `EPOCH_MS`-based
-`dayIndexToDateString` (already duplicated across `app/admin/page.tsx`,
-`app/admin/schedule/page.tsx`, `app/admin/song-library/page.tsx`, `app/admin/preview/page.tsx`)
-turns a day index into a calendar date. The Content Manager reuses that exact function
-(moved into one shared helper, `lib/scheduleDate.ts`, rather than a 5th copy) to classify
-any daily song as:
-- **past** — its scheduled date is before today. Editing warns "this puzzle has already
-  been played; changing the answer won't un-publish wrong guesses players already made."
-- **today** — it's the live puzzle right now. Editing requires an extra confirmation step
-  naming the exact live date.
-- **upcoming** — scheduled but not yet live. Editable normally.
-- **unscheduled** — in the song pool but not currently assigned a date. Freely editable.
+`data/schedule.json` is a plain array of day-indexed song-id lists; the day-index-to-date
+logic (previously duplicated across 4 admin pages) now lives once in `lib/scheduleDate.ts`
+(`classifySchedule()` — pure and unit-tested — wrapped by `getDailyScheduleStatuses()` for
+real use). The Content Manager classifies every daily song as:
+- **past** — already played. Publishing a change warns "won't un-publish wrong guesses
+  players already made."
+- **today** — the live puzzle right now. Publishing requires an explicit confirm naming the
+  exact risk.
+- **upcoming** — scheduled but not live yet. No extra confirmation.
+- **unscheduled** — in the pool but not currently assigned a date. No extra confirmation.
 
-This status is informational and a confirmation gate, not a hard block — the issue asks
-for "clear warnings and deliberate confirmation," not prevention.
+This is a confirmation gate, not a hard block, per the issue's "clear warnings and
+deliberate confirmation" instruction rather than outright prevention.
+
+## Session tokens
+
+Both `/admin` and the quiz preview gate originally used a static value
+(`base64(secret)`) as the session cookie — identical every time, never expires on its own,
+and can't be revoked without rotating the password for everyone. Replaced with signed,
+expiring tokens (`lib/sessionToken.ts`): HMAC-SHA256 over a JSON payload containing
+`iat`/`exp`, verified with a constant-time comparison, independently unit-tested (tamper
+detection, expiry, wrong-secret rejection — see `scripts/test-session-token.ts`). Cookie
+names and max-ages are unchanged (`admin_session`, 30 days; `quiz_preview_session`, 7 days)
+— only the value's shape changed, so this is transparent to anything else in the app, but
+**it does mean existing admin/preview sessions will need to log in again** once this ships,
+since old-format cookies won't verify against the new scheme.
 
 ## What this doc intentionally does not cover
 
-- Multi-editor conflict resolution (out of scope at current usage scale, see tradeoff
-  above).
+- Multi-editor *simultaneous* conflict resolution beyond "the second write gets a clear
+  error and retries" (see concurrency note above) — a real merge UI is out of scope at
+  current usage scale.
 - A generalized CMS/content-type system — this is specifically two catalogs (daily songs,
   quiz songs) with a shared record shape, not a generic framework.
-- Production publishing workflow (committing to `main`, triggering a real deploy) — all
-  commits described here target the feature branch this work ships on, per Issue #4's
-  explicit no-production-merge gate. Wiring "publish" to actually reach production is a
-  separate, later decision.
+- Production publishing workflow (committing to `main`, triggering a real deploy) — every
+  commit described here targets `content/quiz-library-data` or the code feature branch,
+  never `main`, per Issue #4's explicit no-production-merge gate. Wiring "publish" to reach
+  production is a separate, later decision requiring explicit approval.
