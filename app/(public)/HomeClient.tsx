@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 
 
@@ -24,7 +24,6 @@ const FEATURED = [
 
 
 export default function HomeClient() {
-  const router = useRouter();
   const [artworks, setArtworks] = useState<(string | null)[]>(FEATURED.map(() => null));
 
   useEffect(() => {
@@ -98,14 +97,20 @@ export default function HomeClient() {
         </div>
 
         {/* CTA */}
-        <div className="px-6">
-          <button
-            onClick={() => router.push("/play")}
-            className="w-full py-4 rounded-2xl font-bold text-base text-white hover:opacity-90 transition-opacity"
+        <div className="px-6 flex flex-col gap-3">
+          <Link
+            href="/play"
+            className="w-full py-4 rounded-2xl font-bold text-base text-white hover:opacity-90 transition-opacity text-center"
             style={{ background: "var(--btn-gradient)" }}
           >
             ▶ Play Today&apos;s Puzzle
-          </button>
+          </Link>
+          <Link
+            href="/daily-music-word-game"
+            className="text-sm text-center text-[color:var(--color-muted)] hover:text-white transition-colors"
+          >
+            New here? See how the daily music wordle works →
+          </Link>
         </div>
       </div>
 
@@ -121,13 +126,21 @@ export default function HomeClient() {
           </p>
         </div>
 
-        <button
-          onClick={() => router.push("/play")}
-          className="px-10 py-4 rounded-full font-bold text-base text-white hover:opacity-90 transition-opacity"
-          style={{ background: "var(--btn-gradient)" }}
-        >
-          ▶ Play Today&apos;s Puzzle
-        </button>
+        <div className="flex flex-col items-center gap-3">
+          <Link
+            href="/play"
+            className="px-10 py-4 rounded-full font-bold text-base text-white hover:opacity-90 transition-opacity"
+            style={{ background: "var(--btn-gradient)" }}
+          >
+            ▶ Play Today&apos;s Puzzle
+          </Link>
+          <Link
+            href="/daily-music-word-game"
+            className="text-sm text-[color:var(--color-muted)] hover:text-white transition-colors"
+          >
+            New here? See how the daily music wordle works →
+          </Link>
+        </div>
 
         {/* Scrolling marquee */}
         <div
