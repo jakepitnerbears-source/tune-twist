@@ -112,10 +112,10 @@ export default function HomeClient() {
       {/* ── DESKTOP layout ── */}
       <div className="hidden md:flex flex-col items-center text-center gap-8 px-8">
         <div className="relative flex flex-col gap-4 items-center" style={{ zIndex: 1 }}>
-          <h1 className="text-6xl font-black leading-tight tracking-tight text-center">
+          <p className="text-6xl font-black leading-tight tracking-tight text-center" role="heading" aria-level={2}>
             Familiar Songs.<br />
             <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
-          </h1>
+          </p>
           <p className="text-lg text-[color:var(--color-muted)] max-w-lg">
             A free daily music wordle: song titles get twisted into synonyms, and it&apos;s your job to decode them.
           </p>
