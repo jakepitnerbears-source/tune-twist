@@ -55,7 +55,7 @@ export default function Nav() {
               <Link href="/packs" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Packs</Link>
               <Link href="/about" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">About</Link>
               <Link href="/contact" className="text-sm font-medium text-[color:var(--color-muted)] hover:text-white transition-colors">Contact</Link>
-              <Link href="/" className="text-sm font-bold px-4 py-1.5 rounded-full text-white hover:opacity-90 transition-opacity whitespace-nowrap" style={{ background: "var(--btn-gradient)" }}>Play Now!</Link>
+              <Link href="/play" className="text-sm font-bold px-4 py-1.5 rounded-full text-white hover:opacity-90 transition-opacity whitespace-nowrap" style={{ background: "var(--btn-gradient)" }}>Play Now!</Link>
             </div>
           </div>
         </div>
