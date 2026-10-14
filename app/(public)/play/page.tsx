@@ -19,7 +19,7 @@ const GAME_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "Game",
   name: "TuneTwist",
-  url: "https://tunetwist.io/play",
+  url: "https://www.tunetwist.io/play",
   genre: "Puzzle",
   isAccessibleForFree: true,
   description: "Every day, 5 song titles get rewritten with synonyms. Decode them back to the real title.",
