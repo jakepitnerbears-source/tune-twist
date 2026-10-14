@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { trackEvent } from "@/lib/analytics";
 
 
 const FEATURED = [
@@ -107,6 +108,7 @@ export default function HomeClient() {
           </Link>
           <Link
             href="/daily-music-word-game"
+            onClick={() => trackEvent("homepage_wordle_link_click", { location: "mobile" })}
             className="text-sm text-center text-[color:var(--color-muted)] hover:text-white transition-colors"
           >
             New here? See how the daily music wordle works →
@@ -136,6 +138,7 @@ export default function HomeClient() {
           </Link>
           <Link
             href="/daily-music-word-game"
+            onClick={() => trackEvent("homepage_wordle_link_click", { location: "desktop" })}
             className="text-sm text-[color:var(--color-muted)] hover:text-white transition-colors"
           >
             New here? See how the daily music wordle works →
