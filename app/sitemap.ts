@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { PACKS } from "@/lib/packs";
 
-const BASE = "https://tunetwist.io";
+const BASE = "https://www.tunetwist.io";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
