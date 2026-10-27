@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   },
   title: "TuneTwist — Daily Music Word Game",
   description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all? A free daily music puzzle game.",
-  metadataBase: new URL("https://tunetwist.io"),
+  metadataBase: new URL("https://www.tunetwist.io"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "TuneTwist — Daily Music Word Game",
     description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
-    url: "https://tunetwist.io",
+    url: "https://www.tunetwist.io",
     siteName: "TuneTwist",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "TuneTwist" }],
     type: "website",
@@ -58,14 +58,14 @@ const JSON_LD = {
     {
       "@type": "WebSite",
       name: "TuneTwist",
-      url: "https://tunetwist.io",
+      url: "https://www.tunetwist.io",
       description: "Every day, 5 song titles get rewritten with synonyms. Can you decode them all?",
     },
     {
       "@type": "Organization",
       name: "TuneTwist",
-      url: "https://tunetwist.io",
-      logo: "https://tunetwist.io/logo.png",
+      url: "https://www.tunetwist.io",
+      logo: "https://www.tunetwist.io/logo.png",
     },
   ],
 };
