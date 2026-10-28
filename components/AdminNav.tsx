@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: "/admin/song-library", label: "Song Library" },
   { href: "/admin/schedule", label: "Schedule" },
   { href: "/admin/library", label: "Library" },
+  { href: "/admin/content-manager", label: "Content Manager" },
   { href: "/admin/preview", label: "Preview" },
   { href: "/admin/play", label: "Overview" },
   { href: "/admin/jukebox", label: "Jukebox" },

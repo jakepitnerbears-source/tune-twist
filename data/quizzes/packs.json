@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "taylor-swift",
+    "kind": "artist",
+    "heading": "Guess the Taylor Swift Song",
+    "title": "Guess the Taylor Swift Song — Free Song Title Quiz | TuneTwist",
+    "description": "Can you guess the Taylor Swift song from its twisted title? A free Taylor Swift song quiz — titles rewritten with synonyms, no audio required.",
+    "intro": "Every title below is a real Taylor Swift song, rewritten using synonyms. No audio, no lyrics — just the title, in disguise. Decode 5 at a time, and hit play again for a fresh set."
+  },
+  {
+    "slug": "80s-hits",
+    "kind": "decade",
+    "heading": "Guess the 80s Hit",
+    "title": "Guess the 80s Song — Free 1980s Music Quiz | TuneTwist",
+    "description": "A free 80s music quiz — classic song titles from the 1980s, rewritten with synonyms. Decode them without hearing a single note.",
+    "intro": "Eight 80s classics, each title rewritten word-for-word using synonyms. Work backwards from the disguised version to the real song."
+  },
+  {
+    "slug": "90s-hits",
+    "kind": "decade",
+    "heading": "Guess the 90s Hit",
+    "title": "Guess the 90s Song — Free 1990s Music Quiz | TuneTwist",
+    "description": "A free 90s music quiz — iconic song titles from the 1990s, rewritten with synonyms. No audio required, just your memory.",
+    "intro": "Eight 90s hits, each title rewritten word-for-word using synonyms. Decode as many as you can, then play again for more."
+  },
+  {
+    "slug": "christmas-songs",
+    "kind": "seasonal",
+    "heading": "Guess the Christmas Song",
+    "title": "Guess the Christmas Song — Free Holiday Music Quiz | TuneTwist",
+    "description": "A free Christmas music quiz — holiday classics rewritten with synonyms. Coming once enough songs are curated and reviewed.",
+    "intro": "This pack is still being curated — not enough reviewed songs exist yet to publish it. Deferred per Issue #4 until holiday song data is built out."
+  }
+]
