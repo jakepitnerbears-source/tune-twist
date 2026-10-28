@@ -49,19 +49,19 @@ export default function HomeClient() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top left, rgba(249,115,22,0.45) 0%, transparent 70%)", zIndex: 0 }} />
       <div className="absolute bottom-0 right-0 w-[520px] h-[520px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom right, rgba(124,58,237,0.55) 0%, transparent 70%)", zIndex: 0 }} />
 
+      {/* Hero text — single shared heading across both breakpoints */}
+      <div className="relative px-6 pb-8 flex flex-col gap-4 md:items-center md:px-8" style={{ zIndex: 1 }}>
+        <h1 className="text-[2.4rem] md:text-6xl font-black leading-tight tracking-tight md:text-center">
+          Familiar Songs.<br />
+          <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
+        </h1>
+        <p className="text-base md:text-lg text-[color:var(--color-muted)] max-w-sm md:max-w-lg">
+          A free daily music wordle: song titles get twisted into synonyms, and it&apos;s your job to decode them.
+        </p>
+      </div>
+
       {/* ── MOBILE layout ── */}
       <div className="md:hidden flex flex-col gap-0">
-        {/* Hero text */}
-        <div className="relative px-6 pb-8 flex flex-col gap-4" style={{ zIndex: 1 }}>
-          <h1 className="text-[2.4rem] font-black leading-tight tracking-tight">
-            Familiar Songs.<br />
-            <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
-          </h1>
-          <p className="text-base text-[color:var(--color-muted)] max-w-sm">
-            A free daily music wordle: song titles get twisted into synonyms, and it&apos;s your job to decode them.
-          </p>
-        </div>
-
         {/* Album art marquee */}
         <div
           className="w-full overflow-hidden mb-10"
@@ -116,16 +116,6 @@ export default function HomeClient() {
 
       {/* ── DESKTOP layout ── */}
       <div className="hidden md:flex flex-col items-center text-center gap-8 px-8">
-        <div className="relative flex flex-col gap-4 items-center" style={{ zIndex: 1 }}>
-          <h1 className="text-6xl font-black leading-tight tracking-tight text-center">
-            Familiar Songs.<br />
-            <span style={{ background: "linear-gradient(135deg, #7c3aed 0%, #c026d3 50%, #f59e0b 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Unfamiliar Titles.</span>
-          </h1>
-          <p className="text-lg text-[color:var(--color-muted)] max-w-lg">
-            A free daily music wordle: song titles get twisted into synonyms, and it&apos;s your job to decode them.
-          </p>
-        </div>
-
         <div className="flex flex-col items-center gap-3">
           <Link
             href="/play"
